@@ -1,0 +1,205 @@
+# HELP mf_monthly_income_jpy ホーム > 当月収入
+# TYPE mf_monthly_income_jpy gauge
+mf_monthly_income_jpy{period="2021-08-25 - 2021-09-23"} 332839.0
+# HELP mf_monthly_expenditure_jpy ホーム > 当月支出
+# TYPE mf_monthly_expenditure_jpy gauge
+mf_monthly_expenditure_jpy{period="2021-08-25 - 2021-09-23"} 325720.0
+# HELP mf_monthly_balance_jpy ホーム > 当月収支
+# TYPE mf_monthly_balance_jpy gauge
+mf_monthly_balance_jpy{period="2021-08-25 - 2021-09-23"} 7119.0
+# HELP mf_monthly_withdrawal_jpy トップページ > 引落予定額
+# TYPE mf_monthly_withdrawal_jpy gauge
+mf_monthly_withdrawal_jpy{name="ワイモバイル"} -504.0
+# HELP mf_monthly_withdrawal_date_info トップページ > 締め日・引落予定日
+# TYPE mf_monthly_withdrawal_date_info gauge
+mf_monthly_withdrawal_date_info{name="ワイモバイル",schedule="当月分 締め日:(2021/09/30)"} 1.0
+# HELP mf_assets_total_jpy 資産 > 資本総額
+# TYPE mf_assets_total_jpy gauge
+mf_assets_total_jpy 5.680437e+06
+# HELP mf_assets_subtotal_jpy 資産 > 資産の内訳 > 合計
+# TYPE mf_assets_subtotal_jpy gauge
+mf_assets_subtotal_jpy{type="預金・現金・暗号資産"} 256256.0
+mf_assets_subtotal_jpy{type="株式（現物）"} 362.0
+mf_assets_subtotal_jpy{type="投資信託"} 351106.0
+mf_assets_subtotal_jpy{type="年金"} 5.05156e+06
+mf_assets_subtotal_jpy{type="ポイント・マイル"} 21153.0
+# HELP mf_assets_deposit_jpy 資産 > 預金・現金・暗号資産 > 残高
+# TYPE mf_assets_deposit_jpy gauge
+mf_assets_deposit_jpy{account="財布",name="財布"} 0.0
+mf_assets_deposit_jpy{account="PayPay",name="PayPay"} 37278.0
+mf_assets_deposit_jpy{account="nanaco",name="nanaco"} 2431.0
+mf_assets_deposit_jpy{account="nanaco（カード）",name="nanaco(センターお預り分)"} 5000.0
+mf_assets_deposit_jpy{account="nanaco（カード）",name="nanaco"} 109.0
+mf_assets_deposit_jpy{account="Suica(HAL-Phone)",name="Suica"} 1234.0
+mf_assets_deposit_jpy{account="住信SBIネット銀行",name="代表口座-普通"} 183920.0
+mf_assets_deposit_jpy{account="住信SBIネット銀行",name="SBIハイブリッド預金"} 39613.0
+mf_assets_deposit_jpy{account="住信SBIネット銀行",name="非常用貯金-普通"} 100.0
+mf_assets_deposit_jpy{account="PayPay銀行",name="普通預金"} 2180.0
+mf_assets_deposit_jpy{account="三井住友銀行",name="残高別普通(総合)預金残高"} 2823.0
+mf_assets_deposit_jpy{account="住信SBIネット銀行",name="代表口座-米ドル普通"} 1021.0
+mf_assets_deposit_jpy{account="SBI証券",name="現金残高(ハイブリッド預金除く)"} -20000.0
+# HELP mf_assets_stock_sum 資産 > 株式（現物） > 保有数
+# TYPE mf_assets_stock_sum gauge
+mf_assets_stock_sum{account="SBI証券",code="1357",name="NF日経ダブインバ"} 1.0
+# HELP mf_assets_stock_average_jpy 資産 > 株式（現物） > 平均取得単価
+# TYPE mf_assets_stock_average_jpy gauge
+mf_assets_stock_average_jpy{account="SBI証券",code="1357",name="NF日経ダブインバ"} 387.0
+# HELP mf_assets_stock_present_jpy 資産 > 株式（現物） > 現在値
+# TYPE mf_assets_stock_present_jpy gauge
+mf_assets_stock_present_jpy{account="SBI証券",code="1357",name="NF日経ダブインバ"} 362.0
+# HELP mf_assets_stock_valuation_jpy 資産 > 株式（現物） > 評価額
+# TYPE mf_assets_stock_valuation_jpy gauge
+mf_assets_stock_valuation_jpy{account="SBI証券",code="1357",name="NF日経ダブインバ"} 362.0
+# HELP mf_assets_stock_dayoverday_jpy 資産 > 株式（現物） > 前日比
+# TYPE mf_assets_stock_dayoverday_jpy gauge
+mf_assets_stock_dayoverday_jpy{account="SBI証券",code="1357",name="NF日経ダブインバ"} 0.0
+# HELP mf_assets_stock_gainloss_jpy 資産 > 株式（現物） > 評価損益
+# TYPE mf_assets_stock_gainloss_jpy gauge
+mf_assets_stock_gainloss_jpy{account="SBI証券",code="1357",name="NF日経ダブインバ"} -25.0
+# HELP mf_assets_stock_gainloss_percent 資産 > 株式（現物） > 評価損益率
+# TYPE mf_assets_stock_gainloss_percent gauge
+mf_assets_stock_gainloss_percent{account="SBI証券",code="1357",name="NF日経ダブインバ"} -6.46
+# HELP mf_assets_mutualfund_sum 資産 > 投資信託 > 保有数
+# TYPE mf_assets_mutualfund_sum gauge
+mf_assets_mutualfund_sum{account="SBI証券",name="SBI-SBI・V・S&P500インデックス・ファンド"} 224220.0
+# HELP mf_assets_mutualfund_average_jpy 資産 > 投資信託 > 平均取得単価
+# TYPE mf_assets_mutualfund_average_jpy gauge
+mf_assets_mutualfund_average_jpy{account="SBI証券",name="SBI-SBI・V・S&P500インデックス・ファンド"} 12934.0
+# HELP mf_assets_mutualfund_base_jpy 資産 > 投資信託 > 平均取得単価
+# TYPE mf_assets_mutualfund_base_jpy gauge
+mf_assets_mutualfund_base_jpy{account="SBI証券",name="SBI-SBI・V・S&P500インデックス・ファンド"} 15659.0
+# HELP mf_assets_mutualfund_valuation_jpy 資産 > 投資信託 > 評価額
+# TYPE mf_assets_mutualfund_valuation_jpy gauge
+mf_assets_mutualfund_valuation_jpy{account="SBI証券",name="SBI-SBI・V・S&P500インデックス・ファンド"} 351106.0
+# HELP mf_assets_mutualfund_dayoverday_jpy 資産 > 投資信託 > 前日比
+# TYPE mf_assets_mutualfund_dayoverday_jpy gauge
+mf_assets_mutualfund_dayoverday_jpy{account="SBI証券",name="SBI-SBI・V・S&P500インデックス・ファンド"} 0.0
+# HELP mf_assets_mutualfund_gainloss_jpy 資産 > 投資信託 > 評価損益
+# TYPE mf_assets_mutualfund_gainloss_jpy gauge
+mf_assets_mutualfund_gainloss_jpy{account="SBI証券",name="SBI-SBI・V・S&P500インデックス・ファンド"} 61100.0
+# HELP mf_assets_mutualfund_gainloss_percent 資産 > 投資信託 > 評価損益率
+# TYPE mf_assets_mutualfund_gainloss_percent gauge
+mf_assets_mutualfund_gainloss_percent{account="SBI証券",name="SBI-SBI・V・S&P500インデックス・ファンド"} 21.07
+# HELP mf_assets_pension_acquisition_jpy 資産 > 年金 > 取得価額
+# TYPE mf_assets_pension_acquisition_jpy gauge
+mf_assets_pension_acquisition_jpy{name="厚生年金(一般)"} 0.0
+mf_assets_pension_acquisition_jpy{name="SBI・V・S&P500インデックス・ファンド(SBI・V・S&P500インデックス・ファンド)"} 15121.0
+# HELP mf_assets_pension_present_jpy 資産 > 年金 > 現在価値
+# TYPE mf_assets_pension_present_jpy gauge
+mf_assets_pension_present_jpy{name="厚生年金(一般)"} 3.817904e+06
+mf_assets_pension_present_jpy{name="SBI・V・S&P500インデックス・ファンド(SBI・V・S&P500インデックス・ファンド)"} 1.233656e+06
+# HELP mf_assets_pension_gainloss_jpy 資産 > 年金 > 評価損益
+# TYPE mf_assets_pension_gainloss_jpy gauge
+mf_assets_pension_gainloss_jpy{name="厚生年金(一般)"} 0.0
+mf_assets_pension_gainloss_jpy{name="SBI・V・S&P500インデックス・ファンド(SBI・V・S&P500インデックス・ファンド)"} 42374.0
+# HELP mf_assets_pension_gainloss_percent 資産 > 年金 > 評価損益率
+# TYPE mf_assets_pension_gainloss_percent gauge
+mf_assets_pension_gainloss_percent{name="厚生年金(一般)"} 0.0
+mf_assets_pension_gainloss_percent{name="SBI・V・S&P500インデックス・ファンド(SBI・V・S&P500インデックス・ファンド)"} 3.56
+# HELP mf_assets_point_sum 資産 > ポイント・マイル > ポイント・マイル数
+# TYPE mf_assets_point_sum gauge
+mf_assets_point_sum{account="JCBカード",name="",type=""} 215.0
+mf_assets_point_sum{account="ANASuicaカード",name="",type=""} 12.0
+mf_assets_point_sum{account="nanaco（カード）",name="nanaco(センターお預り分)",type=""} 53.0
+mf_assets_point_sum{account="nanaco（カード）",name="nanaco",type=""} 110.0
+mf_assets_point_sum{account="ANAマイレージ",name="ANAマイレージ()",type=""} 5310.0
+mf_assets_point_sum{account="JALマイレージ",name="JALマイレージ()",type=""} 6.0
+mf_assets_point_sum{account="JALマイレージ",name="JALマイレージ(eJAL)",type=""} 10200.0
+mf_assets_point_sum{account="T",name="T",type="T"} 1700.0
+mf_assets_point_sum{account="Amazon.co.jp",name="Amazon",type="Amazon"} 792.0
+# HELP mf_assets_point_rate 資産 > ポイント・マイル > 換算レート
+# TYPE mf_assets_point_rate gauge
+mf_assets_point_rate{account="JCBカード",name="",type=""} 3.0
+mf_assets_point_rate{account="ANASuicaカード",name="",type=""} 1.0
+mf_assets_point_rate{account="nanaco（カード）",name="nanaco(センターお預り分)",type=""} 1.0
+mf_assets_point_rate{account="nanaco（カード）",name="nanaco",type=""} 1.0
+mf_assets_point_rate{account="ANAマイレージ",name="ANAマイレージ()",type=""} 1.0
+mf_assets_point_rate{account="JALマイレージ",name="JALマイレージ()",type=""} 1.2
+mf_assets_point_rate{account="JALマイレージ",name="JALマイレージ(eJAL)",type=""} 1.0
+mf_assets_point_rate{account="T",name="T",type="T"} 1.0
+mf_assets_point_rate{account="Amazon.co.jp",name="Amazon",type="Amazon"} 1.0
+# HELP mf_assets_point_present_jpy 資産 > ポイント・マイル > 現在の価値
+# TYPE mf_assets_point_present_jpy gauge
+mf_assets_point_present_jpy{account="JCBカード",name="",type=""} 645.0
+mf_assets_point_present_jpy{account="ANASuicaカード",name="",type=""} 12.0
+mf_assets_point_present_jpy{account="nanaco（カード）",name="nanaco(センターお預り分)",type=""} 53.0
+mf_assets_point_present_jpy{account="nanaco（カード）",name="nanaco",type=""} 110.0
+mf_assets_point_present_jpy{account="ANAマイレージ",name="ANAマイレージ()",type=""} 5310.0
+mf_assets_point_present_jpy{account="JALマイレージ",name="JALマイレージ()",type=""} 7.0
+mf_assets_point_present_jpy{account="JALマイレージ",name="JALマイレージ(eJAL)",type=""} 10200.0
+mf_assets_point_present_jpy{account="T",name="T",type="T"} 1700.0
+mf_assets_point_present_jpy{account="Amazon.co.jp",name="Amazon",type="Amazon"} 792.0
+# HELP mf_assets_point_expire_date_info 資産 > ポイント・マイル > 有効期限
+# TYPE mf_assets_point_expire_date_info gauge
+mf_assets_point_expire_date_info{account="JCBカード",expired="2026/08/15",name="",type=""} 1.0
+mf_assets_point_expire_date_info{account="ANASuicaカード",expired="2023/07/31",name="",type=""} 1.0
+mf_assets_point_expire_date_info{account="nanaco（カード）",expired="2023/03/31",name="nanaco(センターお預り分)",type=""} 1.0
+mf_assets_point_expire_date_info{account="nanaco（カード）",expired="2023/03/31",name="nanaco",type=""} 1.0
+mf_assets_point_expire_date_info{account="ANAマイレージ",expired="",name="ANAマイレージ()",type=""} 1.0
+mf_assets_point_expire_date_info{account="JALマイレージ",expired="2025/06/30",name="JALマイレージ()",type=""} 1.0
+mf_assets_point_expire_date_info{account="JALマイレージ",expired="2021/11/30",name="JALマイレージ(eJAL)",type=""} 1.0
+mf_assets_point_expire_date_info{account="T",expired="2022/09/16",name="T",type="T"} 1.0
+mf_assets_point_expire_date_info{account="Amazon.co.jp",expired="2022/09/07",name="Amazon",type="Amazon"} 1.0
+# HELP mf_liability_total_jpy 負債 > 負債総額
+# TYPE mf_liability_total_jpy gauge
+mf_liability_total_jpy 6.713339e+06
+# HELP mf_liability_subtotal_jpy 負債 > 負債の内訳
+# TYPE mf_liability_subtotal_jpy gauge
+mf_liability_subtotal_jpy{type="クレジットカード利用残高"} 990416.0
+mf_liability_subtotal_jpy{type="キャッシング・カードローン"} 1.585823e+06
+mf_liability_subtotal_jpy{type="奨学金"} 3.72668e+06
+mf_liability_subtotal_jpy{type="その他の負債"} 410420.0
+# HELP mf_liability_detail_jpy 負債 > 負債詳細
+# TYPE mf_liability_detail_jpy gauge
+mf_liability_detail_jpy{account="JCBカード",name="ご利用残高",type="クレジットカード利用残高"} 551327.0
+mf_liability_detail_jpy{account="ANASuicaカード",name="ご利用残高",type="クレジットカード利用残高"} 0.0
+mf_liability_detail_jpy{account="YJカード",name="Yahoo!JAPANカードご利用残高",type="クレジットカード利用残高"} 439089.0
+mf_liability_detail_jpy{account="住信SBIネット銀行",name="ローン(カードローン)",type="キャッシング・カードローン"} 1.171199e+06
+mf_liability_detail_jpy{account="住信SBIネット銀行",name="ローン(目的ローン)",type="キャッシング・カードローン"} 414624.0
+mf_liability_detail_jpy{account="奨学金",name="第二種奨学金",type="奨学金"} 2.478605e+06
+mf_liability_detail_jpy{account="奨学金",name="第一種奨学金",type="奨学金"} 1.248075e+06
+mf_liability_detail_jpy{account="教育ローン(母)",name="教育ローン",type="その他"} 410420.0
+# HELP mf_budget_progress_total_jpy 予算 > 使った金額 > 支出全体
+# TYPE mf_budget_progress_total_jpy gauge
+mf_budget_progress_total_jpy{period="2021/08/25-2021/09/23"} 299337.0
+# HELP mf_budget_progress_subtotal_jpy 予算 > 使った金額 > 分類（手元で管理するお金・毎月決まった支出）
+# TYPE mf_budget_progress_subtotal_jpy gauge
+mf_budget_progress_subtotal_jpy{category="手元で管理するお金",period="2021/08/25-2021/09/23"} 183155.0
+mf_budget_progress_subtotal_jpy{category="毎月決まった支出",period="2021/08/25-2021/09/23"} 116182.0
+# HELP mf_budget_progress_category_jpy 予算 > 使った金額 > 大項目
+# TYPE mf_budget_progress_category_jpy gauge
+mf_budget_progress_category_jpy{category="自動車",period="2021/08/25-2021/09/23"} 0.0
+mf_budget_progress_category_jpy{category="日用品",period="2021/08/25-2021/09/23"} 16519.0
+mf_budget_progress_category_jpy{category="食費",period="2021/08/25-2021/09/23"} 43931.0
+mf_budget_progress_category_jpy{category="教養・教育",period="2021/08/25-2021/09/23"} 704.0
+mf_budget_progress_category_jpy{category="趣味・娯楽",period="2021/08/25-2021/09/23"} 63509.0
+mf_budget_progress_category_jpy{category="衣服・美容",period="2021/08/25-2021/09/23"} 12826.0
+mf_budget_progress_category_jpy{category="健康・医療",period="2021/08/25-2021/09/23"} 10280.0
+mf_budget_progress_category_jpy{category="交通費",period="2021/08/25-2021/09/23"} 4946.0
+mf_budget_progress_category_jpy{category="交際費",period="2021/08/25-2021/09/23"} 30440.0
+mf_budget_progress_category_jpy{category="住宅",period="2021/08/25-2021/09/23"} 70313.0
+mf_budget_progress_category_jpy{category="水道・光熱費",period="2021/08/25-2021/09/23"} 16438.0
+mf_budget_progress_category_jpy{category="通信費",period="2021/08/25-2021/09/23"} 22831.0
+mf_budget_progress_category_jpy{category="保険",period="2021/08/25-2021/09/23"} 6600.0
+# HELP mf_budget_balance_total_jpy 予算 > 残り使える金額 > 支出全体
+# TYPE mf_budget_balance_total_jpy gauge
+mf_budget_balance_total_jpy{period="2021/08/25-2021/09/23"} -104164.0
+# HELP mf_budget_balance_subtotal_jpy 予算 > 残り使える金額 > 分類（手元で管理するお金・毎月決まった支出）
+# TYPE mf_budget_balance_subtotal_jpy gauge
+mf_budget_balance_subtotal_jpy{category="手元で管理するお金",period="2021/08/25-2021/09/23"} -81295.0
+mf_budget_balance_subtotal_jpy{category="毎月決まった支出",period="2021/08/25-2021/09/23"} -22869.0
+# HELP mf_budget_balance_category_jpy 予算 > 残り使える金額 > 大項目
+# TYPE mf_budget_balance_category_jpy gauge
+mf_budget_balance_category_jpy{category="自動車",period="2021/08/25-2021/09/23"} 0.0
+mf_budget_balance_category_jpy{category="日用品",period="2021/08/25-2021/09/23"} -8659.0
+mf_budget_balance_category_jpy{category="食費",period="2021/08/25-2021/09/23"} 16069.0
+mf_budget_balance_category_jpy{category="教養・教育",period="2021/08/25-2021/09/23"} -704.0
+mf_budget_balance_category_jpy{category="趣味・娯楽",period="2021/08/25-2021/09/23"} -43509.0
+mf_budget_balance_category_jpy{category="衣服・美容",period="2021/08/25-2021/09/23"} -2826.0
+mf_budget_balance_category_jpy{category="健康・医療",period="2021/08/25-2021/09/23"} -9280.0
+mf_budget_balance_category_jpy{category="交通費",period="2021/08/25-2021/09/23"} -1946.0
+mf_budget_balance_category_jpy{category="交際費",period="2021/08/25-2021/09/23"} -30440.0
+mf_budget_balance_category_jpy{category="住宅",period="2021/08/25-2021/09/23"} 0.0
+mf_budget_balance_category_jpy{category="水道・光熱費",period="2021/08/25-2021/09/23"} -6438.0
+mf_budget_balance_category_jpy{category="通信費",period="2021/08/25-2021/09/23"} -9831.0
+mf_budget_balance_category_jpy{category="保険",period="2021/08/25-2021/09/23"} -6600.0

@@ -1,1 +1,1 @@
-# raspberrypi-local-exporter
+# life-metrics-grafana-deployment
