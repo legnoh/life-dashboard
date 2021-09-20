@@ -31,7 +31,7 @@ jobs:
         TODOIST_API_KEY: ${{ secrets.TODOIST_API_KEY }}
         TODOIST_PORT: ${{ secrets.TODOIST_PORT }}
       run: |
-        cd containers
+        cd container
         envsubst < ./tpl/openweather.env.tpl > ./openweather.tpl
         envsubst < ./tpl/tado.env.tpl > ./tado.tpl
         envsubst < ./tpl/todoist.env.tpl > ./todoist.tpl
