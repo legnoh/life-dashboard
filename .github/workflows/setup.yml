@@ -32,8 +32,8 @@ jobs:
         TODOIST_PORT: ${{ secrets.TODOIST_PORT }}
       run: |
         cd container
-        envsubst < ./tpl/openweather.env.tpl > ./openweather.tpl
-        envsubst < ./tpl/tado.env.tpl > ./tado.tpl
-        envsubst < ./tpl/todoist.env.tpl > ./todoist.tpl
-        sudo docker-compose up -d
+        envsubst < ./tpl/openweather.env.tpl > ./openweather.env
+        envsubst < ./tpl/tado.env.tpl > ./tado.env
+        envsubst < ./tpl/todoist.env.tpl > ./todoist.env
+        sudo docker-compose up -d --force-recreate
         cd - && sudo docker ps
