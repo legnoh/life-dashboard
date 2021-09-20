@@ -13,18 +13,27 @@ jobs:
         python: [3.7]
     steps:
     - uses: actions/checkout@v1
-    - name: test docker
-      run: sudo docker images
-    # - name: Install dependencies
-    #   run: |
-    #     python -m pip install --upgrade pip
-    #     pip install pipenv
-    #     pipenv install
-    # - name: setup GCP access
-    #   uses: google-github-actions/setup-gcloud@master
-    #   with:
-    #     project_id: ${{ secrets.GCP_PROJECT_ID }}
-    #     service_account_key: ${{ secrets.GCP_SA_KEY }}
-    #     export_default_credentials: true
-    # - name: Download JSON from GCS
-    #   run: gsutil cp gs://${{ secrets.BUCKET_NAME }}/*.prom container/public
+    - name: setup GCP access
+      uses: google-github-actions/setup-gcloud@master
+      with:
+        project_id: ${{ secrets.GCP_PROJECT_ID }}
+        service_account_key: ${{ secrets.GCP_SA_KEY }}
+        export_default_credentials: true
+    - name: Download JSON from GCS
+      run: gsutil cp gs://${{ secrets.BUCKET_NAME }}/*.prom container/staticfile-exporter/metrics
+    - name: start docker images
+      env:
+        OPENWEATHER_CITY: ${{ secrets.OPENWEATHER_CITY }}
+        OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
+        OPENWEATHER_LISTEN_ADDRESS: ${{ secrets.OPENWEATHER_LISTEN_ADDRESS }}
+        TADOAC_USERNAME: ${{ secrets.TADOAC_USERNAME }}
+        TADOAC_PASSWORD: ${{ secrets.TADOAC_PASSWORD }}
+        TODOIST_API_KEY: ${{ secrets.TODOIST_API_KEY }}
+        TODOIST_PORT: ${{ secrets.TODOIST_PORT }}
+      run: |
+        cd containers
+        envsubst < ./tpl/openweather.env.tpl > ./openweather.tpl
+        envsubst < ./tpl/tado.env.tpl > ./tado.tpl
+        envsubst < ./tpl/todoist.env.tpl > ./todoist.tpl
+        sudo docker-compose up -d
+        cd - && sudo docker ps

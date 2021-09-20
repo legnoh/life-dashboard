@@ -1,33 +1,42 @@
 version: '3'
 services:
-  mf-exporter:
+  staticfile-exporter:
     image: nginx:stable
-    container_name: mf-exporter
+    container_name: staticfile-exporter
     volumes:
-      - ./public:/usr/share/nginx/html:ro
-    ports:
-      - 9101:80
+      - ./staticfile-exporter/metrics:/usr/share/nginx/html:ro
+    ports: [ 9101:80 ]
     restart: always
-  node-exporter:
-    image: prom/node-exporter:latest
-    container_name: node-exporter
-    ports:
-      - 9100:9100
+  todoist-exporter:
+    image: legnoh/todoist-exporter:latest
+    container_name: todoist-exporter
+    ports: [ 9102:9102 ]
     restart: always
+    env_file: todoist.env
+  openweather-exporter:
+    image: billykwooten/openweather-exporter
+    container_name: openweather-exporter
+    restart: always
+    ports: [ "9103:9103" ]
+    env_file: openweather.env
+  tado-exporter:
+    image: ekofr/tado-exporter:latest
+    container_name: tado-exporter
+    ports: [ 9898:9898 ]
+    restart: always
+    env_file: tado.env
   prometheus:
-    image: prom/prometheus
     container_name: prometheus
+    image: prom/prometheus
+    ports: [ 9090:9090 ]
     volumes:
       - ./prometheus:/etc/prometheus
     command: "--config.file=/etc/prometheus/prometheus.yaml"
-    ports:
-      - 9090:9090
     restart: always
   grafana:
     image: grafana/grafana
     container_name: grafana
     volumes:
       - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
-    ports:
-      - 3000:3000
+    ports: [ 3000:3000 ]
     restart: always

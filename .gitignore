@@ -29,4 +29,9 @@ Temporary Items
 .apdisk
 
 # env files
+.env
 .envrc
+container/staticfile-exporter/metrics/*.prom
+openweather.env
+tado.env
+todoist.env
