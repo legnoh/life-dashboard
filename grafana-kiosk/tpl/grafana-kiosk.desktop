@@ -1,3 +1,0 @@
-[Desktop Entry]
-Type=Application
-Exec=/usr/bin/grafana-kiosk -c /etc/grafana-kiosk.yaml
