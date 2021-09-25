@@ -2,14 +2,6 @@
 
 # https://docs.docker.com/engine/install/debian/
 
-## Uninstall old versions
-sudo apt-get -y remove \
-    docker \
-    docker-engine \
-    docker.io \
-    containerd \
-    runc
-
 ## Update the apt package index and install packages to allow apt to use a repository over HTTPS
 sudo apt-get -y update
 sudo apt-get -y install \

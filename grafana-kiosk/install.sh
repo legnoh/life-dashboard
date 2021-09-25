@@ -3,7 +3,7 @@
 PATH=$PATH:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
 
 # https://github.com/grafana/grafana-kiosk#installing-on-linux
-ARCH=`armv7`
+ARCH="armv7"
 
 # install some utilities
 sudo apt-get -y install \
