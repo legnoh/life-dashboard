@@ -6,7 +6,7 @@ general:
   lxde-home: /home/pi
 
 target:
-  login-method: local
+  login-method: gcom
   URL: "${GRAFANA_KIOSK_URL}"
   username: "${GRAFANA_KIOSK_USERNAME}"
   password: "${GRAFANA_KIOSK_PASSWORD}"
