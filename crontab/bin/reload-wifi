@@ -12,8 +12,9 @@ then
   sudo systemctl restart grafana-kiosk
 
   # restart github action runner process
+  echo "restarting github actions self-hosted runner process..."
   cd /home/pi/actions-runner
-  sudo ./svcs.sh stop
-  sudo ./svcs.sh start
+  sudo ./svc.sh stop
+  sudo ./svc.sh start
   cd -
 fi
