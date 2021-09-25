@@ -17,6 +17,7 @@ then
   sudo ./svcs.sh start
   cd -
 
-  # restart grafana-kiosk
+  # restart ssh, grafana-kiosk
+  sudo systemctl restart ssh
   sudo systemctl restart grafana-kiosk
 fi
