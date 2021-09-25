@@ -7,9 +7,8 @@ then
   echo "No network connection, restarting some services..."
   sudo systemctl daemon-reload
   sudo systemctl restart dhcpcd
-  sleep 20
   sudo systemctl restart avahi-daemon
-  sudo systemctl restart ssh
+  sleep 20
   sudo systemctl restart grafana-kiosk
 
   # restart github action runner process
