@@ -5,8 +5,6 @@ sudo systemctl status dhcpcd > /dev/null
 if [ $? != 0 ]
 then
   echo "No network connection, restarting some services..."
-
-  # restart ssh, 
   sudo systemctl daemon-reload
   sudo systemctl restart dhcpcd
   sleep 20
