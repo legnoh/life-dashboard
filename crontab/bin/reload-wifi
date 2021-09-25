@@ -1,11 +1,12 @@
 #!/bin/sh
 
-ping -c4 192.168.1.1 > /dev/null
+ifconfig wlan0 > /dev/null
 
 if [ $? != 0 ]
 then
   echo "No network connection, restarting wlan0"
-  /sbin/ifdown 'wlan0'
-  sleep 5
-  /sbin/ifup --force 'wlan0'
+  sudo systemctl daemon-reload
+  sudo systemctl restart dhcpcd
+  sleep 10
+  ifconfig wlan0
 fi
