@@ -13,8 +13,16 @@ sudo apt-get -y install \
 
 ## install docker with official script
 ## https://docs.docker.com/engine/install/debian/#install-using-the-convenience-script
-sudo curl -fsSL https://get.docker.com -o get-docker.sh
-sudo sh get-docker.sh
+which docker > /dev/null
+if [ $? != 0 ]
+then
+    sudo curl -fsSL https://get.docker.com -o get-docker.sh
+    sudo sh get-docker.sh
+fi
 
 # install docker-compose
-sudo pip3 install docker-compose
+which docker-compose > /dev/null
+if [ $? != 0 ]
+then
+    sudo pip3 install docker-compose
+fi
