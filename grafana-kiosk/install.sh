@@ -6,7 +6,7 @@ PATH=$PATH:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
 ARCH=`armv7`
 
 # install some utilities
-sudo apt-get install \
+sudo apt-get -y install \
     chromium-browser \
     jq
 

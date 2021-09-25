@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  setup-raspberry-pi:
     runs-on: self-hosted
     strategy:
       matrix:
@@ -42,10 +42,6 @@ jobs:
         GRAFANA_REMOTE_WRITE_API_KEY: ${{ secrets.GRAFANA_REMOTE_WRITE_API_KEY }}
       run: |
         ./docker/start.sh
-    - name: set crontab
-      run: |
-        sudo cp -r ./crontab/bin/* /usr/local/bin/
-        sudo cp -r ./crontab/settings/* /etc/cron.d/
     - name: setup grafana-kiosk
       env:
           GRAFANA_KIOSK_URL: ${{ secrets.GRAFANA_KIOSK_URL }}
@@ -54,3 +50,11 @@ jobs:
       run: |
         ./grafana-kiosk/install.sh
         ./grafana-kiosk/start.sh
+    - name: set crontab
+      run: |
+        sudo cp -r ./crontab/bin/* /usr/local/bin/
+        sudo cp -r ./crontab/settings/* /etc/cron.d/
+        echo "success copy crontab scripts"
+    - name: Done
+      run: |
+        echo "All Done!"
