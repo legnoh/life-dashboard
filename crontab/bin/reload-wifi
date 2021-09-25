@@ -5,8 +5,18 @@ sudo systemctl status dhcpcd > /dev/null
 if [ $? != 0 ]
 then
   echo "No network connection, restarting wlan0"
+  
+  # restart dhcpcd
   sudo systemctl daemon-reload
   sudo systemctl restart dhcpcd
   sleep 10
-  ifconfig wlan0
+
+  # restart github action runner process
+  cd /home/pi/actions-runner
+  sudo ./svcs.sh stop
+  sudo ./svcs.sh start
+  cd -
+
+  # restart grafana-kiosk
+  sudo systemctl restart grafana-kiosk
 fi

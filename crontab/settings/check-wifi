@@ -1,4 +1,4 @@
 SHELL=/bin/bash
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
-* * * * *  root sudo -H reload-wifi >> /dev/null 2>&1
+* * * * *  root reload-wifi >> /dev/null 2>&1
