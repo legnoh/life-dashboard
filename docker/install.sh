@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -eu
+
 # https://docs.docker.com/engine/install/debian/
 
 ## Update the apt package index and install packages to allow apt to use a repository over HTTPS

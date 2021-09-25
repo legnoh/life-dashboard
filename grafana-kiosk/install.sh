@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -eu
+
 PATH=$PATH:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
 
 # https://github.com/grafana/grafana-kiosk#installing-on-linux

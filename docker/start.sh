@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -eu
+
 cd docker
 
 envsubst < ./tpl/openweather.env.tpl > ./openweather.env

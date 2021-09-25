@@ -1,6 +1,8 @@
 #!/bin/bash
 
-cd grafana
+set -eu
+
+cd grafana-kiosk
 
 sudo cp -r ./tpl/grafana-kiosk.service /etc/systemd/system/grafana-kiosk.service
 sudo sh -c 'envsubst < ./tpl/grafana-kiosk.yaml.tpl > /etc/grafana-kiosk.yaml'
