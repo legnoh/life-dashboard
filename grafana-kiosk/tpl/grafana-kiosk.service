@@ -1,0 +1,14 @@
+[Unit]
+Description=Grafana Kiosk
+Documentation=https://github.com/grafana/grafana-kiosk
+Documentation=https://grafana.com/blog/2019/05/02/grafana-tutorial-how-to-create-kiosks-to-display-dashboards-on-a-tv
+After=network.target
+
+[Service]
+User=pi
+Environment="DISPLAY=:0"
+Environment="XAUTHORITY=/home/pi/.Xauthority"
+ExecStart=/usr/bin/grafana-kiosk -c /etc/grafana-kiosk.yaml
+
+[Install]
+WantedBy=graphical.target

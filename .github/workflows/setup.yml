@@ -1,4 +1,4 @@
-name: Upload Numerics JSON to Netlify
+name: Setup Grafana RaspberryPi
 
 on:
   push:
@@ -13,6 +13,10 @@ jobs:
         python: [3.7]
     steps:
     - uses: actions/checkout@v1
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
     - name: setup GCP access
       uses: google-github-actions/setup-gcloud@master
       with:
@@ -20,7 +24,11 @@ jobs:
         service_account_key: ${{ secrets.GCP_SA_KEY }}
         export_default_credentials: true
     - name: Download JSON from GCS
-      run: gsutil cp gs://${{ secrets.BUCKET_NAME }}/*.prom container/staticfile-exporter/metrics
+      run: |
+        gsutil cp gs://${{ secrets.GCP_BUCKET_NAME }}/*.prom docker/staticfile-exporter/metrics
+    - name: install docker
+      run: |
+        ./docker/install.sh
     - name: start docker images
       env:
         OPENWEATHER_CITY: ${{ secrets.OPENWEATHER_CITY }}
@@ -30,10 +38,19 @@ jobs:
         TADOAC_PASSWORD: ${{ secrets.TADOAC_PASSWORD }}
         TODOIST_API_KEY: ${{ secrets.TODOIST_API_KEY }}
         TODOIST_PORT: ${{ secrets.TODOIST_PORT }}
+        GRAFANA_REMOTE_WRITE_USERNAME: ${{ secrets.GRAFANA_REMOTE_WRITE_USERNAME }}
+        GRAFANA_REMOTE_WRITE_API_KEY: ${{ secrets.GRAFANA_REMOTE_WRITE_API_KEY }}
       run: |
-        cd container
-        envsubst < ./tpl/openweather.env.tpl > ./openweather.env
-        envsubst < ./tpl/tado.env.tpl > ./tado.env
-        envsubst < ./tpl/todoist.env.tpl > ./todoist.env
-        sudo docker-compose up -d --force-recreate
-        cd - && sudo docker ps
+        ./docker/start.sh
+    - name: set crontab
+      run: |
+        sudo cp -r ./crontab/bin/* /usr/local/bin/
+        sudo cp -r ./crontab/settings/* /etc/cron.d/
+    - name: setup grafana-kiosk
+      env:
+          GRAFANA_KIOSK_URL: ${{ secrets.GRAFANA_KIOSK_URL }}
+          GRAFANA_KIOSK_USERNAME: ${{ secrets.GRAFANA_KIOSK_USERNAME }}
+          GRAFANA_KIOSK_PASSWORD: ${{ secrets.GRAFANA_KIOSK_PASSWORD }}
+      run: |
+        ./grafana-kiosk/install.sh
+        ./grafana-kiosk/start.sh
