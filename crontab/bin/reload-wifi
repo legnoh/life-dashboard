@@ -1,6 +1,6 @@
 #!/bin/sh
 
-ifconfig wlan0 > /dev/null
+sudo systemctl status dhcpcd > /dev/null
 
 if [ $? != 0 ]
 then
