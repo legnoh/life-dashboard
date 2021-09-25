@@ -9,6 +9,7 @@ then
   sudo systemctl restart dhcpcd
   sudo systemctl restart avahi-daemon
   sleep 20
+  sudo service docker restart
   sudo systemctl restart grafana-kiosk
 
   # restart github action runner process
@@ -16,5 +17,5 @@ then
   cd /home/pi/actions-runner
   sudo ./svc.sh stop
   sudo ./svc.sh start
-  cd -
+  cd - 
 fi
