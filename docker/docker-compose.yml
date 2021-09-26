@@ -16,7 +16,7 @@ services:
     env_file: todoist.env
     expose: [ "9102" ]
   openweather-exporter:
-    image: billykwooten/openweather-exporter
+    image: legnoh/openweather-exporter
     container_name: openweather-exporter
     restart: always
     ports: [ "9103:9103" ]
