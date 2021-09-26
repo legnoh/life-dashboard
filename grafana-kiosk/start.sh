@@ -9,7 +9,7 @@ sudo cp -r /tmp/grafana-kiosk.yaml /etc/grafana-kiosk.yaml
 sudo chmod 664 /etc/grafana-kiosk.yaml
 
 systemctl is-enabled grafana-kiosk
-if [ $? != 0 ]
+if [ $? == 0 ]
 then
     sudo systemctl stop grafana-kiosk
     sudo systemctl disable grafana-kiosk
