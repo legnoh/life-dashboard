@@ -11,7 +11,7 @@ Environment="KIOSK_AUTOFIT=false"
 Environment="KIOSK_LXDE_ENABLED=true"
 Environment="KIOSK_LXDE_HOME=/home/pi"
 Environment="KIOSK_LOGIN_METHOD=anom"
-Environment="URL=http://localhost:3000/d/jTY6Raggz"
+Environment="KIOSK_URL=http://localhost:3000/d/jTY6Raggz"
 Environment="KIOSK_IGNORE_CERTIFICATE_ERRORS=false"
 Environment="KIOSK_IS_PLAYLIST=true"
 ExecStart=/usr/bin/grafana-kiosk
