@@ -10,7 +10,10 @@ Environment="KIOSK_MODE=full"
 Environment="KIOSK_AUTOFIT=false"
 Environment="KIOSK_LXDE_ENABLED=true"
 Environment="KIOSK_LXDE_HOME=/home/pi"
-ExecStart=/usr/bin/grafana-kiosk -c /etc/grafana-kiosk.yaml
+Environment="KIOSK_LOGIN_METHOD=anom"
+Environment="KIOSK_IGNORE_CERTIFICATE_ERRORS=false"
+Environment="KIOSK_IS_PLAYLIST=true"
+ExecStart=/usr/bin/grafana-kiosk
 
 [Install]
 WantedBy=graphical.target
