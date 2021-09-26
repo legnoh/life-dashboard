@@ -13,7 +13,7 @@ Environment="KIOSK_LXDE_HOME=/home/pi"
 Environment="KIOSK_LOGIN_METHOD=anom"
 Environment="KIOSK_IGNORE_CERTIFICATE_ERRORS=false"
 Environment="KIOSK_IS_PLAYLIST=true"
-ExecStart=/usr/bin/grafana-kiosk -c /etc/grafana-kiosk.yaml
+ExecStart=/usr/bin/grafana-kiosk -URL=http://localhost:3000/d/jTY6Raggz
 
 [Install]
 WantedBy=graphical.target
