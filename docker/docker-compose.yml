@@ -23,7 +23,7 @@ services:
     env_file: openweather.env
     expose: [ "9103" ]
   tado-exporter:
-    image: ekofr/tado-exporter:latest
+    image: legnoh/tado-exporter:latest
     container_name: tado-exporter
     ports: [ 9898:9898 ]
     restart: always
