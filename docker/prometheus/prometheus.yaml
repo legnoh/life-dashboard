@@ -24,13 +24,17 @@ scrape_configs:
     static_configs:
       - targets: [ 'todoist-exporter:9102' ]
     scrape_interval: 60s
-  - job_name: 'tado'
-    static_configs:
-      - targets: [ 'tado-exporter:9898' ]
-    scrape_interval: 60s
   - job_name: 'openweather'
     static_configs:
       - targets: [ 'openweather-exporter:9103' ]
+    metric_relabel_configs:
+    - source_labels: [__name__]
+      regex: '(go|process|promhttp)_(.*)'
+      action: drop
+    scrape_interval: 60s
+  - job_name: 'tado'
+    static_configs:
+      - targets: [ 'tado-monitor:9104' ]
     metric_relabel_configs:
     - source_labels: [__name__]
       regex: '(go|process|promhttp)_(.*)'
