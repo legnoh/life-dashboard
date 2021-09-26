@@ -1,13 +1,13 @@
 # life-metrics-grafana-deployment
 
+- RaspberryPi で人生に必要なメトリクスを取得・監視するための Prometheus デプロイ用セット。
+- 慣れれば1時間かからないくらいで必要なものが揃うようになっている。
+- GitHub Actions の self-hosted ランナーによってデプロイされる。
+
 Usage
 ----
 
-### test on local
-
-```sh
-
-```
+TBD
 
 やること
 ----
@@ -32,6 +32,18 @@ Usage
     - このリポジトリの GitHub Action を使って、以下を実行する
       - Docker をインストールする
       - docker-compose をインストールする
-      - docker-compose で container/docker-compose.yml のコンテナたちを起動状態にする
+      - docker-compose で docker/docker-compose.yml のコンテナたちを起動状態にする
       - grafana-kiosk で Grafana のページを開いて、初期状態でフルスクリーン化する
       - ネットワークが切断された場合、自動的にWifiを起動し直すcrontabを仕掛ける
+
+お品書き
+----
+
+|name|desc|
+|---|---|
+| [legnoh/asken-exporter](https://github.com/legnoh/asken-exporter) | あすけん の食事スコア、アドバイス |
+| [legnoh/moneyforward-exporter](https://github.com/legnoh/moneyforward-exporter) | MoneyForward ME の 残高、資産、負債、引落予定額 |
+| [legnoh/withings-exporter](https://github.com/legnoh/withings-exporter) | Withings の 身体測定情報、アクティビティ、睡眠データ |
+| [legnoh/openweather-exporter](https://github.com/legnoh/openweather-exporter) | OpenWeatherMap の 指定地点の天気、温度、湿度 などの気象情報 |
+| [clambin/tado-monitor](https://github.com/clambin/tado-exporter) | Tado° の室内温度、湿度 などの計測情報 |
+| [legnoh/todoist-exporter](https://github.com/legnoh/todoist_exporter)(TBD) | Todoist の特定フィルターのタスク残数 |
