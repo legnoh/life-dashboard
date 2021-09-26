@@ -1,0 +1,13 @@
+# Section for Prometheus exporter functionality
+exporter:
+  # Enable exporter functionality
+  enabled: true
+  # HTTP port for Prometheus scraping. Metrics are exposed on /metrics path
+  port: 9104
+  # How often the exporter should run
+  interval: 1m
+
+# Section for controller functionality
+controller:
+  # Enable controller functionality
+  enabled: false

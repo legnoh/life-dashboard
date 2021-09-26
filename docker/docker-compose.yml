@@ -22,13 +22,16 @@ services:
     ports: [ "9103:9103" ]
     env_file: openweather.env
     expose: [ "9103" ]
-  tado-exporter:
-    image: legnoh/tado-exporter:latest
-    container_name: tado-exporter
-    ports: [ 9898:9898 ]
+  tado-monitor:
+    image: clambin/tado-monitor:latest
+    container_name: tado-monitor
+    ports: [ 9104:9104 ]
+    volumes:
+      - ./tado-monitor:/etc/tado-monitor
+    command: [ "--config=/etc/tado-monitor/config.yaml" ]
     restart: always
     env_file: tado.env
-    expose: [ "9898" ]
+    expose: [ "9104" ]
   prometheus:
     container_name: prometheus
     image: prom/prometheus
