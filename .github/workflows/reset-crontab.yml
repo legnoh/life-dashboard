@@ -1,0 +1,20 @@
+name: Reset Crontab setting
+
+on:
+  push:
+    branches:
+    - main
+    paths:
+    - 'crontab/**'
+  workflow_dispatch:
+
+jobs:
+  setup-raspberry-pi:
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v1
+    - name: set crontab
+      run: |
+        sudo cp -r ./crontab/bin/* /usr/local/bin/
+        sudo cp -r ./crontab/settings/* /etc/cron.d/
+        echo "success copy crontab scripts"

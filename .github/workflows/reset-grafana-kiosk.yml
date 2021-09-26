@@ -1,0 +1,22 @@
+name: Reset Grafana KIOSK setting
+
+on:
+  push:
+    branches:
+    - main
+    paths:
+    - 'grafana-kiosk/**'
+  workflow_dispatch:
+
+jobs:
+  setup-raspberry-pi:
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v1
+    - name: setup grafana-kiosk
+      env:
+          GRAFANA_KIOSK_URL: ${{ secrets.GRAFANA_KIOSK_URL }}
+          GRAFANA_KIOSK_USERNAME: ${{ secrets.GRAFANA_KIOSK_USERNAME }}
+          GRAFANA_KIOSK_PASSWORD: ${{ secrets.GRAFANA_KIOSK_PASSWORD }}
+      run: |
+        ./grafana-kiosk/start.sh

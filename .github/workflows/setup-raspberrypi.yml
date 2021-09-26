@@ -1,0 +1,41 @@
+name: Setup RaspberryPi
+
+on:
+  workflow_dispatch:
+
+jobs:
+  setup-raspberry-pi:
+    runs-on: self-hosted
+    strategy:
+      matrix:
+        python: [3.7]
+    steps:
+    - uses: actions/checkout@v1
+    - name: set crontab
+      run: |
+        sudo cp -r ./crontab/bin/* /usr/local/bin/
+        sudo cp -r ./crontab/settings/* /etc/cron.d/
+        echo "success copy crontab scripts"
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: install docker
+      run: |
+        ./docker/install.sh
+    - name: setup grafana-kiosk
+      env:
+          GRAFANA_KIOSK_URL: ${{ secrets.GRAFANA_KIOSK_URL }}
+          GRAFANA_KIOSK_USERNAME: ${{ secrets.GRAFANA_KIOSK_USERNAME }}
+          GRAFANA_KIOSK_PASSWORD: ${{ secrets.GRAFANA_KIOSK_PASSWORD }}
+      run: |
+        ./grafana-kiosk/install.sh
+    - name: setup GCP access
+      uses: google-github-actions/setup-gcloud@master
+      with:
+        project_id: ${{ secrets.GCP_PROJECT_ID }}
+        service_account_key: ${{ secrets.GCP_SA_KEY }}
+        export_default_credentials: true
+    - name: Download JSON from GCS
+      run: |
+        gsutil cp gs://${{ secrets.GCP_BUCKET_NAME }}/*.prom docker/staticfile-exporter/metrics

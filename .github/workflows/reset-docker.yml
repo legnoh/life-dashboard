@@ -1,8 +1,11 @@
-name: Setup Grafana RaspberryPi
+name: Reset docker-compose setting
 
 on:
   push:
-    branches: [ main ]
+    branches:
+    - main
+    paths:
+    - 'docker/**'
   workflow_dispatch:
 
 jobs:
@@ -26,9 +29,6 @@ jobs:
     - name: Download JSON from GCS
       run: |
         gsutil cp gs://${{ secrets.GCP_BUCKET_NAME }}/*.prom docker/staticfile-exporter/metrics
-    - name: install docker
-      run: |
-        ./docker/install.sh
     - name: start docker images
       env:
         OPENWEATHER_CITY: ${{ secrets.OPENWEATHER_CITY }}
@@ -42,16 +42,3 @@ jobs:
         GRAFANA_REMOTE_WRITE_API_KEY: ${{ secrets.GRAFANA_REMOTE_WRITE_API_KEY }}
       run: |
         ./docker/start.sh
-    - name: setup grafana-kiosk
-      env:
-          GRAFANA_KIOSK_URL: ${{ secrets.GRAFANA_KIOSK_URL }}
-          GRAFANA_KIOSK_USERNAME: ${{ secrets.GRAFANA_KIOSK_USERNAME }}
-          GRAFANA_KIOSK_PASSWORD: ${{ secrets.GRAFANA_KIOSK_PASSWORD }}
-      run: |
-        ./grafana-kiosk/install.sh
-        ./grafana-kiosk/start.sh
-    - name: set crontab
-      run: |
-        sudo cp -r ./crontab/bin/* /usr/local/bin/
-        sudo cp -r ./crontab/settings/* /etc/cron.d/
-        echo "success copy crontab scripts"

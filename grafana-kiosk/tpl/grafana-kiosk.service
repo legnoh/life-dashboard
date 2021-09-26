@@ -2,7 +2,7 @@
 Description=Grafana Kiosk
 Documentation=https://github.com/grafana/grafana-kiosk
 Documentation=https://grafana.com/blog/2019/05/02/grafana-tutorial-how-to-create-kiosks-to-display-dashboards-on-a-tv
-After=network.target graphical.target
+After=network.target graphical.target network.service
 
 [Service]
 User=pi

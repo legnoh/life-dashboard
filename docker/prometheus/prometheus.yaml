@@ -9,17 +9,17 @@ scrape_configs:
     metrics_path: /moneyforward.prom
     static_configs:
       - targets: [ staticfile-exporter:80 ]
-    scrape_interval: 1800s
+    scrape_interval: 60s
   - job_name: 'asken'
     metrics_path: /asken.prom
     static_configs:
       - targets: [ staticfile-exporter:80 ]
-    scrape_interval: 1800s
+    scrape_interval: 60s
   - job_name: 'withings'
     metrics_path: /withings.prom
     static_configs:
       - targets: [ staticfile-exporter:80 ]
-    scrape_interval: 1800s
+    scrape_interval: 60s
   - job_name: 'todoist'
     static_configs:
       - targets: [ 'todoist-exporter:9102' ]

@@ -1,8 +1,8 @@
 up:
-	cd container && docker-compose up -d --remove-orphans && cd -
+	cd docker && docker-compose up -d --remove-orphans && cd -
 
 down:
-	cd container && docker-compose down --remove-orphans && cd -
+	cd docker && docker-compose down --remove-orphans && cd -
 
 destroy:
 	docker stop `docker ps -q`
