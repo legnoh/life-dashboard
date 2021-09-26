@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -eu
+set -u
 
 # https://docs.docker.com/engine/install/debian/
 
