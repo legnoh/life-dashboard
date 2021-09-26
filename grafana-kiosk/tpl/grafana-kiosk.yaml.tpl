@@ -6,9 +6,9 @@ general:
   lxde-home: /home/pi
 
 target:
-  login-method: gcom
-  URL: "${GRAFANA_KIOSK_URL}"
-  username: "${GRAFANA_KIOSK_USERNAME}"
-  password: "${GRAFANA_KIOSK_PASSWORD}"
+  login-method: local
+  URL: "http://localhost:3000/"
+  username: "admin"
+  password: "admin"
   playlists: true
   ignore-certificate-errors: false
