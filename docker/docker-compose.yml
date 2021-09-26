@@ -43,6 +43,7 @@ services:
     container_name: grafana
     volumes:
       - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
+      - ./grafana/grafana.ini:/etc/grafana/grafana.ini
     ports: [ 3000:3000 ]
     expose: [ "3000" ]
     restart: always

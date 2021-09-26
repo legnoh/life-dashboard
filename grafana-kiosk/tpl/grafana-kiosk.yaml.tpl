@@ -6,9 +6,7 @@ general:
   lxde-home: /home/pi
 
 target:
-  login-method: local
+  login-method: anom
   URL: "http://localhost:3000/"
-  username: "admin"
-  password: "admin"
-  playlists: true
+  playlist: false
   ignore-certificate-errors: false
