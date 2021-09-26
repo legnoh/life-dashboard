@@ -6,7 +6,7 @@ After=network.target graphical.target
 
 [Service]
 User=pi
-ExecStart=/usr/bin/grafana-kiosk -URL=http://localhost:3000/d/jTY6Raggz/new-dashboard-copy -autofit=false -lxde
+ExecStart=/usr/bin/grafana-kiosk -URL=http://localhost:3000/d/jTY6Raggz
 
 [Install]
 WantedBy=graphical.target
