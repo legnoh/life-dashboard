@@ -49,4 +49,5 @@ services:
       - ./grafana/grafana.ini:/etc/grafana/grafana.ini
     ports: [ 3000:3000 ]
     expose: [ "3000" ]
+    env_file: grafana.env
     restart: always

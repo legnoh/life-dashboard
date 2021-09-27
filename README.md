@@ -19,6 +19,8 @@ TBD
     - https://www.raspberrypi.org/documentation/computers/configuration.html#setting-up-a-headless-raspberry-pi
 - 起動して電源オン
   - SSHして以下を実行
+    - `sudo raspi-config` で以下を実行
+      - `2 Display Options` -> `D4 Screen Blanking` -> `<No>`
     - GitHub Action hosted runner をインストールして、service起動状態にする
       - https://docs.github.com/en/actions/hosting-your-own-runners/adding-self-hosted-runners
         - https://github.com/legnoh/life-metrics-grafana-deployment/settings/actions/runners
