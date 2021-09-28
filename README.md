@@ -49,3 +49,4 @@ TBD
 | [legnoh/openweather-exporter](https://github.com/legnoh/openweather-exporter) | OpenWeatherMap の 指定地点の天気、温度、湿度 などの気象情報 |
 | [clambin/tado-monitor](https://github.com/clambin/tado-exporter) | Tado° の室内温度、湿度 などの計測情報 |
 | [legnoh/todoist-exporter](https://github.com/legnoh/todoist-exporter) | Todoist の特定フィルターのタスク残数 |
+| [legnoh/countdown-exporter](https://github.com/legnoh/countdown-exporter) | 特定日時までのカウントダウン |
