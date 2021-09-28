@@ -32,6 +32,13 @@ services:
     restart: always
     env_file: tado.env
     expose: [ "9104" ]
+  countdown-exporter:
+    image: legnoh/countdown-exporter:latest
+    container_name: countdown-exporter
+    ports: [ 9105:9105 ]
+    restart: always
+    env_file: countdown.env
+    expose: [ "9105" ]
   prometheus:
     container_name: prometheus
     image: prom/prometheus

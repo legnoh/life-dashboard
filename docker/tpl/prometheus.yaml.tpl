@@ -40,6 +40,10 @@ scrape_configs:
       regex: '(go|process|promhttp)_(.*)'
       action: drop
     scrape_interval: 60s
+  - job_name: 'countdown'
+    static_configs:
+      - targets: [ 'countdown-exporter:9105' ]
+    scrape_interval: 60s
 
 remote_write:
 - url: https://prometheus-prod-10-prod-us-central-0.grafana.net/api/prom/push
