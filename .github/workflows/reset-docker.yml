@@ -42,3 +42,9 @@ jobs:
         GRAFANA_REMOTE_WRITE_API_KEY: ${{ secrets.GRAFANA_REMOTE_WRITE_API_KEY }}
       run: |
         ./docker/start.sh
+    - name: Archive production artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: artifact
+        path: |
+          docker
