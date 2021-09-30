@@ -7,6 +7,7 @@ After=network.target graphical.target
 [Service]
 User=pi
 ExecStart=/usr/bin/grafana-kiosk -URL=http://localhost:3000/d/jTY6Raggz
+Restart=always
 
 [Install]
 WantedBy=graphical.target
