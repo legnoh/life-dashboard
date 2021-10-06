@@ -3,6 +3,3 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
 # Check if wifi is connected
 * * * * *  root reload-wifi >> /dev/null 2>&1
-
-# Daily reboot
-0 0 * * * root sudo reboot
