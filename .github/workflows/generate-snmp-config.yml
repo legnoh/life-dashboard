@@ -28,14 +28,12 @@ jobs:
         go-version: 1.17
     - name: Get & Build generator script
       env:
-        GENERATOR_PATH: src/github.com/prometheus/snmp_exporter/generator
+        GENERATOR_PATH: /home/runner/go/pkg/mod/github.com/prometheus/snmp_exporter/generator
       run: |
         go install github.com/prometheus/snmp_exporter/generator@latest
-        ls -al /home/runner/
-        ls -al /home/runner/.cache
-        ls -al /home/runner/go
-        
-        cd /home/runner/go/${GENERATOR_PATH}
+        ls -al /home/runner/go/pkg
+        ls -al /home/runner/go/pkg/mod
+        cd ${GENERATOR_PATH}
         go build
         make mibs
     - name: Download YAMAHA Private MIB
@@ -50,14 +48,14 @@ jobs:
         SNMP_PASSWORD: ${{ secrets.SNMP_PASSWORD }}
         SNMP_PRIV_PASSWORD: ${{ secrets.SNMP_PRIV_PASSWORD }}
         SNMP_CONTEXT_NAME: ${{ secrets.SNMP_CONTEXT_NAME }}
-        GENERATOR_PATH: src/github.com/prometheus/snmp_exporter/generator
+        GENERATOR_PATH: /home/runner/go/pkg/mod/github.com/prometheus/snmp_exporter/generator
       run: |
         cd -
-        envsubst < ./tpl/snmp-generator.yml.tpl > /home/runner/go/${GENERATOR_PATH}/generator.yml
+        envsubst < ./tpl/snmp-generator.yml.tpl > ${GENERATOR_PATH}/generator.yml
         cd -
     - name: Execute script
       env:
-        GENERATOR_PATH: src/github.com/prometheus/snmp_exporter/generator
+        GENERATOR_PATH: /home/runner/go/pkg/mod/github.com/prometheus/snmp_exporter/generator
         MIBDIRS: mibs
       run: ./generator generate
     - name: Upload snmp.yml to GCS
