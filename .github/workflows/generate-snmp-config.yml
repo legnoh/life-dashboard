@@ -32,7 +32,7 @@ jobs:
         GENERATOR_PATH: src/github.com/prometheus/snmp_exporter/generator
       run: |
         go install github.com/prometheus/snmp_exporter/generator@latest
-        ls -al /home/runner/go/src/github.com
+        ls -al /home/runner/work/
         cd /home/runner/go/${GENERATOR_PATH}
         go build
         make mibs
