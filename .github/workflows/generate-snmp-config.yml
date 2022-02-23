@@ -21,12 +21,13 @@ jobs:
     - name: setup GCP project information
       uses: google-github-actions/setup-gcloud@v0
     - name: Get & Build generator script
-      env:
+      env: &go_envs
         GO111MODULE: on
-        GOPATH: /home/runner/work/
+        GOPATH: /home/runner/go/
+        GENERATOR_PATH: src/github.com/prometheus/snmp_exporter/generator
       run: |
         go get github.com/prometheus/snmp_exporter/generator
-        cd ${GOPATH}/src/github.com/prometheus/snmp_exporter/generator
+        cd ${GOPATH}/${GENERATOR_PATH}
         go build
         make mibs
     - name: Download YAMAHA Private MIB
@@ -41,15 +42,14 @@ jobs:
         SNMP_PASSWORD: ${{ secrets.SNMP_PASSWORD }}
         SNMP_PRIV_PASSWORD: ${{ secrets.SNMP_PRIV_PASSWORD }}
         SNMP_CONTEXT_NAME: ${{ secrets.SNMP_CONTEXT_NAME }}
-        GOPATH: /home/runner/work/
+        <<: *go_envs
       run: |
         cd -
-        envsubst < ./tpl/snmp-generator.yml.tpl > ${GOPATH}/src/github.com/prometheus/snmp_exporter/generator/generator.yml
+        envsubst < ./tpl/snmp-generator.yml.tpl > ${GOPATH}/${GENERATOR_PATH}/generator.yml
         cd -
     - name: Execute script
       env:
-        GO111MODULE: on
-        GOPATH: /home/runner/work/
+        <<: *go_envs
         MIBDIRS: mibs
       run: ./generator generate
     - name: Upload snmp.yml to GCS
