@@ -3,6 +3,11 @@ name: Generate SNMP Config for YAMAHA NVR510
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+    - main
+    paths:
+    - '.github/workflows/generate-snmp-config.yml'
 
 jobs:
   build:
