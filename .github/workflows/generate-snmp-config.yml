@@ -32,7 +32,8 @@ jobs:
         GENERATOR_PATH: src/github.com/prometheus/snmp_exporter/generator
       run: |
         go install github.com/prometheus/snmp_exporter/generator@latest
-        cd ${GOPATH}/${GENERATOR_PATH}
+        ls -al /home/runner/go
+        cd /home/runner/go/${GENERATOR_PATH}
         go build
         make mibs
     - name: Download YAMAHA Private MIB
@@ -50,7 +51,7 @@ jobs:
         GENERATOR_PATH: src/github.com/prometheus/snmp_exporter/generator
       run: |
         cd -
-        envsubst < ./tpl/snmp-generator.yml.tpl > ${GOPATH}/${GENERATOR_PATH}/generator.yml
+        envsubst < ./tpl/snmp-generator.yml.tpl > /home/runner/go/${GENERATOR_PATH}/generator.yml
         cd -
     - name: Execute script
       env:
