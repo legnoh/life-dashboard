@@ -37,3 +37,4 @@ tado.env
 todoist.env
 generator.yml
 snmp.yml
+prometheus.yaml
