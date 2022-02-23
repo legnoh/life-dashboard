@@ -26,7 +26,7 @@ jobs:
       env:
         GENERATOR_PATH: src/github.com/prometheus/snmp_exporter/generator
       run: |
-        go install github.com/prometheus/snmp_exporter/generator
+        go install github.com/prometheus/snmp_exporter/generator@latest
         cd ${GOPATH}/${GENERATOR_PATH}
         go build
         make mibs
