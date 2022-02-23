@@ -21,7 +21,7 @@ jobs:
     - name: setup GCP project information
       uses: google-github-actions/setup-gcloud@v0
     - name: Install required packages
-      run: sudo apt-get install unzip build-essential libsnmp-dev p7zip-full
+      run: sudo apt-get install unzip build-essential libsnmp-dev p7zip-full curl
     - name: Set up Go
       uses: actions/setup-go@v2
       with:
@@ -34,7 +34,8 @@ jobs:
         make mibs
     - name: Download YAMAHA Private MIB
       run: |
-        wget http://www.rtpro.yamaha.co.jp/RT/docs/mib/yamaha-private-mib.zip
+        ls -al
+        curl -Lo http://www.rtpro.yamaha.co.jp/RT/docs/mib/yamaha-private-mib.zip
         unzip yamaha-private-mib.zip
         cp -r yamaha-private-mib/* mibs/
     - name: Generate generator.yml
