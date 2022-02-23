@@ -36,7 +36,7 @@ jobs:
       run: |
         wget http://www.rtpro.yamaha.co.jp/RT/docs/mib/yamaha-private-mib.zip
         unzip yamaha-private-mib.zip
-        cp yamaha-private-mib/* mibs/
+        cp -r yamaha-private-mib/* mibs/
     - name: Generate generator.yml
       env:
         SNMP_EXPORTER_MODULE_NAME: ${{ secrets.SNMP_EXPORTER_MODULE_NAME }}
