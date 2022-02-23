@@ -35,7 +35,7 @@ jobs:
     - name: Download YAMAHA Private MIB
       run: |
         ls -al
-        curl -Lo http://www.rtpro.yamaha.co.jp/RT/docs/mib/yamaha-private-mib.zip
+        curl -Lo yamaha-private-mib.zip http://www.rtpro.yamaha.co.jp/RT/docs/mib/yamaha-private-mib.zip
         unzip yamaha-private-mib.zip
         cp -r yamaha-private-mib/* mibs/
     - name: Generate generator.yml
