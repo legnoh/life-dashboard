@@ -24,11 +24,9 @@ jobs:
       run: sudo apt-get install unzip build-essential libsnmp-dev p7zip-full
     - name: Get & Build generator script
       env:
-        GO111MODULE: on
-        GOPATH: /home/runner/work
         GENERATOR_PATH: src/github.com/prometheus/snmp_exporter/generator
       run: |
-        go get github.com/prometheus/snmp_exporter/generator
+        go install github.com/prometheus/snmp_exporter/generator
         cd ${GOPATH}/${GENERATOR_PATH}
         go build
         make mibs
@@ -44,8 +42,6 @@ jobs:
         SNMP_PASSWORD: ${{ secrets.SNMP_PASSWORD }}
         SNMP_PRIV_PASSWORD: ${{ secrets.SNMP_PRIV_PASSWORD }}
         SNMP_CONTEXT_NAME: ${{ secrets.SNMP_CONTEXT_NAME }}
-        GO111MODULE: on
-        GOPATH: /home/runner/work
         GENERATOR_PATH: src/github.com/prometheus/snmp_exporter/generator
       run: |
         cd -
@@ -53,8 +49,6 @@ jobs:
         cd -
     - name: Execute script
       env:
-        GO111MODULE: on
-        GOPATH: /home/runner/work
         GENERATOR_PATH: src/github.com/prometheus/snmp_exporter/generator
         MIBDIRS: mibs
       run: ./generator generate
