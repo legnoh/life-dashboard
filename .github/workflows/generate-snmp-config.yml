@@ -25,7 +25,7 @@ jobs:
     - name: Get & Build generator script
       env:
         GO111MODULE: on
-        GOPATH: /home/runner/go/
+        GOPATH: /home/runner/go
         GENERATOR_PATH: src/github.com/prometheus/snmp_exporter/generator
       run: |
         go get github.com/prometheus/snmp_exporter/generator
@@ -45,7 +45,7 @@ jobs:
         SNMP_PRIV_PASSWORD: ${{ secrets.SNMP_PRIV_PASSWORD }}
         SNMP_CONTEXT_NAME: ${{ secrets.SNMP_CONTEXT_NAME }}
         GO111MODULE: on
-        GOPATH: /home/runner/go/
+        GOPATH: /home/runner/go
         GENERATOR_PATH: src/github.com/prometheus/snmp_exporter/generator
       run: |
         cd -
@@ -54,7 +54,7 @@ jobs:
     - name: Execute script
       env:
         GO111MODULE: on
-        GOPATH: /home/runner/go/
+        GOPATH: /home/runner/go
         GENERATOR_PATH: src/github.com/prometheus/snmp_exporter/generator
         MIBDIRS: mibs
       run: ./generator generate
