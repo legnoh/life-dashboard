@@ -47,7 +47,6 @@ jobs:
       run: envsubst < ./setup/snmp/tpl/snmp-generator.yml.tpl > ./snmp_exporter/generator/generator.yml
     - name: Execute script
       env:
-        GENERATOR_PATH: /home/runner/go/pkg/mod/cache/github.com/prometheus/snmp_exporter/generator
         MIBDIRS: mibs
       run: |
         cd snmp_exporter/generator
