@@ -39,6 +39,14 @@ services:
     restart: always
     env_file: countdown.env
     expose: [ "9105" ]
+  snmp-exporter:
+    image: prom/snmp-exporter:latest
+    container_name: snmp-exporter
+    ports: [ 9106:9116 ]
+    restart: always
+    volumes:
+      - ./snmp-exporter/snmp.yml:/etc/snmp_exporter/snmp.yml
+    expose: [ "9116" ]
   prometheus:
     container_name: prometheus
     image: prom/prometheus

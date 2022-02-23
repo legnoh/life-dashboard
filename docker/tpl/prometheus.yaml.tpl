@@ -44,6 +44,17 @@ scrape_configs:
     static_configs:
       - targets: [ 'countdown-exporter:9105' ]
     scrape_interval: 60s
+  - job_name: 'snmp'
+    metrics_path: "/snmp"
+    params:
+      module: [ ${SNMP_EXPORTER_MODULE_NAME} ]
+      target: [ ${SNMP_TARGET_IP} ]
+    static_configs:
+      - targets: [ 'snmp-exporter:9116' ]
+    metric_relabel_configs:
+    - source_labels: [__name__]
+      regex: '(go|process|promhttp)_(.*)'
+      action: drop
 
 remote_write:
 - url: https://prometheus-prod-10-prod-us-central-0.grafana.net/api/prom/push

@@ -29,11 +29,16 @@ jobs:
     - name: Download JSON from GCS
       run: |
         gsutil cp gs://${{ secrets.GCP_BUCKET_NAME }}/*.prom docker/staticfile-exporter/metrics
+    - name: Download snmp.yml from GCS
+      run: |
+        gsutil cp gs://${{ secrets.GCP_BUCKET_NAME }}/snmp.yml docker/snmp-exporter
     - name: start docker images
       env:
         OPENWEATHER_CITY: ${{ secrets.OPENWEATHER_CITY }}
         OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
         OPENWEATHER_LISTEN_ADDRESS: ${{ secrets.OPENWEATHER_LISTEN_ADDRESS }}
+        SNMP_EXPORTER_MODULE_NAME: ${{ secrets.SNMP_EXPORTER_MODULE_NAME }}
+        SNMP_TARGET_IP: ${{ secrets.SNMP_TARGET_IP }}
         TADOAC_USERNAME: ${{ secrets.TADOAC_USERNAME }}
         TADOAC_PASSWORD: ${{ secrets.TADOAC_PASSWORD }}
         TODOIST_API_KEY: ${{ secrets.TODOIST_API_KEY }}
