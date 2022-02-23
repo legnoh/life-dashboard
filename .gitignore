@@ -35,3 +35,5 @@ docker/staticfile-exporter/metrics/*.prom
 openweather.env
 tado.env
 todoist.env
+generator.yml
+snmp.yml

@@ -50,3 +50,23 @@ TBD
 | [clambin/tado-monitor](https://github.com/clambin/tado-exporter) | Tado° の室内温度、湿度 などの計測情報 |
 | [legnoh/todoist-exporter](https://github.com/legnoh/todoist-exporter) | Todoist の特定フィルターのタスク残数 |
 | [legnoh/countdown-exporter](https://github.com/legnoh/countdown-exporter) | 特定日時までのカウントダウン |
+| [prometheus/snmp_exporter](https://github.com/prometheus/snmp_exporter) | 宅内回線の利用状況 |
+
+development
+----
+
+Mac などの別端末で開発を行う場合、以下のように実施する
+
+1. [docker/docker-compose.yml](./docker/docker-compose.yml) に対し、追加で起動したいサービス情報を記入する
+1. サービス指定して起動してみて、意図した通りに動作することを確認
+  ```sh
+  # up
+  cd docker
+  docker-compose up -d ${new_svc_name}
+  cd -
+
+  # down
+  cd docker
+  docker-compose rm -fsv ${new_svc_name}
+  cd -
+  ```
