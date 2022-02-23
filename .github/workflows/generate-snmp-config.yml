@@ -1,4 +1,4 @@
-name: Generate SNMP Config for YAMAHA NVR510
+name: Generate SNMP Config
 # https://github.com/prometheus/snmp_exporter/tree/main/generator
 
 on:

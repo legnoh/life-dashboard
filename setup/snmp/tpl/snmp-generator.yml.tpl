@@ -8,8 +8,8 @@ modules:
       - yrhInboxTemperature
       - yrfUpTime
       - yrhMemoryUtil
-      - ifHCInOctets
-      - ifHCOutOctets
+      - ifInOctets
+      - ifOutOctets
     version: 3
     auth:
       username: ${SNMP_USERNAME}

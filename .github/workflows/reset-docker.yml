@@ -7,6 +7,9 @@ on:
     paths:
     - 'docker/**'
   workflow_dispatch:
+  workflow_run:
+    workflows: [ Generate SNMP Config ]
+    types: [ completed ]
 
 jobs:
   setup-raspberry-pi:
