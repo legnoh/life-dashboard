@@ -34,10 +34,9 @@ jobs:
         make mibs
     - name: Download YAMAHA Private MIB
       run: |
-        ls -al
         curl -Lo yamaha-private-mib.zip http://www.rtpro.yamaha.co.jp/RT/docs/mib/yamaha-private-mib.zip
         unzip yamaha-private-mib.zip
-        cp -r yamaha-private-mib/* mibs/
+        cp -r yamaha-private-mib/* snmp_exporter/generator/mibs/
     - name: Generate generator.yml
       env:
         SNMP_EXPORTER_MODULE_NAME: ${{ secrets.SNMP_EXPORTER_MODULE_NAME }}
@@ -45,14 +44,16 @@ jobs:
         SNMP_PASSWORD: ${{ secrets.SNMP_PASSWORD }}
         SNMP_PRIV_PASSWORD: ${{ secrets.SNMP_PRIV_PASSWORD }}
         SNMP_CONTEXT_NAME: ${{ secrets.SNMP_CONTEXT_NAME }}
-      run: envsubst < ../../docker/tpl/snmp-generator.yml.tpl > ./generator.yml
+      run: envsubst < ./setup/snmp/tpl/snmp-generator.yml.tpl > ./snmp_exporter/generator/generator.yml
     - name: Execute script
       env:
         GENERATOR_PATH: /home/runner/go/pkg/mod/cache/github.com/prometheus/snmp_exporter/generator
         MIBDIRS: mibs
-      run: ./generator generate
+      run: |
+        cd snmp_exporter/generator
+        ./generator generate
     - name: Upload snmp.yml to GCS
       uses: google-github-actions/upload-cloud-storage@main
       with:
-        path: ./snmp.yml
+        path: ./snmp_exporter/generator/snmp.yml
         destination: ${{ secrets.BUCKET_NAME }}/
