@@ -28,10 +28,10 @@ jobs:
         go-version: 1.17
     - name: Get & Build generator script
       env:
-        GENERATOR_PATH: /home/runner/go/pkg/mod/cache/github.com/prometheus/snmp_exporter/generator
+        GENERATOR_PATH: /home/runner/go/pkg/mod/download/cache/github.com/prometheus/snmp_exporter/generator
       run: |
         go install github.com/prometheus/snmp_exporter/generator@latest
-        ls -al /home/runner/go/pkg/mod/cache
+        tree /home/runner/go/pkg/mod/cache
         cd ${GENERATOR_PATH}
         go build
         make mibs
