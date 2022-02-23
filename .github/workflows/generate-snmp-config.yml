@@ -55,4 +55,4 @@ jobs:
       uses: google-github-actions/upload-cloud-storage@main
       with:
         path: ./snmp_exporter/generator/snmp.yml
-        destination: ${{ secrets.BUCKET_NAME }}/
+        destination: ${{ secrets.GCP_BUCKET_NAME }}/
