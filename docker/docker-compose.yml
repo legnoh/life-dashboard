@@ -54,7 +54,7 @@ services:
     restart: always
     env_file: smartmeter.env
     devices:
-      - "/dev/ttyUSB0"
+      - "/dev/ttyUSB0:/dev/ttyUSB0"
     expose: [ "9107" ]
   prometheus:
     container_name: prometheus
