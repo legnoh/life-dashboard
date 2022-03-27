@@ -51,6 +51,7 @@ TBD
 | [legnoh/todoist-exporter](https://github.com/legnoh/todoist-exporter) | Todoist の特定フィルターのタスク残数 |
 | [legnoh/countdown-exporter](https://github.com/legnoh/countdown-exporter) | 特定日時までのカウントダウン |
 | [prometheus/snmp_exporter](https://github.com/prometheus/snmp_exporter) | 宅内回線の利用状況 |
+| [legnoh/smartmeter-exporter](https://github.com/legnoh/smartmeter-exporter) | 宅内電力・電流の利用状況 |
 
 development
 ----

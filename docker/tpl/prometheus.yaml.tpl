@@ -55,6 +55,14 @@ scrape_configs:
     - source_labels: [__name__]
       regex: '(go|process|promhttp)_(.*)'
       action: drop
+  - job_name: 'smartmeter'
+    static_configs:
+      - targets: [ 'smartmeter-exporter:9107' ]
+    metric_relabel_configs:
+    - source_labels: [__name__]
+      regex: '(go|process|python|promhttp)_(.*)'
+      action: drop
+    scrape_interval: 60s
 
 remote_write:
 - url: https://prometheus-prod-10-prod-us-central-0.grafana.net/api/prom/push

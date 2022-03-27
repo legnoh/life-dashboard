@@ -16,7 +16,7 @@ jobs:
     runs-on: self-hosted
     strategy:
       matrix:
-        python: [3.7]
+        python: [3.9]
     steps:
     - uses: actions/checkout@v1
     - name: Set up Python ${{ matrix.python-version }}
@@ -45,7 +45,8 @@ jobs:
         TADOAC_USERNAME: ${{ secrets.TADOAC_USERNAME }}
         TADOAC_PASSWORD: ${{ secrets.TADOAC_PASSWORD }}
         TODOIST_API_KEY: ${{ secrets.TODOIST_API_KEY }}
-        TODOIST_PORT: ${{ secrets.TODOIST_PORT }}
+        SMARTMETER_ID: ${{ secrets.SMARTMETER_ID }}
+        SMARTMETER_PASSWORD: ${{ secrets.SMARTMETER_PASSWORD }}
         GRAFANA_REMOTE_WRITE_USERNAME: ${{ secrets.GRAFANA_REMOTE_WRITE_USERNAME }}
         GRAFANA_REMOTE_WRITE_API_KEY: ${{ secrets.GRAFANA_REMOTE_WRITE_API_KEY }}
       run: |

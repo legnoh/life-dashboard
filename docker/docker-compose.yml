@@ -47,6 +47,15 @@ services:
     volumes:
       - ./snmp-exporter/snmp.yml:/etc/snmp_exporter/snmp.yml
     expose: [ "9116" ]
+  smartmeter-exporter:
+    image: legnoh/smartmeter-exporter:latest
+    container_name: smartmeter-exporter
+    ports: [ 9107:9107 ]
+    restart: always
+    env_file: smartmeter.env
+    devices:
+      - "/dev/ttyUSB0"
+    expose: [ "9107" ]
   prometheus:
     container_name: prometheus
     image: prom/prometheus

@@ -8,7 +8,7 @@ jobs:
     runs-on: self-hosted
     strategy:
       matrix:
-        python: [3.7]
+        python: [3.9]
     steps:
     - uses: actions/checkout@v1
     - name: set crontab
