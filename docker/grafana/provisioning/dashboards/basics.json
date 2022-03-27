@@ -897,10 +897,11 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "continuous-GrYlRd"
+            "mode": "thresholds"
           },
+          "decimals": 0,
           "mappings": [],
-          "max": 30,
+          "max": 30000,
           "min": 0,
           "thresholds": {
             "mode": "absolute",
@@ -911,19 +912,19 @@
               },
               {
                 "color": "super-light-green",
-                "value": 500
+                "value": 5000
               },
               {
                 "color": "#EAB839",
-                "value": 1000
+                "value": 10000
               },
               {
                 "color": "orange",
-                "value": 2000
+                "value": 20000
               },
               {
                 "color": "dark-red",
-                "value": 2500
+                "value": 25000
               }
             ]
           },
@@ -958,7 +959,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "power_consumption_ampare_r + power_consumption_ampare_t",
+          "expr": "power_consumption_ampare_r{} + power_consumption_ampare_t{}",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -2529,6 +2530,6 @@
   "timezone": "",
   "title": "main dashboard",
   "uid": "jTY6Raggz",
-  "version": 2,
+  "version": 3,
   "weekStart": ""
 }
