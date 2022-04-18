@@ -49,6 +49,12 @@ jobs:
         SMARTMETER_PASSWORD: ${{ secrets.SMARTMETER_PASSWORD }}
         GRAFANA_REMOTE_WRITE_USERNAME: ${{ secrets.GRAFANA_REMOTE_WRITE_USERNAME }}
         GRAFANA_REMOTE_WRITE_API_KEY: ${{ secrets.GRAFANA_REMOTE_WRITE_API_KEY }}
+        WITHINGS_CLIENT_ID: ${{ secrets.WITHINGS_CLIENT_ID }}
+        WITHINGS_CONSUMER_SECRET: ${{ secrets.WITHINGS_CONSUMER_SECRET }}
+        WITHINGS_ACCESS_TOKEN: ${{ secrets.WITHINGS_ACCESS_TOKEN }}
+        WITHINGS_REFRESH_TOKEN: ${{ secrets.WITHINGS_REFRESH_TOKEN }}
+        WITHINGS_USERID: ${{ secrets.WITHINGS_USERID }}
+        WITHINGS_CREATED: ${{ secrets.WITHINGS_CREATED }}
       run: |
         ./docker/start.sh
     # - name: Archive production artifacts
