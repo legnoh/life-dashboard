@@ -18,7 +18,7 @@ scrape_configs:
   - job_name: 'withings'
     static_configs:
       - targets: [ withings-exporter:9108 ]
-    scrape_interval: 300s
+    scrape_interval: 60s
   - job_name: 'todoist'
     static_configs:
       - targets: [ 'todoist-exporter:9102' ]
