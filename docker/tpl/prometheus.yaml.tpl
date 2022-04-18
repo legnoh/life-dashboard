@@ -16,9 +16,8 @@ scrape_configs:
       - targets: [ staticfile-exporter:80 ]
     scrape_interval: 300s
   - job_name: 'withings'
-    metrics_path: /withings.prom
     static_configs:
-      - targets: [ staticfile-exporter:80 ]
+      - targets: [ withings-exporter:9108 ]
     scrape_interval: 300s
   - job_name: 'todoist'
     static_configs:
