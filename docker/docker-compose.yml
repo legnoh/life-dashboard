@@ -56,6 +56,15 @@ services:
     devices:
       - "/dev/ttyUSB0:/dev/ttyUSB0"
     expose: [ "9107" ]
+  withings-exporter:
+    image: legnoh/withings-exporter:latest
+    container_name: withings-exporter
+    ports: [ 9108:9108 ]
+    volumes:
+      - ./withings-exporter:/usr/src/app/config/tmp
+    restart: always
+    env_file: withings.env
+    expose: [ "9108" ]
   prometheus:
     container_name: prometheus
     image: prom/prometheus
