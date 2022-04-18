@@ -109,7 +109,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 4,
         "w": 3,
         "x": 0,
         "y": 0
@@ -137,7 +137,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.4",
+      "pluginVersion": "8.4.6",
       "targets": [
         {
           "exemplar": true,
@@ -159,521 +159,6 @@
           "options": {}
         }
       ],
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "max": 40,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "dark-blue",
-                "value": 0
-              },
-              {
-                "color": "semi-dark-blue",
-                "value": 5
-              },
-              {
-                "color": "blue",
-                "value": 10
-              },
-              {
-                "color": "yellow",
-                "value": 20
-              },
-              {
-                "color": "super-light-green",
-                "value": 23
-              },
-              {
-                "color": "light-green",
-                "value": 24
-              },
-              {
-                "color": "green",
-                "value": 25
-              },
-              {
-                "color": "orange",
-                "value": 26
-              },
-              {
-                "color": "dark-orange",
-                "value": 27
-              },
-              {
-                "color": "semi-dark-red",
-                "value": 28
-              },
-              {
-                "color": "dark-red",
-                "value": 30
-              }
-            ]
-          },
-          "unit": "celsius"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 3,
-        "x": 3,
-        "y": 0
-      },
-      "id": 16,
-      "links": [
-        {
-          "targetBlank": true,
-          "title": "Tado",
-          "url": "https://app.tado.com/en/main/home"
-        }
-      ],
-      "options": {
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true,
-        "text": {}
-      },
-      "pluginVersion": "8.4.4",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "tado_zone_temperature_celsius{zone_name=\"Air Conditioning\"}",
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "部屋の温度",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "max": 70,
-          "min": 40,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "semi-dark-blue",
-                "value": null
-              },
-              {
-                "color": "super-light-yellow",
-                "value": 40
-              },
-              {
-                "color": "green",
-                "value": 50
-              },
-              {
-                "color": "light-orange",
-                "value": 60
-              }
-            ]
-          },
-          "unit": "percent"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 3,
-        "x": 6,
-        "y": 0
-      },
-      "id": 14,
-      "links": [
-        {
-          "targetBlank": true,
-          "title": "Tado",
-          "url": "https://app.tado.com/en/main/home"
-        }
-      ],
-      "options": {
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true,
-        "text": {}
-      },
-      "pluginVersion": "8.4.4",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "tado_zone_humidity_percentage{zone_name=\"Air Conditioning\"}",
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "部屋の湿度",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "yellow",
-                "value": 500
-              },
-              {
-                "color": "orange",
-                "value": 800
-              },
-              {
-                "color": "red",
-                "value": 1000
-              }
-            ]
-          },
-          "unit": "watt"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 3,
-        "x": 9,
-        "y": 0
-      },
-      "id": 56,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.4.4",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "exemplar": true,
-          "expr": "power_consumption_watt{}",
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "瞬間消費電力",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "light-yellow",
-                "value": 1000000
-              },
-              {
-                "color": "#EAB839",
-                "value": 2000000
-              },
-              {
-                "color": "#6ED0E0",
-                "value": 3000000
-              },
-              {
-                "color": "#EF843C",
-                "value": 4000000
-              },
-              {
-                "color": "#E24D42",
-                "value": 5000000
-              },
-              {
-                "color": "semi-dark-red",
-                "value": 6000000
-              },
-              {
-                "color": "dark-red",
-                "value": 10000000
-              }
-            ]
-          },
-          "unit": "bps"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 3,
-        "x": 12,
-        "y": 0
-      },
-      "id": 54,
-      "links": [
-        {
-          "targetBlank": true,
-          "title": "NetVolante",
-          "url": "http://setup.netvolante.jp/"
-        }
-      ],
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.4.4",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "exemplar": true,
-          "expr": "sum(delta(ifInOctets[180s])) * 8 / 180",
-          "interval": "",
-          "legendFormat": "IN",
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "exemplar": true,
-          "expr": "sum(delta(ifOutOctets[180s])) * 8 / 180",
-          "hide": false,
-          "instant": false,
-          "interval": "",
-          "legendFormat": "OUT",
-          "refId": "B"
-        }
-      ],
-      "title": "帯域通信量",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "#EAB839",
-                "value": 5
-              },
-              {
-                "color": "red",
-                "value": 10
-              }
-            ]
-          },
-          "unit": "個"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 15,
-        "y": 0
-      },
-      "id": 36,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.4.4",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "todoist_filter_task_items{name=\"TODO - 自宅\"}",
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "自宅タスク残数",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              },
-              {
-                "color": "orange",
-                "value": 50
-              },
-              {
-                "color": "green",
-                "value": 75
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 5,
-        "x": 19,
-        "y": 0
-      },
-      "id": 28,
-      "links": [
-        {
-          "targetBlank": true,
-          "title": "Withings Healthcare",
-          "url": "https://healthmate.withings.com/"
-        }
-      ],
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.4.4",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "withings_sleep_sleep_score",
-          "instant": false,
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "睡眠スコア",
       "type": "stat"
     },
     {
@@ -746,7 +231,7 @@
         "h": 4,
         "w": 3,
         "x": 3,
-        "y": 4
+        "y": 0
       },
       "id": 18,
       "links": [
@@ -769,7 +254,7 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "8.4.4",
+      "pluginVersion": "8.4.6",
       "targets": [
         {
           "exemplar": true,
@@ -853,7 +338,7 @@
         "h": 4,
         "w": 3,
         "x": 6,
-        "y": 4
+        "y": 0
       },
       "id": 19,
       "links": [
@@ -876,7 +361,7 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "8.4.4",
+      "pluginVersion": "8.4.6",
       "targets": [
         {
           "exemplar": true,
@@ -887,6 +372,194 @@
         }
       ],
       "title": "外気の湿度",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 40,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "dark-blue",
+                "value": 0
+              },
+              {
+                "color": "semi-dark-blue",
+                "value": 5
+              },
+              {
+                "color": "blue",
+                "value": 10
+              },
+              {
+                "color": "yellow",
+                "value": 20
+              },
+              {
+                "color": "super-light-green",
+                "value": 23
+              },
+              {
+                "color": "light-green",
+                "value": 24
+              },
+              {
+                "color": "green",
+                "value": 25
+              },
+              {
+                "color": "orange",
+                "value": 26
+              },
+              {
+                "color": "dark-orange",
+                "value": 27
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 28
+              },
+              {
+                "color": "dark-red",
+                "value": 30
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 9,
+        "y": 0
+      },
+      "id": 16,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "Tado",
+          "url": "https://app.tado.com/en/main/home"
+        }
+      ],
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "text": {}
+      },
+      "pluginVersion": "8.4.6",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "tado_zone_temperature_celsius{zone_name=\"Air Conditioning\"}",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "部屋の温度",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 70,
+          "min": 40,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-blue",
+                "value": null
+              },
+              {
+                "color": "super-light-yellow",
+                "value": 40
+              },
+              {
+                "color": "green",
+                "value": 50
+              },
+              {
+                "color": "light-orange",
+                "value": 60
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 12,
+        "y": 0
+      },
+      "id": 14,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "Tado",
+          "url": "https://app.tado.com/en/main/home"
+        }
+      ],
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "text": {}
+      },
+      "pluginVersion": "8.4.6",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "tado_zone_humidity_percentage{zone_name=\"Air Conditioning\"}",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "部屋の湿度",
       "type": "gauge"
     },
     {
@@ -935,8 +608,8 @@
       "gridPos": {
         "h": 4,
         "w": 3,
-        "x": 9,
-        "y": 4
+        "x": 15,
+        "y": 0
       },
       "id": 58,
       "options": {
@@ -951,7 +624,7 @@
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "8.4.4",
+      "pluginVersion": "8.4.6",
       "targets": [
         {
           "datasource": {
@@ -987,522 +660,35 @@
                 "value": null
               },
               {
-                "color": "#EAB839",
-                "value": 5
+                "color": "yellow",
+                "value": 500
+              },
+              {
+                "color": "orange",
+                "value": 800
               },
               {
                 "color": "red",
-                "value": 10
-              }
-            ]
-          },
-          "unit": "個"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 15,
-        "y": 4
-      },
-      "id": 37,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.4.4",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "todoist_filter_task_items{name=\"TODO - 職場\"}",
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "職場タスク残数",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              },
-              {
-                "color": "light-red",
                 "value": 1000
-              },
-              {
-                "color": "light-orange",
-                "value": 4000
-              },
-              {
-                "color": "yellow",
-                "value": 6000
-              },
-              {
-                "color": "green",
-                "value": 8000
               }
             ]
           },
-          "unit": "歩"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 3,
-        "x": 0,
-        "y": 8
-      },
-      "id": 34,
-      "links": [
-        {
-          "targetBlank": true,
-          "title": "Withings Healthcare",
-          "url": "https://healthmate.withings.com/"
-        }
-      ],
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.4.4",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "withings_activity_steps_total",
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "歩数",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 0,
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              },
-              {
-                "color": "yellow",
-                "value": 30
-              },
-              {
-                "color": "green",
-                "value": 40
-              }
-            ]
-          },
-          "unit": "分"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 3,
-        "x": 3,
-        "y": 8
-      },
-      "id": 50,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.4.4",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "withings_activity_active_total{} / 60",
-          "instant": false,
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "運動時間",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "yellow",
-                "value": 20
-              },
-              {
-                "color": "orange",
-                "value": 25
-              },
-              {
-                "color": "red",
-                "value": 30
-              }
-            ]
-          },
-          "unit": "percent"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 3,
-        "x": 6,
-        "y": 8
-      },
-      "id": 32,
-      "links": [
-        {
-          "targetBlank": true,
-          "title": "Withings Healthcare",
-          "url": "https://healthmate.withings.com/"
-        }
-      ],
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.4.4",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "withings_meas_fat_ratio",
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "体脂肪率",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              },
-              {
-                "color": "orange",
-                "value": 50
-              },
-              {
-                "color": "green",
-                "value": 55
-              },
-              {
-                "color": "orange",
-                "value": 61
-              },
-              {
-                "color": "red",
-                "value": 67.6
-              }
-            ]
-          },
-          "unit": "masskg"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 3,
-        "x": 9,
-        "y": 8
-      },
-      "id": 30,
-      "links": [
-        {
-          "targetBlank": true,
-          "title": "Withings Healthcare",
-          "url": "https://healthmate.withings.com/"
-        }
-      ],
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.4.4",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "withings_meas_weight",
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "体重",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "dark-blue",
-                "value": null
-              },
-              {
-                "color": "semi-dark-blue",
-                "value": 16
-              },
-              {
-                "color": "yellow",
-                "value": 17
-              },
-              {
-                "color": "green",
-                "value": 18.5
-              },
-              {
-                "color": "orange",
-                "value": 25
-              },
-              {
-                "color": "red",
-                "value": 30
-              },
-              {
-                "color": "semi-dark-red",
-                "value": 35
-              },
-              {
-                "color": "dark-red",
-                "value": 40
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 3,
-        "x": 12,
-        "y": 8
-      },
-      "id": 38,
-      "links": [
-        {
-          "targetBlank": true,
-          "title": "Withings Healthcare",
-          "url": "https://healthmate.withings.com/"
-        }
-      ],
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.4.4",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "withings_meas_weight / (1.645 ^ 2)",
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "BMI",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "light-green",
-                "value": 115
-              },
-              {
-                "color": "#EAB839",
-                "value": 125
-              },
-              {
-                "color": "orange",
-                "value": 135
-              },
-              {
-                "color": "semi-dark-orange",
-                "value": 155
-              },
-              {
-                "color": "red",
-                "value": 175
-              }
-            ]
-          },
-          "unit": "none"
+          "unit": "watt"
         },
         "overrides": []
       },
       "gridPos": {
         "h": 4,
         "w": 3,
-        "x": 15,
-        "y": 8
+        "x": 18,
+        "y": 0
       },
-      "id": 42,
-      "links": [
-        {
-          "targetBlank": true,
-          "title": "Withings Healthcare",
-          "url": "https://healthmate.withings.com/"
-        }
-      ],
+      "id": 56,
       "options": {
         "colorMode": "value",
         "graphMode": "none",
         "justifyMode": "auto",
-        "orientation": "horizontal",
+        "orientation": "auto",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -1510,10 +696,9 @@
           "fields": "",
           "values": false
         },
-        "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.4",
+      "pluginVersion": "8.4.6",
       "targets": [
         {
           "datasource": {
@@ -1521,103 +706,13 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "withings_meas_systolic_blood_pressure",
+          "expr": "power_consumption_watt{}",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
         }
       ],
-      "title": "最高血圧(mmHg)",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              },
-              {
-                "color": "orange",
-                "value": 30
-              },
-              {
-                "color": "yellow",
-                "value": 40
-              },
-              {
-                "color": "super-light-green",
-                "value": 50
-              },
-              {
-                "color": "green",
-                "value": 60
-              },
-              {
-                "color": "semi-dark-green",
-                "value": 70
-              },
-              {
-                "color": "dark-green",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 3,
-        "x": 18,
-        "y": 8
-      },
-      "id": 12,
-      "links": [
-        {
-          "targetBlank": true,
-          "title": "あすけん",
-          "url": "https://www.asken.jp"
-        }
-      ],
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.4.4",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "asken_score{}",
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "あすけん健康度",
+      "title": "瞬間消費電力",
       "type": "stat"
     },
     {
@@ -1696,10 +791,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 4,
         "w": 3,
         "x": 21,
-        "y": 8
+        "y": 0
       },
       "id": 48,
       "options": {
@@ -1717,7 +812,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.4",
+      "pluginVersion": "8.4.6",
       "targets": [
         {
           "datasource": {
@@ -1732,6 +827,240 @@
         }
       ],
       "title": "チャンミまで後",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 50
+              },
+              {
+                "color": "green",
+                "value": 75
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 0,
+        "y": 4
+      },
+      "id": 28,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "Withings Healthcare",
+          "url": "https://healthmate.withings.com/"
+        }
+      ],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.4.6",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "withings_sleep_sleep_score",
+          "instant": false,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "睡眠スコア",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "light-red",
+                "value": 1000
+              },
+              {
+                "color": "light-orange",
+                "value": 4000
+              },
+              {
+                "color": "yellow",
+                "value": 6000
+              },
+              {
+                "color": "green",
+                "value": 8000
+              }
+            ]
+          },
+          "unit": "歩"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 3,
+        "y": 4
+      },
+      "id": 34,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "Withings Healthcare",
+          "url": "https://healthmate.withings.com/"
+        }
+      ],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.4.6",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "withings_activity_steps",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "歩数",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 0,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 30
+              },
+              {
+                "color": "green",
+                "value": 40
+              }
+            ]
+          },
+          "unit": "分"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 6,
+        "y": 4
+      },
+      "id": 50,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.4.6",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "withings_activity_active / 60",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "運動時間",
       "type": "stat"
     },
     {
@@ -1781,8 +1110,8 @@
       "gridPos": {
         "h": 4,
         "w": 3,
-        "x": 15,
-        "y": 12
+        "x": 9,
+        "y": 4
       },
       "id": 59,
       "links": [
@@ -1807,7 +1136,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.4",
+      "pluginVersion": "8.4.6",
       "targets": [
         {
           "datasource": {
@@ -1823,6 +1152,362 @@
         }
       ],
       "title": "最低血圧(mmHg)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "light-green",
+                "value": 115
+              },
+              {
+                "color": "#EAB839",
+                "value": 125
+              },
+              {
+                "color": "orange",
+                "value": 135
+              },
+              {
+                "color": "semi-dark-orange",
+                "value": 155
+              },
+              {
+                "color": "red",
+                "value": 175
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 12,
+        "y": 4
+      },
+      "id": 42,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "Withings Healthcare",
+          "url": "https://healthmate.withings.com/"
+        }
+      ],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.4.6",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "withings_meas_systolic_blood_pressure",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "最高血圧(mmHg)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 20
+              },
+              {
+                "color": "orange",
+                "value": 25
+              },
+              {
+                "color": "red",
+                "value": 30
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 15,
+        "y": 4
+      },
+      "id": 32,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "Withings Healthcare",
+          "url": "https://healthmate.withings.com/"
+        }
+      ],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.4.6",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "withings_meas_fat_ratio",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "体脂肪率",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 50
+              },
+              {
+                "color": "green",
+                "value": 55
+              },
+              {
+                "color": "orange",
+                "value": 61
+              },
+              {
+                "color": "red",
+                "value": 67.6
+              }
+            ]
+          },
+          "unit": "masskg"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 18,
+        "y": 4
+      },
+      "id": 30,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "Withings Healthcare",
+          "url": "https://healthmate.withings.com/"
+        }
+      ],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.4.6",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "withings_meas_weight",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "体重",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-blue",
+                "value": null
+              },
+              {
+                "color": "semi-dark-blue",
+                "value": 16
+              },
+              {
+                "color": "yellow",
+                "value": 17
+              },
+              {
+                "color": "green",
+                "value": 18.5
+              },
+              {
+                "color": "orange",
+                "value": 25
+              },
+              {
+                "color": "red",
+                "value": 30
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 35
+              },
+              {
+                "color": "dark-red",
+                "value": 40
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 21,
+        "y": 4
+      },
+      "id": 38,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "Withings Healthcare",
+          "url": "https://healthmate.withings.com/"
+        }
+      ],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.4.6",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "withings_meas_weight / (1.645 ^ 2)",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "BMI",
       "type": "stat"
     },
     {
@@ -1870,10 +1555,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 4,
         "w": 3,
         "x": 0,
-        "y": 16
+        "y": 8
       },
       "id": 46,
       "options": {
@@ -1891,7 +1576,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.4",
+      "pluginVersion": "8.4.6",
       "targets": [
         {
           "exemplar": true,
@@ -1950,10 +1635,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 4,
         "w": 3,
         "x": 3,
-        "y": 16
+        "y": 8
       },
       "id": 10,
       "links": [
@@ -1978,7 +1663,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.4",
+      "pluginVersion": "8.4.6",
       "targets": [
         {
           "exemplar": true,
@@ -2037,10 +1722,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 4,
         "w": 3,
         "x": 6,
-        "y": 16
+        "y": 8
       },
       "id": 3,
       "links": [
@@ -2065,7 +1750,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.4",
+      "pluginVersion": "8.4.6",
       "targets": [
         {
           "exemplar": true,
@@ -2123,10 +1808,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 4,
         "w": 3,
         "x": 9,
-        "y": 16
+        "y": 8
       },
       "id": 2,
       "links": [
@@ -2151,7 +1836,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.4",
+      "pluginVersion": "8.4.6",
       "targets": [
         {
           "exemplar": true,
@@ -2162,6 +1847,79 @@
         }
       ],
       "title": "預金残高",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 3,
+        "x": 12,
+        "y": 8
+      },
+      "id": 52,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.4.6",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "mf_assets_mutualfund_gainloss_percent{name=\"SBI-SBI・V・S&P500インデックス・ファンド\"}",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "投資信託",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "mf_assets_pension_gainloss_percent{name=\"SBI・V・S&P500インデックス・ファンドSBI・V・S&P500インデックス・ファンド\"}",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "年金",
+          "refId": "B"
+        }
+      ],
+      "title": "VOO S&P500",
       "type": "stat"
     },
     {
@@ -2212,8 +1970,8 @@
       "gridPos": {
         "h": 8,
         "w": 3,
-        "x": 12,
-        "y": 16
+        "x": 15,
+        "y": 8
       },
       "id": 5,
       "links": [
@@ -2238,7 +1996,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.4",
+      "pluginVersion": "8.4.6",
       "targets": [
         {
           "exemplar": true,
@@ -2257,6 +2015,95 @@
         }
       ],
       "title": "カード引落額",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "noValue": "(TBD)",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 3,
+        "x": 18,
+        "y": 8
+      },
+      "id": 23,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "MyJCB",
+          "url": "https://my.jcb.co.jp/iss-pc/member/details_inquiry/detailMenu.html?link_id=myj_main_detailMenu"
+        }
+      ],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^schedule$/",
+          "limit": 1,
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.4.6",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "mf_monthly_withdrawal_date_info{name=\"JCBカード\"}",
+          "format": "time_series",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "JCBカード",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "mf_monthly_withdrawal_date_info{name=\"YJカード\"}",
+          "format": "time_series",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "YJカード",
+          "refId": "B"
+        }
+      ],
+      "title": "カード引落日",
+      "transformations": [
+        {
+          "id": "labelsToFields",
+          "options": {
+            "valueLabel": "__name__"
+          }
+        }
+      ],
       "type": "stat"
     },
     {
@@ -2307,8 +2154,8 @@
       "gridPos": {
         "h": 8,
         "w": 3,
-        "x": 15,
-        "y": 16
+        "x": 21,
+        "y": 8
       },
       "id": 44,
       "options": {
@@ -2326,7 +2173,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.4",
+      "pluginVersion": "8.4.6",
       "targets": [
         {
           "exemplar": true,
@@ -2361,82 +2208,127 @@
             "mode": "thresholds"
           },
           "mappings": [],
-          "noValue": "(TBD)",
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "text",
+                "color": "green",
                 "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 5
+              },
+              {
+                "color": "red",
+                "value": 10
               }
             ]
           },
-          "unit": "none"
+          "unit": "個"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 4,
         "w": 3,
-        "x": 18,
-        "y": 16
+        "x": 0,
+        "y": 12
       },
-      "id": 23,
-      "links": [
-        {
-          "targetBlank": true,
-          "title": "MyJCB",
-          "url": "https://my.jcb.co.jp/iss-pc/member/details_inquiry/detailMenu.html?link_id=myj_main_detailMenu"
-        }
-      ],
+      "id": 36,
       "options": {
         "colorMode": "value",
         "graphMode": "none",
         "justifyMode": "auto",
-        "orientation": "horizontal",
+        "orientation": "auto",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
           ],
-          "fields": "/^schedule$/",
-          "limit": 1,
+          "fields": "",
           "values": false
         },
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.4",
+      "pluginVersion": "8.4.6",
       "targets": [
         {
           "exemplar": true,
-          "expr": "mf_monthly_withdrawal_date_info{name=\"JCBカード\"}",
-          "format": "time_series",
-          "hide": false,
-          "instant": false,
+          "expr": "todoist_filter_task_items{name=\"TODO - 自宅\"}",
           "interval": "",
-          "legendFormat": "JCBカード",
+          "legendFormat": "",
           "refId": "A"
+        }
+      ],
+      "title": "自宅タスク残数",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 5
+              },
+              {
+                "color": "red",
+                "value": 10
+              }
+            ]
+          },
+          "unit": "個"
         },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 3,
+        "y": 12
+      },
+      "id": 37,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.4.6",
+      "targets": [
         {
           "exemplar": true,
-          "expr": "mf_monthly_withdrawal_date_info{name=\"YJカード\"}",
-          "format": "time_series",
-          "hide": false,
-          "instant": false,
+          "expr": "todoist_filter_task_items{name=\"TODO - 職場\"}",
           "interval": "",
-          "legendFormat": "YJカード",
-          "refId": "B"
+          "legendFormat": "",
+          "refId": "A"
         }
       ],
-      "title": "カード引落日",
-      "transformations": [
-        {
-          "id": "labelsToFields",
-          "options": {
-            "valueLabel": "__name__"
-          }
-        }
-      ],
+      "title": "職場タスク残数",
       "type": "stat"
     },
     {
@@ -2458,22 +2350,144 @@
                 "value": null
               },
               {
+                "color": "orange",
+                "value": 30
+              },
+              {
+                "color": "yellow",
+                "value": 40
+              },
+              {
+                "color": "super-light-green",
+                "value": 50
+              },
+              {
                 "color": "green",
-                "value": 0
+                "value": 60
+              },
+              {
+                "color": "semi-dark-green",
+                "value": 70
+              },
+              {
+                "color": "dark-green",
+                "value": 80
               }
             ]
           },
-          "unit": "percent"
+          "unit": "none"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 4,
         "w": 3,
-        "x": 21,
-        "y": 16
+        "x": 6,
+        "y": 12
       },
-      "id": 52,
+      "id": 12,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "あすけん",
+          "url": "https://www.asken.jp"
+        }
+      ],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.4.6",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "asken_score{}",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "あすけん健康度",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "light-yellow",
+                "value": 1000000
+              },
+              {
+                "color": "#EAB839",
+                "value": 2000000
+              },
+              {
+                "color": "#6ED0E0",
+                "value": 3000000
+              },
+              {
+                "color": "#EF843C",
+                "value": 4000000
+              },
+              {
+                "color": "#E24D42",
+                "value": 5000000
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 6000000
+              },
+              {
+                "color": "dark-red",
+                "value": 10000000
+              }
+            ]
+          },
+          "unit": "bps"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 9,
+        "y": 12
+      },
+      "id": 54,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "NetVolante",
+          "url": "http://setup.netvolante.jp/"
+        }
+      ],
       "options": {
         "colorMode": "value",
         "graphMode": "none",
@@ -2486,30 +2500,23 @@
           "fields": "",
           "values": false
         },
-        "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.4",
+      "pluginVersion": "8.4.6",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "exemplar": true,
-          "expr": "mf_assets_mutualfund_gainloss_percent{name=\"SBI-SBI・V・S&P500インデックス・ファンド\"}",
-          "instant": false,
+          "expr": "sum(delta(ifInOctets[180s])) * 8 / 180",
           "interval": "",
-          "legendFormat": "投資信託",
+          "legendFormat": "IN",
           "refId": "A"
-        },
-        {
-          "exemplar": true,
-          "expr": "mf_assets_pension_gainloss_percent{name=\"SBI・V・S&P500インデックス・ファンドSBI・V・S&P500インデックス・ファンド\"}",
-          "hide": false,
-          "instant": false,
-          "interval": "",
-          "legendFormat": "年金",
-          "refId": "B"
         }
       ],
-      "title": "VOO S&P500",
+      "title": "帯域通信量",
       "type": "stat"
     }
   ],
@@ -2521,7 +2528,7 @@
     "list": []
   },
   "time": {
-    "from": "now-24h",
+    "from": "now-5m",
     "to": "now"
   },
   "timepicker": {
@@ -2530,6 +2537,6 @@
   "timezone": "",
   "title": "main dashboard",
   "uid": "jTY6Raggz",
-  "version": 3,
+  "version": 1,
   "weekStart": ""
 }
