@@ -61,7 +61,7 @@ services:
     container_name: withings-exporter
     ports: [ 9108:9108 ]
     volumes:
-      - ./withings-exporter:/usr/src/app/config/tmp
+      - /var/withings-exporter/tmp:/usr/src/app/config/tmp
     restart: always
     env_file: withings.env
     expose: [ "9108" ]

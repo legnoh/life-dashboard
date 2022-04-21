@@ -4,6 +4,8 @@ set -eu
 
 cd docker
 
+sudo mkdir -p /var/withings-exporter/tmp
+
 envsubst < ./tpl/openweather.env.tpl > ./openweather.env
 envsubst < ./tpl/tado.env.tpl > ./tado.env
 envsubst < ./tpl/todoist.env.tpl > ./todoist.env
