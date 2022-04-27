@@ -17,8 +17,8 @@ jobs:
           new_expr="countdown_until_seconds{date=\"${new_date}\"} / 86400)"
           cat docker/grafana/provisioning/dashboards/basics.json \
           | jq --arg NEW_EXPR "${new_expr}" \
-            '(.panels[] | select(.id==48).targets[0].expr) = $NEW_EXPR' > tmp.json
-          cp -r ./tmp.json docker/grafana/provisioning/dashboards/basics.json
+            '(.panels[] | select(.id==48).targets[0].expr) = $NEW_EXPR' > ./tmp.json
+          cp -r ./tmp.json ./docker/grafana/provisioning/dashboards/basics.json
           rm -rf ./tmp.json
           echo "new_date=${new_date}" >> $GITHUB_ENV
     - name: Create Pull Request
