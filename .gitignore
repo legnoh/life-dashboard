@@ -37,5 +37,6 @@ tado.env
 todoist.env
 withings.env
 generator.yml
+smartmeter.env
 snmp.yml
 prometheus.yaml
