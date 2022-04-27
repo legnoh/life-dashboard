@@ -4,6 +4,11 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '0 * * * *'
+  workflow_run:
+    workflows:
+    - Reset Crontab setting
+    - Reset Grafana KIOSK setting
+    types: [ completed ]
 
 jobs:
   setup-raspberry-pi:

@@ -38,59 +38,279 @@
             {
               "options": {
                 "broken clouds": {
-                  "color": "text",
-                  "index": 4,
-                  "text": "曇り"
+                  "color": "super-light-green",
+                  "index": 53,
+                  "text": "雲がち"
                 },
                 "clear sky": {
                   "color": "dark-green",
-                  "index": 0,
+                  "index": 50,
                   "text": "快晴"
+                },
+                "drizzle": {
+                  "color": "light-blue",
+                  "index": 11,
+                  "text": "霧雨"
+                },
+                "drizzle rain": {
+                  "color": "blue",
+                  "index": 14,
+                  "text": "雨+霧雨"
+                },
+                "dust": {
+                  "color": "purple",
+                  "index": 46,
+                  "text": "降塵"
+                },
+                "extreme rain": {
+                  "color": "semi-dark-blue",
+                  "index": 23,
+                  "text": "雨(猛烈)"
                 },
                 "few clouds": {
                   "color": "semi-dark-green",
-                  "index": 1,
+                  "index": 51,
                   "text": "晴れ"
                 },
-                "mist": {
-                  "color": "light-purple",
-                  "index": 10,
+                "fog": {
+                  "color": "purple",
+                  "index": 44,
                   "text": "霧"
                 },
-                "overcast clouds": {
-                  "color": "green",
-                  "index": 2,
-                  "text": "少し曇り"
+                "freezing rain": {
+                  "color": "super-light-yellow",
+                  "index": 24,
+                  "text": "雨氷"
                 },
-                "rain": {
+                "haze": {
+                  "color": "super-light-purple",
+                  "index": 42,
+                  "text": "煙霧"
+                },
+                "heavy intensity drizzle": {
+                  "color": "blue",
+                  "index": 12,
+                  "text": "霧雨(強)"
+                },
+                "heavy intensity drizzle rain": {
+                  "color": "semi-dark-blue",
+                  "index": 15,
+                  "text": "雨(強)+霧雨"
+                },
+                "heavy intensity rain": {
+                  "color": "blue",
+                  "index": 21,
+                  "text": "雨(強)"
+                },
+                "heavy intensity shower rain": {
                   "color": "yellow",
-                  "index": 6,
-                  "text": "雨"
+                  "index": 27,
+                  "text": "にわか雨(強)"
                 },
-                "scattered clouds": {
-                  "color": "super-light-green",
-                  "index": 3,
-                  "text": "やや曇り"
+                "heavy shower rain and drizzle": {
+                  "color": "yellow",
+                  "index": 17,
+                  "text": "にわか雨(強)+霧雨"
                 },
-                "shower rain": {
-                  "color": "semi-dark-yellow",
+                "heavy shower snow": {
+                  "color": "dark-yellow",
+                  "index": 39,
+                  "text": "にわか雪(強)"
+                },
+                "heavy snow": {
+                  "color": "dark-purple",
+                  "index": 32,
+                  "text": "大雪"
+                },
+                "heavy thunderstorm": {
+                  "color": "semi-dark-orange",
                   "index": 5,
+                  "text": "雷(強)"
+                },
+                "light intensity drizzle": {
+                  "color": "super-light-yellow",
+                  "index": 10,
+                  "text": "霧雨(弱)"
+                },
+                "light intensity drizzle rain": {
+                  "color": "light-blue",
+                  "index": 13,
+                  "text": "雨(弱)+霧雨"
+                },
+                "light intensity shower rain": {
+                  "color": "super-light-yellow",
+                  "index": 25,
+                  "text": "にわか雨(弱)"
+                },
+                "light rain": {
+                  "color": "super-light-blue",
+                  "index": 19,
                   "text": "小雨"
                 },
+                "light rain and snow": {
+                  "color": "super-light-blue",
+                  "index": 35,
+                  "text": "みぞれ(弱)"
+                },
+                "light shower snow": {
+                  "color": "yellow",
+                  "index": 37,
+                  "text": "にわか雪(弱)"
+                },
+                "light snow": {
+                  "color": "light-purple",
+                  "index": 30,
+                  "text": "小雪"
+                },
+                "light thunderstorm": {
+                  "color": "light-orange",
+                  "index": 3,
+                  "text": "雷(弱)"
+                },
+                "mist": {
+                  "color": "super-light-purple",
+                  "index": 40,
+                  "text": "もや"
+                },
+                "moderate rain": {
+                  "color": "light-blue",
+                  "index": 20,
+                  "text": "雨"
+                },
+                "overcast clouds": {
+                  "color": "text",
+                  "index": 54,
+                  "text": "曇り"
+                },
+                "proximity shower rain": {
+                  "color": "super-light-yellow",
+                  "index": 29,
+                  "text": "にわか雨(近)"
+                },
+                "ragged shower rain": {
+                  "color": "light-yellow",
+                  "index": 28,
+                  "text": "にわか雨(時々)"
+                },
+                "ragged thunderstorm": {
+                  "color": "super-light-orange",
+                  "index": 6,
+                  "text": "ときどき雷"
+                },
+                "rain and snow": {
+                  "color": "blue",
+                  "index": 36,
+                  "text": "みぞれ"
+                },
+                "sand": {
+                  "color": "purple",
+                  "index": 45,
+                  "text": "降砂"
+                },
+                "sand, dust whirls": {
+                  "color": "dark-purple",
+                  "index": 43,
+                  "text": "砂塵旋風"
+                },
+                "scattered clouds": {
+                  "color": "light-green",
+                  "index": 52,
+                  "text": "千切れ雲"
+                },
+                "shower drizzle": {
+                  "color": "super-light-yellow",
+                  "index": 18,
+                  "text": "にわか霧雨"
+                },
+                "shower rain": {
+                  "color": "light-yellow",
+                  "index": 26,
+                  "text": "にわか雨"
+                },
+                "shower rain and drizzle": {
+                  "color": "light-yellow",
+                  "index": 16,
+                  "text": "にわか雨+霧雨"
+                },
+                "shower sleet": {
+                  "color": "dark-yellow",
+                  "index": 34,
+                  "text": "にわか凍雨"
+                },
+                "shower snow": {
+                  "color": "semi-dark-yellow",
+                  "index": 38,
+                  "text": "にわか雪"
+                },
+                "sleet": {
+                  "color": "semi-dark-purple",
+                  "index": 33,
+                  "text": "凍雨"
+                },
+                "smoke": {
+                  "color": "super-light-purple",
+                  "index": 41,
+                  "text": "煙"
+                },
                 "snow": {
-                  "color": "red",
-                  "index": 9,
+                  "color": "purple",
+                  "index": 31,
                   "text": "雪"
                 },
-                "thunderstorm": {
+                "squalls": {
                   "color": "red",
+                  "index": 48,
+                  "text": "スコール"
+                },
+                "thunderstorm": {
+                  "color": "orange",
+                  "index": 4,
+                  "text": "雷"
+                },
+                "thunderstorm with drizzle": {
+                  "color": "light-yellow",
+                  "index": 8,
+                  "text": "霧雨+雷"
+                },
+                "thunderstorm with heavy drizzle": {
+                  "color": "yellow",
+                  "index": 9,
+                  "text": "霧雨(強)+雷"
+                },
+                "thunderstorm with heavy rain": {
+                  "color": "dark-red",
+                  "index": 2,
+                  "text": "雷雨(強)"
+                },
+                "thunderstorm with light drizzle": {
+                  "color": "super-light-yellow",
                   "index": 7,
+                  "text": "霧雨(弱)+雷"
+                },
+                "thunderstorm with light rain": {
+                  "color": "red",
+                  "index": 0,
+                  "text": "雷雨(弱)"
+                },
+                "thunderstorm with rain": {
+                  "color": "semi-dark-red",
+                  "index": 1,
                   "text": "雷雨"
                 },
+                "tornado": {
+                  "color": "dark-red",
+                  "index": 49,
+                  "text": "竜巻"
+                },
                 "very heavy rain": {
-                  "color": "dark-blue",
-                  "index": 8,
-                  "text": "豪雨"
+                  "color": "blue",
+                  "index": 22,
+                  "text": "雨(激)"
+                },
+                "volcanic ash": {
+                  "color": "semi-dark-purple",
+                  "index": 47,
+                  "text": "降灰"
                 }
               },
               "type": "value"
@@ -137,10 +357,14 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.6",
+      "pluginVersion": "8.4.7",
       "targets": [
         {
-          "exemplar": true,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": false,
           "expr": "openweather_currentconditions{location=\"Kashiwa, JP\"}",
           "instant": true,
           "interval": "",
@@ -254,7 +478,7 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "8.4.6",
+      "pluginVersion": "8.4.7",
       "targets": [
         {
           "exemplar": true,
@@ -361,7 +585,7 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "8.4.6",
+      "pluginVersion": "8.4.7",
       "targets": [
         {
           "exemplar": true,
@@ -471,7 +695,7 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "8.4.6",
+      "pluginVersion": "8.4.7",
       "targets": [
         {
           "exemplar": true,
@@ -549,7 +773,7 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "8.4.6",
+      "pluginVersion": "8.4.7",
       "targets": [
         {
           "exemplar": true,
@@ -624,7 +848,7 @@
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "8.4.6",
+      "pluginVersion": "8.4.7",
       "targets": [
         {
           "datasource": {
@@ -698,7 +922,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.6",
+      "pluginVersion": "8.4.7",
       "targets": [
         {
           "datasource": {
@@ -812,7 +1036,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.6",
+      "pluginVersion": "8.4.7",
       "targets": [
         {
           "datasource": {
@@ -889,7 +1113,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.6",
+      "pluginVersion": "8.4.7",
       "targets": [
         {
           "exemplar": true,
@@ -973,7 +1197,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.6",
+      "pluginVersion": "8.4.7",
       "targets": [
         {
           "datasource": {
@@ -1045,7 +1269,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.6",
+      "pluginVersion": "8.4.7",
       "targets": [
         {
           "datasource": {
@@ -1136,7 +1360,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.6",
+      "pluginVersion": "8.4.7",
       "targets": [
         {
           "datasource": {
@@ -1227,7 +1451,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.6",
+      "pluginVersion": "8.4.7",
       "targets": [
         {
           "datasource": {
@@ -1309,7 +1533,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.6",
+      "pluginVersion": "8.4.7",
       "targets": [
         {
           "datasource": {
@@ -1395,7 +1619,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.6",
+      "pluginVersion": "8.4.7",
       "targets": [
         {
           "datasource": {
@@ -1493,7 +1717,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.6",
+      "pluginVersion": "8.4.7",
       "targets": [
         {
           "datasource": {
@@ -1576,7 +1800,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.6",
+      "pluginVersion": "8.4.7",
       "targets": [
         {
           "exemplar": true,
@@ -1663,7 +1887,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.6",
+      "pluginVersion": "8.4.7",
       "targets": [
         {
           "exemplar": true,
@@ -1750,7 +1974,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.6",
+      "pluginVersion": "8.4.7",
       "targets": [
         {
           "exemplar": true,
@@ -1836,7 +2060,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.6",
+      "pluginVersion": "8.4.7",
       "targets": [
         {
           "exemplar": true,
@@ -1899,7 +2123,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.6",
+      "pluginVersion": "8.4.7",
       "targets": [
         {
           "exemplar": true,
@@ -1996,7 +2220,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.6",
+      "pluginVersion": "8.4.7",
       "targets": [
         {
           "exemplar": true,
@@ -2072,7 +2296,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.6",
+      "pluginVersion": "8.4.7",
       "targets": [
         {
           "exemplar": true,
@@ -2173,7 +2397,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.6",
+      "pluginVersion": "8.4.7",
       "targets": [
         {
           "exemplar": true,
@@ -2251,7 +2475,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.6",
+      "pluginVersion": "8.4.7",
       "targets": [
         {
           "exemplar": true,
@@ -2318,7 +2542,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.6",
+      "pluginVersion": "8.4.7",
       "targets": [
         {
           "exemplar": true,
@@ -2408,7 +2632,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.6",
+      "pluginVersion": "8.4.7",
       "targets": [
         {
           "exemplar": true,
@@ -2502,7 +2726,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "8.4.6",
+      "pluginVersion": "8.4.7",
       "targets": [
         {
           "datasource": {
