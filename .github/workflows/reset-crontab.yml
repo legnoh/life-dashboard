@@ -12,7 +12,7 @@ jobs:
   setup-raspberry-pi:
     runs-on: self-hosted
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v3
     - name: set crontab
       run: |
         sudo cp -r ./crontab/bin/* /usr/local/bin/
