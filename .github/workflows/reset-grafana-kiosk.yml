@@ -7,9 +7,6 @@ on:
     paths:
     - 'grafana-kiosk/**'
   workflow_dispatch:
-  workflow_run:
-    workflows: [  Reset docker-compose setting ]
-    types: [ completed ]
 
 jobs:
   setup-raspberry-pi:
