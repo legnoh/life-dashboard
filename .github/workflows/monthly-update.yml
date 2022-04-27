@@ -19,6 +19,7 @@ jobs:
           | jq --arg NEW_EXPR "${new_expr}" \
             '(.panels[] | select(.id==48).targets[0].expr) = $NEW_EXPR' > tmp.json
           cp tmp.json docker/grafana/provisioning/dashboards/basics.json
+          rm -rf tmp.json
           echo "new_date=${new_date}" >> $GITHUB_ENV
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v3
