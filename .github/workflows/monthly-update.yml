@@ -3,7 +3,7 @@ name: Update monthly panel
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 4 28 * *'
+    - cron: '0 4 21 * *'
 
 jobs:
   update-monthly-panel:
@@ -13,7 +13,7 @@ jobs:
       uses: actions/checkout@v3
     - name: Create new expr for Game Panel
       run: |
-          new_date=$(date '+%Y-%m-22' -d "1month")
+          new_date=$(date '+%Y-%m-14' -d "1month")
           new_expr="countdown_until_seconds{date=\"${new_date}\"} / 86400"
           cat docker/grafana/provisioning/dashboards/basics.json \
           | jq --arg NEW_EXPR "${new_expr}" \
