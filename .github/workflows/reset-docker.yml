@@ -14,15 +14,12 @@ on:
 jobs:
   setup-raspberry-pi:
     runs-on: self-hosted
-    strategy:
-      matrix:
-        python: [3.9]
     steps:
     - uses: actions/checkout@v3
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
+    - name: Set up Python
+      uses: actions/setup-python@v4
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: '3.x'
     - name: setup GCP Auth
       uses: google-github-actions/auth@v0
       with:
