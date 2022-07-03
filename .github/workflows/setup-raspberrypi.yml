@@ -6,9 +6,6 @@ on:
 jobs:
   setup-raspberry-pi:
     runs-on: self-hosted
-    strategy:
-      matrix:
-        python: [3.9]
     steps:
     - uses: actions/checkout@v3
     - name: set crontab
@@ -16,10 +13,6 @@ jobs:
         sudo cp -r ./crontab/bin/* /usr/local/bin/
         sudo cp -r ./crontab/settings/* /etc/cron.d/
         echo "success copy crontab scripts"
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v4
-      with:
-        python-version: ${{ matrix.python-version }}
     - name: install docker
       run: |
         ./docker/install.sh
