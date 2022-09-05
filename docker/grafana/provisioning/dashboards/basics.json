@@ -21,6 +21,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
+  "id": 3,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -2201,8 +2202,8 @@
       "links": [
         {
           "targetBlank": true,
-          "title": "MyJCB",
-          "url": "https://my.jcb.co.jp/iss-pc/member/details_inquiry/detailMenu.html?link_id=myj_main_detailMenu"
+          "title": "Vpass",
+          "url": "https://www.smbc-card.com/mem/index.jsp"
         }
       ],
       "options": {
@@ -2223,18 +2224,26 @@
       "pluginVersion": "8.4.7",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "exemplar": true,
-          "expr": "mf_monthly_withdrawal_jpy{name=\"JCBカード\"}",
+          "expr": "mf_monthly_withdrawal_jpy{name=\"三井住友カード\"}",
           "interval": "",
-          "legendFormat": "JCBカード",
+          "legendFormat": "三井住友カード",
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "exemplar": true,
-          "expr": "mf_monthly_withdrawal_jpy{name=\"YJカード\"}",
+          "expr": "mf_monthly_withdrawal_jpy{name=\"PayPayカード\"}",
           "hide": false,
           "interval": "",
-          "legendFormat": "YJカード",
+          "legendFormat": "PayPayカード",
           "refId": "B"
         }
       ],
@@ -2276,8 +2285,8 @@
       "links": [
         {
           "targetBlank": true,
-          "title": "MyJCB",
-          "url": "https://my.jcb.co.jp/iss-pc/member/details_inquiry/detailMenu.html?link_id=myj_main_detailMenu"
+          "title": "Vpass",
+          "url": "https://www.smbc-card.com/mem/index.jsp"
         }
       ],
       "options": {
@@ -2299,23 +2308,31 @@
       "pluginVersion": "8.4.7",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "exemplar": true,
-          "expr": "mf_monthly_withdrawal_date_info{name=\"JCBカード\"}",
+          "expr": "mf_monthly_withdrawal_date_info{name=\"三井住友カード\"}",
           "format": "time_series",
           "hide": false,
           "instant": false,
           "interval": "",
-          "legendFormat": "JCBカード",
+          "legendFormat": "三井住友カード",
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "exemplar": true,
-          "expr": "mf_monthly_withdrawal_date_info{name=\"YJカード\"}",
+          "expr": "mf_monthly_withdrawal_date_info{name=\"PayPayカード\"}",
           "format": "time_series",
           "hide": false,
           "instant": false,
           "interval": "",
-          "legendFormat": "YJカード",
+          "legendFormat": "PayPayカード",
           "refId": "B"
         }
       ],
@@ -2400,21 +2417,29 @@
       "pluginVersion": "8.4.7",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "exemplar": true,
-          "expr": "mf_assets_deposit_jpy{account=\"住信SBIネット銀行\",name=\"代表口座-普通\"} + ignoring(name, account) mf_monthly_withdrawal_jpy{name=\"JCBカード\"} ",
+          "expr": "mf_assets_deposit_jpy{account=\"住信SBIネット銀行\",name=\"代表口座-普通\"} + ignoring(name, account) mf_monthly_withdrawal_jpy{name=\"三井住友カード\"} ",
           "hide": false,
           "instant": false,
           "interval": "",
-          "legendFormat": "JCBカード",
+          "legendFormat": "三井住友カード",
           "refId": "C"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "exemplar": true,
-          "expr": "mf_assets_deposit_jpy{account=\"住信SBIネット銀行\",name=\"代表口座-普通\"} + ignoring(name, account) mf_monthly_withdrawal_jpy{name=\"YJカード\"}",
+          "expr": "mf_assets_deposit_jpy{account=\"住信SBIネット銀行\",name=\"代表口座-普通\"} + ignoring(name, account) mf_monthly_withdrawal_jpy{name=\"PayPayカード\"}",
           "hide": false,
           "instant": false,
           "interval": "",
-          "legendFormat": "YJカード",
+          "legendFormat": "PayPayカード",
           "refId": "A"
         }
       ],
