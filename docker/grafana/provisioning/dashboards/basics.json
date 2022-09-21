@@ -1045,7 +1045,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "countdown_until_seconds{date=\"2022-09-14\"} / 86400",
+          "expr": "countdown_until_seconds{date=\"2022-10-14\"} / 86400",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
