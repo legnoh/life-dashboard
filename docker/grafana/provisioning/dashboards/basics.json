@@ -1892,7 +1892,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "mf_assets_total_jpy - ignoring(type) mf_assets_subtotal_jpy{type=\"年金\"} - (mf_liability_total_jpy - ignoring(type) mf_liability_subtotal_jpy{type=\"奨学金\"} - ignoring(type) mf_liability_subtotal_jpy{type=\"その他の負債\"})",
+          "expr": "mf_assets_total_jpy - ignoring(type) mf_assets_subtotal_jpy{type=\"年金\"} - (mf_liability_total_jpy - ignoring(type) mf_liability_subtotal_jpy{type=\"奨学金\"})",
           "instant": false,
           "interval": "",
           "legendFormat": "",
@@ -1979,7 +1979,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "-1 * (mf_liability_total_jpy - ignoring(type) mf_liability_subtotal_jpy{type=\"奨学金\"} - ignoring(type) mf_liability_subtotal_jpy{type=\"その他の負債\"})",
+          "expr": "-1 * (mf_liability_total_jpy - ignoring(type) mf_liability_subtotal_jpy{type=\"奨学金\"})",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
