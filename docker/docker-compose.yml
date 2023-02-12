@@ -58,6 +58,7 @@ services:
     expose: [ "9107" ]
   speedtest-exporter:
     image: billimek/prometheus-speedtest-exporter:latest
+    container_name: speedtest-exporter
     ports: [ 9469:9469 ]
     restart: always
     expose: [ "9469" ]
