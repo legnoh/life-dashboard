@@ -61,8 +61,8 @@ services:
     container_name: speedtest-exporter
     ports: [ 9469:9469 ]
     restart: always
-    expose: [ "9469" ]
     env_file: speedtest.env
+    expose: [ "9469" ]
   withings-exporter:
     image: legnoh/withings-exporter:latest
     container_name: withings-exporter
