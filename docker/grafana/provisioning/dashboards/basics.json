@@ -960,7 +960,7 @@
         },
         "dateSettings": {
           "dateFormat": "YYYY/MM/DD(ddd)",
-          "fontSize": "20px",
+          "fontSize": "0.5vw",
           "fontWeight": "normal",
           "locale": "ja",
           "showDate": true
@@ -969,7 +969,7 @@
         "refresh": "sec",
         "timeSettings": {
           "customFormat": "HH:mm:ss",
-          "fontSize": "45px",
+          "fontSize": "1vw",
           "fontWeight": "bold"
         },
         "timezone": "Asia/Tokyo",
@@ -2715,6 +2715,6 @@
   "timezone": "",
   "title": "main dashboard",
   "uid": "jTY6Raggz",
-  "version": 1,
+  "version": 2,
   "weekStart": ""
 }
