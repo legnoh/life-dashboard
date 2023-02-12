@@ -960,7 +960,7 @@
         },
         "dateSettings": {
           "dateFormat": "YYYY/MM/DD(ddd)",
-          "fontSize": "0.5vw",
+          "fontSize": "1.5vw",
           "fontWeight": "normal",
           "locale": "ja",
           "showDate": true
@@ -968,8 +968,8 @@
         "mode": "time",
         "refresh": "sec",
         "timeSettings": {
-          "customFormat": "HH:mm:ss",
-          "fontSize": "1vw",
+          "customFormat": "HH:mm",
+          "fontSize": "4.5vw",
           "fontWeight": "bold"
         },
         "timezone": "Asia/Tokyo",
