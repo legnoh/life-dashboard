@@ -56,6 +56,11 @@ services:
     devices:
       - "/dev/ttyUSB0:/dev/ttyUSB0"
     expose: [ "9107" ]
+  speedtest-exporter:
+    image: billimek/prometheus-speedtest-exporter:latest
+    ports: [ 9469:9469 ]
+    restart: always
+    expose: [ "9469" ]
   withings-exporter:
     image: legnoh/withings-exporter:latest
     container_name: withings-exporter

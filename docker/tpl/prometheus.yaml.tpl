@@ -62,6 +62,16 @@ scrape_configs:
       regex: '(go|process|python|promhttp)_(.*)'
       action: drop
     scrape_interval: 60s
+  - job_name: 'speedtest'
+    metrics_path: /probe
+    params:
+      script: [speedtest]
+    static_configs:
+      - targets: [ 'speedtest-exporter:9469' ]
+    scrape_interval: 60m
+    scrape_timeout: 90s
+    environment:
+      - server_ids=14623 # IPA CyberLab (Bunkyo, Japan)
 
 remote_write:
 - url: https://prometheus-prod-10-prod-us-central-0.grafana.net/api/prom/push
