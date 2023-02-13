@@ -25,365 +25,48 @@
   "liveNow": false,
   "panels": [
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "options": {
-                "broken clouds": {
-                  "color": "super-light-green",
-                  "index": 53,
-                  "text": "雲がち"
-                },
-                "clear sky": {
-                  "color": "dark-green",
-                  "index": 50,
-                  "text": "快晴"
-                },
-                "drizzle": {
-                  "color": "light-blue",
-                  "index": 11,
-                  "text": "霧雨"
-                },
-                "drizzle rain": {
-                  "color": "blue",
-                  "index": 14,
-                  "text": "雨+霧雨"
-                },
-                "dust": {
-                  "color": "purple",
-                  "index": 46,
-                  "text": "降塵"
-                },
-                "extreme rain": {
-                  "color": "semi-dark-blue",
-                  "index": 23,
-                  "text": "雨(猛烈)"
-                },
-                "few clouds": {
-                  "color": "semi-dark-green",
-                  "index": 51,
-                  "text": "晴れ"
-                },
-                "fog": {
-                  "color": "purple",
-                  "index": 44,
-                  "text": "霧"
-                },
-                "freezing rain": {
-                  "color": "super-light-yellow",
-                  "index": 24,
-                  "text": "雨氷"
-                },
-                "haze": {
-                  "color": "super-light-purple",
-                  "index": 42,
-                  "text": "煙霧"
-                },
-                "heavy intensity drizzle": {
-                  "color": "blue",
-                  "index": 12,
-                  "text": "霧雨(強)"
-                },
-                "heavy intensity drizzle rain": {
-                  "color": "semi-dark-blue",
-                  "index": 15,
-                  "text": "雨(強)+霧雨"
-                },
-                "heavy intensity rain": {
-                  "color": "blue",
-                  "index": 21,
-                  "text": "雨(強)"
-                },
-                "heavy intensity shower rain": {
-                  "color": "yellow",
-                  "index": 27,
-                  "text": "にわか雨(強)"
-                },
-                "heavy shower rain and drizzle": {
-                  "color": "yellow",
-                  "index": 17,
-                  "text": "にわか雨(強)+霧雨"
-                },
-                "heavy shower snow": {
-                  "color": "dark-yellow",
-                  "index": 39,
-                  "text": "にわか雪(強)"
-                },
-                "heavy snow": {
-                  "color": "dark-purple",
-                  "index": 32,
-                  "text": "大雪"
-                },
-                "heavy thunderstorm": {
-                  "color": "semi-dark-orange",
-                  "index": 5,
-                  "text": "雷(強)"
-                },
-                "light intensity drizzle": {
-                  "color": "super-light-yellow",
-                  "index": 10,
-                  "text": "霧雨(弱)"
-                },
-                "light intensity drizzle rain": {
-                  "color": "light-blue",
-                  "index": 13,
-                  "text": "雨(弱)+霧雨"
-                },
-                "light intensity shower rain": {
-                  "color": "super-light-yellow",
-                  "index": 25,
-                  "text": "にわか雨(弱)"
-                },
-                "light rain": {
-                  "color": "super-light-blue",
-                  "index": 19,
-                  "text": "小雨"
-                },
-                "light rain and snow": {
-                  "color": "super-light-blue",
-                  "index": 35,
-                  "text": "みぞれ(弱)"
-                },
-                "light shower snow": {
-                  "color": "yellow",
-                  "index": 37,
-                  "text": "にわか雪(弱)"
-                },
-                "light snow": {
-                  "color": "light-purple",
-                  "index": 30,
-                  "text": "小雪"
-                },
-                "light thunderstorm": {
-                  "color": "light-orange",
-                  "index": 3,
-                  "text": "雷(弱)"
-                },
-                "mist": {
-                  "color": "super-light-purple",
-                  "index": 40,
-                  "text": "もや"
-                },
-                "moderate rain": {
-                  "color": "light-blue",
-                  "index": 20,
-                  "text": "雨"
-                },
-                "overcast clouds": {
-                  "color": "text",
-                  "index": 54,
-                  "text": "曇り"
-                },
-                "proximity shower rain": {
-                  "color": "super-light-yellow",
-                  "index": 29,
-                  "text": "にわか雨(近)"
-                },
-                "ragged shower rain": {
-                  "color": "light-yellow",
-                  "index": 28,
-                  "text": "にわか雨(時々)"
-                },
-                "ragged thunderstorm": {
-                  "color": "super-light-orange",
-                  "index": 6,
-                  "text": "ときどき雷"
-                },
-                "rain and snow": {
-                  "color": "blue",
-                  "index": 36,
-                  "text": "みぞれ"
-                },
-                "sand": {
-                  "color": "purple",
-                  "index": 45,
-                  "text": "降砂"
-                },
-                "sand, dust whirls": {
-                  "color": "dark-purple",
-                  "index": 43,
-                  "text": "砂塵旋風"
-                },
-                "scattered clouds": {
-                  "color": "light-green",
-                  "index": 52,
-                  "text": "千切れ雲"
-                },
-                "shower drizzle": {
-                  "color": "super-light-yellow",
-                  "index": 18,
-                  "text": "にわか霧雨"
-                },
-                "shower rain": {
-                  "color": "light-yellow",
-                  "index": 26,
-                  "text": "にわか雨"
-                },
-                "shower rain and drizzle": {
-                  "color": "light-yellow",
-                  "index": 16,
-                  "text": "にわか雨+霧雨"
-                },
-                "shower sleet": {
-                  "color": "dark-yellow",
-                  "index": 34,
-                  "text": "にわか凍雨"
-                },
-                "shower snow": {
-                  "color": "semi-dark-yellow",
-                  "index": 38,
-                  "text": "にわか雪"
-                },
-                "sleet": {
-                  "color": "semi-dark-purple",
-                  "index": 33,
-                  "text": "凍雨"
-                },
-                "smoke": {
-                  "color": "super-light-purple",
-                  "index": 41,
-                  "text": "煙"
-                },
-                "snow": {
-                  "color": "purple",
-                  "index": 31,
-                  "text": "雪"
-                },
-                "squalls": {
-                  "color": "red",
-                  "index": 48,
-                  "text": "スコール"
-                },
-                "thunderstorm": {
-                  "color": "orange",
-                  "index": 4,
-                  "text": "雷"
-                },
-                "thunderstorm with drizzle": {
-                  "color": "light-yellow",
-                  "index": 8,
-                  "text": "霧雨+雷"
-                },
-                "thunderstorm with heavy drizzle": {
-                  "color": "yellow",
-                  "index": 9,
-                  "text": "霧雨(強)+雷"
-                },
-                "thunderstorm with heavy rain": {
-                  "color": "dark-red",
-                  "index": 2,
-                  "text": "雷雨(強)"
-                },
-                "thunderstorm with light drizzle": {
-                  "color": "super-light-yellow",
-                  "index": 7,
-                  "text": "霧雨(弱)+雷"
-                },
-                "thunderstorm with light rain": {
-                  "color": "red",
-                  "index": 0,
-                  "text": "雷雨(弱)"
-                },
-                "thunderstorm with rain": {
-                  "color": "semi-dark-red",
-                  "index": 1,
-                  "text": "雷雨"
-                },
-                "tornado": {
-                  "color": "dark-red",
-                  "index": 49,
-                  "text": "竜巻"
-                },
-                "very heavy rain": {
-                  "color": "blue",
-                  "index": 22,
-                  "text": "雨(激)"
-                },
-                "volcanic ash": {
-                  "color": "semi-dark-purple",
-                  "index": 47,
-                  "text": "降灰"
-                }
-              },
-              "type": "value"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
       "gridPos": {
         "h": 4,
         "w": 3,
         "x": 0,
         "y": 0
       },
-      "id": 40,
-      "links": [
-        {
-          "targetBlank": true,
-          "title": "Yahoo!天気・災害",
-          "url": "https://weather.yahoo.co.jp/weather/12/4510/12217.html"
-        }
-      ],
+      "id": 61,
       "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "/^currentconditions$/",
-          "values": false
+        "bgColor": "",
+        "clockType": "custom",
+        "countdownSettings": {
+          "endCountdownTime": "2023-02-13T02:24:19+09:00",
+          "endText": "00:00:00"
         },
-        "text": {},
-        "textMode": "auto"
+        "countupSettings": {
+          "beginCountupTime": "2023-02-13T02:24:19+09:00",
+          "beginText": "00:00:00"
+        },
+        "dateSettings": {
+          "dateFormat": "YYYY/MM/DD(ddd)",
+          "fontSize": "1.5vw",
+          "fontWeight": "normal",
+          "locale": "ja",
+          "showDate": true
+        },
+        "mode": "time",
+        "refresh": "sec",
+        "timeSettings": {
+          "customFormat": "HH:mm",
+          "fontSize": "4.5vw",
+          "fontWeight": "bold"
+        },
+        "timezone": "Asia/Tokyo",
+        "timezoneSettings": {
+          "fontSize": "12px",
+          "fontWeight": "normal",
+          "showTimezone": false,
+          "zoneFormat": "offsetAbbv"
+        }
       },
-      "pluginVersion": "8.4.7",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "exemplar": false,
-          "expr": "openweather_currentconditions{location=\"Kashiwa, JP\"}",
-          "instant": true,
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "現在の天気",
-      "transformations": [
-        {
-          "id": "labelsToFields",
-          "options": {}
-        },
-        {
-          "id": "merge",
-          "options": {}
-        }
-      ],
-      "type": "stat"
+      "pluginVersion": "2.1.2",
+      "type": "grafana-clock-panel"
     },
     {
       "datasource": {
@@ -876,28 +559,62 @@
             "mode": "thresholds"
           },
           "mappings": [],
+          "max": 1000000000,
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
+                "color": "text",
                 "value": null
               },
               {
-                "color": "yellow",
-                "value": 500
+                "color": "red",
+                "value": 1000000
+              },
+              {
+                "color": "light-red",
+                "value": 5000000
               },
               {
                 "color": "orange",
-                "value": 800
+                "value": 10000000
               },
               {
-                "color": "red",
-                "value": 1000
+                "color": "light-orange",
+                "value": 30000000
+              },
+              {
+                "color": "super-light-orange",
+                "value": 50000000
+              },
+              {
+                "color": "super-light-yellow",
+                "value": 100000000
+              },
+              {
+                "color": "super-light-green",
+                "value": 200000000
+              },
+              {
+                "color": "light-green",
+                "value": 300000000
+              },
+              {
+                "color": "green",
+                "value": 400000000
+              },
+              {
+                "color": "semi-dark-green",
+                "value": 500000000
+              },
+              {
+                "color": "dark-green",
+                "value": 1000000000
               }
             ]
           },
-          "unit": "watt"
+          "unit": "bps"
         },
         "overrides": []
       },
@@ -907,12 +624,9 @@
         "x": 18,
         "y": 0
       },
-      "id": 56,
+      "id": 63,
       "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
+        "orientation": "vertical",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -920,7 +634,8 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
       },
       "pluginVersion": "8.4.7",
       "targets": [
@@ -930,58 +645,472 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "power_consumption_watt{}",
+          "expr": "speedtest_downloadedbytes_bytes{}",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
         }
       ],
-      "title": "瞬間消費電力",
-      "type": "stat"
+      "title": "回線速度",
+      "type": "gauge"
     },
     {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 100000000,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "light-yellow",
+                "value": 10000000
+              },
+              {
+                "color": "#EAB839",
+                "value": 20000000
+              },
+              {
+                "color": "#6ED0E0",
+                "value": 30000000
+              },
+              {
+                "color": "#EF843C",
+                "value": 40000000
+              },
+              {
+                "color": "#E24D42",
+                "value": 50000000
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 60000000
+              },
+              {
+                "color": "dark-red",
+                "value": 100000000
+              }
+            ]
+          },
+          "unit": "bps"
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 4,
         "w": 3,
         "x": 21,
         "y": 0
       },
-      "id": 61,
-      "options": {
-        "bgColor": "",
-        "clockType": "custom",
-        "countdownSettings": {
-          "endCountdownTime": "2023-02-13T02:24:19+09:00",
-          "endText": "00:00:00"
-        },
-        "countupSettings": {
-          "beginCountupTime": "2023-02-13T02:24:19+09:00",
-          "beginText": "00:00:00"
-        },
-        "dateSettings": {
-          "dateFormat": "YYYY/MM/DD(ddd)",
-          "fontSize": "1.5vw",
-          "fontWeight": "normal",
-          "locale": "ja",
-          "showDate": true
-        },
-        "mode": "time",
-        "refresh": "sec",
-        "timeSettings": {
-          "customFormat": "HH:mm",
-          "fontSize": "4.5vw",
-          "fontWeight": "bold"
-        },
-        "timezone": "Asia/Tokyo",
-        "timezoneSettings": {
-          "fontSize": "12px",
-          "fontWeight": "normal",
-          "showTimezone": false,
-          "zoneFormat": "offsetAbbv"
+      "id": 54,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "NetVolante",
+          "url": "http://setup.netvolante.jp/"
         }
+      ],
+      "options": {
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
       },
-      "pluginVersion": "2.1.2",
-      "type": "grafana-clock-panel"
+      "pluginVersion": "8.4.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "sum(delta(ifInOctets[180s])) * 8 / 180",
+          "interval": "",
+          "legendFormat": "IN",
+          "refId": "A"
+        }
+      ],
+      "title": "帯域通信量",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "broken clouds": {
+                  "color": "super-light-green",
+                  "index": 53,
+                  "text": "雲がち"
+                },
+                "clear sky": {
+                  "color": "dark-green",
+                  "index": 50,
+                  "text": "快晴"
+                },
+                "drizzle": {
+                  "color": "light-blue",
+                  "index": 11,
+                  "text": "霧雨"
+                },
+                "drizzle rain": {
+                  "color": "blue",
+                  "index": 14,
+                  "text": "雨+霧雨"
+                },
+                "dust": {
+                  "color": "purple",
+                  "index": 46,
+                  "text": "降塵"
+                },
+                "extreme rain": {
+                  "color": "semi-dark-blue",
+                  "index": 23,
+                  "text": "雨(猛烈)"
+                },
+                "few clouds": {
+                  "color": "semi-dark-green",
+                  "index": 51,
+                  "text": "晴れ"
+                },
+                "fog": {
+                  "color": "purple",
+                  "index": 44,
+                  "text": "霧"
+                },
+                "freezing rain": {
+                  "color": "super-light-yellow",
+                  "index": 24,
+                  "text": "雨氷"
+                },
+                "haze": {
+                  "color": "super-light-purple",
+                  "index": 42,
+                  "text": "煙霧"
+                },
+                "heavy intensity drizzle": {
+                  "color": "blue",
+                  "index": 12,
+                  "text": "霧雨(強)"
+                },
+                "heavy intensity drizzle rain": {
+                  "color": "semi-dark-blue",
+                  "index": 15,
+                  "text": "雨(強)+霧雨"
+                },
+                "heavy intensity rain": {
+                  "color": "blue",
+                  "index": 21,
+                  "text": "雨(強)"
+                },
+                "heavy intensity shower rain": {
+                  "color": "yellow",
+                  "index": 27,
+                  "text": "にわか雨(強)"
+                },
+                "heavy shower rain and drizzle": {
+                  "color": "yellow",
+                  "index": 17,
+                  "text": "にわか雨(強)+霧雨"
+                },
+                "heavy shower snow": {
+                  "color": "dark-yellow",
+                  "index": 39,
+                  "text": "にわか雪(強)"
+                },
+                "heavy snow": {
+                  "color": "dark-purple",
+                  "index": 32,
+                  "text": "大雪"
+                },
+                "heavy thunderstorm": {
+                  "color": "semi-dark-orange",
+                  "index": 5,
+                  "text": "雷(強)"
+                },
+                "light intensity drizzle": {
+                  "color": "super-light-yellow",
+                  "index": 10,
+                  "text": "霧雨(弱)"
+                },
+                "light intensity drizzle rain": {
+                  "color": "light-blue",
+                  "index": 13,
+                  "text": "雨(弱)+霧雨"
+                },
+                "light intensity shower rain": {
+                  "color": "super-light-yellow",
+                  "index": 25,
+                  "text": "にわか雨(弱)"
+                },
+                "light rain": {
+                  "color": "super-light-blue",
+                  "index": 19,
+                  "text": "小雨"
+                },
+                "light rain and snow": {
+                  "color": "super-light-blue",
+                  "index": 35,
+                  "text": "みぞれ(弱)"
+                },
+                "light shower snow": {
+                  "color": "yellow",
+                  "index": 37,
+                  "text": "にわか雪(弱)"
+                },
+                "light snow": {
+                  "color": "light-purple",
+                  "index": 30,
+                  "text": "小雪"
+                },
+                "light thunderstorm": {
+                  "color": "light-orange",
+                  "index": 3,
+                  "text": "雷(弱)"
+                },
+                "mist": {
+                  "color": "super-light-purple",
+                  "index": 40,
+                  "text": "もや"
+                },
+                "moderate rain": {
+                  "color": "light-blue",
+                  "index": 20,
+                  "text": "雨"
+                },
+                "overcast clouds": {
+                  "color": "text",
+                  "index": 54,
+                  "text": "曇り"
+                },
+                "proximity shower rain": {
+                  "color": "super-light-yellow",
+                  "index": 29,
+                  "text": "にわか雨(近)"
+                },
+                "ragged shower rain": {
+                  "color": "light-yellow",
+                  "index": 28,
+                  "text": "にわか雨(時々)"
+                },
+                "ragged thunderstorm": {
+                  "color": "super-light-orange",
+                  "index": 6,
+                  "text": "ときどき雷"
+                },
+                "rain and snow": {
+                  "color": "blue",
+                  "index": 36,
+                  "text": "みぞれ"
+                },
+                "sand": {
+                  "color": "purple",
+                  "index": 45,
+                  "text": "降砂"
+                },
+                "sand, dust whirls": {
+                  "color": "dark-purple",
+                  "index": 43,
+                  "text": "砂塵旋風"
+                },
+                "scattered clouds": {
+                  "color": "light-green",
+                  "index": 52,
+                  "text": "千切れ雲"
+                },
+                "shower drizzle": {
+                  "color": "super-light-yellow",
+                  "index": 18,
+                  "text": "にわか霧雨"
+                },
+                "shower rain": {
+                  "color": "light-yellow",
+                  "index": 26,
+                  "text": "にわか雨"
+                },
+                "shower rain and drizzle": {
+                  "color": "light-yellow",
+                  "index": 16,
+                  "text": "にわか雨+霧雨"
+                },
+                "shower sleet": {
+                  "color": "dark-yellow",
+                  "index": 34,
+                  "text": "にわか凍雨"
+                },
+                "shower snow": {
+                  "color": "semi-dark-yellow",
+                  "index": 38,
+                  "text": "にわか雪"
+                },
+                "sleet": {
+                  "color": "semi-dark-purple",
+                  "index": 33,
+                  "text": "凍雨"
+                },
+                "smoke": {
+                  "color": "super-light-purple",
+                  "index": 41,
+                  "text": "煙"
+                },
+                "snow": {
+                  "color": "purple",
+                  "index": 31,
+                  "text": "雪"
+                },
+                "squalls": {
+                  "color": "red",
+                  "index": 48,
+                  "text": "スコール"
+                },
+                "thunderstorm": {
+                  "color": "orange",
+                  "index": 4,
+                  "text": "雷"
+                },
+                "thunderstorm with drizzle": {
+                  "color": "light-yellow",
+                  "index": 8,
+                  "text": "霧雨+雷"
+                },
+                "thunderstorm with heavy drizzle": {
+                  "color": "yellow",
+                  "index": 9,
+                  "text": "霧雨(強)+雷"
+                },
+                "thunderstorm with heavy rain": {
+                  "color": "dark-red",
+                  "index": 2,
+                  "text": "雷雨(強)"
+                },
+                "thunderstorm with light drizzle": {
+                  "color": "super-light-yellow",
+                  "index": 7,
+                  "text": "霧雨(弱)+雷"
+                },
+                "thunderstorm with light rain": {
+                  "color": "red",
+                  "index": 0,
+                  "text": "雷雨(弱)"
+                },
+                "thunderstorm with rain": {
+                  "color": "semi-dark-red",
+                  "index": 1,
+                  "text": "雷雨"
+                },
+                "tornado": {
+                  "color": "dark-red",
+                  "index": 49,
+                  "text": "竜巻"
+                },
+                "very heavy rain": {
+                  "color": "blue",
+                  "index": 22,
+                  "text": "雨(激)"
+                },
+                "volcanic ash": {
+                  "color": "semi-dark-purple",
+                  "index": 47,
+                  "text": "降灰"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 0,
+        "y": 4
+      },
+      "id": 40,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "Yahoo!天気・災害",
+          "url": "https://weather.yahoo.co.jp/weather/12/4510/12217.html"
+        }
+      ],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^currentconditions$/",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.4.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": false,
+          "expr": "openweather_currentconditions{location=\"Kashiwa, JP\"}",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "現在の天気",
+      "transformations": [
+        {
+          "id": "labelsToFields",
+          "options": {}
+        },
+        {
+          "id": "merge",
+          "options": {}
+        }
+      ],
+      "type": "stat"
     },
     {
       "datasource": {
@@ -1017,7 +1146,7 @@
       "gridPos": {
         "h": 4,
         "w": 3,
-        "x": 0,
+        "x": 3,
         "y": 4
       },
       "id": 28,
@@ -1077,6 +1206,96 @@
                 "value": null
               },
               {
+                "color": "orange",
+                "value": 30
+              },
+              {
+                "color": "yellow",
+                "value": 40
+              },
+              {
+                "color": "super-light-green",
+                "value": 50
+              },
+              {
+                "color": "green",
+                "value": 60
+              },
+              {
+                "color": "semi-dark-green",
+                "value": 70
+              },
+              {
+                "color": "dark-green",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 6,
+        "y": 4
+      },
+      "id": 12,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "あすけん",
+          "url": "https://www.asken.jp"
+        }
+      ],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.4.7",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "asken_score{}",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "あすけん健康度",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
                 "color": "light-red",
                 "value": 1000
               },
@@ -1101,7 +1320,7 @@
       "gridPos": {
         "h": 4,
         "w": 3,
-        "x": 3,
+        "x": 9,
         "y": 4
       },
       "id": 34,
@@ -1142,170 +1361,6 @@
         }
       ],
       "title": "歩数",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 0,
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              },
-              {
-                "color": "yellow",
-                "value": 30
-              },
-              {
-                "color": "green",
-                "value": 40
-              }
-            ]
-          },
-          "unit": "分"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 3,
-        "x": 6,
-        "y": 4
-      },
-      "id": 50,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.4.7",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "exemplar": true,
-          "expr": "withings_activity_active / 60",
-          "instant": false,
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "運動時間",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "light-green",
-                "value": 115
-              },
-              {
-                "color": "#EAB839",
-                "value": 125
-              },
-              {
-                "color": "orange",
-                "value": 135
-              },
-              {
-                "color": "semi-dark-orange",
-                "value": 155
-              },
-              {
-                "color": "red",
-                "value": 175
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 3,
-        "x": 9,
-        "y": 4
-      },
-      "id": 59,
-      "links": [
-        {
-          "targetBlank": true,
-          "title": "Withings Healthcare",
-          "url": "https://healthmate.withings.com/"
-        }
-      ],
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.4.7",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "exemplar": true,
-          "expr": "withings_meas_diastolic_blood_pressure",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "最低",
-          "refId": "B"
-        }
-      ],
-      "title": "最低血圧(mmHg)",
       "type": "stat"
     },
     {
@@ -1417,20 +1472,28 @@
                 "value": null
               },
               {
-                "color": "yellow",
-                "value": 20
+                "color": "light-green",
+                "value": 115
+              },
+              {
+                "color": "#EAB839",
+                "value": 125
               },
               {
                 "color": "orange",
-                "value": 25
+                "value": 135
+              },
+              {
+                "color": "semi-dark-orange",
+                "value": 155
               },
               {
                 "color": "red",
-                "value": 30
+                "value": 175
               }
             ]
           },
-          "unit": "percent"
+          "unit": "none"
         },
         "overrides": []
       },
@@ -1440,7 +1503,7 @@
         "x": 15,
         "y": 4
       },
-      "id": 32,
+      "id": 59,
       "links": [
         {
           "targetBlank": true,
@@ -1452,7 +1515,7 @@
         "colorMode": "value",
         "graphMode": "none",
         "justifyMode": "auto",
-        "orientation": "auto",
+        "orientation": "horizontal",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -1471,13 +1534,14 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "withings_meas_fat_ratio",
+          "expr": "withings_meas_diastolic_blood_pressure",
+          "hide": false,
           "interval": "",
-          "legendFormat": "",
-          "refId": "A"
+          "legendFormat": "最低",
+          "refId": "B"
         }
       ],
-      "title": "体脂肪率",
+      "title": "最低血圧(mmHg)",
       "type": "stat"
     },
     {
@@ -1679,6 +1743,73 @@
             "mode": "absolute",
             "steps": [
               {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 5
+              },
+              {
+                "color": "red",
+                "value": 10
+              }
+            ]
+          },
+          "unit": "個"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 0,
+        "y": 8
+      },
+      "id": 36,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.4.7",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "todoist_filter_task_items{name=\"TODO - 自宅\"}",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "自宅タスク残数",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
                 "color": "red",
                 "value": null
               },
@@ -1711,7 +1842,7 @@
       "gridPos": {
         "h": 4,
         "w": 3,
-        "x": 0,
+        "x": 3,
         "y": 8
       },
       "id": 46,
@@ -1741,180 +1872,6 @@
         }
       ],
       "title": "当月収支",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "dark-red",
-                "value": null
-              },
-              {
-                "color": "semi-dark-red",
-                "value": 100000
-              },
-              {
-                "color": "light-red",
-                "value": 300000
-              },
-              {
-                "color": "super-light-orange",
-                "value": 500000
-              },
-              {
-                "color": "light-green",
-                "value": 1000000
-              },
-              {
-                "color": "green",
-                "value": 3000000
-              }
-            ]
-          },
-          "unit": "currencyJPY"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 3,
-        "x": 3,
-        "y": 8
-      },
-      "id": 10,
-      "links": [
-        {
-          "targetBlank": true,
-          "title": "MoneyForward",
-          "url": "https://moneyforward.com/bs/balance_sheet"
-        }
-      ],
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.4.7",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "mf_assets_total_jpy - ignoring(type) mf_assets_subtotal_jpy{type=\"年金\"} - (mf_liability_total_jpy - ignoring(type) mf_liability_subtotal_jpy{type=\"奨学金\"})",
-          "instant": false,
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "バランスシート",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": -3000000
-              },
-              {
-                "color": "#EAB839",
-                "value": -1000000
-              },
-              {
-                "color": "blue",
-                "value": -500000
-              },
-              {
-                "color": "green",
-                "value": 0
-              },
-              {
-                "color": "#6ED0E0",
-                "value": ""
-              }
-            ]
-          },
-          "unit": "currencyJPY"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 3,
-        "x": 6,
-        "y": 8
-      },
-      "id": 3,
-      "links": [
-        {
-          "targetBlank": true,
-          "title": "SBIネット銀行",
-          "url": "https://www.netbk.co.jp/contents/"
-        }
-      ],
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.4.7",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "-1 * (mf_liability_total_jpy - ignoring(type) mf_liability_subtotal_jpy{type=\"奨学金\"})",
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "借金残高",
       "type": "stat"
     },
     {
@@ -1964,7 +1921,7 @@
       "gridPos": {
         "h": 4,
         "w": 3,
-        "x": 9,
+        "x": 6,
         "y": 8
       },
       "id": 2,
@@ -2034,7 +1991,7 @@
       "gridPos": {
         "h": 8,
         "w": 3,
-        "x": 12,
+        "x": 9,
         "y": 8
       },
       "id": 52,
@@ -2124,7 +2081,7 @@
       "gridPos": {
         "h": 8,
         "w": 3,
-        "x": 15,
+        "x": 12,
         "y": 8
       },
       "id": 5,
@@ -2207,7 +2164,7 @@
       "gridPos": {
         "h": 8,
         "w": 3,
-        "x": 18,
+        "x": 15,
         "y": 8
       },
       "id": 23,
@@ -2324,7 +2281,7 @@
       "gridPos": {
         "h": 8,
         "w": 3,
-        "x": 21,
+        "x": 18,
         "y": 8
       },
       "id": 44,
@@ -2394,26 +2351,37 @@
                 "value": null
               },
               {
-                "color": "#EAB839",
-                "value": 5
+                "color": "yellow",
+                "value": 20
+              },
+              {
+                "color": "orange",
+                "value": 25
               },
               {
                 "color": "red",
-                "value": 10
+                "value": 30
               }
             ]
           },
-          "unit": "個"
+          "unit": "percent"
         },
         "overrides": []
       },
       "gridPos": {
         "h": 4,
         "w": 3,
-        "x": 0,
-        "y": 12
+        "x": 21,
+        "y": 8
       },
-      "id": 36,
+      "id": 32,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "Withings Healthcare",
+          "url": "https://healthmate.withings.com/"
+        }
+      ],
       "options": {
         "colorMode": "value",
         "graphMode": "none",
@@ -2432,14 +2400,18 @@
       "pluginVersion": "8.4.7",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "exemplar": true,
-          "expr": "todoist_filter_task_items{name=\"TODO - 自宅\"}",
+          "expr": "withings_meas_fat_ratio",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
         }
       ],
-      "title": "自宅タスク残数",
+      "title": "体脂肪率",
       "type": "stat"
     },
     {
@@ -2477,7 +2449,7 @@
       "gridPos": {
         "h": 4,
         "w": 3,
-        "x": 3,
+        "x": 0,
         "y": 12
       },
       "id": 37,
@@ -2528,47 +2500,43 @@
                 "value": null
               },
               {
-                "color": "orange",
-                "value": 30
+                "color": "red",
+                "value": -3000000
               },
               {
-                "color": "yellow",
-                "value": 40
+                "color": "#EAB839",
+                "value": -1000000
               },
               {
-                "color": "super-light-green",
-                "value": 50
+                "color": "blue",
+                "value": -500000
               },
               {
                 "color": "green",
-                "value": 60
+                "value": 0
               },
               {
-                "color": "semi-dark-green",
-                "value": 70
-              },
-              {
-                "color": "dark-green",
-                "value": 80
+                "color": "#6ED0E0",
+                "value": ""
               }
             ]
           },
-          "unit": "none"
+          "unit": "currencyJPY"
         },
         "overrides": []
       },
       "gridPos": {
         "h": 4,
         "w": 3,
-        "x": 6,
+        "x": 3,
         "y": 12
       },
-      "id": 12,
+      "id": 3,
       "links": [
         {
           "targetBlank": true,
-          "title": "あすけん",
-          "url": "https://www.asken.jp"
+          "title": "SBIネット銀行",
+          "url": "https://www.netbk.co.jp/contents/"
         }
       ],
       "options": {
@@ -2590,13 +2558,13 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "asken_score{}",
+          "expr": "-1 * (mf_liability_total_jpy - ignoring(type) mf_liability_subtotal_jpy{type=\"奨学金\"})",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
         }
       ],
-      "title": "あすけん健康度",
+      "title": "借金残高",
       "type": "stat"
     },
     {
@@ -2604,73 +2572,65 @@
         "type": "prometheus",
         "uid": "PBFA97CFB590B2093"
       },
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "thresholds"
           },
           "mappings": [],
-          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
+                "color": "dark-red",
                 "value": null
               },
               {
-                "color": "light-yellow",
+                "color": "semi-dark-red",
+                "value": 100000
+              },
+              {
+                "color": "light-red",
+                "value": 300000
+              },
+              {
+                "color": "super-light-orange",
+                "value": 500000
+              },
+              {
+                "color": "light-green",
                 "value": 1000000
               },
               {
-                "color": "#EAB839",
-                "value": 2000000
-              },
-              {
-                "color": "#6ED0E0",
+                "color": "green",
                 "value": 3000000
-              },
-              {
-                "color": "#EF843C",
-                "value": 4000000
-              },
-              {
-                "color": "#E24D42",
-                "value": 5000000
-              },
-              {
-                "color": "semi-dark-red",
-                "value": 6000000
-              },
-              {
-                "color": "dark-red",
-                "value": 10000000
               }
             ]
           },
-          "unit": "bps"
+          "unit": "currencyJPY"
         },
         "overrides": []
       },
       "gridPos": {
         "h": 4,
         "w": 3,
-        "x": 9,
+        "x": 6,
         "y": 12
       },
-      "id": 54,
+      "id": 10,
       "links": [
         {
           "targetBlank": true,
-          "title": "NetVolante",
-          "url": "http://setup.netvolante.jp/"
+          "title": "MoneyForward",
+          "url": "https://moneyforward.com/bs/balance_sheet"
         }
       ],
       "options": {
         "colorMode": "value",
         "graphMode": "none",
         "justifyMode": "auto",
-        "orientation": "horizontal",
+        "orientation": "auto",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -2678,23 +2638,21 @@
           "fields": "",
           "values": false
         },
+        "text": {},
         "textMode": "auto"
       },
       "pluginVersion": "8.4.7",
       "targets": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
           "exemplar": true,
-          "expr": "sum(delta(ifInOctets[180s])) * 8 / 180",
+          "expr": "mf_assets_total_jpy - ignoring(type) mf_assets_subtotal_jpy{type=\"年金\"} - (mf_liability_total_jpy - ignoring(type) mf_liability_subtotal_jpy{type=\"奨学金\"})",
+          "instant": false,
           "interval": "",
-          "legendFormat": "IN",
+          "legendFormat": "",
           "refId": "A"
         }
       ],
-      "title": "帯域通信量",
+      "title": "バランスシート",
       "type": "stat"
     }
   ],
@@ -2715,6 +2673,6 @@
   "timezone": "",
   "title": "main dashboard",
   "uid": "jTY6Raggz",
-  "version": 2,
+  "version": 4,
   "weekStart": ""
 }
