@@ -402,17 +402,17 @@
             "mode": "thresholds"
           },
           "mappings": [],
-          "max": 70,
-          "min": 40,
+          "max": 100,
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "semi-dark-blue",
+                "color": "red",
                 "value": null
               },
               {
-                "color": "super-light-yellow",
+                "color": "light-green",
                 "value": 40
               },
               {
@@ -420,8 +420,16 @@
                 "value": 50
               },
               {
-                "color": "light-orange",
+                "color": "semi-dark-green",
+                "value": 55
+              },
+              {
+                "color": "yellow",
                 "value": 60
+              },
+              {
+                "color": "red",
+                "value": 70
               }
             ]
           },
@@ -2673,6 +2681,6 @@
   "timezone": "",
   "title": "main dashboard",
   "uid": "jTY6Raggz",
-  "version": 4,
+  "version": 5,
   "weekStart": ""
 }
