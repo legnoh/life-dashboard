@@ -2675,7 +2675,7 @@
         "autoPlay": true,
         "customBackground": false,
         "geolocate": false,
-        "loop": true,
+        "loop": false,
         "videoId": "jfKfPfyJRdk",
         "videoType": "youtube"
       },
