@@ -438,7 +438,7 @@
     },
     {
       "gridPos": {
-        "h": 4,
+        "h": 5,
         "w": 3,
         "x": 21,
         "y": 0
@@ -479,88 +479,6 @@
       },
       "pluginVersion": "2.1.2",
       "type": "grafana-clock-panel"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "yellow",
-                "value": 20
-              },
-              {
-                "color": "orange",
-                "value": 25
-              },
-              {
-                "color": "red",
-                "value": 30
-              }
-            ]
-          },
-          "unit": "percent"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 3,
-        "x": 9,
-        "y": 4
-      },
-      "id": 32,
-      "links": [
-        {
-          "targetBlank": true,
-          "title": "Withings Healthcare",
-          "url": "https://healthmate.withings.com/"
-        }
-      ],
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.4.7",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "exemplar": true,
-          "expr": "withings_meas_fat_ratio",
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "体脂肪率",
-      "type": "stat"
     },
     {
       "datasource": {
@@ -1166,10 +1084,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
+        "h": 3,
         "w": 3,
         "x": 21,
-        "y": 4
+        "y": 5
       },
       "id": 40,
       "links": [
@@ -1227,6 +1145,7 @@
         "type": "prometheus",
         "uid": "PBFA97CFB590B2093"
       },
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1237,28 +1156,28 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "red",
+                "color": "dark-red",
                 "value": null
               },
               {
-                "color": "orange",
-                "value": 0
+                "color": "semi-dark-red",
+                "value": 100000
               },
               {
-                "color": "#EAB839",
-                "value": 30000
+                "color": "light-red",
+                "value": 300000
               },
               {
-                "color": "yellow",
-                "value": 50000
+                "color": "super-light-orange",
+                "value": 500000
               },
               {
-                "color": "#6ED0E0",
-                "value": 70000
+                "color": "light-green",
+                "value": 1000000
               },
               {
                 "color": "green",
-                "value": 100000
+                "value": 3000000
               }
             ]
           },
@@ -1267,12 +1186,19 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
-        "w": 6,
+        "h": 5,
+        "w": 9,
         "x": 9,
         "y": 8
       },
-      "id": 46,
+      "id": 10,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "MoneyForward",
+          "url": "https://moneyforward.com/bs/balance_sheet"
+        }
+      ],
       "options": {
         "colorMode": "value",
         "graphMode": "none",
@@ -1292,13 +1218,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "mf_monthly_balance_jpy",
+          "expr": "mf_assets_total_jpy - ignoring(type) mf_assets_subtotal_jpy{type=\"年金\"} - (mf_liability_total_jpy - ignoring(type) mf_liability_subtotal_jpy{type=\"奨学金\"})",
+          "instant": false,
           "interval": "",
           "legendFormat": "",
           "refId": "A"
         }
       ],
-      "title": "当月収支",
+      "title": "バランスシート",
       "type": "stat"
     },
     {
@@ -1330,9 +1257,9 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
-        "w": 5,
-        "x": 15,
+        "h": 5,
+        "w": 6,
+        "x": 18,
         "y": 8
       },
       "id": 52,
@@ -1372,109 +1299,6 @@
         }
       ],
       "title": "VOO S&P500",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "noValue": "(未確定)",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "text",
-                "value": null
-              },
-              {
-                "color": "dark-red",
-                "value": -600000
-              },
-              {
-                "color": "red",
-                "value": -400000
-              },
-              {
-                "color": "#EAB839",
-                "value": -300000
-              },
-              {
-                "color": "#6ED0E0",
-                "value": -150000
-              },
-              {
-                "color": "green",
-                "value": -50000
-              }
-            ]
-          },
-          "unit": "currencyJPY"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 20,
-        "y": 8
-      },
-      "id": 5,
-      "links": [
-        {
-          "targetBlank": true,
-          "title": "Vpass",
-          "url": "https://www.smbc-card.com/mem/index.jsp"
-        }
-      ],
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.4.7",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "exemplar": true,
-          "expr": "mf_monthly_withdrawal_jpy{name=\"三井住友カード\"}",
-          "interval": "",
-          "legendFormat": "三井住友カード",
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "exemplar": true,
-          "expr": "mf_monthly_withdrawal_jpy{name=\"PayPayカード\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "PayPayカード",
-          "refId": "B"
-        }
-      ],
-      "title": "カード引落額",
       "type": "stat"
     },
     {
@@ -1651,7 +1475,6 @@
         "type": "prometheus",
         "uid": "PBFA97CFB590B2093"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1662,28 +1485,28 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "dark-red",
+                "color": "red",
                 "value": null
               },
               {
-                "color": "semi-dark-red",
-                "value": 100000
+                "color": "orange",
+                "value": 0
               },
               {
-                "color": "light-red",
-                "value": 300000
+                "color": "#EAB839",
+                "value": 30000
               },
               {
-                "color": "super-light-orange",
-                "value": 500000
+                "color": "yellow",
+                "value": 50000
               },
               {
-                "color": "light-green",
-                "value": 1000000
+                "color": "#6ED0E0",
+                "value": 70000
               },
               {
                 "color": "green",
-                "value": 3000000
+                "value": 100000
               }
             ]
           },
@@ -1695,16 +1518,9 @@
         "h": 4,
         "w": 5,
         "x": 9,
-        "y": 12
+        "y": 13
       },
-      "id": 10,
-      "links": [
-        {
-          "targetBlank": true,
-          "title": "MoneyForward",
-          "url": "https://moneyforward.com/bs/balance_sheet"
-        }
-      ],
+      "id": 46,
       "options": {
         "colorMode": "value",
         "graphMode": "none",
@@ -1724,14 +1540,13 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "mf_assets_total_jpy - ignoring(type) mf_assets_subtotal_jpy{type=\"年金\"} - (mf_liability_total_jpy - ignoring(type) mf_liability_subtotal_jpy{type=\"奨学金\"})",
-          "instant": false,
+          "expr": "mf_monthly_balance_jpy",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
         }
       ],
-      "title": "バランスシート",
+      "title": "当月収支",
       "type": "stat"
     },
     {
@@ -1780,9 +1595,9 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 3,
+        "w": 5,
         "x": 14,
-        "y": 12
+        "y": 13
       },
       "id": 3,
       "links": [
@@ -1866,9 +1681,9 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 3,
-        "x": 17,
-        "y": 12
+        "w": 5,
+        "x": 19,
+        "y": 13
       },
       "id": 2,
       "links": [
@@ -1904,105 +1719,6 @@
         }
       ],
       "title": "預金残高",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "noValue": "(TBD)",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "text",
-                "value": null
-              },
-              {
-                "color": "dark-red",
-                "value": -1000000
-              },
-              {
-                "color": "semi-dark-red",
-                "value": 0
-              },
-              {
-                "color": "red",
-                "value": 20000
-              },
-              {
-                "color": "#EAB839",
-                "value": 50000
-              },
-              {
-                "color": "green",
-                "value": 100000
-              }
-            ]
-          },
-          "unit": "currencyJPY"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 20,
-        "y": 12
-      },
-      "id": 44,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.4.7",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "exemplar": true,
-          "expr": "mf_assets_deposit_jpy{account=\"住信SBIネット銀行\",name=\"代表口座-普通\"} + ignoring(name, account) mf_monthly_withdrawal_jpy{name=\"三井住友カード\"} ",
-          "hide": false,
-          "instant": false,
-          "interval": "",
-          "legendFormat": "三井住友カード",
-          "refId": "C"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "exemplar": true,
-          "expr": "mf_assets_deposit_jpy{account=\"住信SBIネット銀行\",name=\"代表口座-普通\"} + ignoring(name, account) mf_monthly_withdrawal_jpy{name=\"PayPayカード\"}",
-          "hide": false,
-          "instant": false,
-          "interval": "",
-          "legendFormat": "PayPayカード",
-          "refId": "A"
-        }
-      ],
-      "title": "残高足りる？",
       "type": "stat"
     },
     {
@@ -2279,6 +1995,208 @@
             "mode": "thresholds"
           },
           "mappings": [],
+          "noValue": "(未確定)",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": null
+              },
+              {
+                "color": "dark-red",
+                "value": -600000
+              },
+              {
+                "color": "red",
+                "value": -400000
+              },
+              {
+                "color": "#EAB839",
+                "value": -300000
+              },
+              {
+                "color": "#6ED0E0",
+                "value": -150000
+              },
+              {
+                "color": "green",
+                "value": -50000
+              }
+            ]
+          },
+          "unit": "currencyJPY"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 5,
+        "x": 9,
+        "y": 17
+      },
+      "id": 5,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "Vpass",
+          "url": "https://www.smbc-card.com/mem/index.jsp"
+        }
+      ],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.4.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "mf_monthly_withdrawal_jpy{name=\"三井住友カード\"}",
+          "interval": "",
+          "legendFormat": "三井住友カード",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "mf_monthly_withdrawal_jpy{name=\"PayPayカード\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "PayPayカード",
+          "refId": "B"
+        }
+      ],
+      "title": "カード引落額",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "noValue": "(TBD)",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": null
+              },
+              {
+                "color": "dark-red",
+                "value": -1000000
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 20000
+              },
+              {
+                "color": "#EAB839",
+                "value": 50000
+              },
+              {
+                "color": "green",
+                "value": 100000
+              }
+            ]
+          },
+          "unit": "currencyJPY"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 5,
+        "x": 14,
+        "y": 17
+      },
+      "id": 44,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.4.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "mf_assets_deposit_jpy{account=\"住信SBIネット銀行\",name=\"代表口座-普通\"} + ignoring(name, account) mf_monthly_withdrawal_jpy{name=\"三井住友カード\"} ",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "三井住友カード",
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "mf_assets_deposit_jpy{account=\"住信SBIネット銀行\",name=\"代表口座-普通\"} + ignoring(name, account) mf_monthly_withdrawal_jpy{name=\"PayPayカード\"}",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "PayPayカード",
+          "refId": "A"
+        }
+      ],
+      "title": "残高足りる？",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
           "noValue": "(TBD)",
           "thresholds": {
             "mode": "absolute",
@@ -2294,10 +2212,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 20,
-        "y": 16
+        "h": 5,
+        "w": 5,
+        "x": 19,
+        "y": 17
       },
       "id": 23,
       "links": [
@@ -2561,28 +2479,24 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "red",
+                "color": "green",
                 "value": null
               },
               {
-                "color": "orange",
-                "value": 50
-              },
-              {
-                "color": "green",
-                "value": 55
+                "color": "yellow",
+                "value": 20
               },
               {
                 "color": "orange",
-                "value": 61
+                "value": 25
               },
               {
                 "color": "red",
-                "value": 67.6
+                "value": 30
               }
             ]
           },
-          "unit": "masskg"
+          "unit": "percent"
         },
         "overrides": []
       },
@@ -2592,7 +2506,7 @@
         "x": 6,
         "y": 18
       },
-      "id": 30,
+      "id": 32,
       "links": [
         {
           "targetBlank": true,
@@ -2623,13 +2537,13 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "withings_meas_weight",
+          "expr": "withings_meas_fat_ratio",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
         }
       ],
-      "title": "体重",
+      "title": "体脂肪率",
       "type": "stat"
     }
   ],
@@ -2650,6 +2564,6 @@
   "timezone": "",
   "title": "main dashboard",
   "uid": "jTY6Raggz",
-  "version": 5,
+  "version": 7,
   "weekStart": ""
 }
