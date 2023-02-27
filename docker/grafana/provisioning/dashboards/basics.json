@@ -26,9 +26,421 @@
   "panels": [
     {
       "gridPos": {
+        "h": 9,
+        "w": 9,
+        "x": 0,
+        "y": 0
+      },
+      "id": 65,
+      "options": {
+        "autoPlay": true,
+        "customBackground": false,
+        "geolocate": false,
+        "iframeURL": "https://www.youtube.com/embed?playsinline=1&listType=playlist&list=PLBdI4smwsafq3epBMWozPADjIzP2Fzxgl&autoplay=1&controls=0&modestbranding=1&loop=1&mute=1",
+        "loop": false,
+        "videoId": "jfKfPfyJRdk",
+        "videoType": "iframe"
+      },
+      "transparent": true,
+      "type": "innius-video-panel"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 100000000,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "light-yellow",
+                "value": 10000000
+              },
+              {
+                "color": "#EAB839",
+                "value": 20000000
+              },
+              {
+                "color": "#6ED0E0",
+                "value": 30000000
+              },
+              {
+                "color": "#EF843C",
+                "value": 40000000
+              },
+              {
+                "color": "#E24D42",
+                "value": 50000000
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 60000000
+              },
+              {
+                "color": "dark-red",
+                "value": 100000000
+              }
+            ]
+          },
+          "unit": "bps"
+        },
+        "overrides": []
+      },
+      "gridPos": {
         "h": 4,
         "w": 3,
-        "x": 0,
+        "x": 9,
+        "y": 0
+      },
+      "id": 54,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "NetVolante",
+          "url": "http://setup.netvolante.jp/"
+        }
+      ],
+      "options": {
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "8.4.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "sum(delta(ifInOctets[180s])) * 8 / 180",
+          "interval": "",
+          "legendFormat": "IN",
+          "refId": "A"
+        }
+      ],
+      "title": "帯域通信量",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 0,
+          "mappings": [],
+          "max": 30000,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "super-light-green",
+                "value": 5000
+              },
+              {
+                "color": "#EAB839",
+                "value": 10000
+              },
+              {
+                "color": "orange",
+                "value": 20000
+              },
+              {
+                "color": "dark-red",
+                "value": 25000
+              }
+            ]
+          },
+          "unit": "mamp"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 12,
+        "y": 0
+      },
+      "id": 58,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "8.4.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "power_consumption_ampare_r{} + power_consumption_ampare_t{}",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "瞬間消費電流",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 40,
+          "min": -10,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": null
+              },
+              {
+                "color": "dark-blue",
+                "value": -5
+              },
+              {
+                "color": "semi-dark-blue",
+                "value": 0
+              },
+              {
+                "color": "light-blue",
+                "value": 5
+              },
+              {
+                "color": "#6ED0E0",
+                "value": 10
+              },
+              {
+                "color": "#EAB839",
+                "value": 15
+              },
+              {
+                "color": "semi-dark-green",
+                "value": 20
+              },
+              {
+                "color": "green",
+                "value": 25
+              },
+              {
+                "color": "orange",
+                "value": 30
+              },
+              {
+                "color": "dark-orange",
+                "value": 35
+              },
+              {
+                "color": "red",
+                "value": 40
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 15,
+        "y": 0
+      },
+      "id": 18,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "Yahoo! 天気・災害",
+          "url": "https://weather.yahoo.co.jp/weather/12/4510/12217.html"
+        }
+      ],
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "text": {}
+      },
+      "pluginVersion": "8.4.7",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "(openweather_temperature{location=\"Kashiwa, JP\"} - 32)/1.8",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "外の温度",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 40,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "dark-blue",
+                "value": 0
+              },
+              {
+                "color": "semi-dark-blue",
+                "value": 5
+              },
+              {
+                "color": "blue",
+                "value": 10
+              },
+              {
+                "color": "yellow",
+                "value": 20
+              },
+              {
+                "color": "super-light-green",
+                "value": 23
+              },
+              {
+                "color": "light-green",
+                "value": 24
+              },
+              {
+                "color": "green",
+                "value": 25
+              },
+              {
+                "color": "orange",
+                "value": 26
+              },
+              {
+                "color": "dark-orange",
+                "value": 27
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 28
+              },
+              {
+                "color": "dark-red",
+                "value": 30
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 18,
+        "y": 0
+      },
+      "id": 16,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "Tado",
+          "url": "https://app.tado.com/en/main/home"
+        }
+      ],
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "text": {}
+      },
+      "pluginVersion": "8.4.7",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "tado_zone_temperature_celsius{zone_name=\"Air Conditioning\"}",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "部屋の温度",
+      "type": "gauge"
+    },
+    {
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 21,
         "y": 0
       },
       "id": 61,
@@ -67,6 +479,387 @@
       },
       "pluginVersion": "2.1.2",
       "type": "grafana-clock-panel"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 20
+              },
+              {
+                "color": "orange",
+                "value": 25
+              },
+              {
+                "color": "red",
+                "value": 30
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 9,
+        "y": 4
+      },
+      "id": 32,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "Withings Healthcare",
+          "url": "https://healthmate.withings.com/"
+        }
+      ],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.4.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "withings_meas_fat_ratio",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "体脂肪率",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 1000000000,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 1000000
+              },
+              {
+                "color": "light-red",
+                "value": 5000000
+              },
+              {
+                "color": "orange",
+                "value": 10000000
+              },
+              {
+                "color": "light-orange",
+                "value": 30000000
+              },
+              {
+                "color": "super-light-orange",
+                "value": 50000000
+              },
+              {
+                "color": "super-light-yellow",
+                "value": 100000000
+              },
+              {
+                "color": "super-light-green",
+                "value": 200000000
+              },
+              {
+                "color": "light-green",
+                "value": 300000000
+              },
+              {
+                "color": "green",
+                "value": 400000000
+              },
+              {
+                "color": "semi-dark-green",
+                "value": 500000000
+              },
+              {
+                "color": "dark-green",
+                "value": 1000000000
+              }
+            ]
+          },
+          "unit": "bps"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 12,
+        "y": 4
+      },
+      "id": 63,
+      "options": {
+        "orientation": "vertical",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "8.4.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "speedtest_downloadedbytes_bytes{}",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "回線速度",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "light-green",
+                "value": 40
+              },
+              {
+                "color": "green",
+                "value": 50
+              },
+              {
+                "color": "semi-dark-green",
+                "value": 55
+              },
+              {
+                "color": "yellow",
+                "value": 60
+              },
+              {
+                "color": "red",
+                "value": 70
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 15,
+        "y": 4
+      },
+      "id": 14,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "Tado",
+          "url": "https://app.tado.com/en/main/home"
+        }
+      ],
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "text": {}
+      },
+      "pluginVersion": "8.4.7",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "tado_zone_humidity_percentage{zone_name=\"Air Conditioning\"}",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "部屋の湿度",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": null
+              },
+              {
+                "color": "dark-blue",
+                "value": 10
+              },
+              {
+                "color": "light-blue",
+                "value": 20
+              },
+              {
+                "color": "super-light-green",
+                "value": 30
+              },
+              {
+                "color": "green",
+                "value": 40
+              },
+              {
+                "color": "semi-dark-green",
+                "value": 50
+              },
+              {
+                "color": "dark-green",
+                "value": 60
+              },
+              {
+                "color": "dark-yellow",
+                "value": 70
+              },
+              {
+                "color": "orange",
+                "value": 80
+              },
+              {
+                "color": "dark-orange",
+                "value": 90
+              },
+              {
+                "color": "red",
+                "value": 100
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 18,
+        "y": 4
+      },
+      "id": 19,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "Yahoo! 天気・災害",
+          "url": "https://weather.yahoo.co.jp/weather/12/4510/12217.html"
+        }
+      ],
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "text": {}
+      },
+      "pluginVersion": "8.4.7",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "openweather_humidity{location=\"Kashiwa, JP\"}",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "外の湿度",
+      "type": "gauge"
     },
     {
       "datasource": {
@@ -375,8 +1168,8 @@
       "gridPos": {
         "h": 4,
         "w": 3,
-        "x": 3,
-        "y": 0
+        "x": 21,
+        "y": 4
       },
       "id": 40,
       "links": [
@@ -440,1054 +1233,6 @@
             "mode": "thresholds"
           },
           "mappings": [],
-          "max": 40,
-          "min": -10,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "text",
-                "value": null
-              },
-              {
-                "color": "dark-blue",
-                "value": -5
-              },
-              {
-                "color": "semi-dark-blue",
-                "value": 0
-              },
-              {
-                "color": "light-blue",
-                "value": 5
-              },
-              {
-                "color": "#6ED0E0",
-                "value": 10
-              },
-              {
-                "color": "#EAB839",
-                "value": 15
-              },
-              {
-                "color": "semi-dark-green",
-                "value": 20
-              },
-              {
-                "color": "green",
-                "value": 25
-              },
-              {
-                "color": "orange",
-                "value": 30
-              },
-              {
-                "color": "dark-orange",
-                "value": 35
-              },
-              {
-                "color": "red",
-                "value": 40
-              }
-            ]
-          },
-          "unit": "celsius"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 6,
-        "y": 0
-      },
-      "id": 18,
-      "links": [
-        {
-          "targetBlank": true,
-          "title": "Yahoo! 天気・災害",
-          "url": "https://weather.yahoo.co.jp/weather/12/4510/12217.html"
-        }
-      ],
-      "options": {
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true,
-        "text": {}
-      },
-      "pluginVersion": "8.4.7",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "(openweather_temperature{location=\"Kashiwa, JP\"} - 32)/1.8",
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "外の温度",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 1,
-          "mappings": [],
-          "max": 100,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "text",
-                "value": null
-              },
-              {
-                "color": "dark-blue",
-                "value": 10
-              },
-              {
-                "color": "light-blue",
-                "value": 20
-              },
-              {
-                "color": "super-light-green",
-                "value": 30
-              },
-              {
-                "color": "green",
-                "value": 40
-              },
-              {
-                "color": "semi-dark-green",
-                "value": 50
-              },
-              {
-                "color": "dark-green",
-                "value": 60
-              },
-              {
-                "color": "dark-yellow",
-                "value": 70
-              },
-              {
-                "color": "orange",
-                "value": 80
-              },
-              {
-                "color": "dark-orange",
-                "value": 90
-              },
-              {
-                "color": "red",
-                "value": 100
-              }
-            ]
-          },
-          "unit": "percent"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 9,
-        "y": 0
-      },
-      "id": 19,
-      "links": [
-        {
-          "targetBlank": true,
-          "title": "Yahoo! 天気・災害",
-          "url": "https://weather.yahoo.co.jp/weather/12/4510/12217.html"
-        }
-      ],
-      "options": {
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true,
-        "text": {}
-      },
-      "pluginVersion": "8.4.7",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "openweather_humidity{location=\"Kashiwa, JP\"}",
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "外の湿度",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 1000
-              },
-              {
-                "color": "#EAB839",
-                "value": 50000
-              },
-              {
-                "color": "#6ED0E0",
-                "value": 100000
-              },
-              {
-                "color": "blue",
-                "value": 300000
-              },
-              {
-                "color": "green",
-                "value": 500000
-              }
-            ]
-          },
-          "unit": "currencyJPY"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 3,
-        "x": 12,
-        "y": 0
-      },
-      "id": 2,
-      "links": [
-        {
-          "targetBlank": true,
-          "title": "SBIネット銀行",
-          "url": "https://www.netbk.co.jp/contents/"
-        }
-      ],
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.4.7",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "mf_assets_deposit_jpy{account=\"住信SBIネット銀行\", name=\"代表口座-普通\"}",
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "預金残高",
-      "type": "stat"
-    },
-    {
-      "gridPos": {
-        "h": 8,
-        "w": 9,
-        "x": 15,
-        "y": 0
-      },
-      "id": 65,
-      "options": {
-        "autoPlay": true,
-        "customBackground": false,
-        "geolocate": false,
-        "iframeURL": "https://www.youtube.com/embed?playsinline=1&listType=playlist&list=PLBdI4smwsafq3epBMWozPADjIzP2Fzxgl&autoplay=1&controls=0&modestbranding=1&loop=1",
-        "loop": false,
-        "videoId": "jfKfPfyJRdk",
-        "videoType": "iframe"
-      },
-      "transparent": true,
-      "type": "innius-video-panel"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "max": 40,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "dark-blue",
-                "value": 0
-              },
-              {
-                "color": "semi-dark-blue",
-                "value": 5
-              },
-              {
-                "color": "blue",
-                "value": 10
-              },
-              {
-                "color": "yellow",
-                "value": 20
-              },
-              {
-                "color": "super-light-green",
-                "value": 23
-              },
-              {
-                "color": "light-green",
-                "value": 24
-              },
-              {
-                "color": "green",
-                "value": 25
-              },
-              {
-                "color": "orange",
-                "value": 26
-              },
-              {
-                "color": "dark-orange",
-                "value": 27
-              },
-              {
-                "color": "semi-dark-red",
-                "value": 28
-              },
-              {
-                "color": "dark-red",
-                "value": 30
-              }
-            ]
-          },
-          "unit": "celsius"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 6,
-        "y": 3
-      },
-      "id": 16,
-      "links": [
-        {
-          "targetBlank": true,
-          "title": "Tado",
-          "url": "https://app.tado.com/en/main/home"
-        }
-      ],
-      "options": {
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true,
-        "text": {}
-      },
-      "pluginVersion": "8.4.7",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "tado_zone_temperature_celsius{zone_name=\"Air Conditioning\"}",
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "部屋の温度",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "max": 100,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              },
-              {
-                "color": "light-green",
-                "value": 40
-              },
-              {
-                "color": "green",
-                "value": 50
-              },
-              {
-                "color": "semi-dark-green",
-                "value": 55
-              },
-              {
-                "color": "yellow",
-                "value": 60
-              },
-              {
-                "color": "red",
-                "value": 70
-              }
-            ]
-          },
-          "unit": "percent"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 9,
-        "y": 3
-      },
-      "id": 14,
-      "links": [
-        {
-          "targetBlank": true,
-          "title": "Tado",
-          "url": "https://app.tado.com/en/main/home"
-        }
-      ],
-      "options": {
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true,
-        "text": {}
-      },
-      "pluginVersion": "8.4.7",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "tado_zone_humidity_percentage{zone_name=\"Air Conditioning\"}",
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "部屋の湿度",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "#EAB839",
-                "value": 5
-              },
-              {
-                "color": "red",
-                "value": 10
-              }
-            ]
-          },
-          "unit": "個"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 3,
-        "x": 0,
-        "y": 4
-      },
-      "id": 36,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.4.7",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "exemplar": true,
-          "expr": "todoist_filter_task_items{name=\"TODO - 自宅\"}",
-          "interval": "",
-          "legendFormat": "自宅",
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "exemplar": true,
-          "expr": "todoist_filter_task_items{name=\"TODO - 職場\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "職場",
-          "refId": "B"
-        }
-      ],
-      "title": "自宅タスク残数",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              },
-              {
-                "color": "orange",
-                "value": 50
-              },
-              {
-                "color": "green",
-                "value": 75
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 3,
-        "x": 3,
-        "y": 4
-      },
-      "id": 28,
-      "links": [
-        {
-          "targetBlank": true,
-          "title": "Withings Healthcare",
-          "url": "https://healthmate.withings.com/"
-        }
-      ],
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.4.7",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "withings_sleep_sleep_score",
-          "instant": false,
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "睡眠スコア",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": -3000000
-              },
-              {
-                "color": "#EAB839",
-                "value": -1000000
-              },
-              {
-                "color": "blue",
-                "value": -500000
-              },
-              {
-                "color": "green",
-                "value": 0
-              },
-              {
-                "color": "#6ED0E0",
-                "value": ""
-              }
-            ]
-          },
-          "unit": "currencyJPY"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 3,
-        "x": 12,
-        "y": 4
-      },
-      "id": 3,
-      "links": [
-        {
-          "targetBlank": true,
-          "title": "SBIネット銀行",
-          "url": "https://www.netbk.co.jp/contents/"
-        }
-      ],
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.4.7",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "-1 * (mf_liability_total_jpy - ignoring(type) mf_liability_subtotal_jpy{type=\"奨学金\"})",
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "借金残高",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "max": 1000000000,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "text",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 1000000
-              },
-              {
-                "color": "light-red",
-                "value": 5000000
-              },
-              {
-                "color": "orange",
-                "value": 10000000
-              },
-              {
-                "color": "light-orange",
-                "value": 30000000
-              },
-              {
-                "color": "super-light-orange",
-                "value": 50000000
-              },
-              {
-                "color": "super-light-yellow",
-                "value": 100000000
-              },
-              {
-                "color": "super-light-green",
-                "value": 200000000
-              },
-              {
-                "color": "light-green",
-                "value": 300000000
-              },
-              {
-                "color": "green",
-                "value": 400000000
-              },
-              {
-                "color": "semi-dark-green",
-                "value": 500000000
-              },
-              {
-                "color": "dark-green",
-                "value": 1000000000
-              }
-            ]
-          },
-          "unit": "bps"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 6,
-        "y": 6
-      },
-      "id": 63,
-      "options": {
-        "orientation": "vertical",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true
-      },
-      "pluginVersion": "8.4.7",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "exemplar": true,
-          "expr": "speedtest_downloadedbytes_bytes{}",
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "回線速度",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "max": 100000000,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "light-yellow",
-                "value": 10000000
-              },
-              {
-                "color": "#EAB839",
-                "value": 20000000
-              },
-              {
-                "color": "#6ED0E0",
-                "value": 30000000
-              },
-              {
-                "color": "#EF843C",
-                "value": 40000000
-              },
-              {
-                "color": "#E24D42",
-                "value": 50000000
-              },
-              {
-                "color": "semi-dark-red",
-                "value": 60000000
-              },
-              {
-                "color": "dark-red",
-                "value": 100000000
-              }
-            ]
-          },
-          "unit": "bps"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 9,
-        "y": 6
-      },
-      "id": 54,
-      "links": [
-        {
-          "targetBlank": true,
-          "title": "NetVolante",
-          "url": "http://setup.netvolante.jp/"
-        }
-      ],
-      "options": {
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true
-      },
-      "pluginVersion": "8.4.7",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "exemplar": true,
-          "expr": "sum(delta(ifInOctets[180s])) * 8 / 180",
-          "interval": "",
-          "legendFormat": "IN",
-          "refId": "A"
-        }
-      ],
-      "title": "帯域通信量",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              },
-              {
-                "color": "light-red",
-                "value": 1000
-              },
-              {
-                "color": "light-orange",
-                "value": 4000
-              },
-              {
-                "color": "yellow",
-                "value": 6000
-              },
-              {
-                "color": "green",
-                "value": 8000
-              }
-            ]
-          },
-          "unit": "歩"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 3,
-        "x": 0,
-        "y": 8
-      },
-      "id": 34,
-      "links": [
-        {
-          "targetBlank": true,
-          "title": "Withings Healthcare",
-          "url": "https://healthmate.withings.com/"
-        }
-      ],
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.4.7",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "exemplar": true,
-          "expr": "withings_activity_steps",
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "歩数",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -1523,8 +1268,8 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 3,
-        "x": 3,
+        "w": 6,
+        "x": 9,
         "y": 8
       },
       "id": 46,
@@ -1571,49 +1316,26 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
+                "color": "red",
                 "value": null
               },
               {
-                "color": "light-green",
-                "value": 115
-              },
-              {
-                "color": "#EAB839",
-                "value": 125
-              },
-              {
-                "color": "orange",
-                "value": 135
-              },
-              {
-                "color": "semi-dark-orange",
-                "value": 155
-              },
-              {
-                "color": "red",
-                "value": 175
+                "color": "green",
+                "value": 0
               }
             ]
           },
-          "unit": "none"
+          "unit": "percent"
         },
         "overrides": []
       },
       "gridPos": {
         "h": 4,
-        "w": 3,
-        "x": 12,
+        "w": 5,
+        "x": 15,
         "y": 8
       },
-      "id": 42,
-      "links": [
-        {
-          "targetBlank": true,
-          "title": "Withings Healthcare",
-          "url": "https://healthmate.withings.com/"
-        }
-      ],
+      "id": 52,
       "options": {
         "colorMode": "value",
         "graphMode": "none",
@@ -1632,18 +1354,24 @@
       "pluginVersion": "8.4.7",
       "targets": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
           "exemplar": true,
-          "expr": "withings_meas_systolic_blood_pressure",
+          "expr": "mf_assets_mutualfund_gainloss_percent{name=\"SBI-SBI・V・S&P500インデックス・ファンド\"}",
+          "instant": false,
           "interval": "",
-          "legendFormat": "",
+          "legendFormat": "投資信託",
           "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "mf_assets_pension_gainloss_percent{name=\"SBI・V・S&P500インデックス・ファンドSBI・V・S&P500インデックス・ファンド\"}",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "年金",
+          "refId": "B"
         }
       ],
-      "title": "最高血圧(mmHg)",
+      "title": "VOO S&P500",
       "type": "stat"
     },
     {
@@ -1694,7 +1422,7 @@
       "gridPos": {
         "h": 4,
         "w": 4,
-        "x": 16,
+        "x": 20,
         "y": 8
       },
       "id": 5,
@@ -1760,6 +1488,435 @@
             "mode": "thresholds"
           },
           "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 5
+              },
+              {
+                "color": "red",
+                "value": 10
+              }
+            ]
+          },
+          "unit": "個"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 5,
+        "x": 0,
+        "y": 9
+      },
+      "id": 36,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.4.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "todoist_filter_task_items{name=\"TODO - 自宅\"}",
+          "interval": "",
+          "legendFormat": "自宅",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "todoist_filter_task_items{name=\"TODO - 職場\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "職場",
+          "refId": "B"
+        }
+      ],
+      "title": "自宅タスク残数",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "light-red",
+                "value": 1000
+              },
+              {
+                "color": "light-orange",
+                "value": 4000
+              },
+              {
+                "color": "yellow",
+                "value": 6000
+              },
+              {
+                "color": "green",
+                "value": 8000
+              }
+            ]
+          },
+          "unit": "歩"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 4,
+        "x": 5,
+        "y": 9
+      },
+      "id": 34,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "Withings Healthcare",
+          "url": "https://healthmate.withings.com/"
+        }
+      ],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.4.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "withings_activity_steps",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "歩数",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-red",
+                "value": null
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 100000
+              },
+              {
+                "color": "light-red",
+                "value": 300000
+              },
+              {
+                "color": "super-light-orange",
+                "value": 500000
+              },
+              {
+                "color": "light-green",
+                "value": 1000000
+              },
+              {
+                "color": "green",
+                "value": 3000000
+              }
+            ]
+          },
+          "unit": "currencyJPY"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 9,
+        "y": 12
+      },
+      "id": 10,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "MoneyForward",
+          "url": "https://moneyforward.com/bs/balance_sheet"
+        }
+      ],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.4.7",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "mf_assets_total_jpy - ignoring(type) mf_assets_subtotal_jpy{type=\"年金\"} - (mf_liability_total_jpy - ignoring(type) mf_liability_subtotal_jpy{type=\"奨学金\"})",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "バランスシート",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": -3000000
+              },
+              {
+                "color": "#EAB839",
+                "value": -1000000
+              },
+              {
+                "color": "blue",
+                "value": -500000
+              },
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "#6ED0E0",
+                "value": ""
+              }
+            ]
+          },
+          "unit": "currencyJPY"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 14,
+        "y": 12
+      },
+      "id": 3,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "SBIネット銀行",
+          "url": "https://www.netbk.co.jp/contents/"
+        }
+      ],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.4.7",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "-1 * (mf_liability_total_jpy - ignoring(type) mf_liability_subtotal_jpy{type=\"奨学金\"})",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "借金残高",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 1000
+              },
+              {
+                "color": "#EAB839",
+                "value": 50000
+              },
+              {
+                "color": "#6ED0E0",
+                "value": 100000
+              },
+              {
+                "color": "blue",
+                "value": 300000
+              },
+              {
+                "color": "green",
+                "value": 500000
+              }
+            ]
+          },
+          "unit": "currencyJPY"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 17,
+        "y": 12
+      },
+      "id": 2,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "SBIネット銀行",
+          "url": "https://www.netbk.co.jp/contents/"
+        }
+      ],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.4.7",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "mf_assets_deposit_jpy{account=\"住信SBIネット銀行\", name=\"代表口座-普通\"}",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "預金残高",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
           "noValue": "(TBD)",
           "thresholds": {
             "mode": "absolute",
@@ -1798,7 +1955,7 @@
         "h": 4,
         "w": 4,
         "x": 20,
-        "y": 8
+        "y": 12
       },
       "id": 44,
       "options": {
@@ -1858,118 +2015,34 @@
           "color": {
             "mode": "thresholds"
           },
-          "decimals": 0,
-          "mappings": [],
-          "max": 30000,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "super-light-green",
-                "value": 5000
-              },
-              {
-                "color": "#EAB839",
-                "value": 10000
-              },
-              {
-                "color": "orange",
-                "value": 20000
-              },
-              {
-                "color": "dark-red",
-                "value": 25000
-              }
-            ]
-          },
-          "unit": "mamp"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 6,
-        "y": 9
-      },
-      "id": 58,
-      "options": {
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true
-      },
-      "pluginVersion": "8.4.7",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "exemplar": true,
-          "expr": "power_consumption_ampare_r{} + power_consumption_ampare_t{}",
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "瞬間消費電流",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "yellow",
-                "value": 20
-              },
-              {
-                "color": "orange",
-                "value": 25
-              },
               {
                 "color": "red",
-                "value": 30
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 50
+              },
+              {
+                "color": "green",
+                "value": 75
               }
             ]
-          },
-          "unit": "percent"
+          }
         },
         "overrides": []
       },
       "gridPos": {
         "h": 4,
         "w": 3,
-        "x": 9,
-        "y": 9
+        "x": 0,
+        "y": 14
       },
-      "id": 32,
+      "id": 28,
       "links": [
         {
           "targetBlank": true,
@@ -1995,18 +2068,16 @@
       "pluginVersion": "8.4.7",
       "targets": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
           "exemplar": true,
-          "expr": "withings_meas_fat_ratio",
+          "expr": "withings_sleep_sleep_score",
+          "instant": false,
           "interval": "",
+          "intervalFactor": 1,
           "legendFormat": "",
           "refId": "A"
         }
       ],
-      "title": "体脂肪率",
+      "title": "睡眠スコア",
       "type": "stat"
     },
     {
@@ -2060,8 +2131,8 @@
       "gridPos": {
         "h": 4,
         "w": 3,
-        "x": 0,
-        "y": 12
+        "x": 3,
+        "y": 14
       },
       "id": 12,
       "links": [
@@ -2104,7 +2175,6 @@
         "type": "prometheus",
         "uid": "PBFA97CFB590B2093"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -2115,201 +2185,36 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "dark-red",
+                "color": "dark-blue",
                 "value": null
+              },
+              {
+                "color": "semi-dark-blue",
+                "value": 16
+              },
+              {
+                "color": "yellow",
+                "value": 17
+              },
+              {
+                "color": "green",
+                "value": 18.5
+              },
+              {
+                "color": "orange",
+                "value": 25
+              },
+              {
+                "color": "red",
+                "value": 30
               },
               {
                 "color": "semi-dark-red",
-                "value": 100000
+                "value": 35
               },
               {
-                "color": "light-red",
-                "value": 300000
-              },
-              {
-                "color": "super-light-orange",
-                "value": 500000
-              },
-              {
-                "color": "light-green",
-                "value": 1000000
-              },
-              {
-                "color": "green",
-                "value": 3000000
-              }
-            ]
-          },
-          "unit": "currencyJPY"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 3,
-        "x": 3,
-        "y": 12
-      },
-      "id": 10,
-      "links": [
-        {
-          "targetBlank": true,
-          "title": "MoneyForward",
-          "url": "https://moneyforward.com/bs/balance_sheet"
-        }
-      ],
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.4.7",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "mf_assets_total_jpy - ignoring(type) mf_assets_subtotal_jpy{type=\"年金\"} - (mf_liability_total_jpy - ignoring(type) mf_liability_subtotal_jpy{type=\"奨学金\"})",
-          "instant": false,
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "バランスシート",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              },
-              {
-                "color": "orange",
-                "value": 50
-              },
-              {
-                "color": "green",
-                "value": 55
-              },
-              {
-                "color": "orange",
-                "value": 61
-              },
-              {
-                "color": "red",
-                "value": 67.6
-              }
-            ]
-          },
-          "unit": "masskg"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 3,
-        "x": 6,
-        "y": 12
-      },
-      "id": 30,
-      "links": [
-        {
-          "targetBlank": true,
-          "title": "Withings Healthcare",
-          "url": "https://healthmate.withings.com/"
-        }
-      ],
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.4.7",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "exemplar": true,
-          "expr": "withings_meas_weight",
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "体重",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "light-green",
-                "value": 115
-              },
-              {
-                "color": "#EAB839",
-                "value": 125
-              },
-              {
-                "color": "orange",
-                "value": 135
-              },
-              {
-                "color": "semi-dark-orange",
-                "value": 155
-              },
-              {
-                "color": "red",
-                "value": 175
+                "color": "dark-red",
+                "value": 40
               }
             ]
           },
@@ -2320,10 +2225,10 @@
       "gridPos": {
         "h": 4,
         "w": 3,
-        "x": 12,
-        "y": 12
+        "x": 6,
+        "y": 14
       },
-      "id": 59,
+      "id": 38,
       "links": [
         {
           "targetBlank": true,
@@ -2335,7 +2240,7 @@
         "colorMode": "value",
         "graphMode": "none",
         "justifyMode": "auto",
-        "orientation": "horizontal",
+        "orientation": "auto",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -2354,87 +2259,13 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "withings_meas_diastolic_blood_pressure",
-          "hide": false,
+          "expr": "withings_meas_weight / (1.645 ^ 2)",
           "interval": "",
-          "legendFormat": "最低",
-          "refId": "B"
-        }
-      ],
-      "title": "最低血圧(mmHg)",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              },
-              {
-                "color": "green",
-                "value": 0
-              }
-            ]
-          },
-          "unit": "percent"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 16,
-        "y": 12
-      },
-      "id": 52,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.4.7",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "mf_assets_mutualfund_gainloss_percent{name=\"SBI-SBI・V・S&P500インデックス・ファンド\"}",
-          "instant": false,
-          "interval": "",
-          "legendFormat": "投資信託",
+          "legendFormat": "",
           "refId": "A"
-        },
-        {
-          "exemplar": true,
-          "expr": "mf_assets_pension_gainloss_percent{name=\"SBI・V・S&P500インデックス・ファンドSBI・V・S&P500インデックス・ファンド\"}",
-          "hide": false,
-          "instant": false,
-          "interval": "",
-          "legendFormat": "年金",
-          "refId": "B"
         }
       ],
-      "title": "VOO S&P500",
+      "title": "BMI",
       "type": "stat"
     },
     {
@@ -2466,7 +2297,7 @@
         "h": 4,
         "w": 4,
         "x": 20,
-        "y": 12
+        "y": 16
       },
       "id": 23,
       "links": [
@@ -2549,36 +2380,28 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "dark-blue",
+                "color": "green",
                 "value": null
               },
               {
-                "color": "semi-dark-blue",
-                "value": 16
+                "color": "light-green",
+                "value": 115
               },
               {
-                "color": "yellow",
-                "value": 17
-              },
-              {
-                "color": "green",
-                "value": 18.5
+                "color": "#EAB839",
+                "value": 125
               },
               {
                 "color": "orange",
-                "value": 25
+                "value": 135
+              },
+              {
+                "color": "semi-dark-orange",
+                "value": 155
               },
               {
                 "color": "red",
-                "value": 30
-              },
-              {
-                "color": "semi-dark-red",
-                "value": 35
-              },
-              {
-                "color": "dark-red",
-                "value": 40
+                "value": 175
               }
             ]
           },
@@ -2589,10 +2412,187 @@
       "gridPos": {
         "h": 4,
         "w": 3,
-        "x": 9,
-        "y": 13
+        "x": 0,
+        "y": 18
       },
-      "id": 38,
+      "id": 42,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "Withings Healthcare",
+          "url": "https://healthmate.withings.com/"
+        }
+      ],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.4.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "withings_meas_systolic_blood_pressure",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "最高血圧(mmHg)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "light-green",
+                "value": 115
+              },
+              {
+                "color": "#EAB839",
+                "value": 125
+              },
+              {
+                "color": "orange",
+                "value": 135
+              },
+              {
+                "color": "semi-dark-orange",
+                "value": 155
+              },
+              {
+                "color": "red",
+                "value": 175
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 3,
+        "y": 18
+      },
+      "id": 59,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "Withings Healthcare",
+          "url": "https://healthmate.withings.com/"
+        }
+      ],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.4.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "withings_meas_diastolic_blood_pressure",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "最低",
+          "refId": "B"
+        }
+      ],
+      "title": "最低血圧(mmHg)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 50
+              },
+              {
+                "color": "green",
+                "value": 55
+              },
+              {
+                "color": "orange",
+                "value": 61
+              },
+              {
+                "color": "red",
+                "value": 67.6
+              }
+            ]
+          },
+          "unit": "masskg"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 6,
+        "y": 18
+      },
+      "id": 30,
       "links": [
         {
           "targetBlank": true,
@@ -2623,13 +2623,13 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "withings_meas_weight / (1.645 ^ 2)",
+          "expr": "withings_meas_weight",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
         }
       ],
-      "title": "BMI",
+      "title": "体重",
       "type": "stat"
     }
   ],
@@ -2650,6 +2650,6 @@
   "timezone": "",
   "title": "main dashboard",
   "uid": "jTY6Raggz",
-  "version": 4,
+  "version": 5,
   "weekStart": ""
 }
