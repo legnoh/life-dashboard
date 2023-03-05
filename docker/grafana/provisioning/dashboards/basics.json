@@ -36,7 +36,7 @@
         "autoPlay": true,
         "customBackground": false,
         "geolocate": false,
-        "iframeURL": "https://www.youtube.com/embed?playsinline=1&listType=playlist&list=PLBdI4smwsafq3epBMWozPADjIzP2Fzxgl&autoplay=1&loop=1&mute=1",
+        "iframeURL": "https://www.youtube.com/embed?playsinline=1&listType=playlist&list=PLBdI4smwsafq3epBMWozPADjIzP2Fzxgl&autoplay=1&loop=1",
         "loop": false,
         "videoId": "jfKfPfyJRdk",
         "videoType": "iframe"
