@@ -57,15 +57,13 @@ jobs:
           curl -X "POST" "http://localhost:3000/api/playlists/" \
               -H 'Content-Type: application/json; charset=utf-8' \
               -d $'{
-            "name": "Kiosk playlist",
-            "interval": "30m",
-            "items": [
-              {
-                "value": "2",
-                "title": "Service/main dashboard",
-                "order": 1,
-                "type": "dashboard_by_id"
-              }
-            ]
-          }'
+                "name": "Kiosk playlist",
+                "interval": "30m",
+                "items": [{
+                    "value": "2",
+                    "title": "Service/main dashboard",
+                    "order": 1,
+                    "type": "dashboard_by_id"
+                }
+              ]}'
         fi
