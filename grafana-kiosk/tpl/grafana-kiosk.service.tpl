@@ -6,7 +6,7 @@ After=network.target graphical.target
 
 [Service]
 User=pi
-ExecStart=/usr/bin/grafana-kiosk -playlists -URL=http://localhost:3000/playlists/play/1?autofitpanels&from=now-1h&to=now
+ExecStart=/usr/bin/grafana-kiosk -kiosk-mode=full -playlists -URL=http://localhost:3000/playlists/play/1?autofitpanels&from=now-1h&to=now
 Restart=always
 
 [Install]
