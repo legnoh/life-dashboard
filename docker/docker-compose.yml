@@ -1,5 +1,17 @@
 version: '3'
 services:
+  node-exporter:
+    image: quay.io/prometheus/node-exporter:latest
+    container_name: node-exporter
+    command:
+      - '--path.rootfs=/host'
+    network_mode: host
+    pid: host
+    restart: always
+    volumes:
+      - '/:/host:ro,rslave'
+    ports: [ 9100:80 ]
+    expose: [ "9100" ]
   staticfile-exporter:
     image: nginx:stable
     container_name: staticfile-exporter
@@ -32,13 +44,6 @@ services:
     restart: always
     env_file: tado.env
     expose: [ "9104" ]
-  countdown-exporter:
-    image: legnoh/countdown-exporter:latest
-    container_name: countdown-exporter
-    ports: [ 9105:9105 ]
-    restart: always
-    env_file: countdown.env
-    expose: [ "9105" ]
   snmp-exporter:
     image: prom/snmp-exporter:latest
     container_name: snmp-exporter

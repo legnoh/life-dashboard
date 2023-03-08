@@ -52,6 +52,7 @@ TBD
 | [legnoh/countdown-exporter](https://github.com/legnoh/countdown-exporter) | 特定日時までのカウントダウン |
 | [prometheus/snmp_exporter](https://github.com/prometheus/snmp_exporter) | 宅内回線の利用状況 |
 | [legnoh/smartmeter-exporter](https://github.com/legnoh/smartmeter-exporter) | 宅内電力・電流の利用状況 |
+| [prometheus/node_exporter](https://github.com/prometheus/node_exporter) | RaspberryPi 自身の状況 |
 
 development
 ----

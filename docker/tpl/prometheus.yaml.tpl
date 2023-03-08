@@ -5,6 +5,10 @@ global:
       monitor: 'codelab-monitor'
 
 scrape_configs:
+  - job_name: 'node'
+    static_configs:
+    - targets: [ node-exporter:80 ]
+    scrape_interval: 60s
   - job_name: 'moneyforward'
     metrics_path: /moneyforward.prom
     static_configs:
