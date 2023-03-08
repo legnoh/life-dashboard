@@ -7,6 +7,11 @@ on:
     paths:
     - 'docker/**'
   workflow_dispatch:
+    inputs:
+      rm_state:
+        description: 'If you want to rm current state of image'
+        type: boolean
+        default: false
   workflow_run:
     workflows: [ Generate SNMP Config ]
     types: [ completed ]
@@ -30,6 +35,7 @@ jobs:
         gsutil cp gs://${{ secrets.GCP_BUCKET_NAME }}/snmp.yml docker/snmp-exporter
     - name: start docker images
       env:
+        DOCKER_COMPOSE_RM: ${{ inputs.rm_state }}
         OPENWEATHER_CITY: ${{ secrets.OPENWEATHER_CITY }}
         OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
         OPENWEATHER_LISTEN_ADDRESS: ${{ secrets.OPENWEATHER_LISTEN_ADDRESS }}
