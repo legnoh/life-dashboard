@@ -7,7 +7,7 @@ global:
 scrape_configs:
   - job_name: 'node'
     static_configs:
-    - targets: [ node-exporter:80 ]
+    - targets: [ node-exporter:9100 ]
     scrape_interval: 60s
   - job_name: 'moneyforward'
     metrics_path: /moneyforward.prom
