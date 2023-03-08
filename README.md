@@ -32,6 +32,8 @@ TBD
         sudo ./svc.sh status
         ```
     - このリポジトリの GitHub Action を使って、以下を実行する
+      - [WiFiのパワーマネジメントモード](https://hnw.hatenablog.com/entry/2020/10/11/134737) をOFFにする
+      - wifiを自動的に再起動するcrontabを入れる
       - Docker をインストールする
       - docker-compose をインストールする
       - docker-compose で docker/docker-compose.yml のコンテナたちを起動状態にする
