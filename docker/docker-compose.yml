@@ -10,8 +10,6 @@ services:
     restart: always
     volumes:
       - '/:/host:ro,rslave'
-    ports: [ 9100:80 ]
-    expose: [ "9100" ]
   staticfile-exporter:
     image: nginx:stable
     container_name: staticfile-exporter
