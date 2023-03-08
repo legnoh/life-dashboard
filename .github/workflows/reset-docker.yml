@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
     inputs:
       rm_state:
-        description: 'If you want to rm current state of image'
+        description: 'inject docker compose rm'
         type: boolean
         default: false
   workflow_run:
