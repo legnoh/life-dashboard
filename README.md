@@ -49,7 +49,6 @@ TBD
 | [legnoh/openweather-exporter](https://github.com/legnoh/openweather-exporter) | OpenWeatherMap の 指定地点の天気、温度、湿度 などの気象情報 |
 | [clambin/tado-monitor](https://github.com/clambin/tado-exporter) | Tado° の室内温度、湿度 などの計測情報 |
 | [legnoh/todoist-exporter](https://github.com/legnoh/todoist-exporter) | Todoist の特定フィルターのタスク残数 |
-| [legnoh/countdown-exporter](https://github.com/legnoh/countdown-exporter) | 特定日時までのカウントダウン |
 | [prometheus/snmp_exporter](https://github.com/prometheus/snmp_exporter) | 宅内回線の利用状況 |
 | [legnoh/smartmeter-exporter](https://github.com/legnoh/smartmeter-exporter) | 宅内電力・電流の利用状況 |
 | [prometheus/node_exporter](https://github.com/prometheus/node_exporter) | RaspberryPi 自身の状況 |

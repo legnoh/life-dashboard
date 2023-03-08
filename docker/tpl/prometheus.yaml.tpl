@@ -43,10 +43,6 @@ scrape_configs:
       regex: '(go|process|promhttp)_(.*)'
       action: drop
     scrape_interval: 60s
-  - job_name: 'countdown'
-    static_configs:
-      - targets: [ 'countdown-exporter:9105' ]
-    scrape_interval: 60s
   - job_name: 'snmp'
     metrics_path: "/snmp"
     params:
