@@ -549,7 +549,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "(node_network_receive_bytes_total{device=\"wlan0\"} + node_network_transmit_bytes_total{device=\"wlan0\"}) * 8",
+          "expr": "(node_network_receive_bytes_total{device=\"wlan0\"} + node_network_transmit_bytes_total{device=\"wlan0\"}) * 8 / 60",
           "interval": "",
           "intervalFactor": 4,
           "legendFormat": "",
