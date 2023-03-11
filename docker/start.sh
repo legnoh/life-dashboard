@@ -23,7 +23,9 @@ sudo docker ps
 
 sudo docker system prune -f --all --volumes
 
-is_exist_playlist=$(curl -o /dev/null -w '%{http_code}\n' -s http://localhost:3000/api/playlists/1)
+set -x
+
+is_exist_playlist=$(curl -o /dev/null -w '%{http_code}\n' -s "http://localhost:3000/api/playlists/1")
 if [[ ${is_exist_playlist} == 404 ]]; then
     curl -X "POST" "http://localhost:3000/api/playlists/" \
         -H 'Content-Type: application/json; charset=utf-8' \
