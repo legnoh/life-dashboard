@@ -13,7 +13,7 @@ providers:
     foldersFromFilesStructure: false
 - name: 'RaspberryPi stats'
   orgId: 1
-  folder: 'General'
+  folder: 'Service'
   type: file
   disableDeletion: false
   updateIntervalSeconds: 10
