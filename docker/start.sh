@@ -25,7 +25,7 @@ sudo docker system prune -f --all --volumes
 
 set -x
 
-sleep 10
+sleep 60
 
 is_exist_playlist=$(curl -o /dev/null -w '%{http_code}\n' -s "http://localhost:3000/api/playlists/1")
 if [[ ${is_exist_playlist} == 404 ]]; then
