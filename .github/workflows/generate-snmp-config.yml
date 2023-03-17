@@ -23,7 +23,7 @@ jobs:
     - name: Install required packages
       run: sudo apt-get install unzip build-essential libsnmp-dev p7zip-full curl
     - name: Set up Go
-      uses: actions/setup-go@v3
+      uses: actions/setup-go@v4
       with:
         go-version: 1.17
     - name: Get & Build generator script
