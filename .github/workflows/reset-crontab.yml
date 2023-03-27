@@ -10,7 +10,7 @@ on:
 
 jobs:
   setup-raspberry-pi:
-    runs-on: self-hosted
+    runs-on: [self-hosted, raspberrypi]
     steps:
     - uses: actions/checkout@v3
     - name: set crontab
