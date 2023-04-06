@@ -79,6 +79,7 @@ services:
   todoist-exporter:
     container_name: todoist-exporter
     image: legnoh/todoist-exporter:latest
+    platform: linux/arm/v7
     ports: [ 9102:8000 ]
     restart: always
     environment:

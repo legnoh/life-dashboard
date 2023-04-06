@@ -73,7 +73,7 @@ exit
 ghq get -l https://github.com/legnoh/life-dashboard.git
 
 export OPENWEATHER_CITY="..."
-export OPENWEATHER_APIKEY="..."
+export OPENWEATHER_API_KEY="..."
 export SPEEDTEST_SERVER_IDS="..."
 export TADO_USERNAME="..."
 export TADO_PASSWORD="..."
