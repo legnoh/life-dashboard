@@ -36,15 +36,6 @@ services:
       - /opt/life-dashboard/configs/grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
       - /opt/life-dashboard/configs/grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
       - /opt/life-dashboard/configs/grafana/grafana.ini:/etc/grafana/grafana.ini
-  node-exporter:
-    container_name: node-exporter
-    image: prom/node-exporter:latest
-    command: ['--path.rootfs=/host']
-    restart: always
-    network_mode: host
-    pid: host
-    volumes:
-      - '/:/host:ro,rslave'
   openweather-exporter:
     container_name: openweather-exporter
     image: legnoh/openweather-exporter
