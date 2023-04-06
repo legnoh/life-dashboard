@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -eu
+set -e
 
 COMPOSE_FILE="${HOME}/life-dashboard/configs/docker-compose.yml"
 
