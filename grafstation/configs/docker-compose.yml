@@ -76,8 +76,8 @@ services:
     ports: [ 9104:8080 ]
     restart: always
     environment:
-      - TADO_MONITOR_TADO.USERNAME=${TADO_USERNAME}
-      - TADO_MONITOR_TADO.PASSWORD=${TADO_PASSWORD}
+      - TADO_USERNAME=${TADO_USERNAME}
+      - TADO_PASSWORD=${TADO_PASSWORD}
     volumes:
       - /Users/${USER}/life-dashboard/configs/tado-config.yaml:/etc/tado-monitor/config.yaml
   todoist-exporter:
