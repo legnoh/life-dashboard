@@ -41,4 +41,4 @@ EOS
 
 docker run -it -v "${PWD}:/opt" prom/snmp-generator generate
 
-cp -r snmp.yml /opt/life-dashboard/configs/snmp.yml
+cp -r snmp.yml ${HOME}/life-dashboard/configs/snmp.yml

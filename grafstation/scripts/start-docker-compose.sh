@@ -2,7 +2,7 @@
 
 set -eu
 
-COMPOSE_FILE="/opt/life-dashboard/configs/docker-compose.yml"
+COMPOSE_FILE="${HOME}/life-dashboard/configs/docker-compose.yml"
 
 docker compose -f ${COMPOSE_FILE} pull
 docker compose -f ${COMPOSE_FILE} stop

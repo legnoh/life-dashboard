@@ -9,20 +9,20 @@ services:
         TZ: Asia/Tokyo
     volumes:
         - /etc/localtime:/etc/localtime:ro
-        - /opt/life-dashboard/epgstation/config:/opt/epgstation/config
-        - /opt/life-dashboard/epgstation/data:/opt/epgstation/data
-        - /opt/life-dashboard/epgstation/drop:/opt/epgstation/drop
-        - /opt/life-dashboard/epgstation/img:/opt/epgstation/img
-        - /opt/life-dashboard/epgstation/thumbnail:/opt/epgstation/thumbnail
-        - /opt/life-dashboard/epgstation/logs:/opt/epgstation/logs
-        - /opt/life-dashboard/epgstation/recorded:/opt/epgstation/recorded
+        - /Users/${USER}/life-dashboard/epgstation/config:/opt/epgstation/config
+        - /Users/${USER}/life-dashboard/epgstation/data:/opt/epgstation/data
+        - /Users/${USER}/life-dashboard/epgstation/drop:/opt/epgstation/drop
+        - /Users/${USER}/life-dashboard/epgstation/img:/opt/epgstation/img
+        - /Users/${USER}/life-dashboard/epgstation/thumbnail:/opt/epgstation/thumbnail
+        - /Users/${USER}/life-dashboard/epgstation/logs:/opt/epgstation/logs
+        - /Users/${USER}/life-dashboard/epgstation/recorded:/opt/epgstation/recorded
   prometheus:
     container_name: prometheus
     image: prom/prometheus
     ports: [ 9090:9090 ]
     restart: always
     volumes:
-      - /opt/life-dashboard/configs/prometheus/prometheus.yaml:/etc/prometheus/prometheus.yaml
+      - /Users/${USER}/life-dashboard/configs/prometheus/prometheus.yaml:/etc/prometheus/prometheus.yaml
     extra_hosts:
       - "node-exporter:192.168.100.101"
   grafana:
@@ -33,9 +33,9 @@ services:
     environment:
       - GF_INSTALL_PLUGINS=grafana-clock-panel,innius-video-panel,aidanmountford-html-panel
     volumes:
-      - /opt/life-dashboard/configs/grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
-      - /opt/life-dashboard/configs/grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
-      - /opt/life-dashboard/configs/grafana/grafana.ini:/etc/grafana/grafana.ini
+      - /Users/${USER}/life-dashboard/configs/grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
+      - /Users/${USER}/life-dashboard/configs/grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
+      - /Users/${USER}/life-dashboard/configs/grafana/grafana.ini:/etc/grafana/grafana.ini
   openweather-exporter:
     container_name: openweather-exporter
     image: legnoh/openweather-exporter
@@ -52,7 +52,7 @@ services:
     ports: [ 9106:9116 ]
     restart: always
     volumes:
-      - /opt/life-dashboard/configs/snmp.yml:/etc/snmp_exporter/snmp.yml
+      - /Users/${USER}/life-dashboard/configs/snmp.yml:/etc/snmp_exporter/snmp.yml
   speedtest-exporter:
     container_name: speedtest-exporter
     image: billimek/prometheus-speedtest-exporter:latest
@@ -67,7 +67,7 @@ services:
     ports: [ 9101:80 ]
     restart: always
     volumes:
-      - /opt/life-dashboard/metrics:/usr/share/nginx/html:ro
+      - /Users/${USER}/life-dashboard/metrics:/usr/share/nginx/html:ro
   tado-monitor:
     container_name: tado-monitor
     image: clambin/tado-monitor
@@ -78,7 +78,7 @@ services:
       - TADO_USERNAME=${TADO_USERNAME}
       - TADO_PASSWORD=${TADO_PASSWORD}
     volumes:
-      - /opt/life-dashboard/configs/tado-config.yml:/etc/tado-monitor/config.yaml
+      - /Users/${USER}/life-dashboard/configs/tado-config.yml:/etc/tado-monitor/config.yaml
   todoist-exporter:
     container_name: todoist-exporter
     image: legnoh/todoist-exporter:latest
@@ -104,4 +104,4 @@ services:
       - WITHINGS_EXPIRES_IN=10800
       - WITHINGS_CREATED=${WITHINGS_CREATED}
     volumes:
-      - /opt/life-dashboard/withings:/usr/src/app/config/tmp
+      - /Users/${USER}/life-dashboard/withings:/usr/src/app/config/tmp

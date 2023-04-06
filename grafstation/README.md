@@ -22,11 +22,10 @@ Homebrew と Docker for Mac をインストールしておく。
     curl -Lo ~/.Brewfile https://github.com/legnoh/life-dashboard/raw/main/grafstation/configs/Brewfile
     brew bundle --global
     ```
-- 設定等の格納用に`/opt/life-dashboard` ディレクトリを掘っておく
+- 設定等の格納用に`${HOME}/life-dashboard` ディレクトリを掘っておく
     ```sh
-    sudo mkdir -p /opt/life-dashboard/{metrics,configs,withings}
-    sudo mkdir -p /opt/life-dashboard/epgstation/{config,data,drop,img,thumbnail,logs,recorded}
-    sudo chown -R ${USER}:admin /opt/life-dashboard
+    mkdir -p ${HOME}/life-dashboard/{metrics,configs,withings}
+    mkdir -p ${HOME}/life-dashboard/epgstation/{config,data,drop,img,thumbnail,logs,recorded}
     ```
 - dockerd を起動
     ```sh
@@ -60,10 +59,10 @@ exit
 
 ```sh
 ghq get -l https://github.com/legnoh/life-dashboard.git
-cp -r grafstation/configs/grafana /opt/life-dashboard/grafana
-cp -r grafstation/configs/docker-compose.yml /opt/life-dashboard/configs/
-cp -r grafstation/configs/prometheus.yaml /opt/life-dashboard/configs/
-cp -r grafstation/configs/tado-config.yaml /opt/life-dashboard/configs/
+cp -r grafstation/configs/grafana ${HOME}/life-dashboard/grafana
+cp -r grafstation/configs/docker-compose.yml ${HOME}/life-dashboard/configs/
+cp -r grafstation/configs/prometheus.yaml ${HOME}/life-dashboard/configs/
+cp -r grafstation/configs/tado-config.yaml ${HOME}/life-dashboard/configs/
 exit
 ```
 
