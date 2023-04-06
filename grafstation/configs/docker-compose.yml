@@ -48,7 +48,7 @@ services:
   snmp-exporter:
     container_name: snmp-exporter
     image: prom/snmp-exporter:latest
-    platform: linux/arm
+    platform: linux/arm64
     ports: [ 9106:9116 ]
     restart: always
     volumes:
@@ -56,7 +56,7 @@ services:
   speedtest-exporter:
     container_name: speedtest-exporter
     image: billimek/prometheus-speedtest-exporter:latest
-    platform: linux/arm
+    platform: linux/arm64
     ports: [ 9469:9469 ]
     restart: always
     environment:
@@ -82,7 +82,7 @@ services:
   todoist-exporter:
     container_name: todoist-exporter
     image: legnoh/todoist-exporter:latest
-    platform: linux/arm
+    platform: linux/arm/v7
     ports: [ 9102:8000 ]
     restart: always
     environment:
@@ -104,4 +104,4 @@ services:
       - WITHINGS_EXPIRES_IN=10800
       - WITHINGS_CREATED=${WITHINGS_CREATED}
     volumes:
-      - /opt/life-dashboard/withings/tmp:/usr/src/app/config/tmp
+      - /opt/life-dashboard/withings:/usr/src/app/config/tmp
