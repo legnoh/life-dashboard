@@ -39,6 +39,7 @@ services:
   openweather-exporter:
     container_name: openweather-exporter
     image: legnoh/openweather-exporter
+    platform: linux/arm
     ports: [ "9103:9091" ]
     restart: always
     environment:
