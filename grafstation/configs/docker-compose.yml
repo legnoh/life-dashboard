@@ -79,7 +79,7 @@ services:
       - TADO_USERNAME=${TADO_USERNAME}
       - TADO_PASSWORD=${TADO_PASSWORD}
     volumes:
-      - /Users/${USER}/life-dashboard/configs/tado-config.yaml:/etc/tado-monitor/config.yaml
+      - /Users/${USER}/life-dashboard/configs/tado-monitor:/etc/tado-monitor
   todoist-exporter:
     container_name: todoist-exporter
     image: legnoh/todoist-exporter:latest

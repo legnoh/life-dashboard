@@ -11,13 +11,3 @@ providers:
   options:
     path: /etc/grafana/provisioning/dashboards/life-metrics.json
     foldersFromFilesStructure: false
-- name: 'RaspberryPi stats'
-  orgId: 1
-  folder: 'Service'
-  type: file
-  disableDeletion: false
-  updateIntervalSeconds: 10
-  allowUiUpdates: false
-  options:
-    path: /etc/grafana/provisioning/dashboards/node-exporter.json
-    foldersFromFilesStructure: false
