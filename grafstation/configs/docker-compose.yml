@@ -48,6 +48,7 @@ services:
   snmp-exporter:
     container_name: snmp-exporter
     image: prom/snmp-exporter:latest
+    platform: linux/arm
     ports: [ 9106:9116 ]
     restart: always
     volumes:
@@ -55,6 +56,7 @@ services:
   speedtest-exporter:
     container_name: speedtest-exporter
     image: billimek/prometheus-speedtest-exporter:latest
+    platform: linux/arm
     ports: [ 9469:9469 ]
     restart: always
     environment:
@@ -69,6 +71,7 @@ services:
   tado-monitor:
     container_name: tado-monitor
     image: clambin/tado-monitor
+    platform: linux/arm64
     ports: [ 9104:8080 ]
     restart: always
     environment:
@@ -87,6 +90,7 @@ services:
   withings-exporter:
     container_name: withings-exporter
     image: legnoh/withings-exporter:latest
+    platform: linux/arm64
     ports: [ 9108:8000 ]
     restart: always
     environment:
