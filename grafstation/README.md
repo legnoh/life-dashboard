@@ -24,7 +24,7 @@ Homebrew と Docker for Mac をインストールしておく。
     ```
 - 設定等の格納用に`${HOME}/life-dashboard` ディレクトリを掘っておく
     ```sh
-    mkdir -p ${HOME}/life-dashboard/{epgstation/{data/{key,streamfiles},drop,img,thumbnail,logs/{EPGUpdater,Operator,Service},recorded,metrics,configs,withings}
+    mkdir -p ${HOME}/life-dashboard/{epgstation/{data/{key,streamfiles},drop,img,thumbnail,logs/{EPGUpdater,Operator,Service},recorded},prometheus,metrics,configs,withings}
     ```
 - dockerd を起動
     ```sh
@@ -62,7 +62,7 @@ cp -r grafstation/configs/grafana ${HOME}/life-dashboard/configs/
 cp -r grafstation/configs/tado-monitor ${HOME}/life-dashboard/configs/
 cp -r grafstation/configs/epgstation ${HOME}/life-dashboard/epgstation/config
 cp -r grafstation/configs/docker-compose.yml ${HOME}/life-dashboard/configs/
-cp -r grafstation/configs/prometheus.yaml ${HOME}/life-dashboard/configs/
+cp -r grafstation/configs/prometheus.yaml ${HOME}/life-dashboard/prometheus/
 cp -r grafstation/configs/grafana-kiosk-config.yml ${HOME}/.grafana-kiosk-config.yml
 
 exit

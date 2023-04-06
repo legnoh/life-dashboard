@@ -22,7 +22,7 @@ services:
     ports: [ 9090:9090 ]
     restart: always
     volumes:
-      - /Users/${USER}/life-dashboard/configs/prometheus.yaml:/etc/prometheus/prometheus.yaml
+      - /Users/${USER}/life-dashboard/prometheus/:/etc/prometheus/
     extra_hosts:
       - "node-exporter:192.168.100.101"
   grafana:
