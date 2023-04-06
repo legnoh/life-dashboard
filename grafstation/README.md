@@ -59,7 +59,7 @@ exit
 
 ```sh
 ghq get -l https://github.com/legnoh/life-dashboard.git
-cp -r grafstation/configs/grafana ${HOME}/life-dashboard/grafana
+cp -r grafstation/configs/grafana ${HOME}/life-dashboard/configs/grafana
 cp -r grafstation/configs/docker-compose.yml ${HOME}/life-dashboard/configs/
 cp -r grafstation/configs/prometheus.yaml ${HOME}/life-dashboard/configs/
 cp -r grafstation/configs/tado-config.yaml ${HOME}/life-dashboard/configs/
