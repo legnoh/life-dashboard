@@ -43,7 +43,7 @@
         "y": 0
       },
       "handleMetric": {},
-      "html_data": "<video controls autoplay width=\"100%\" height=\"100%\">\n    <source src=\"http://localhost:8888/api/streams/live/3273601024/webm?mode=0\" type=\"video/webm\">\n  Your browser does not support the video tag.\n  </video>",
+      "html_data": "<video controls muted autoplay width=\"100%\" height=\"100%\">\n    <source src=\"http://localhost:8888/api/streams/live/3273601024/webm?mode=0\" type=\"video/webm\">\n  Your browser does not support the video tag.\n  </video>",
       "id": 66,
       "js_code": "",
       "js_init_code": "",
