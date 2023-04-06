@@ -72,7 +72,7 @@ services:
     container_name: tado-monitor
     image: clambin/tado-monitor
     platform: linux/arm64
-    # command: [ "--config=/app/config.yaml" ]
+    command: [ "--config=/etc/tado-monitor/config.yaml" ]
     ports: [ 9104:8080 ]
     restart: always
     environment:
