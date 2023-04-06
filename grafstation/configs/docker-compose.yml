@@ -72,14 +72,14 @@ services:
     container_name: tado-monitor
     image: clambin/tado-monitor
     platform: linux/arm64
-    command: ["--config=/app/config.yaml"]
+    # command: [ "--config=/app/config.yaml" ]
     ports: [ 9104:8080 ]
     restart: always
     environment:
       - TADO_MONITOR_TADO.USERNAME=${TADO_USERNAME}
       - TADO_MONITOR_TADO.PASSWORD=${TADO_PASSWORD}
     volumes:
-      - /Users/${USER}/life-dashboard/configs/tado-config.yml:/app/config.yaml
+      - /Users/${USER}/life-dashboard/configs/tado-config.yaml:/etc/tado-monitor/config.yaml
   todoist-exporter:
     container_name: todoist-exporter
     image: legnoh/todoist-exporter:latest
