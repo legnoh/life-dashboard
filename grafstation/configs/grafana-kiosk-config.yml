@@ -1,0 +1,8 @@
+general:
+  kiosk-mode: full
+  autofit: true
+
+target:
+  login-method: anon
+  playlist: false
+  URL: http://localhost:3000/d/jTY6Raggz/life-metrics?orgId=1&refresh=5m

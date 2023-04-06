@@ -1,3 +1,0 @@
-if [[ "$reason" = "PREINIT" -a "$interface" = "wlan0" ]]; then
-    iw dev wlan0 set power_save off
-fi
