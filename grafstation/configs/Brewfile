@@ -1,0 +1,21 @@
+tap 'homebrew/cask-drivers'
+tap 'legnoh/etc', 'https://github.com/legnoh/homebrew-etc.git'
+
+brew 'coreutils'
+brew 'direnv'
+brew 'ghq'
+brew 'grafana-kiosk'
+brew 'jq'
+brew 'mas'
+brew 'terraform'
+brew 'tree'
+brew 'yq'
+
+cask 'docker'
+cask 'flux'
+cask 'google-chrome'
+cask 'google-cloud-sdk'
+cask 'logi-options-plus'
+
+mas 'Genki Arcade', id:1555925018
+mas 'OverPicture for Safari', id:1188020834

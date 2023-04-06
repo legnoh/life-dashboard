@@ -1,0 +1,101 @@
+version: '3'
+services:
+  epgstation:
+    container_name: epgstation
+    image: collelog/epgstation:latest-debian-arm64v8
+    ports: ["8888:8888", "8889:8889"]
+    restart: always
+    environment:
+        TZ: Asia/Tokyo
+    volumes:
+        - /etc/localtime:/etc/localtime:ro
+        - /opt/life-dashboard/epgstation/config:/opt/epgstation/config
+        - /opt/life-dashboard/epgstation/data:/opt/epgstation/data
+        - /opt/life-dashboard/epgstation/drop:/opt/epgstation/drop
+        - /opt/life-dashboard/epgstation/img:/opt/epgstation/img
+        - /opt/life-dashboard/epgstation/thumbnail:/opt/epgstation/thumbnail
+        - /opt/life-dashboard/epgstation/logs:/opt/epgstation/logs
+        - /opt/life-dashboard/epgstation/recorded:/opt/epgstation/recorded
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus
+    ports: [ 9090:9090 ]
+    restart: always
+    volumes:
+      - /opt/life-dashboard/configs/prometheus/prometheus.yaml:/etc/prometheus/prometheus.yaml
+    extra_hosts:
+      - "node-exporter:192.168.100.101"
+  grafana:
+    container_name: grafana
+    image: grafana/grafana
+    ports: [ 3000:3000 ]
+    restart: always
+    environment:
+      - GF_INSTALL_PLUGINS=grafana-clock-panel,innius-video-panel,aidanmountford-html-panel
+    volumes:
+      - /opt/life-dashboard/configs/grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
+      - /opt/life-dashboard/configs/grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
+      - /opt/life-dashboard/configs/grafana/grafana.ini:/etc/grafana/grafana.ini
+  openweather-exporter:
+    container_name: openweather-exporter
+    image: legnoh/openweather-exporter
+    ports: [ "9103:9091" ]
+    restart: always
+    environment:
+    - OW_APIKEY=${OPENWEATHER_API_KEY}
+    - OW_CITY=${OPENWEATHER_CITY}
+  snmp-exporter:
+    container_name: snmp-exporter
+    image: prom/snmp-exporter:latest
+    ports: [ 9106:9116 ]
+    restart: always
+    volumes:
+      - /opt/life-dashboard/configs/snmp.yml:/etc/snmp_exporter/snmp.yml
+  speedtest-exporter:
+    container_name: speedtest-exporter
+    image: billimek/prometheus-speedtest-exporter:latest
+    ports: [ 9469:9469 ]
+    restart: always
+    environment:
+      - server_ids=14623
+  staticfile-exporter:
+    container_name: staticfile-exporter
+    image: nginx:stable
+    ports: [ 9101:80 ]
+    restart: always
+    volumes:
+      - /opt/life-dashboard/metrics:/usr/share/nginx/html:ro
+  tado-monitor:
+    container_name: tado-monitor
+    image: clambin/tado-monitor
+    ports: [ 9104:8080 ]
+    restart: always
+    environment:
+      - TADO_USERNAME=${TADO_USERNAME}
+      - TADO_PASSWORD=${TADO_PASSWORD}
+    volumes:
+      - /opt/life-dashboard/configs/tado-config.yml:/etc/tado-monitor/config.yaml
+  todoist-exporter:
+    container_name: todoist-exporter
+    image: legnoh/todoist-exporter:latest
+    ports: [ 9102:8000 ]
+    restart: always
+    environment:
+      - TODOIST_API_KEY=${TODOIST_API_KEY}
+  withings-exporter:
+    container_name: withings-exporter
+    image: legnoh/withings-exporter:latest
+    ports: [ 9108:8000 ]
+    restart: always
+    environment:
+      - TZ=Asia/Tokyo
+      - WITHINGS_CLIENT_ID=${WITHINGS_CLIENT_ID}
+      - WITHINGS_CONSUMER_SECRET=${WITHINGS_CONSUMER_SECRET}
+      - WITHINGS_ACCESS_TOKEN=${WITHINGS_ACCESS_TOKEN}
+      - WITHINGS_TOKEN_TYPE=Bearer
+      - WITHINGS_REFRESH_TOKEN=${WITHINGS_REFRESH_TOKEN}
+      - WITHINGS_USERID=${WITHINGS_USERID}
+      - WITHINGS_EXPIRES_IN=10800
+      - WITHINGS_CREATED=${WITHINGS_CREATED}
+    volumes:
+      - /opt/life-dashboard/withings/tmp:/usr/src/app/config/tmp
