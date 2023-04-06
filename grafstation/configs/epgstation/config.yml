@@ -5,18 +5,7 @@ dbtype: sqlite
 sqlite:
     extensions:
         - '/opt/epgstation/pcre.so'
-#        - '/opt/epgstation/libsqlite_pcre.so'
-#        - '/opt/epgstation/regexp.so'
     regexp: true
-
-# dbtype: mysql
-# mysql:
-#     host: 192.168.xx.xx
-#     port: 3306
-#     user: epgstation
-#     password: epgstation
-#     database: epgstation
-#     charset: utf8mb4
 
 epgUpdateIntervalTime: 10
 
