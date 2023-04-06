@@ -23,8 +23,6 @@ services:
     restart: always
     volumes:
       - /Users/${USER}/life-dashboard/prometheus/:/etc/prometheus/
-    extra_hosts:
-      - "node-exporter:192.168.100.101"
   grafana:
     container_name: grafana
     image: grafana/grafana
