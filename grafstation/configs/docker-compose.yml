@@ -57,7 +57,7 @@ services:
     ports: [ 9469:9469 ]
     restart: always
     environment:
-      - server_ids=14623
+      - server_ids=${SPEEDTEST_SERVER_IDS}
   staticfile-exporter:
     container_name: staticfile-exporter
     image: nginx:stable
@@ -88,7 +88,7 @@ services:
     ports: [ 9108:8000 ]
     restart: always
     environment:
-      - TZ=Asia/Tokyo
+      - TZ=${WITHINGS_TZ}
       - WITHINGS_CLIENT_ID=${WITHINGS_CLIENT_ID}
       - WITHINGS_CONSUMER_SECRET=${WITHINGS_CONSUMER_SECRET}
       - WITHINGS_ACCESS_TOKEN=${WITHINGS_ACCESS_TOKEN}

@@ -25,6 +25,7 @@ Homebrew と Docker for Mac をインストールしておく。
 - 設定等の格納用に`/opt/life-dashboard` ディレクトリを掘っておく
     ```sh
     sudo mkdir -p /opt/life-dashboard/{metrics,configs,withings}
+    sudo mkdir -p /opt/life-dashboard/epgstation/{config,data,drop,img,thumbnail,logs,recorded}
     sudo chown -R ${USER}:admin /opt/life-dashboard
     ```
 - dockerd を起動
@@ -38,10 +39,9 @@ Homebrew と Docker for Mac をインストールしておく。
 ghq get -l https://github.com/legnoh/life-dashboard.git
 cd grafstation/scripts/snmp
 
-cp .envrc.sample .envrc
-vi .envrc
-direnv allow
-
+export SNMP_USERNAME="..."
+export SNMP_PASSWORD="..."
+export SNMP_PRIV_PASSWORD="..."
 ./generate.sh
 exit
 ```
@@ -50,6 +50,8 @@ exit
 
 ```sh
 ghq get -l https://github.com/legnoh/life-dashboard.git
+
+export GCP_BUCKET_NAME="..."
 ./grafstation/scripts/download-metrics.sh
 exit
 ```
@@ -59,9 +61,9 @@ exit
 ```sh
 ghq get -l https://github.com/legnoh/life-dashboard.git
 cp -r grafstation/configs/grafana /opt/life-dashboard/grafana
-cp -r grafstation/configs/docker-compose.yml /opt/life-dashboard/
-cp -r grafstation/configs/prometheus.yml /opt/life-dashboard/
-cp -r grafstation/configs/tado-config.yml /opt/life-dashboard/
+cp -r grafstation/configs/docker-compose.yml /opt/life-dashboard/configs/
+cp -r grafstation/configs/prometheus.yaml /opt/life-dashboard/configs/
+cp -r grafstation/configs/tado-config.yaml /opt/life-dashboard/configs/
 exit
 ```
 
@@ -69,6 +71,22 @@ exit
 
 ```sh
 ghq get -l https://github.com/legnoh/life-dashboard.git
+
+export OPENWEATHER_CITY="..."
+export OPENWEATHER_APIKEY="..."
+export SPEEDTEST_SERVER_IDS="..."
+export TADO_USERNAME="..."
+export TADO_PASSWORD="..."
+export TODOIST_API_KEY="..."
+export WITHINGS_CLIENT_ID="..."
+export WITHINGS_CONSUMER_SECRET="..."
+export WITHINGS_ACCESS_TOKEN="..."
+export WITHINGS_TOKEN_TYPE="..."
+export WITHINGS_REFRESH_TOKEN="..."
+export WITHINGS_USERID="..."
+export WITHINGS_EXPIRES_IN="..."
+export WITHINGS_CREATED="..."
+export WITHINGS_TZ="..."
 ./grafstation/scripts/start-docker-compose.sh
 exit
 ```
