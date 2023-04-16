@@ -3,6 +3,7 @@
 # set -x
 
 JQ="/opt/homebrew/bin/jq"
+TF="/opt/homebrew/bin/terraform"
 
 EPGS_HOST="hal-mini.local:8888"
 CHANNELS_JSON=$(curl "http://${EPGS_HOST}/api/channels" 2>/dev/null)
@@ -41,9 +42,9 @@ done
 # fi
 
 # 曜日・時間を取得
-weekday=$(/bin/date +%u) # 月-日 = 1-7
-hour=$(/bin/date +%-H)
-min=$(/bin/date +%-M)
+weekday=$(date +%u) # 月-日 = 1-7
+hour=$(date +%-H)
+min=$(date +%-M)
 now=$(echo "scale=3; ${hour} + (${min} / 60)" | bc)
 
 # 平日の場合
@@ -200,4 +201,4 @@ for var in ${TFVARS[@]}; do
 done
 
 # 設定反映
-/opt/homebrew/bin/terraform apply ${TF_OPTIONS}
+${TF} apply ${TF_OPTIONS}
