@@ -1,0 +1,2 @@
+export TF_VAR_OPENWEATHER_CITY="Tokyo, JP"
+export TF_VAR_YOUTUBE_PLAYLIST_ID="...."

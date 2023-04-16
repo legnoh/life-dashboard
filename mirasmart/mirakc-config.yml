@@ -8,7 +8,7 @@ server:
   stream-max-chunks: 30000
 
 channels:
-  - name: 'ＴＯＫＹＯ　ＭＸ１'
+  - name: 'TOKYO MX1'
     type: 'GR'
     channel: '16'
 
@@ -16,11 +16,11 @@ channels:
     type: 'GR'
     channel: '21'
 
-  - name: 'ＴＢＳ１'
+  - name: 'TBS1'
     type: 'GR'
     channel: '22'
 
-  - name: 'テレビ東京１'
+  - name: 'テレビ東京1'
     type: 'GR'
     channel: '23'
 
@@ -28,94 +28,94 @@ channels:
     type: 'GR'
     channel: '24'
 
-  - name: '日テレ１'
+  - name: '日テレ1'
     type: 'GR'
     channel: '25'
 
-  - name: 'ＮＨＫＥテレ１東京'
+  - name: 'NHKEテレ1東京'
     type: 'GR'
     channel: '26'
 
-  - name: 'ＮＨＫ総合１・東京'
+  - name: 'NHK総合1・東京'
     type: 'GR'
     channel: '27'
 
-  - name: 'ＢＳ朝日１'
+  - name: 'BS朝日1'
     type: 'BS'
     channel: 'BS1_0'
     services: [151]
 
-  - name: 'ＢＳ朝日２'
+  - name: 'BS朝日2'
     type: 'BS'
     channel: 'BS1_0'
     services: [152]
 
-  - name: 'ＢＳ朝日３'
+  - name: 'BS朝日3'
     type: 'BS'
     channel: 'BS1_0'
     services: [153]
 
-  - name: 'ＢＳ－ＴＢＳ'
+  - name: 'BS-TBS'
     type: 'BS'
     channel: 'BS1_1'
     services: [161]
 
-  - name: 'ＢＳ－ＴＢＳ'
+  - name: 'BS-TBS'
     type: 'BS'
     channel: 'BS1_1'
     services: [162]
 
-  - name: 'ＢＳ－ＴＢＳ'
+  - name: 'BS-TBS'
     type: 'BS'
     channel: 'BS1_1'
     services: [163]
 
-  - name: 'ＢＳテレ東'
+  - name: 'BSテレ東'
     type: 'BS'
     channel: 'BS1_2'
     services: [171]
 
-  - name: 'ＢＳテレ東２'
+  - name: 'BSテレ東2'
     type: 'BS'
     channel: 'BS1_2'
     services: [172]
 
-  - name: 'ＢＳテレ東３'
+  - name: 'BSテレ東3'
     type: 'BS'
     channel: 'BS1_2'
     services: [173]
 
-  - name: 'ＮＨＫＢＳプレミアム'
+  - name: 'NHKBSプレミアム'
     type: 'BS'
     channel: 'BS3_1'
     services: [103]
 
-  - name: 'ＮＨＫＢＳプレミアム'
+  - name: 'NHKBSプレミアム'
     type: 'BS'
     channel: 'BS3_1'
     services: [104]
 
-  - name: 'ＢＳ１１イレブン'
+  - name: 'BS11イレブン'
     type: 'BS'
     channel: 'BS9_0'
     services: [211]
 
-  - name: 'ＢＳ１２トゥエルビ'
+  - name: 'BS12トゥエルビ'
     type: 'BS'
     channel: 'BS9_2'
     services: [222]
 
-  - name: 'ＢＳスカパー！'
+  - name: 'BSスカパー!'
     type: 'BS'
     channel: 'BS11_0'
     services: [241]
 
-  - name: '放送大学ｅｘ'
+  - name: '放送大学ex'
     type: 'BS'
     channel: 'BS11_1'
     services: [231]
 
-  - name: '放送大学ｏｎ'
+  - name: '放送大学on'
     type: 'BS'
     channel: 'BS11_1'
     services: [232]
@@ -126,42 +126,42 @@ channels:
     services: [531]
     disabled: true
 
-  - name: 'ＢＳ日テレ'
+  - name: 'BS日テレ'
     type: 'BS'
     channel: 'BS13_0'
     services: [141]
 
-  - name: 'ＢＳ日テレ'
+  - name: 'BS日テレ'
     type: 'BS'
     channel: 'BS13_0'
     services: [142]
 
-  - name: 'ＢＳ日テレ'
+  - name: 'BS日テレ'
     type: 'BS'
     channel: 'BS13_0'
     services: [143]
 
-  - name: 'ＢＳフジ・１８１'
+  - name: 'BSフジ・181'
     type: 'BS'
     channel: 'BS13_1'
     services: [181]
 
-  - name: 'ＢＳフジ・１８２'
+  - name: 'BSフジ・182'
     type: 'BS'
     channel: 'BS13_1'
     services: [182]
 
-  - name: 'ＢＳフジ・１８３'
+  - name: 'BSフジ・183'
     type: 'BS'
     channel: 'BS13_1'
     services: [183]
 
-  - name: 'ＮＨＫＢＳ１'
+  - name: 'NHKBS1'
     type: 'BS'
     channel: 'BS15_0'
     services: [101]
 
-  - name: 'ＮＨＫＢＳ１'
+  - name: 'NHKBS1'
     type: 'BS'
     channel: 'BS15_0'
     services: [102]
@@ -171,7 +171,7 @@ channels:
     channel: 'BS21_2'
     services: [234]
 
-  - name: 'ＢＳ松竹東急'
+  - name: 'BS松竹東急'
     type: 'BS'
     channel: BS23_3
     services: [260]
@@ -204,133 +204,3 @@ tuners:
 filters:
   decode-filter:
     command: arib-b25-stream-test
-
-resource:
-  logos:
-    - service-triple: [32391, 32391, 23608]
-      image: /var/lib/mirakc/logos/gr_23608.png
-    - service-triple: [32391, 32391, 23609]
-      image: /var/lib/mirakc/logos/gr_23608.png
-    - service-triple: [32391, 32391, 23610]
-      image: /var/lib/mirakc/logos/gr_23608.png
-    - service-triple: [32375, 32375, 24632]
-      image: /var/lib/mirakc/logos/gr_24632.png
-    - service-triple: [32375, 32375, 24633]
-      image: /var/lib/mirakc/logos/gr_24632.png
-    - service-triple: [32375, 32375, 24634]
-      image: /var/lib/mirakc/logos/gr_24632.png
-    - service-triple: [32740, 32740, 1056]
-      image: /var/lib/mirakc/logos/gr_1056.png
-    - service-triple: [32740, 32740, 1057]
-      image: /var/lib/mirakc/logos/gr_1056.png
-    - service-triple: [32740, 32740, 1058]
-      image: /var/lib/mirakc/logos/gr_1056.png
-    - service-triple: [32739, 32739, 1048]
-      image: /var/lib/mirakc/logos/gr_1048.png
-    - service-triple: [32739, 32739, 1049]
-      image: /var/lib/mirakc/logos/gr_1048.png
-    - service-triple: [32742, 32742, 1072]
-      image: /var/lib/mirakc/logos/gr_1072.png
-    - service-triple: [32742, 32742, 1073]
-      image: /var/lib/mirakc/logos/gr_1072.png
-    - service-triple: [32742, 32742, 1074]
-      image: /var/lib/mirakc/logos/gr_1072.png
-    - service-triple: [32741, 32741, 1064]
-      image: /var/lib/mirakc/logos/gr_1064.png
-    - service-triple: [32741, 32741, 1065]
-      image: /var/lib/mirakc/logos/gr_1064.png
-      syeimage: /var/lib/mirakc/logos/gr_1064.png
-    - service-triple: [32738, 32738, 1040]
-      image: /var/lib/mirakc/logos/gr_1040.png
-    - service-triple: [32738, 32738, 1041]
-      image: /var/lib/mirakc/logos/gr_1040.png
-    - service-triple: [32737, 32737, 1032]
-      image: /var/lib/mirakc/logos/gr_nhke.png
-    - service-triple: [32737, 32737, 1033]
-      image: /var/lib/mirakc/logos/gr_nhke.png
-    - service-triple: [32737, 32737, 1034]
-      image: /var/lib/mirakc/logos/gr_nhke.png
-    - service-triple: [32736, 32736, 1024]
-      image: /var/lib/mirakc/logos/gr_nhkg.png
-    - service-triple: [32736, 32736, 1025]
-      image: /var/lib/mirakc/logos/gr_nhkg.png
-    - service-triple: [4, 16400, 151]
-      image: /var/lib/mirakc/logos/bs_151.png
-    - service-triple: [4, 16400, 152]
-      image: /var/lib/mirakc/logos/bs_151.png
-    - service-triple: [4, 16400, 153]
-      image: /var/lib/mirakc/logos/bs_151.png
-    - service-triple: [4, 16401, 161]
-      image: /var/lib/mirakc/logos/bs_161.png
-    - service-triple: [4, 16401, 162]
-      image: /var/lib/mirakc/logos/bs_161.png
-    - service-triple: [4, 16401, 163]
-      image: /var/lib/mirakc/logos/bs_161.png
-    - service-triple: [4, 16402, 171]
-      image: /var/lib/mirakc/logos/bs_171.png
-    - service-triple: [4, 16402, 172]
-      image: /var/lib/mirakc/logos/bs_171.png
-    - service-triple: [4, 16402, 173]
-      image: /var/lib/mirakc/logos/bs_171.png
-    - service-triple: [4, 16432, 191]
-      image: /var/lib/mirakc/logos/bs_191.png
-    - service-triple: [4, 16433, 103]
-      image: /var/lib/mirakc/logos/bs_103.png
-    - service-triple: [4, 16433, 104]
-      image: /var/lib/mirakc/logos/bs_103.png
-    - service-triple: [4, 17488, 192]
-      image: /var/lib/mirakc/logos/bs_191.png
-    - service-triple: [4, 17489, 193]
-      image: /var/lib/mirakc/logos/bs_191.png
-    - service-triple: [4, 16528, 211]
-      image: /var/lib/mirakc/logos/bs_211.png
-    - service-triple: [4, 16529, 200]
-      image: /var/lib/mirakc/logos/bs_200.png
-    - service-triple: [4, 16530, 222]
-      image: /var/lib/mirakc/logos/bs_222.png
-    - service-triple: [4, 18097, 241]
-      image: /var/lib/mirakc/logos/bs_241.png
-    - service-triple: [4, 18098, 231]
-      image: /var/lib/mirakc/logos/bs_231.png
-    - service-triple: [4, 18098, 232]
-      image: /var/lib/mirakc/logos/bs_231.png
-    - service-triple: [4, 18099, 251]
-      image: /var/lib/mirakc/logos/bs_251.png
-    - service-triple: [4, 16592, 141]
-      image: /var/lib/mirakc/logos/bs_141.png
-    - service-triple: [4, 16592, 142]
-      image: /var/lib/mirakc/logos/bs_141.png
-    - service-triple: [4, 16592, 143]
-      image: /var/lib/mirakc/logos/bs_141.png
-    - service-triple: [4, 16593, 181]
-      image: /var/lib/mirakc/logos/bs_181.png
-    - service-triple: [4, 16593, 182]
-      image: /var/lib/mirakc/logos/bs_181.png
-    - service-triple: [4, 16593, 183]
-      image: /var/lib/mirakc/logos/bs_181.png
-    - service-triple: [4, 18130, 236]
-      image: /var/lib/mirakc/logos/bs_236.png
-    - service-triple: [4, 16625, 101]
-      image: /var/lib/mirakc/logos/bs_101.png
-    - service-triple: [4, 16625, 102]
-      image: /var/lib/mirakc/logos/bs_101.png
-    - service-triple: [4, 16626, 201]
-      image: /var/lib/mirakc/logos/bs_200.png
-    - service-triple: [4, 16626, 202]
-      image: /var/lib/mirakc/logos/bs_200.png
-    - service-triple: [4, 18224, 245]
-      image: /var/lib/mirakc/logos/bs_242.png
-    - service-triple: [4, 18225, 242]
-      image: /var/lib/mirakc/logos/bs_242.png
-    - service-triple: [4, 18226, 243]
-      image: /var/lib/mirakc/logos/bs_242.png
-    - service-triple: [4, 18227, 244]
-      image: /var/lib/mirakc/logos/bs_242.png
-    - service-triple: [4, 18256, 252]
-      image: /var/lib/mirakc/logos/bs_252.png
-    - service-triple: [4, 18257, 255]
-      image: /var/lib/mirakc/logos/bs_255.png
-    - service-triple: [4, 18288, 256]
-      image: /var/lib/mirakc/logos/bs_256.png
-    - service-triple: [4, 18258, 234]
-      image: /var/lib/mirakc/logos/bs_234.png

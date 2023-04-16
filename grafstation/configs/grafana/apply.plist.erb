@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>io.lkj.life.dashboard.grafstation.grafana.apply</string>
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>TF_VAR_OPENWEATHER_CITY</key>
+        <string><%= ow_city %></string>
+        <key>TF_VAR_YOUTUBE_PLAYLIST_ID</key>
+        <string><%= yt_playlist %></string>
+    </dict>
+    <key>WorkingDirectory</key>
+    <string>/Users/<%= user %>/ghq/github.com/legnoh/life-dashboard/grafana</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>apply.sh</string>
+    </array>
+    <key>StartInterval</key>
+    <integer>60</integer>
+</dict>
+</plist>

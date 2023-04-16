@@ -92,6 +92,23 @@ export WITHINGS_TZ="..."
 exit
 ```
 
+### Terraform による Grafana 設定の流込み
+
+```sh
+ghq get -l https://github.com/legnoh/life-dashboard.git
+cd grafstation/configs/grafana
+
+export TF_VAR_OPENWEATHER_CITY="${OPENWEATHER_CITY}"
+export TF_VAR_YOUTUBE_PLAYLIST_ID="..."
+./apply.sh
+
+# applyはlaunchdで1分おきに実行させる
+erb ow_city="..." \
+    yt_playlist="..." \
+    user="${USER}" \
+    apply.plist.erb > ~/Library/LaunchAgents/grafana-tf-apply.plist 
+```
+
 ### grafana-kiosk 起動/再起動
 
 ```sh

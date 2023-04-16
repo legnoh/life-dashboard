@@ -31,8 +31,6 @@ services:
     environment:
       - GF_INSTALL_PLUGINS=grafana-clock-panel,innius-video-panel,aidanmountford-html-panel
     volumes:
-      - /Users/${USER}/life-dashboard/configs/grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
-      - /Users/${USER}/life-dashboard/configs/grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
       - /Users/${USER}/life-dashboard/configs/grafana/grafana.ini:/etc/grafana/grafana.ini
   openweather-exporter:
     container_name: openweather-exporter
