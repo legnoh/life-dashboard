@@ -103,10 +103,16 @@ export TF_VAR_YOUTUBE_PLAYLIST_ID="..."
 ./apply.sh
 
 # applyはlaunchdで1分おきに実行させる
+PLIST_PATH="~/Library/LaunchAgents/io.lkj.life.dashboard.grafstation.grafana.apply.plist"
 erb ow_city="..." \
     yt_playlist="..." \
     user="${USER}" \
-    apply.plist.erb > ~/Library/LaunchAgents/grafana-tf-apply.plist 
+    apply.plist.erb > ${PLIST_PATH}
+chmod 664 
+plutil -lint ${PLIST_PATH}
+launchctl load ${PLIST_PATH}
+
+tail -f "/tmp/grafana-apply.*"
 ```
 
 ### grafana-kiosk 起動/再起動
