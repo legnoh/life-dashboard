@@ -108,7 +108,7 @@ erb ow_city="..." \
     yt_playlist="..." \
     user="${USER}" \
     apply.plist.erb > ${PLIST_PATH}
-chmod 664 
+chmod 664 ${PLIST_PATH}
 plutil -lint ${PLIST_PATH}
 launchctl load ${PLIST_PATH}
 
