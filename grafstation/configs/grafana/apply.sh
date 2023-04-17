@@ -2,6 +2,10 @@
 
 # set -x
 
+echo "---------------------------------
+date "+%Y/%m/%d %H:%M:%S"
+
+
 JQ="/opt/homebrew/bin/jq"
 TF="/opt/homebrew/bin/terraform"
 
