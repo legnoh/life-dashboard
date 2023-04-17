@@ -110,7 +110,7 @@ erb ow_city="..." \
 chmod 664 ${PLIST_PATH}
 
 launchctl unload -w ~/Library/LaunchAgents/io.lkj.life.dashboard.grafstation.grafana.apply.plist
-plutil -lint "~/Library/LaunchAgents/io.lkj.life.dashboard.grafstation.grafana.apply.plist"
+plutil -lint ~/Library/LaunchAgents/io.lkj.life.dashboard.grafstation.grafana.apply.plist
 launchctl load -w ~/Library/LaunchAgents/io.lkj.life.dashboard.grafstation.grafana.apply.plist
 
 tail -f "/tmp/grafana-apply.log"

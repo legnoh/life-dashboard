@@ -22,12 +22,14 @@
     <key>StandardErrorPath</key>
     <string>/tmp/grafana-apply.err</string>
     <key>StartCalendarInterval</key>
-    <array><% minutes = 0..59 %><% minutes.each do |min| %>
+    <array>
+        <% minutes = 0..59 %>
+        <% minutes.each do |min| %>
         <dict>
             <key>Minute</key>
             <integer><%= min %></integer>
         </dict>
-<% end %>
+        <% end %>
     </array>
 </dict>
 </plist>
