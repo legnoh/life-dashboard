@@ -113,7 +113,7 @@ launchctl unload -w ~/Library/LaunchAgents/io.lkj.life.dashboard.grafstation.gra
 plutil -lint "~/Library/LaunchAgents/io.lkj.life.dashboard.grafstation.grafana.apply.plist"
 launchctl load -w ~/Library/LaunchAgents/io.lkj.life.dashboard.grafstation.grafana.apply.plist
 
-tail -f "/tmp/grafana-apply.*"
+tail -f "/tmp/grafana-apply.log"
 ```
 
 ### grafana-kiosk 起動/再起動
