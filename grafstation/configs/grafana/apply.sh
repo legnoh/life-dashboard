@@ -112,7 +112,7 @@ elif [ ${weekday} -eq 6 ]; then
 
   # 5:30~09:00 / 日テレ
   elif [ $( echo "${now} < 9" | bc ) == 1 ]; then
-    tv_channel_id1=${CHANNEL_BSBS1_2}
+    tv_channel_id1=${CHANNEL_GR25}
     is_tv_channel1_muted=false
   
   # 09:00~12:00 / グリーンチャンネル
