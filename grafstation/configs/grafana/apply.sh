@@ -132,7 +132,7 @@ elif [ ${weekday} -eq 6 ]; then
     is_tv_channel1_muted=false
 
   # 18:45~23:00 / NHK1
-  elif [ $( echo "${now} < 13" | bc ) == 1 ]; then
+  elif [ $( echo "${now} < 23" | bc ) == 1 ]; then
     tv_channel_id1=${CHANNEL_GR27}
     is_youtube_muted=false
   
