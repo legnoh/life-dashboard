@@ -36,3 +36,14 @@ snmpv3 host any user ${user_id}
 # 終了
 save
 ```
+
+snmp-exporter config 作成
+---
+
+```sh
+export SNMP_USERNAME="..."
+export SNMP_PASSWORD="..."
+export SNMP_PRIV_PASSWORD="..."
+
+./generate.sh
+```

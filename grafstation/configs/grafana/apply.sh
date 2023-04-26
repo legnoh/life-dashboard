@@ -60,7 +60,18 @@ if [ ${weekday} -le 5 ]; then
   if [ $( echo "${now} < 5.75" | bc ) == 1 ]; then
     :
 
-  # 5:45~07:05 / BSテレ東(ミュート解除)
+  # 5:45~06:25 / BSテレ東(ミュート解除)
+  elif [ $( echo "${now} < 6.416" | bc ) == 1 ]; then
+    tv_channel_id1=${CHANNEL_BSBS1_2}
+    is_tv_channel1_muted=false
+  
+  # 6:25~06:35 / BSテレ東+NHK総合1(体操)
+  elif [ $( echo "${now} < 6.583" | bc ) == 1 ]; then
+    tv_channel_id1=${CHANNEL_BSBS1_2}
+    tv_channel_id2=${CHANNEL_GR27}
+    is_tv_channel2_muted=false
+
+  # 6:35~07:05 / BSテレ東(ミュート解除)
   elif [ $( echo "${now} < 7.083" | bc ) == 1 ]; then
     tv_channel_id1=${CHANNEL_BSBS1_2}
     is_tv_channel1_muted=false
@@ -70,7 +81,16 @@ if [ ${weekday} -le 5 ]; then
     tv_channel_id1=${CHANNEL_BSBS1_2}
     is_youtube_muted=false
   
-  # 07:55~12:00 / NHK総合1
+  # 07:55~09:55 / NHK総合1
+  elif [ $( echo "${now} < 9.916" | bc ) == 1 ]; then
+    tv_channel_id1=${CHANNEL_GR27}
+  
+  # 09:55~10:00 / NHK総合1(体操)
+  elif [ $( echo "${now} < 10" | bc ) == 1 ]; then
+    tv_channel_id1=${CHANNEL_GR27}
+    is_tv_channel1_muted=false
+  
+  # 10:00~12:00 / NHK総合1
   elif [ $( echo "${now} < 12" | bc ) == 1 ]; then
     tv_channel_id1=${CHANNEL_GR27}
   
@@ -79,12 +99,21 @@ if [ ${weekday} -le 5 ]; then
     tv_channel_id1=${CHANNEL_GR27}
     is_tv_channel1_muted=false
 
-  # 12:25~13:00 / BS NHK
+  # 12:25~13:00 / BS NHK(YouTubeミュート解除)
   elif [ $( echo "${now} < 13" | bc ) == 1 ]; then
     tv_channel_id1=${CHANNEL_BSBS15_0}
     is_youtube_muted=false
   
-  # 13:00~20:54 / NHK総合1
+  # 13:00~13:55 / NHK総合1
+  elif [ $( echo "${now} < 13.916" | bc ) == 1 ]; then
+    tv_channel_id1=${CHANNEL_GR27}
+  
+  # 13:55~14:00 / NHK総合1(体操)
+  elif [ $( echo "${now} < 14" | bc ) == 1 ]; then
+    tv_channel_id1=${CHANNEL_GR27}
+    is_tv_channel1_muted=false
+  
+  # 14:00~20:54 / NHK総合1
   elif [ $( echo "${now} < 20.9" | bc ) == 1 ]; then
     tv_channel_id1=${CHANNEL_GR27}
   
@@ -163,8 +192,8 @@ elif [ ${weekday} -le 7 ]; then
   # 12:00~12:15 / グリーンチャンネル + NHK
   elif [ $( echo "${now} < 12.25" | bc ) == 1 ]; then
     tv_channel_id1=${CHANNEL_BSBS21_2}
-    channel2_id=${CHANNEL_GR27}
-    channel2_muted=false
+    tv_channel_id2=${CHANNEL_GR27}
+    is_tv_channel2_muted=false
   
   # 12:15~17:00 / グリーンチャンネル
   elif [ $( echo "${now} < 17" | bc ) == 1 ]; then
