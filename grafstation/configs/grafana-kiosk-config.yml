@@ -4,5 +4,5 @@ general:
 
 target:
   login-method: anon
-  playlist: false
-  URL: http://localhost:3000/d/jTY6Raggz/life-metrics?orgId=1&refresh=5m
+  playlist: true
+  URL: http://hal-mini.local:3000/playlists/play/a985507d-3b0b-496a-b121-07fe2308dd66?autofitpanels

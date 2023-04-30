@@ -11,7 +11,6 @@ Usage
 Homebrew と Docker for Mac をインストールしておく。
 
 - [Homebrew — The Missing Package Manager for macOS (or Linux)](https://brew.sh/)
-  - 一緒に Command Line Tool も入れてくれる。
   - 最後の指示通りにPATHを通しておく。
     ```sh
     echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/${USER}/.zprofile
@@ -103,10 +102,9 @@ export TF_VAR_YOUTUBE_PLAYLIST_ID="..."
 ./apply.sh
 
 # applyはlaunchdで1分おきに実行させる
-erb ow_city="..." \
-    yt_playlist="..." \
-    user="${USER}" \
-    apply.plist.erb > "~/Library/LaunchAgents/io.lkj.life.dashboard.grafstation.grafana.apply.plist"
+OPENWEATHER_CITY="..." \
+YOUTUBE_PLAYLIST_ID="..." \
+envsubst < ./apply.plist > "~/Library/LaunchAgents/io.lkj.life.dashboard.grafstation.grafana.apply.plist"
 chmod 664 ${PLIST_PATH}
 
 launchctl unload -w ~/Library/LaunchAgents/io.lkj.life.dashboard.grafstation.grafana.apply.plist
