@@ -6,8 +6,6 @@
     <string>io.lkj.life.dashboard.grafstation.grafana.apply</string>
     <key>EnvironmentVariables</key>
     <dict>
-        <key>TF_VAR_GRAFANA_HOST</key>
-        <string>${HOST}:3000</string>
         <key>TF_VAR_TV_EPGSTATION_HOST</key>
         <string>${HOST}:8888</string>
         <key>TF_VAR_OPENWEATHER_CITY</key>
