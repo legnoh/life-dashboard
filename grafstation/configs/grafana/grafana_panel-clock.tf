@@ -1,5 +1,5 @@
 resource "grafana_library_panel" "clock" {
-  name = "時計"
+  name = "clock"
   model_json = jsonencode({
     type = "grafana-clock-panel",
     options = {

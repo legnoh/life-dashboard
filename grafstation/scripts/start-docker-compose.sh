@@ -5,10 +5,7 @@ set -e
 COMPOSE_FILE="${HOME}/life-dashboard/configs/docker-compose.yml"
 
 docker compose -f ${COMPOSE_FILE} pull
-docker compose -f ${COMPOSE_FILE} stop
-if [[ "${DOCKER_COMPOSE_RM}" == 'true' ]]; then
-  docker compose -f ${COMPOSE_FILE} rm -f
-fi
+docker compose -f ${COMPOSE_FILE} down -f
 docker compose -f ${COMPOSE_FILE} up -d
 docker ps
 

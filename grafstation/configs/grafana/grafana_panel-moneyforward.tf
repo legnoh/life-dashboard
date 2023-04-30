@@ -1,5 +1,5 @@
 resource "grafana_library_panel" "moneyforward-balancesheet" {
-  name = "MoneyForward - バランスシート"
+  name = "moneyforward-balancesheet"
   model_json = jsonencode(merge(local.common_base, local.stats_base, local.link.moneyforward, {
     title = "バランスシート",
     targets = [merge(local.target_base, {
@@ -24,7 +24,7 @@ resource "grafana_library_panel" "moneyforward-balancesheet" {
 }
 
 resource "grafana_library_panel" "moneyforward-balance" {
-  name = "MoneyForward - 当月収支"
+  name = "moneyforward-balance"
   model_json = jsonencode(merge(local.common_base, local.stats_base, local.link.moneyforward, {
     title = "当月収支",
     targets = [merge(local.target_base, {
@@ -49,7 +49,7 @@ resource "grafana_library_panel" "moneyforward-balance" {
 }
 
 resource "grafana_library_panel" "moneyforward-deposit-withdrawal" {
-  name = "MoneyForward - 引落残高チェック"
+  name = "moneyforward-deposit-withdrawal"
   model_json = jsonencode(merge(local.common_base, local.stats_base, local.link.moneyforward, {
     title = "残高足りる?",
     targets = [merge(local.target_base, {

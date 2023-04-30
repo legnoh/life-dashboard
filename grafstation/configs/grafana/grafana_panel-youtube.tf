@@ -1,5 +1,5 @@
 resource "grafana_library_panel" "youtube" {
-  name = "YouTube(playlist)"
+  name = "youtube"
   model_json = jsonencode({
     type        = "innius-video-panel",
     transparent = true,
@@ -12,7 +12,7 @@ resource "grafana_library_panel" "youtube" {
 }
 
 resource "grafana_library_panel" "youtube-muted" {
-  name = "YouTube(playlist/muted)"
+  name = "youtube-muted"
   model_json = jsonencode({
     type        = "innius-video-panel",
     transparent = true,
@@ -24,8 +24,21 @@ resource "grafana_library_panel" "youtube-muted" {
   })
 }
 
+# resource "grafana_library_panel" "youtube-daymode-muted" {
+#   name = "youtube-daymode-muted"
+#   model_json = jsonencode({
+#     type        = "innius-video-panel",
+#     transparent = true,
+#     options = {
+#       autoPlay  = true,
+#       videoType = "iframe",
+#       iframeURL = "https://www.youtube.com/embed/Q-sZipetAEc?mute=1&autoplay=1&loop=1&playsinline=1",
+#     },
+#   })
+# }
+
 resource "grafana_library_panel" "youtube-nightmode-muted" {
-  name = "YouTube(night)"
+  name = "youtube-nightmode-muted"
   model_json = jsonencode({
     type        = "innius-video-panel",
     transparent = true,

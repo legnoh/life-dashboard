@@ -1,5 +1,5 @@
 resource "grafana_library_panel" "openweather-temperature" {
-  name = "OpenWeather - 温度"
+  name = "openweather-temperature"
   model_json = jsonencode(merge(local.common_base, local.stats_base, local.link.openweather, {
     title = "外の温度",
     targets = [merge(local.target_base, {
