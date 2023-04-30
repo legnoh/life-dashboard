@@ -22,9 +22,9 @@
     <key>WorkingDirectory</key>
     <string>/Users/${USER}/ghq/github.com/legnoh/life-dashboard/grafstation/configs/grafana</string>
     <key>StandardOutPath</key>
-    <string>/var/log/grafana-apply.log</string>
+    <string>/tmp/grafana-apply.log</string>
     <key>StandardErrorPath</key>
-    <string>/var/log/grafana-apply.err</string>
+    <string>/tmp/grafana-apply.err</string>
     <key>StartCalendarInterval</key>
     <array>
         <dict>

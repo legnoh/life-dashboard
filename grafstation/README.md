@@ -104,7 +104,9 @@ export TF_VAR_YOUTUBE_PLAYLIST_ID="..."
 # applyはlaunchdで1分おきに実行させる
 OPENWEATHER_CITY="..." \
 YOUTUBE_PLAYLIST_ID="..." \
-envsubst < ./apply.plist > "~/Library/LaunchAgents/io.lkj.life.dashboard.grafstation.grafana.apply.plist"
+HOST=${HOST} \
+USER=${USER} \
+envsubst < ./apply.plist > ~/Library/LaunchAgents/io.lkj.life.dashboard.grafstation.grafana.apply.plist
 chmod 664 ${PLIST_PATH}
 
 launchctl unload -w ~/Library/LaunchAgents/io.lkj.life.dashboard.grafstation.grafana.apply.plist
