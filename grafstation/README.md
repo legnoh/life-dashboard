@@ -62,8 +62,6 @@ cp -r grafstation/configs/tado-monitor ${HOME}/life-dashboard/configs/
 cp -r grafstation/configs/epgstation ${HOME}/life-dashboard/epgstation/config
 cp -r grafstation/configs/docker-compose.yml ${HOME}/life-dashboard/configs/
 cp -r grafstation/configs/prometheus.yml ${HOME}/life-dashboard/prometheus/
-cp -r grafstation/configs/grafana-kiosk-config.yml ${HOME}/.grafana-kiosk-config.yml
-
 exit
 ```
 
@@ -95,18 +93,13 @@ exit
 
 ```sh
 ghq get -l https://github.com/legnoh/life-dashboard.git
-cd grafstation/configs/grafana
 
-export TF_VAR_OPENWEATHER_CITY="${OPENWEATHER_CITY}"
-export TF_VAR_YOUTUBE_PLAYLIST_ID="..."
-./apply.sh
-
-# applyはlaunchdで1分おきに実行させる
+# applyをlaunchdで1分おきに実行させる
 OPENWEATHER_CITY="..." \
 YOUTUBE_PLAYLIST_ID="..." \
 HOST=${HOST} \
 USER=${USER} \
-envsubst < ./apply.plist > ~/Library/LaunchAgents/io.lkj.life.dashboard.grafstation.grafana.apply.plist
+envsubst < ./grafstation/configs/grafana/apply.plist > ~/Library/LaunchAgents/io.lkj.life.dashboard.grafstation.grafana.apply.plist
 chmod 664 ${PLIST_PATH}
 
 launchctl unload -w ~/Library/LaunchAgents/io.lkj.life.dashboard.grafstation.grafana.apply.plist
@@ -119,6 +112,9 @@ tail -f "/tmp/grafana-apply.log"
 ### grafana-kiosk 起動/再起動
 
 ```sh
+GRAFANA_PLAYLIST=$(curl -s "http://localhost:3000/api/playlists" | jq -r ".[0].uid") \
+HOST=${HOST} \
+envsubst < grafstation/configs/grafana-kiosk-config.yml > ${HOME}/.grafana-kiosk-config.yml
+
 brew services start grafana-kiosk
-brew seavices restart grafana-kiosk
 ```

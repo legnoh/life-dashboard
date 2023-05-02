@@ -1,15 +1,12 @@
 global:
-  scrape_interval:     15s 
-  evaluation_interval: 15s 
+  evaluation_interval: 15s
   external_labels:
       monitor: 'codelab-monitor'
 
 scrape_configs:
   - job_name: 'asken'
-    metrics_path: /asken.prom
     static_configs:
-      - targets: [ staticfile-exporter:80 ]
-    scrape_interval: 300s
+      - targets: [ asken-exporter:8000 ]
   - job_name: 'moneyforward'
     metrics_path: /moneyforward.prom
     static_configs:
@@ -22,7 +19,6 @@ scrape_configs:
     - source_labels: [__name__]
       regex: '(go|process|promhttp)_(.*)'
       action: drop
-    scrape_interval: 60s
   - job_name: 'smartmeter'
     static_configs:
       - targets: [ 'mirasmart.local:9107' ]
@@ -30,7 +26,6 @@ scrape_configs:
     - source_labels: [__name__]
       regex: '(go|process|python|promhttp)_(.*)'
       action: drop
-    scrape_interval: 60s
   - job_name: 'snmp'
     metrics_path: "/snmp"
     params:
@@ -48,7 +43,6 @@ scrape_configs:
       script: [speedtest]
     static_configs:
       - targets: [ 'speedtest-exporter:9469' ]
-    scrape_interval: 60m
     scrape_timeout: 90s
   - job_name: 'tado'
     static_configs:
@@ -57,11 +51,9 @@ scrape_configs:
     - source_labels: [__name__]
       regex: '(go|process|promhttp)_(.*)'
       action: drop
-    scrape_interval: 60s
   - job_name: 'todoist'
     static_configs:
       - targets: [ 'todoist-exporter:8000' ]
-    scrape_interval: 60s
   - job_name: 'withings'
     static_configs:
       - targets: [ withings-exporter:8000 ]

@@ -23,4 +23,4 @@ jobs:
       uses: google-github-actions/setup-gcloud@v1
     - name: Download JSON from GCS
       run: |
-        gsutil cp gs://${{ secrets.GCP_BUCKET_NAME }}/*.prom docker/staticfile-exporter/metrics
+        gsutil cp gs://${{ secrets.GCP_BUCKET_NAME }}/moneyforward.prom docker/staticfile-exporter/metrics

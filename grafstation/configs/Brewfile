@@ -20,4 +20,3 @@ cask 'google-cloud-sdk'
 cask 'logi-options-plus'
 
 mas 'Genki Arcade', id:1555925018
-mas 'OverPicture for Safari', id:1188020834

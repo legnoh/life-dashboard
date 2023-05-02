@@ -32,6 +32,14 @@ services:
       - GF_INSTALL_PLUGINS=grafana-clock-panel,innius-video-panel,aidanmountford-html-panel
     volumes:
       - /Users/${USER}/life-dashboard/configs/grafana/grafana.ini:/etc/grafana/grafana.ini
+  asken-exporter:
+    container_name: asken-exporter
+    image: legnoh/asken-exporter
+    ports: [ "9109:8000" ]
+    restart: always
+    environment:
+    - ASKEN_USERNAME=${ASKEN_USERNAME}
+    - ASKEN_PASSWORD=${ASKEN_PASSWORD}
   openweather-exporter:
     container_name: openweather-exporter
     image: legnoh/openweather-exporter
