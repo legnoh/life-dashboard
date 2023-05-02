@@ -43,7 +43,7 @@ scrape_configs:
       script: [speedtest]
     static_configs:
       - targets: [ 'speedtest-exporter:9469' ]
-    scrape_timeout: 90s
+    scrape_timeout: 180s
   - job_name: 'tado'
     static_configs:
       - targets: [ 'tado-monitor:8080' ]
