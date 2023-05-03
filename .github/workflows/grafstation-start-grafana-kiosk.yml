@@ -14,6 +14,7 @@ on:
 jobs:
   setup:
     runs-on: [self-hosted, grafstation]
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     defaults:
       run:
         working-directory: ./grafstation

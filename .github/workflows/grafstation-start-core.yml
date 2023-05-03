@@ -20,11 +20,13 @@ on:
   workflow_run:
     workflows:
     - Generate SNMP config
+    - Start mirasmart
     types: [ completed ]
 
 jobs:
   setup:
     runs-on: [self-hosted, grafstation]
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     defaults:
       run:
         working-directory: ./grafstation
