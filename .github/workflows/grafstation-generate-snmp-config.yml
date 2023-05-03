@@ -8,7 +8,7 @@ on:
     - main
     paths:
     - '.github/workflows/grafstation-generate-snmp-config.yml'
-    - 'grafstation/scripts/snmp'
+    - 'grafstation/scripts/snmp/**'
   workflow_run:
     workflows:
     - Install core packages
