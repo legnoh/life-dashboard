@@ -27,7 +27,7 @@ jobs:
       run: |
         GRAFANA_PLAYLIST=$(curl -s -u admin:admin "http://localhost:3000/api/playlists" | jq -r ".[0].uid") \
         HOST=${HOST} \
-        envsubst < configs/grafana-kiosk-config.yml
+        envsubst < ./configs/grafana-kiosk-config.yml
         > ${HOME}/.grafana-kiosk-config.yml
 
     - name: Setup grafana-kiosk
