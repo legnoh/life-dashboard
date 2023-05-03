@@ -1,4 +1,4 @@
 provider "grafana" {
   url  = "http://${var.GRAFANA_HOST}/"
-  auth = "anonymous"
+  auth = "admin:admin"
 }

@@ -1,3 +1,3 @@
-resource "grafana_folder" "service" {
-  title = "service"
+resource "grafana_folder" "general" {
+  title = "General"
 }

@@ -30,8 +30,6 @@ services:
     restart: always
     environment:
       - GF_INSTALL_PLUGINS=grafana-clock-panel,innius-video-panel,aidanmountford-html-panel
-    volumes:
-      - /Users/${USER}/life-dashboard/configs/grafana/grafana.ini:/etc/grafana/grafana.ini
   asken-exporter:
     container_name: asken-exporter
     image: legnoh/asken-exporter

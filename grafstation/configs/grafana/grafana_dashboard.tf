@@ -1,5 +1,5 @@
 resource "grafana_dashboard" "life-metrics" {
-  folder = grafana_folder.service.id
+  folder = grafana_folder.general.id
   config_json = jsonencode({
     title       = "life-metrics",
     description = "Now Channel: ${var.TV_CHANNEL_ID1}",
