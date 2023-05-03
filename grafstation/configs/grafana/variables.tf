@@ -5,7 +5,7 @@ variable "GRAFANA_HOST" {
 
 variable "TV_EPGSTATION_HOST" {
   type = string
-  default = "localhost:8888"
+  default = "grafstation.local:8888"
 }
 
 variable "TV_CHANNEL_ID1" {
@@ -30,6 +30,7 @@ variable "IS_TV_CHANNEL2_MUTED" {
 
 variable "YOUTUBE_PLAYLIST_ID" {
   type    = string
+  default = ""
 }
 
 variable "IS_YOUTUBE_MUTED" {

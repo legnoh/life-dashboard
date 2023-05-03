@@ -24,8 +24,6 @@ jobs:
       uses: actions/checkout@v3
     
     - name: Upgrade .terraform.lock.hcl
-      env:
-        TF_VAR_YOUTUBE_PLAYLIST_ID: ${{ secrets.YOUTUBE_PLAYLIST_ID }}
       run: |
         terraform init -upgrade
         terraform plan
@@ -39,12 +37,13 @@ jobs:
         OPENWEATHER_CITY: ${{ secrets.OPENWEATHER_CITY }}
         YOUTUBE_PLAYLIST_ID: ${{ secrets.YOUTUBE_PLAYLIST_ID }}
         LIST_PATH: "Library/LaunchAgents/io.lkj.life.dashboard.grafstation.grafana.apply.plist"
+        GRAFSTATION_HOST: "grafstation.local"
       run: |
         export PLIST_PATH="${HOME}/${LIST_PATH}"
 
         OPENWEATHER_CITY="${OPENWEATHER_CITY}" \
         YOUTUBE_PLAYLIST_ID="${YOUTUBE_PLAYLIST_ID}" \
-        HOST=${HOST} \
+        HOST=${GRAFSTATION_HOST} \
         USER=${USER} \
         envsubst < apply.plist > ${PLIST_PATH}
 
