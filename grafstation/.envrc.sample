@@ -1,3 +1,5 @@
+export ASKEN_USERNAME="..."
+export ASKEN_PASSWORD="..."
 export OPENWEATHER_API_KEY="..."
 export OPENWEATHER_CITY="Tokyo, JP"
 export SPEEDTEST_SERVER_IDS=14623

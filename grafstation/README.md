@@ -57,11 +57,7 @@ exit
 
 ```sh
 ghq get -l https://github.com/legnoh/life-dashboard.git
-cp -r grafstation/configs/grafana ${HOME}/life-dashboard/configs/
-cp -r grafstation/configs/tado-monitor ${HOME}/life-dashboard/configs/
-cp -r grafstation/configs/epgstation ${HOME}/life-dashboard/epgstation/config
-cp -r grafstation/configs/docker-compose.yml ${HOME}/life-dashboard/configs/
-cp -r grafstation/configs/prometheus.yml ${HOME}/life-dashboard/prometheus/
+cp -r grafstation/configs/* ${HOME}/life-dashboard/
 exit
 ```
 
@@ -70,6 +66,8 @@ exit
 ```sh
 ghq get -l https://github.com/legnoh/life-dashboard.git
 
+export ASKEN_USERNAME="..."
+export ASKEN_PASSWORD="..."
 export OPENWEATHER_CITY="..."
 export OPENWEATHER_API_KEY="..."
 export SPEEDTEST_SERVER_IDS="..."

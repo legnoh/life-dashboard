@@ -1,3 +1,4 @@
+# Create a grafana-kiosk user to bypass the admin password reset UI
 resource "grafana_user" "kiosk" {
   email    = "kiosk@localhost"
   name     = "grafana-kiosk"
