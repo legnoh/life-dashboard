@@ -5,7 +5,14 @@ set -e
 COMPOSE_FILE="${HOME}/life-dashboard/configs/docker-compose.yml"
 
 docker compose -f ${COMPOSE_FILE} pull
-docker compose -f ${COMPOSE_FILE} down
+
+if [[ "${RECREATE_CONTAINER}" == 'true' ]]; then
+  docker compose -f ${COMPOSE_FILE} down
+  rm -rf /tmp/terraform.tfstate*
+else
+  docker compose -f ${COMPOSE_FILE} stop
+fi
+
 docker compose -f ${COMPOSE_FILE} up -d
 docker ps
 
