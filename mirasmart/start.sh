@@ -3,10 +3,13 @@
 set -eu
 
 sudo docker compose pull
-sudo docker compose stop
-if [[ "${DOCKER_COMPOSE_RM}" == 'true' ]]; then
-  sudo docker compose rm -f
+
+if [[ "${RECREATE_CONTAINER}" == 'true' ]]; then
+  sudo docker compose down
+else
+  sudo docker compose stop
 fi
+
 sudo docker compose up -d
 sudo docker ps
 

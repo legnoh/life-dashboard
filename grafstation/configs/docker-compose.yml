@@ -6,30 +6,30 @@ services:
     ports: ["8888:8888", "8889:8889"]
     restart: always
     environment:
-        TZ: Asia/Tokyo
+      TZ: Asia/Tokyo
     volumes:
-        - /etc/localtime:/etc/localtime:ro
-        - /Users/${USER}/life-dashboard/epgstation/config:/opt/epgstation/config
-        - /Users/${USER}/life-dashboard/epgstation/data:/opt/epgstation/data
-        - /Users/${USER}/life-dashboard/epgstation/drop:/opt/epgstation/drop
-        - /Users/${USER}/life-dashboard/epgstation/img:/opt/epgstation/img
-        - /Users/${USER}/life-dashboard/epgstation/thumbnail:/opt/epgstation/thumbnail
-        - /Users/${USER}/life-dashboard/epgstation/logs:/opt/epgstation/logs
-        - /Users/${USER}/life-dashboard/epgstation/recorded:/opt/epgstation/recorded
+    - /etc/localtime:/etc/localtime:ro
+    - /Users/${USER}/life-dashboard/epgstation/config:/opt/epgstation/config
+    - /Users/${USER}/life-dashboard/epgstation/data:/opt/epgstation/data
+    - /Users/${USER}/life-dashboard/epgstation/drop:/opt/epgstation/drop
+    - /Users/${USER}/life-dashboard/epgstation/img:/opt/epgstation/img
+    - /Users/${USER}/life-dashboard/epgstation/thumbnail:/opt/epgstation/thumbnail
+    - /Users/${USER}/life-dashboard/epgstation/logs:/opt/epgstation/logs
+    - /Users/${USER}/life-dashboard/epgstation/recorded:/opt/epgstation/recorded
   prometheus:
     container_name: prometheus
     image: prom/prometheus
     ports: [ 9090:9090 ]
     restart: always
     volumes:
-      - /Users/${USER}/life-dashboard/prometheus/:/etc/prometheus/
+    - /Users/${USER}/life-dashboard/prometheus/:/etc/prometheus/
   grafana:
     container_name: grafana
     image: grafana/grafana
     ports: [ 3000:3000 ]
     restart: always
     environment:
-      - GF_INSTALL_PLUGINS=grafana-clock-panel,innius-video-panel,aidanmountford-html-panel
+    - GF_INSTALL_PLUGINS=grafana-clock-panel,innius-video-panel,aidanmountford-html-panel
   asken-exporter:
     container_name: asken-exporter
     image: legnoh/asken-exporter
@@ -38,6 +38,14 @@ services:
     environment:
     - ASKEN_USERNAME=${ASKEN_USERNAME}
     - ASKEN_PASSWORD=${ASKEN_PASSWORD}
+  moneyforward-exporter:
+    container_name: moneyforward-exporter
+    image: legnoh/moneyforward-exporter
+    ports: [ "9110:8000" ]
+    restart: always
+    environment:
+    - MONEYFORWARD_EMAIL=${MONEYFORWARD_EMAIL}
+    - MONEYFORWARD_PASSWORD=${MONEYFORWARD_PASSWORD}
   openweather-exporter:
     container_name: openweather-exporter
     image: legnoh/openweather-exporter
@@ -54,7 +62,7 @@ services:
     ports: [ 9106:9116 ]
     restart: always
     volumes:
-      - /Users/${USER}/life-dashboard/configs/snmp.yml:/etc/snmp_exporter/snmp.yml
+    - /Users/${USER}/life-dashboard/configs/snmp.yml:/etc/snmp_exporter/snmp.yml
   speedtest-exporter:
     container_name: speedtest-exporter
     image: billimek/prometheus-speedtest-exporter:latest
@@ -62,14 +70,7 @@ services:
     ports: [ 9469:9469 ]
     restart: always
     environment:
-      - server_ids=${SPEEDTEST_SERVER_IDS}
-  staticfile-exporter:
-    container_name: staticfile-exporter
-    image: nginx:stable
-    ports: [ 9101:80 ]
-    restart: always
-    volumes:
-      - /Users/${USER}/life-dashboard/metrics:/usr/share/nginx/html:ro
+    - server_ids=${SPEEDTEST_SERVER_IDS}
   tado-monitor:
     container_name: tado-monitor
     image: clambin/tado-monitor
@@ -78,10 +79,10 @@ services:
     ports: [ 9104:8080 ]
     restart: always
     environment:
-      - TADO_USERNAME=${TADO_USERNAME}
-      - TADO_PASSWORD=${TADO_PASSWORD}
+    - TADO_USERNAME=${TADO_USERNAME}
+    - TADO_PASSWORD=${TADO_PASSWORD}
     volumes:
-      - /Users/${USER}/life-dashboard/configs/tado-monitor:/etc/tado-monitor
+    - /Users/${USER}/life-dashboard/configs/tado-monitor:/etc/tado-monitor
   todoist-exporter:
     container_name: todoist-exporter
     image: legnoh/todoist-exporter:latest
@@ -89,7 +90,7 @@ services:
     ports: [ 9102:8000 ]
     restart: always
     environment:
-      - TODOIST_API_KEY=${TODOIST_API_KEY}
+    - TODOIST_API_KEY=${TODOIST_API_KEY}
   withings-exporter:
     container_name: withings-exporter
     image: legnoh/withings-exporter:latest
@@ -97,14 +98,14 @@ services:
     ports: [ 9108:8000 ]
     restart: always
     environment:
-      - TZ=${WITHINGS_TZ}
-      - WITHINGS_CLIENT_ID=${WITHINGS_CLIENT_ID}
-      - WITHINGS_CONSUMER_SECRET=${WITHINGS_CONSUMER_SECRET}
-      - WITHINGS_ACCESS_TOKEN=${WITHINGS_ACCESS_TOKEN}
-      - WITHINGS_TOKEN_TYPE=Bearer
-      - WITHINGS_REFRESH_TOKEN=${WITHINGS_REFRESH_TOKEN}
-      - WITHINGS_USERID=${WITHINGS_USERID}
-      - WITHINGS_EXPIRES_IN=10800
-      - WITHINGS_CREATED=${WITHINGS_CREATED}
+    - TZ=${WITHINGS_TZ}
+    - WITHINGS_CLIENT_ID=${WITHINGS_CLIENT_ID}
+    - WITHINGS_CONSUMER_SECRET=${WITHINGS_CONSUMER_SECRET}
+    - WITHINGS_ACCESS_TOKEN=${WITHINGS_ACCESS_TOKEN}
+    - WITHINGS_TOKEN_TYPE=Bearer
+    - WITHINGS_REFRESH_TOKEN=${WITHINGS_REFRESH_TOKEN}
+    - WITHINGS_USERID=${WITHINGS_USERID}
+    - WITHINGS_EXPIRES_IN=10800
+    - WITHINGS_CREATED=${WITHINGS_CREATED}
     volumes:
-      - /Users/${USER}/life-dashboard/withings:/usr/src/app/config/tmp
+    - /Users/${USER}/life-dashboard/withings:/usr/src/app/config/tmp

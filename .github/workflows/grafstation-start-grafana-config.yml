@@ -1,0 +1,45 @@
+name: Start Grafana Config Daemon
+
+on:
+  push:
+    branches:
+    - main
+    paths:
+    - 'grafstation/configs/grafana'
+  workflow_dispatch:
+  workflow_run:
+    workflows: [ Start grafstation ]
+    types: [ completed ]
+
+jobs:
+  setup:
+    runs-on: [self-hosted, grafstation]
+    defaults:
+      run:
+        working-directory: ./grafstation
+    steps:
+
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: copy configs
+      run: |
+        cp -r configs/grafana ${HOME}/life-dashboard/configs/
+
+    - name: start terraform daemon
+      env:
+        OPENWEATHER_CITY: ${{ secrets.OPENWEATHER_CITY }}
+        YOUTUBE_PLAYLIST_ID: ${{ secrets.YOUTUBE_PLAYLIST_ID }}
+      run: |
+        export PLIST_PATH="${HOME}/Library/LaunchAgents/io.lkj.life.dashboard.grafstation.grafana.apply.plist"
+
+        OPENWEATHER_CITY="${OPENWEATHER_CITY}" \
+        YOUTUBE_PLAYLIST_ID="${YOUTUBE_PLAYLIST_ID}" \
+        HOST=${HOST} \
+        USER=${USER} \
+        envsubst < ./configs/grafana/apply.plist > ${PLIST_PATH}
+
+        chmod 664 ${PLIST_PATH}
+        launchctl unload -w ${PLIST_PATH}
+        plutil -lint ${PLIST_PATH}
+        launchctl load -w ${PLIST_PATH}

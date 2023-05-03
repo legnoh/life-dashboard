@@ -16,7 +16,6 @@ brew 'yq'
 cask 'docker'
 cask 'flux'
 cask 'google-chrome'
-cask 'google-cloud-sdk'
 cask 'logi-options-plus'
 
 mas 'Genki Arcade', id:1555925018

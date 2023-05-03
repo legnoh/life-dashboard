@@ -10,9 +10,8 @@ scrape_configs:
       - targets: [ asken-exporter:8000 ]
     scrape_interval: 300s
   - job_name: 'moneyforward'
-    metrics_path: /moneyforward.prom
     static_configs:
-      - targets: [ staticfile-exporter:80 ]
+      - targets: [ moneyforward-exporter:8000 ]
     scrape_interval: 300s
   - job_name: 'openweather'
     static_configs:
@@ -34,7 +33,7 @@ scrape_configs:
     metrics_path: "/snmp"
     params:
       module: [ nvr510 ]
-      target: [ 192.168.100.1 ]
+      target: [ setup.netvolante.jp ]
     static_configs:
       - targets: [ 'snmp-exporter:9116' ]
     metric_relabel_configs:

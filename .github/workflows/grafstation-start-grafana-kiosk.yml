@@ -1,0 +1,35 @@
+name: Start Grafana KIOSK setting
+
+on:
+  push:
+    branches:
+    - main
+    paths:
+    - 'grafstation/configs/grafana-kiosk-config.yml'
+  workflow_dispatch:
+  workflow_run:
+    workflows: [ Start Grafana Config Daemon ]
+    types: [ completed ]
+
+jobs:
+  setup:
+    runs-on: [self-hosted, grafstation]
+    defaults:
+      run:
+        working-directory: ./grafstation
+    steps:
+
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Create .grafana-kiosk.config.yml
+      run: |
+        GRAFANA_PLAYLIST=$(curl -s -u admin:admin "http://localhost:3000/api/playlists" | jq -r ".[0].uid") \
+        HOST=${HOST} \
+        envsubst < configs/grafana-kiosk-config.yml
+        > ${HOME}/.grafana-kiosk-config.yml
+
+    - name: Setup grafana-kiosk
+      run: |
+        brew services stop grafana-kiosk
+        brew services start grafana-kiosk

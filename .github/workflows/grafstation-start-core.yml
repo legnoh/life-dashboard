@@ -1,0 +1,64 @@
+name: Start grafstation
+
+on:
+  push:
+    branches:
+    - main
+    paths:
+    - '.github/workflows/grafstation-start-core.yml'
+    - 'grafstation/configs/epgstation'
+    - 'grafstation/configs/tado-monitor'
+    - 'grafstation/configs/docker-compose.yml'
+    - 'grafstation/configs/prometheus.yml'
+    - 'grafstation/start.sh'
+  workflow_dispatch:
+    inputs:
+      rm_state:
+        description: 'inject docker compose down'
+        type: boolean
+        default: false
+  workflow_run:
+    workflows:
+    - Generate SNMP config
+    types: [ completed ]
+
+jobs:
+  setup:
+    runs-on: [self-hosted, grafstation]
+    defaults:
+      run:
+        working-directory: ./grafstation
+    steps:
+
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Copy configs
+      run: |
+        mkdir -p ${HOME}/life-dashboard/{epgstation/{data/{key,streamfiles},drop,img,thumbnail,logs/{EPGUpdater,Operator,Service},recorded},prometheus,configs,withings}
+        cp -r configs/tado-monitor ${HOME}/life-dashboard/configs/
+        cp -r configs/epgstation ${HOME}/life-dashboard/epgstation/config
+        cp -r configs/docker-compose.yml ${HOME}/life-dashboard/configs/
+        cp -r configs/prometheus.yml ${HOME}/life-dashboard/prometheus/prometheus.yml
+
+    - name: Start docker images
+      env:
+        RECREATE_CONTAINER: ${{ inputs.rm_state }}
+        ASKEN_PASSWORD: ${{ secrets.ASKEN_PASSWORD }}
+        ASKEN_USERNAME: ${{ secrets.ASKEN_USERNAME }}
+        MONEYFORWARD_EMAIL: ${{ secrets.MONEYFORWARD_EMAIL }}
+        MONEYFORWARD_PASSWORD: ${{ secrets.MONEYFORWARD_PASSWORD }}
+        OPENWEATHER_CITY: ${{ secrets.OPENWEATHER_CITY }}
+        OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
+        SPEEDTEST_SERVER_IDS: ${{ secrets.SPEEDTEST_SERVER_IDS }}
+        TADOAC_PASSWORD: ${{ secrets.TADOAC_PASSWORD }}
+        TADOAC_USERNAME: ${{ secrets.TADOAC_USERNAME }}
+        TODOIST_API_KEY: ${{ secrets.TODOIST_API_KEY }}
+        WITHINGS_ACCESS_TOKEN: ${{ secrets.WITHINGS_ACCESS_TOKEN }}
+        WITHINGS_CLIENT_ID: ${{ secrets.WITHINGS_CLIENT_ID }}
+        WITHINGS_CONSUMER_SECRET: ${{ secrets.WITHINGS_CONSUMER_SECRET }}
+        WITHINGS_CREATED: ${{ secrets.WITHINGS_CREATED }}
+        WITHINGS_REFRESH_TOKEN: ${{ secrets.WITHINGS_REFRESH_TOKEN }}
+        WITHINGS_USERID: ${{ secrets.WITHINGS_USERID }}
+      run: |
+        ./start.sh

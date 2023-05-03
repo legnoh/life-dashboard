@@ -1,4 +1,4 @@
-name: Restart mirasmart
+name: Start mirasmart
 
 on:
   push:
@@ -9,22 +9,25 @@ on:
   workflow_dispatch:
     inputs:
       rm_state:
-        description: 'inject docker compose rm'
+        description: 'inject docker compose down'
         type: boolean
         default: false
 
 jobs:
-  restart:
+  setup:
     runs-on: [self-hosted, mirasmart]
     defaults:
       run:
         working-directory: ./mirasmart
     steps:
-    - uses: actions/checkout@v3
+
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+    
     - name: start docker images
       env:
-        DOCKER_COMPOSE_RM: ${{ inputs.rm_state }}
+        RECREATE_CONTAINER: ${{ inputs.rm_state }}
         SMARTMETER_ID: ${{ secrets.SMARTMETER_ID }}
         SMARTMETER_PASSWORD: ${{ secrets.SMARTMETER_PASSWORD }}
       run: |
-        ./mirasmart/start.sh
+        ./start.sh
