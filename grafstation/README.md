@@ -112,7 +112,7 @@ tail -f "/tmp/grafana-apply.log"
 ### grafana-kiosk 起動/再起動
 
 ```sh
-GRAFANA_PLAYLIST=$(curl -s "http://localhost:3000/api/playlists" | jq -r ".[0].uid") \
+GRAFANA_PLAYLIST=$(curl -s -u admin:admin "http://localhost:3000/api/playlists" | jq -r ".[0].uid") \
 HOST=${HOST} \
 envsubst < grafstation/configs/grafana-kiosk-config.yml > ${HOME}/.grafana-kiosk-config.yml
 

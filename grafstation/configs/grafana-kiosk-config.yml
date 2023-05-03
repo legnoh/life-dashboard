@@ -4,7 +4,7 @@ general:
 
 target:
   login-method: local
-  username: admin
-  password: admin
+  username: grafana-kiosk
+  password: grafana-kiosk
   playlist: true
   URL: http://${HOST}:3000/playlists/play/${GRAFANA_PLAYLIST}?autofitpanels
