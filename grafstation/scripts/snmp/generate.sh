@@ -39,6 +39,6 @@ modules:
       context_name: ${SNMP_CONTEXT_NAME}
 EOS
 
-docker run -it -v "${PWD}:/opt" prom/snmp-generator generate
+docker run -i -v "${PWD}:/opt" prom/snmp-generator generate
 
 cp -r snmp.yml ${HOME}/life-dashboard/configs/snmp.yml
