@@ -26,7 +26,7 @@ on:
 jobs:
   setup:
     runs-on: [self-hosted, grafstation]
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event.push }} || ${{ github.event.workflow_dispatch }} || ${{ github.event.workflow_run.conclusion == 'success' }}
     defaults:
       run:
         working-directory: ./grafstation
@@ -53,14 +53,15 @@ jobs:
         OPENWEATHER_CITY: ${{ secrets.OPENWEATHER_CITY }}
         OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
         SPEEDTEST_SERVER_IDS: ${{ secrets.SPEEDTEST_SERVER_IDS }}
-        TADOAC_PASSWORD: ${{ secrets.TADOAC_PASSWORD }}
-        TADOAC_USERNAME: ${{ secrets.TADOAC_USERNAME }}
+        TADO_PASSWORD: ${{ secrets.TADO_PASSWORD }}
+        TADO_USERNAME: ${{ secrets.TADO_USERNAME }}
         TODOIST_API_KEY: ${{ secrets.TODOIST_API_KEY }}
         WITHINGS_ACCESS_TOKEN: ${{ secrets.WITHINGS_ACCESS_TOKEN }}
         WITHINGS_CLIENT_ID: ${{ secrets.WITHINGS_CLIENT_ID }}
         WITHINGS_CONSUMER_SECRET: ${{ secrets.WITHINGS_CONSUMER_SECRET }}
         WITHINGS_CREATED: ${{ secrets.WITHINGS_CREATED }}
         WITHINGS_REFRESH_TOKEN: ${{ secrets.WITHINGS_REFRESH_TOKEN }}
+        WITHINGS_TZ: ${{ secrets.WITHINGS_TZ }}
         WITHINGS_USERID: ${{ secrets.WITHINGS_USERID }}
       run: |
         ./start.sh
