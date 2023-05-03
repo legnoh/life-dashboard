@@ -3,6 +3,8 @@ general:
   autofit: true
 
 target:
-  login-method: anon
+  login-method: local
+  username: admin
+  password: admin
   playlist: true
   URL: http://${HOST}:3000/playlists/play/${GRAFANA_PLAYLIST}?autofitpanels

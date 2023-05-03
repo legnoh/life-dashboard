@@ -234,4 +234,5 @@ for var in ${TFVARS[@]}; do
 done
 
 # 設定反映
+${TF} init ${TF_OPTIONS}
 ${TF} apply ${TF_OPTIONS}
