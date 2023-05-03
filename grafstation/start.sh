@@ -13,7 +13,7 @@ else
   docker compose -f ${COMPOSE_FILE} stop
 fi
 
-docker compose -f ${COMPOSE_FILE} up -d
+docker compose -f ${COMPOSE_FILE} up -d --remove-orphans
 docker ps
 
 docker system prune -f --all --volumes
