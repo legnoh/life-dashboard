@@ -16,28 +16,34 @@ jobs:
     runs-on: [self-hosted, grafstation]
     defaults:
       run:
-        working-directory: ./grafstation
+        working-directory: ./grafstation/configs/grafana
     steps:
 
     - name: Checkout Repository
       uses: actions/checkout@v3
+    
+    - name: Upgrade .terraform.lock.hcl
+      run: |
+        terraform init -upgrade
+        terraform plan
 
     - name: copy configs
       run: |
-        cp -r configs/grafana ${HOME}/life-dashboard/configs/
+        cp -r ../grafana ${HOME}/life-dashboard/configs/
 
     - name: start terraform daemon
       env:
         OPENWEATHER_CITY: ${{ secrets.OPENWEATHER_CITY }}
         YOUTUBE_PLAYLIST_ID: ${{ secrets.YOUTUBE_PLAYLIST_ID }}
+        LIST_PATH: "Library/LaunchAgents/io.lkj.life.dashboard.grafstation.grafana.apply.plist"
       run: |
-        export PLIST_PATH="${HOME}/Library/LaunchAgents/io.lkj.life.dashboard.grafstation.grafana.apply.plist"
+        export PLIST_PATH="${HOME}/${LIST_PATH}"
 
         OPENWEATHER_CITY="${OPENWEATHER_CITY}" \
         YOUTUBE_PLAYLIST_ID="${YOUTUBE_PLAYLIST_ID}" \
         HOST=${HOST} \
         USER=${USER} \
-        envsubst < ./configs/grafana/apply.plist > ${PLIST_PATH}
+        envsubst < apply.plist > ${PLIST_PATH}
 
         chmod 664 ${PLIST_PATH}
         launchctl unload -w ${PLIST_PATH}
