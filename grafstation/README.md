@@ -57,7 +57,11 @@ exit
 
 ```sh
 ghq get -l https://github.com/legnoh/life-dashboard.git
-cp -r grafstation/configs/* ${HOME}/life-dashboard/
+cp -r grafstation/configs/grafana ${HOME}/life-dashboard/configs/
+cp -r grafstation/configs/tado-monitor ${HOME}/life-dashboard/configs/
+cp -r grafstation/configs/epgstation ${HOME}/life-dashboard/epgstation/config
+cp -r grafstation/configs/docker-compose.yml ${HOME}/life-dashboard/configs/
+cp -r grafstation/configs/prometheus.yml ${HOME}/life-dashboard/prometheus/
 exit
 ```
 
@@ -92,17 +96,19 @@ exit
 ```sh
 ghq get -l https://github.com/legnoh/life-dashboard.git
 
+PLIST_PATH="${HOME}/Library/LaunchAgents/io.lkj.life.dashboard.grafstation.grafana.apply.plist"
+
 # applyをlaunchdで1分おきに実行させる
 OPENWEATHER_CITY="..." \
 YOUTUBE_PLAYLIST_ID="..." \
 HOST=${HOST} \
 USER=${USER} \
-envsubst < ./grafstation/configs/grafana/apply.plist > ~/Library/LaunchAgents/io.lkj.life.dashboard.grafstation.grafana.apply.plist
+envsubst < ./grafstation/configs/grafana/apply.plist > ${PLIST_PATH}
 chmod 664 ${PLIST_PATH}
 
-launchctl unload -w ~/Library/LaunchAgents/io.lkj.life.dashboard.grafstation.grafana.apply.plist
-plutil -lint ~/Library/LaunchAgents/io.lkj.life.dashboard.grafstation.grafana.apply.plist
-launchctl load -w ~/Library/LaunchAgents/io.lkj.life.dashboard.grafstation.grafana.apply.plist
+launchctl unload -w ${PLIST_PATH}
+plutil -lint ${PLIST_PATH}
+launchctl load -w ${PLIST_PATH}
 
 tail -f "/tmp/grafana-apply.log"
 ```
