@@ -18,7 +18,7 @@
         <string>/Users/${USER}/life-dashboard/configs/grafana/apply.sh</string>
     </array>
     <key>WorkingDirectory</key>
-    <string>/Users/${USER}/life-dashboard/configs/grafana/configs/grafana</string>
+    <string>/Users/${USER}/life-dashboard/configs/grafana</string>
     <key>StandardOutPath</key>
     <string>/tmp/grafana-apply.log</string>
     <key>StandardErrorPath</key>
