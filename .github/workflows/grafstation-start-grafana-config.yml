@@ -5,7 +5,7 @@ on:
     branches:
     - main
     paths:
-    - 'grafstation/configs/grafana'
+    - 'grafstation/configs/grafana/**'
   workflow_dispatch:
   workflow_run:
     workflows: [ Start grafstation ]
