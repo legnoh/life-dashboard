@@ -16,7 +16,7 @@ resource "grafana_dashboard" "life-metrics" {
           :
             grafana_library_panel.youtube-nightmode-muted.uid
         ])
-        gridPos = { h = 8, w = 9, x = 0, y = 0 }
+        gridPos = { h = 7, w = 9, x = 0, y = 0 }
       },
 
       # channel2/youtube
@@ -28,7 +28,7 @@ resource "grafana_dashboard" "life-metrics" {
           : var.IS_YOUTUBE_MUTED ?
           grafana_library_panel.youtube-muted.uid : grafana_library_panel.youtube.uid
         ])
-        gridPos = { h = 8, w = 9, x = 0, y = 8 }
+        gridPos = { h = 7, w = 9, x = 0, y = 8 }
       },
 
       # clock
