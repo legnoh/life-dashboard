@@ -9,7 +9,7 @@ date "+%Y/%m/%d %H:%M:%S"
 JQ="/opt/homebrew/bin/jq"
 TF="/opt/homebrew/bin/terraform"
 
-EPGS_HOST="hal-mini.local:8888"
+EPGS_HOST="grafstation.local:8888"
 CHANNELS_JSON=$(curl "http://${EPGS_HOST}/api/channels" 2>/dev/null)
 
 TFVARS=(
