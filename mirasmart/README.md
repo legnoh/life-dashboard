@@ -24,7 +24,7 @@ Usage
       - Step 4: Configure your SSH or Git client
 1. ログイン用の公開鍵ペアを作成
     - [Manage SSH keys | 1Password Developer](https://developer.1password.com/docs/ssh/manage-keys/)
-      - `mirasmart.local` という名前で作成。PrivateKey はed25519で自動生成する。
+      - PrivateKey はed25519で自動生成する。
 1. ログイン後のパスワードを作成
     ```sh
     op item create --category="password" \
