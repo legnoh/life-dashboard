@@ -112,8 +112,13 @@ Usage
 export SMARTMETER_ID="...."
 export SMARTMETER_PASSWORD="...."
 
-git clone https://github.com/legnoh/life-metrics-grafana-deployment.git
-cd life-metrics-grafana-deployment/mirasmart
+git clone https://github.com/legnoh/life-dashboard.git
+cd life-dashboard/mirasmart
+
+# envsubstでdocker-compose.yml の変数部分を差し替えておく
+eunvsubst < docker-compose.yml.tpl > docker-compose.yml
+
+# 起動
 ./start.sh
 
 # ログを確認しておく
