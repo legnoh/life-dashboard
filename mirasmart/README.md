@@ -116,7 +116,7 @@ git clone https://github.com/legnoh/life-dashboard.git
 cd life-dashboard/mirasmart
 
 # envsubstでdocker-compose.yml の変数部分を差し替えておく
-eunvsubst < docker-compose.yml.tpl > docker-compose.yml
+envsubst < docker-compose.yml.tpl > docker-compose.yml
 
 # 起動
 ./start.sh
