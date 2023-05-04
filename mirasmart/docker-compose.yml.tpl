@@ -15,8 +15,9 @@ services:
     ports: [ 9107:8000 ]
     restart: always
     environment:
-      - SMARTMETER_ID=${SMARTMETER_ID}
-      - SMARTMETER_PASSWORD=${SMARTMETER_PASSWORD}
+      SMARTMETER_LOGLEVEL: 20
+      SMARTMETER_ID: ${SMARTMETER_ID}
+      SMARTMETER_PASSWORD: ${SMARTMETER_PASSWORD}
     devices:
       - "/dev/ttyUSB0:/dev/ttyUSB0"
   mirakc:
