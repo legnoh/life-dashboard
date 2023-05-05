@@ -114,6 +114,10 @@ export SMARTMETER_PASSWORD="...."
 
 git clone https://github.com/legnoh/life-dashboard.git
 cd life-dashboard/mirasmart
+
+# envsubstで変数部分を展開
+
+
 ./start.sh
 
 # ログを確認しておく

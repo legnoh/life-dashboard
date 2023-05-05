@@ -22,7 +22,7 @@ services:
       - "/dev/ttyUSB0:/dev/ttyUSB0"
   mirakc:
     container_name: mirakc
-    image: mirakc/mirakc:alpine
+    image: collelog/mirakc:latest-alpine-rpi4-64
     ports: [ 40772:40772 ]
     init: true
     restart: always
@@ -30,6 +30,7 @@ services:
       TZ: Asia/Tokyo
       RUST_LOG: info
     volumes:
+      - /etc/localtime:/etc/localtime:ro
       - mirakc-epg:/var/lib/mirakc/epg
       - ./mirakc-config.yml:/etc/mirakc/config.yml:ro
     devices:
