@@ -134,7 +134,7 @@ resource "grafana_dashboard" "life-metrics" {
       # news
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.news.uid])
-        gridPos      = { h = 4, w = 6, x = 9, y = 12 }
+        gridPos      = { h = 4, w = 6, x = 9, y = 15 }
       },
     ]
   })
