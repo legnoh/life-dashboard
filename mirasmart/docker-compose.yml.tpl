@@ -37,6 +37,7 @@ services:
       - /dev/px4video1
       - /dev/px4video2
       - /dev/px4video3
+      - /dev/bus/usb
 volumes:
   mirakc-epg:
     name: mirakc_epg
