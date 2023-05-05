@@ -7,4 +7,4 @@ target:
   username: grafana-kiosk
   password: grafana-kiosk
   playlist: true
-  URL: http://localhost/playlists/play/${GRAFANA_PLAYLIST}?autofitpanels
+  URL: http://grafstation.local/playlists/play/${GRAFANA_PLAYLIST}?autofitpanels
