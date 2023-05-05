@@ -41,6 +41,7 @@ jobs:
         cp -r configs/tado-monitor ${HOME}/life-dashboard/configs/
         cp -r configs/epgstation ${HOME}/life-dashboard/epgstation/config
         cp -r configs/docker-compose.yml ${HOME}/life-dashboard/configs/
+        cp -r configs/nginx.conf ${HOME}/life-dashboard/configs/
         cp -r configs/prometheus.yml ${HOME}/life-dashboard/prometheus/prometheus.yml
 
     - name: Start docker images
