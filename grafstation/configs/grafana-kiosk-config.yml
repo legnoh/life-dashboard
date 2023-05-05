@@ -1,6 +1,6 @@
 general:
   kiosk-mode: full
-  autofit: true
+  autofit: false
 
 target:
   login-method: local
