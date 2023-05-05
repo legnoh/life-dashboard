@@ -236,9 +236,8 @@ done
 # 設定反映(org/adminをimportしてない場合は再度importする)
 ${TF} init -upgrade
 
-state=$(${TF} state pull)
-is_exist_admin=$(echo ${state} | jq '.resources[] | select( .type == "grafana_user") | select( .name == "admin" )')
-is_exist_main=$(echo ${state} | jq '.resources[] | select( .type == "grafana_organization") | select( .name == "main" )')
+is_exist_admin=(${TF} state list grafana_user.admin)
+is_exist_main=$(${TF} state list grafana_organization.main)
 if [ ${is_exist_admin} == "" ]; then
   ${TF} import grafana_user.admin 1
 fi
