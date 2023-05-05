@@ -1,5 +1,12 @@
-version: '3'
+version: '3.5'
 services:
+  nginx:
+    container_name: nginx
+    image: nginx:stable
+    ports: [ 80:80 ]
+    restart: always
+    volumes:
+    - /Users/${USER}/life-dashboard/configs/nginx.conf:/etc/nginx/nginx.conf:ro
   epgstation:
     container_name: epgstation
     image: collelog/epgstation:latest-debian-arm64v8
