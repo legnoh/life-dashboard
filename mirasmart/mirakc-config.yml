@@ -4,8 +4,8 @@ epg:
 server:
   addrs:
     - http: 0.0.0.0:40772
-  stream-chunk-size: 4096
-  stream-max-chunks: 30000
+  # stream-chunk-size: 4096
+  # stream-max-chunks: 30000
 
 channels:
   - name: 'TOKYO MX1'
