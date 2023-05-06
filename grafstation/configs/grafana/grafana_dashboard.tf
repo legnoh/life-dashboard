@@ -38,15 +38,15 @@ resource "grafana_dashboard" "life-metrics" {
       },
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.news-world.uid])
-        gridPos      = { h = 8, w = 4, x = 9, y = 20 }
+        gridPos      = { h = 5, w = 4, x = 9, y = 20 }
       },
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.news-business.uid])
-        gridPos      = { h = 8, w = 4, x = 13, y = 20 }
+        gridPos      = { h = 5, w = 4, x = 13, y = 20 }
       },
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.news-sports.uid])
-        gridPos      = { h = 8, w = 4, x = 17, y = 20 }
+        gridPos      = { h = 5, w = 4, x = 17, y = 20 }
       },
 
       # clock
