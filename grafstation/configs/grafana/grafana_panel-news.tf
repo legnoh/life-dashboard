@@ -1,5 +1,5 @@
 resource "grafana_library_panel" "news-domestic" {
-  name = "news"
+  name = "news-domestic"
   model_json = jsonencode({
     type        = "news",
     transparent = true,
@@ -11,7 +11,7 @@ resource "grafana_library_panel" "news-domestic" {
 }
 
 resource "grafana_library_panel" "news-world" {
-  name = "news"
+  name = "news-world"
   model_json = jsonencode({
     type        = "news",
     transparent = true,
@@ -23,7 +23,7 @@ resource "grafana_library_panel" "news-world" {
 }
 
 resource "grafana_library_panel" "news-business" {
-  name = "news"
+  name = "news-business"
   model_json = jsonencode({
     type        = "news",
     transparent = true,
@@ -35,7 +35,7 @@ resource "grafana_library_panel" "news-business" {
 }
 
 resource "grafana_library_panel" "news-sports" {
-  name = "news"
+  name = "news-sports"
   model_json = jsonencode({
     type        = "news",
     transparent = true,
