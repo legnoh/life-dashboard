@@ -34,19 +34,19 @@ resource "grafana_dashboard" "life-metrics" {
       # news
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.news-domestic.uid])
-        gridPos      = { h = 6, w = 9, x = 0, y = 22 }
+        gridPos      = { h = 8, w = 4, x = 9, y = 20 }
       },
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.news-world.uid])
-        gridPos      = { h = 5, w = 4, x = 9, y = 22 }
+        gridPos      = { h = 8, w = 4, x = 13, y = 20 }
       },
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.news-business.uid])
-        gridPos      = { h = 5, w = 4, x = 13, y = 22 }
+        gridPos      = { h = 8, w = 4, x = 17, y = 20 }
       },
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.news-sports.uid])
-        gridPos      = { h = 5, w = 4, x = 17, y = 22 }
+        gridPos      = { h = 8, w = 3, x = 21, y = 20 }
       },
 
       # clock
