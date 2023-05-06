@@ -1,7 +1,7 @@
 resource "grafana_library_panel" "aphorism" {
   name = "aphorism"
-  type = "canvas"
   model_json = jsonencode(merge(local.common_base, {
+    type = "canvas",
     targets = [merge(local.target_base, {
       expr = "aphorism_info",
     })],
