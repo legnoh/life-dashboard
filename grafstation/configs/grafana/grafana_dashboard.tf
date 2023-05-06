@@ -42,11 +42,11 @@ resource "grafana_dashboard" "life-metrics" {
       },
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.news-business.uid])
-        gridPos      = { h = 3, w = 4, x = 9, y = 16 }
+        gridPos      = { h = 3, w = 4, x = 9, y = 18 }
       },
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.news-sports.uid])
-        gridPos      = { h = 3, w = 4, x = 13, y = 16 }
+        gridPos      = { h = 3, w = 4, x = 13, y = 18 }
       },
 
       # clock
