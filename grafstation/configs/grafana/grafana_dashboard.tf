@@ -31,6 +31,24 @@ resource "grafana_dashboard" "life-metrics" {
         gridPos = { h = 8, w = 9, x = 0, y = 8 }
       },
 
+      # news
+      {
+        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.news-domestic.uid])
+        gridPos      = { h = 4, w = 5, x = 0, y = 16 }
+      },
+      {
+        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.news-world.uid])
+        gridPos      = { h = 4, w = 4, x = 5, y = 16 }
+      },
+      {
+        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.news-business.uid])
+        gridPos      = { h = 3, w = 4, x = 9, y = 16 }
+      },
+      {
+        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.news-sports.uid])
+        gridPos      = { h = 3, w = 4, x = 13, y = 16 }
+      },
+
       # clock
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.clock.uid])
@@ -129,12 +147,6 @@ resource "grafana_dashboard" "life-metrics" {
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.withings-sleep-score.uid])
         gridPos      = { h = 4, w = 3, x = 9, y = 12 }
-      },
-
-      # news
-      {
-        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.news.uid])
-        gridPos      = { h = 4, w = 6, x = 9, y = 15 }
       },
     ]
   })
