@@ -8,6 +8,6 @@ resource "grafana_organization" "main" {
 
 resource "grafana_organization_preferences" "main" {
   org_id            = grafana_organization.main.org_id
-  home_dashboard_id = grafana_dashboard.life-metrics.id
+  home_dashboard_uid = grafana_dashboard.life-metrics.uid
   theme             = var.GRAFANA_THEME
 }
