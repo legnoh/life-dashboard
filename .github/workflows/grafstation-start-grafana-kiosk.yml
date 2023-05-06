@@ -7,9 +7,6 @@ on:
     paths:
     - 'grafstation/configs/grafana-kiosk-config.yml'
   workflow_dispatch:
-  workflow_run:
-    workflows: [ Start Grafana Config Daemon ]
-    types: [ completed ]
 
 jobs:
   setup:

@@ -16,7 +16,7 @@ resource "grafana_dashboard" "life-metrics" {
           :
             grafana_library_panel.youtube-nightmode-muted.uid
         ])
-        gridPos = { h = 8, w = 9, x = 0, y = 0 }
+        gridPos = { h = 11, w = 9, x = 0, y = 0 }
       },
 
       # channel2/youtube
@@ -28,25 +28,25 @@ resource "grafana_dashboard" "life-metrics" {
           : var.IS_YOUTUBE_MUTED ?
           grafana_library_panel.youtube-muted.uid : grafana_library_panel.youtube.uid
         ])
-        gridPos = { h = 8, w = 9, x = 0, y = 8 }
+        gridPos = { h = 11, w = 9, x = 0, y = 11 }
       },
 
       # news
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.news-domestic.uid])
-        gridPos      = { h = 3, w = 3, x = 9, y = 18 }
+        gridPos      = { h = 6, w = 9, x = 0, y = 22 }
       },
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.news-world.uid])
-        gridPos      = { h = 3, w = 3, x = 13, y = 18 }
+        gridPos      = { h = 8, w = 4, x = 9, y = 20 }
       },
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.news-business.uid])
-        gridPos      = { h = 3, w = 3, x = 16, y = 18 }
+        gridPos      = { h = 8, w = 4, x = 13, y = 20 }
       },
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.news-sports.uid])
-        gridPos      = { h = 3, w = 3, x = 20, y = 18 }
+        gridPos      = { h = 8, w = 4, x = 17, y = 20 }
       },
 
       # clock
