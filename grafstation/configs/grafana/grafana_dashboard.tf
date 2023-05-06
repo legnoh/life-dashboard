@@ -31,6 +31,12 @@ resource "grafana_dashboard" "life-metrics" {
         gridPos = { h = 11, w = 9, x = 0, y = 11 }
       },
 
+      # aphorism
+      {
+        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.aphorism.uid])
+        gridPos      = { h = 6, w = 9, x = 0, y = 22 }
+      },
+
       # news
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.news-domestic.uid])
