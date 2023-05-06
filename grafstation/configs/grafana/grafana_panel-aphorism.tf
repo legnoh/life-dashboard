@@ -12,6 +12,7 @@ resource "grafana_library_panel" "aphorism" {
       }
     }],
     options = {
+      inlineEditing = false,
       root = {
         type = "frame",
         elements = [
