@@ -28,7 +28,7 @@ services:
     restart: always
     environment:
       TZ: Asia/Tokyo
-      RUST_LOG: info
+      RUST_LOG: debug
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - mirakc-epg:/var/lib/mirakc/epg
