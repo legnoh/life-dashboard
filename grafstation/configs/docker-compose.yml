@@ -37,9 +37,9 @@ services:
     restart: always
     environment:
     - GF_INSTALL_PLUGINS=grafana-clock-panel,innius-video-panel,aidanmountford-html-panel
-  aphorium-exporter:
-    container_name: aphorium-exporter
-    image: legnoh/aphorium-exporter
+  aphorism-exporter:
+    container_name: aphorism-exporter
+    image: legnoh/aphorism-exporter
     ports: [ "9111:8000" ]
     restart: always
   asken-exporter:

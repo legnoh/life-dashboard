@@ -5,9 +5,9 @@ global:
       monitor: 'codelab-monitor'
 
 scrape_configs:
-  - job_name: 'aphorium'
+  - job_name: 'aphorism'
     static_configs:
-      - targets: [ aphorium-exporter:8000 ]
+      - targets: [ aphorism-exporter:8000 ]
     scrape_interval: 300s
   - job_name: 'asken'
     static_configs:
