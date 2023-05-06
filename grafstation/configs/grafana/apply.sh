@@ -18,6 +18,7 @@ TFVARS=(
   is_tv_channel1_muted
   is_tv_channel2_muted
   is_youtube_muted
+  grafana_theme
 )
 TF_OPTIONS=${TERRAFORM_OPTIONS:-"-auto-approve"}
 
@@ -223,6 +224,11 @@ elif [ ${weekday} -le 7 ]; then
 else
   echo "invalid weekday num"
   exit 1
+fi
+
+# 05:45~17:30まで画面をライトモードにする
+if [ $( echo "${now} > 5.83" | bc ) == 1 ] && [ $( echo "${now} < 17.5" | bc ) == 1 ]; then
+  grafana_theme="light"
 fi
 
 # デフォルト外項目のみterraformに変数として渡す

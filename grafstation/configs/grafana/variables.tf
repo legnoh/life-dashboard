@@ -3,6 +3,11 @@ variable "GRAFANA_HOST" {
   default = "localhost:3000"
 }
 
+variable "GRAFANA_THEME" {
+  type = string
+  default = "dark"
+}
+
 variable "TV_EPGSTATION_HOST" {
   type = string
   default = "grafstation.local:8888"
