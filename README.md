@@ -26,6 +26,7 @@ TBD
 | [clambin/tado-monitor](https://github.com/clambin/tado-exporter) | Tado° の室内温度、湿度 などの計測情報 |
 | [legnoh/todoist-exporter](https://github.com/legnoh/todoist-exporter) | Todoist の特定フィルターのタスク残数 |
 | [legnoh/withings-exporter](https://github.com/legnoh/withings-exporter) | Withings の 身体測定情報、アクティビティ、睡眠データ |
+| [RSS一覧 - Yahoo!ニュース](https://news.yahoo.co.jp/rss) | 最新ニュースのヘッドライン |
 | [legnoh/youtube-playlist-creator](https://github.com/legnoh/youtube-playlist-creator) | 嗜好に基づいたYouTubeLiveのプレイリスト生成 |
 | [l3tnun/EPGStation](https://github.com/l3tnun/EPGStation) | TV再生(フロントエンド) |
 | [mirakc/mirakc](https://github.com/mirakc/mirakc) | TV再生(バックエンド) |
