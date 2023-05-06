@@ -4,6 +4,8 @@
 - 慣れれば1時間かからないくらいで必要なものが揃うようになっています。
 - GitHub Actions の self-hosted ランナーによってデプロイされますので、自動でCDが実行できます。
 
+![dashboard-sample](https://user-images.githubusercontent.com/706834/236629238-3730ee10-3a4b-414e-9699-3c820b05b638.png)
+
 Usage
 ----
 
