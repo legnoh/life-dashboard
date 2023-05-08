@@ -1,7 +1,7 @@
 resource "grafana_dashboard" "life-metrics" {
   config_json = jsonencode({
-    title       = "life-metrics",
-    description = "Now Channel: ${var.TV_CHANNEL_ID1}",
+    title       = "Life Metrics",
+    description = "Now Channel: ${var.TV_CHANNEL_ID1}, Muted: ${var.IS_TV_CHANNEL1_MUTED}, Theme: ${var.GRAFANA_THEME}",
     timezone    = "browser",
     version     = 0,
     refresh     = "5m"
