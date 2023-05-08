@@ -71,6 +71,16 @@ scrape_configs:
   - job_name: 'node-grafstation'
     static_configs:
       - targets: [ grafstation.local:9100 ]
+    metric_relabel_configs:
+    - source_labels: [__name__]
+      regex: '(go|promhttp)_(.*)'
+      action: drop
+    scrape_interval: 30s
   - job_name: 'node-mirasmart'
     static_configs:
       - targets: [ mirasmart.local:9100 ]
+    metric_relabel_configs:
+    - source_labels: [__name__]
+      regex: '(go|promhttp)_(.*)'
+      action: drop
+    scrape_interval: 30s
