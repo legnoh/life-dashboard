@@ -75,4 +75,3 @@ scrape_configs:
     - source_labels: [__name__]
       regex: '(go|promhttp)_(.*)'
       action: drop
-    scrape_interval: 30s
