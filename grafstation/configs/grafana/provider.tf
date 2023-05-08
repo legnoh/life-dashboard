@@ -3,3 +3,6 @@ provider "grafana" {
   auth   = "admin:admin"
   org_id = 1 # Main org.
 }
+
+provider "curl" {
+}

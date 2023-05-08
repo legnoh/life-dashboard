@@ -3,5 +3,8 @@ terraform {
     grafana = {
       source = "grafana/grafana"
     }
+    curl = {
+      source = "anschoewe/curl"
+    }
   }
 }
