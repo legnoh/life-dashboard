@@ -45,6 +45,11 @@ jobs:
         cp -r configs/nginx.conf ${HOME}/life-dashboard/configs/
         cp -r configs/prometheus.yml ${HOME}/life-dashboard/prometheus/prometheus.yml
 
+    - name: Start node_exporter
+      run: |
+        brew services stop node_exporter
+        brew services start node_exporter
+
     - name: Start docker images
       env:
         RECREATE_CONTAINER: ${{ inputs.rm_state }}

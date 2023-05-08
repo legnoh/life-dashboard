@@ -58,15 +58,6 @@ services:
     environment:
     - MONEYFORWARD_EMAIL=${MONEYFORWARD_EMAIL}
     - MONEYFORWARD_PASSWORD=${MONEYFORWARD_PASSWORD}
-  node-exporter:
-    container_name: node-exporter
-    image: prom/node-exporter:latest
-    command: ['--path.rootfs=/host']
-    network_mode: host
-    pid: host
-    restart: always
-    volumes:
-      - '/:/host:ro,rslave'
   openweather-exporter:
     container_name: openweather-exporter
     image: legnoh/openweather-exporter

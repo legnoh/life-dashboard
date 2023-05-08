@@ -68,9 +68,9 @@ scrape_configs:
     static_configs:
       - targets: [ withings-exporter:8000 ]
     scrape_interval: 300s
-  - job_name: 'node-mirasmart'
-    static_configs:
-      - targets: [ mirasmart.local:9100 ]
   - job_name: 'node-grafstation'
     static_configs:
       - targets: [ grafstation.local:9100 ]
+  - job_name: 'node-mirasmart'
+    static_configs:
+      - targets: [ mirasmart.local:9100 ]
