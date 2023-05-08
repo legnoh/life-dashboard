@@ -161,7 +161,3 @@ resource "grafana_dashboard" "life-metrics" {
 resource "grafana_dashboard" "node-exporter" {
   config_json = data.curl.node-exporter-full.response
 }
-
-resource "grafana_dashboard" "snmp-exporter" {
-  config_json = data.curl.snmp-exporter.response
-}
