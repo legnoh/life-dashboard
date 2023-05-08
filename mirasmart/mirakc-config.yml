@@ -4,7 +4,7 @@ epg:
 server:
   addrs:
     - http: 0.0.0.0:40772
-  stream-chunk-size: 32768
+  stream-chunk-size: 4096
   stream-max-chunks: 100000
 
 channels:
