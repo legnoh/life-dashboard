@@ -244,10 +244,10 @@ ${TF} init -upgrade
 
 is_exist_admin=$(${TF} state list grafana_user.admin)
 is_exist_main=$(${TF} state list grafana_organization.main)
-if [ ${is_exist_admin} == "" ]; then
+if [[ "${is_exist_admin}" == "" ]]; then
   ${TF} import grafana_user.admin 1
 fi
-if [ ${is_exist_main} == "" ]; then
+if [[ "${is_exist_main}" == "" ]]; then
   ${TF} import grafana_organization.main 1
 fi
 
