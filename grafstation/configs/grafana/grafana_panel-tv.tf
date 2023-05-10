@@ -6,7 +6,7 @@ resource "grafana_library_panel" "tv" {
     html_data   = <<-EOT
     <video autoplay controls width="100%" height="100%">
       <source
-        src="http://${var.TV_EPGSTATION_HOST}/api/streams/live/${var.TV_CHANNEL_ID1}/m2tsll?mode=0"
+        src="http://${var.TV_EPGSTATION_HOST}/api/streams/live/${var.TV_CHANNEL_ID1}/m2ts?mode=0"
         type="application/x-mpegURL"
       >
       <source
