@@ -26,11 +26,17 @@
         playerOption.playerVars = {
             listType:'playlist',
             list: playlistId,
+            loop: 1,
+            modestbranding: 1,
         }
       }
 
       if (videoId != null) {
         playerOption.videoId = videoId;
+        playerOption.playerVars = {
+          loop: 1,
+          modestbranding: 1,
+        }
       }
 
       function onYouTubeIframeAPIReady() {
