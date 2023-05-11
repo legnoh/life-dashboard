@@ -27,7 +27,6 @@
       }
 
       function onPlayerReady(event) {
-        event.target.setPlaybackQuality("highres");
         if(isMute == "true") {
           event.target.mute();
         }
@@ -36,6 +35,7 @@
 
       var done = false;
       function onPlayerStateChange(event) {
+        event.target.setPlaybackQuality("hd1080");
         if (event.data == YT.PlayerState.PLAYING && !done) {
           done = true;
         }
