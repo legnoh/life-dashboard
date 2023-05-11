@@ -1,0 +1,18 @@
+<script src="./mpegts.js"></script>
+<video controls id="videoElement" width="100%" height="100%"></video>
+<script>
+    const urlParams = new URLSearchParams(queryString);
+    const channelId = urlParams.get('channel');
+
+    if (mpegts.getFeatureList().mseLivePlayback) {
+        var videoElement = document.getElementById('videoElement');
+        var player = mpegts.createPlayer({
+            type: 'mse',
+            isLive: true,
+            url: 'http://grafstation.local:8888/api/streams/live/' + channelId + '/m2tsll?mode=0'
+        });
+        player.attachMediaElement(videoElement);
+        player.load();
+        player.play();
+    }
+</script>
