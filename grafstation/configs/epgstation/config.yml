@@ -9,6 +9,8 @@ sqlite:
 
 epgUpdateIntervalTime: 10
 
+isAllowAllCORS: true
+
 conflictPriority: 1
 recPriority: 2
 

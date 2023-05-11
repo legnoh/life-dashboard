@@ -84,6 +84,8 @@ ghq get -l https://github.com/legnoh/life-dashboard.git
 cp -r grafstation/configs/html ${HOME}/life-dashboard/configs/
 curl -Lo ${HOME}/life-dashboard/configs/html/mpegts.js \
     https://github.com/xqq/mpegts.js/releases/download/v1.7.3/mpegts.js
+curl -Lo ${HOME}/life-dashboard/configs/html/player/mpegts.js.map \
+    https://github.com/xqq/mpegts.js/releases/download/v1.7.3/mpegts.js.map
 cp -r grafstation/configs/tado-monitor ${HOME}/life-dashboard/configs/
 cp -r grafstation/configs/epgstation ${HOME}/life-dashboard/epgstation/config
 cp -r grafstation/configs/docker-compose.yml ${HOME}/life-dashboard/configs/
