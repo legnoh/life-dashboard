@@ -7,23 +7,34 @@
     <div id="player"></div>
     <script>
       const urlParams = new URLSearchParams(window.location.search);
-      const playlistId = urlParams.get('pl');
+      const playlistId = urlParams.get('list');
+      const videoId = urlParams.get('v');
       const isMute = urlParams.get('muted');
 
       var player;
-      function onYouTubeIframeAPIReady() {
-        player = new YT.Player('player', {
+
+      var playerOption = {
           height: window.innerHeight,
           width: window.innerWidth,
-          playerVars: {
-            listType:'playlist',
-            list: playlistId,
-          },
           events: {
             'onReady': onPlayerReady,
             'onStateChange': onPlayerStateChange
           }
-        });
+      };
+
+      if (playlistId != null) {
+        playerOption.playerVars = {
+            listType:'playlist',
+            list: playlistId,
+        }
+      }
+
+      if (videoId != null) {
+        playerOption.videoId = videoId;
+      }
+
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', playerOption);
       }
 
       function onPlayerReady(event) {

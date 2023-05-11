@@ -6,7 +6,7 @@ resource "grafana_library_panel" "youtube" {
     options = {
       autoPlay  = true,
       videoType = "iframe",
-      iframeURL = "http://grafstation.local/player/youtube.html?pl=${var.YOUTUBE_PLAYLIST_ID}",
+      iframeURL = "http://grafstation.local/player/youtube.html?list=${var.YOUTUBE_PLAYLIST_ID}",
     },
   })
 }
@@ -19,7 +19,7 @@ resource "grafana_library_panel" "youtube-muted" {
     options = {
       autoPlay  = true,
       videoType = "iframe",
-      iframeURL = "http://grafstation.local/player/youtube.html?pl=${var.YOUTUBE_PLAYLIST_ID}&muted=true",
+      iframeURL = "http://grafstation.local/player/youtube.html?list=${var.YOUTUBE_PLAYLIST_ID}&muted=true",
     },
   })
 }
@@ -32,7 +32,7 @@ resource "grafana_library_panel" "youtube-muted" {
 #     options = {
 #       autoPlay  = true,
 #       videoType = "iframe",
-#       iframeURL = "https://www.youtube.com/embed/Q-sZipetAEc?mute=1&autoplay=1&loop=1&playsinline=1",
+#       iframeURL = "http://grafstation.local/player/youtube.html?v=Q-sZipetAEc&muted=true",
 #     },
 #   })
 # }
@@ -45,7 +45,7 @@ resource "grafana_library_panel" "youtube-nightmode-muted" {
     options = {
       autoPlay  = true,
       videoType = "iframe",
-      iframeURL = "https://www.youtube.com/embed/Q-sZipetAEc?mute=1&autoplay=1&loop=1&playsinline=1",
+      iframeURL = "http://grafstation.local/player/youtube.html?v=Q-sZipetAEc&muted=true",
     },
   })
 }
