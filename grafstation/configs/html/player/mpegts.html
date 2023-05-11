@@ -1,7 +1,7 @@
 <script src="./mpegts.js"></script>
 <video controls id="videoElement" width="100%" height="100%"></video>
 <script>
-    const urlParams = new URLSearchParams(queryString);
+    const urlParams = new URLSearchParams(window.location.search);
     const channelId = urlParams.get('channel');
 
     if (mpegts.getFeatureList().mseLivePlayback) {

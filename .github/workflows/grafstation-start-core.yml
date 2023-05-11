@@ -41,8 +41,10 @@ jobs:
       run: |
         mkdir -p ${HOME}/life-dashboard/{epgstation/{data/{key,streamfiles},drop,img,thumbnail,logs/{EPGUpdater,Operator,Service},recorded},prometheus,configs,withings}
         cp -r configs/html ${HOME}/life-dashboard/configs/
-        curl -Lo ${HOME}/life-dashboard/configs/html/mpegts.js \
+        curl -Lo ${HOME}/life-dashboard/configs/html/player/mpegts.js \
           https://github.com/xqq/mpegts.js/releases/download/v1.7.3/mpegts.js
+        curl -Lo ${HOME}/life-dashboard/configs/html/player/mpegts.js.map \
+          https://github.com/xqq/mpegts.js/releases/download/v1.7.3/mpegts.js.map
         cp -r configs/tado-monitor ${HOME}/life-dashboard/configs/
         cp -r configs/epgstation ${HOME}/life-dashboard/epgstation/config
         cp -r configs/docker-compose.yml ${HOME}/life-dashboard/configs/
