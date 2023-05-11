@@ -6,7 +6,7 @@ resource "grafana_library_panel" "tv" {
     options = {
       autoPlay  = true,
       videoType = "iframe",
-      iframeURL = "http://${var.TV_EPGSTATION_HOST}/player/mpegts.html?channel=${var.TV_CHANNEL_ID1}",
+      iframeURL = "http://grafstation.local/player/mpegts.html?channel=${var.TV_CHANNEL_ID1}",
     },
   })
 }
@@ -19,7 +19,7 @@ resource "grafana_library_panel" "tv-muted" {
     options = {
       autoPlay  = true,
       videoType = "iframe",
-      iframeURL = "http://${var.TV_EPGSTATION_HOST}/player/mpegts.html?channel=${var.TV_CHANNEL_ID1}&muted=true",
+      iframeURL = "http://grafstation.local/player/mpegts.html?channel=${var.TV_CHANNEL_ID1}&muted=true",
     },
   })
 }
@@ -32,7 +32,7 @@ resource "grafana_library_panel" "tv2" {
     options = {
       autoPlay  = true,
       videoType = "iframe",
-      iframeURL = "http://${var.TV_EPGSTATION_HOST}/player/mpegts.html?channel=${var.TV_CHANNEL_ID2}",
+      iframeURL = "http://grafstation.local/player/mpegts.html?channel=${var.TV_CHANNEL_ID2}",
     },
   })
 }
@@ -45,7 +45,7 @@ resource "grafana_library_panel" "tv2-muted" {
     options = {
       autoPlay  = true,
       videoType = "iframe",
-      iframeURL = "http://${var.TV_EPGSTATION_HOST}/player/mpegts.html?channel=${var.TV_CHANNEL_ID2}&muted=true",
+      iframeURL = "http://grafstation.local/player/mpegts.html?channel=${var.TV_CHANNEL_ID2}&muted=true",
     },
   })
 }

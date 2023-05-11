@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://www.youtube.com/iframe_api"></script>
+  </head>
+  <body style="background-color: black;">
+    <div id="player"></div>
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const playlistId = urlParams.get('pl');
+      const isMute = urlParams.get('muted');
+
+      var player;
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+          height: window.innerHeight,
+          width: window.innerWidth,
+          playerVars: {
+            listType:'playlist',
+            list: playlistId,
+          },
+          events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+          }
+        });
+      }
+
+      function onPlayerReady(event) {
+        event.target.setPlaybackQuality("highres");
+        if(isMute == "true") {
+          event.target.mute();
+        }
+        event.target.playVideo();
+      }
+
+      var done = false;
+      function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING && !done) {
+          done = true;
+        }
+      }
+    </script>
+  </body>
+</html>
