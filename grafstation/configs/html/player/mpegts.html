@@ -1,8 +1,16 @@
+<!DOCTYPE html>
+<body style="background-color: black;" >
 <script src="./mpegts.js"></script>
-<video controls id="videoElement" width="100%" height="100%"></video>
+<video controls autoplay id="videoElement" width="100%" height="100%"></video>
 <script>
     const urlParams = new URLSearchParams(window.location.search);
     const channelId = urlParams.get('channel');
+    const isMute = urlParams.get('muted');
+
+    if(isMute == "true") {
+        var videoTag = document.getElementsByTagName('video')[0];
+        videoTag.muted = true;
+    }
 
     if (mpegts.getFeatureList().mseLivePlayback) {
         var videoElement = document.getElementById('videoElement');
@@ -16,3 +24,5 @@
         player.play();
     }
 </script>
+</body>
+</html>
