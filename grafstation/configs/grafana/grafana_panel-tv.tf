@@ -13,10 +13,6 @@ resource "grafana_library_panel" "tv" {
         src="http://${var.TV_EPGSTATION_HOST}/api/streams/live/${var.TV_CHANNEL_ID1}/webm?mode=0"
         type="video/webm"
       >
-      <source
-        src="http://${var.TV_EPGSTATION_HOST}/api/streams/live/${var.TV_CHANNEL_ID1}/mp4?mode=0"
-        type="video/mp4"
-      >
       Your browser does not support the video tag.
     </video>
     EOT
@@ -37,10 +33,6 @@ resource "grafana_library_panel" "tv-muted" {
       <source
         src="http://${var.TV_EPGSTATION_HOST}/api/streams/live/${var.TV_CHANNEL_ID1}/webm?mode=0"
         type="video/webm"
-      >
-      <source
-        src="http://${var.TV_EPGSTATION_HOST}/api/streams/live/${var.TV_CHANNEL_ID1}/mp4?mode=0"
-        type="video/mp4"
       >
       Your browser does not support the video tag.
     </video>
@@ -63,10 +55,6 @@ resource "grafana_library_panel" "tv2" {
         src="http://${var.TV_EPGSTATION_HOST}/api/streams/live/${var.TV_CHANNEL_ID2}/webm?mode=0"
         type="video/webm"
       >
-      <source
-        src="http://${var.TV_EPGSTATION_HOST}/api/streams/live/${var.TV_CHANNEL_ID2}/mp4?mode=0"
-        type="video/mp4"
-      >
       Your browser does not support the video tag.
     </video>
     EOT
@@ -87,10 +75,6 @@ resource "grafana_library_panel" "tv2-muted" {
       <source
         src="http://${var.TV_EPGSTATION_HOST}/api/streams/live/${var.TV_CHANNEL_ID2}/webm?mode=0"
         type="video/webm"
-      >
-      <source
-        src="http://${var.TV_EPGSTATION_HOST}/api/streams/live/${var.TV_CHANNEL_ID2}/mp4?mode=0"
-        type="video/mp4"
       >
       Your browser does not support the video tag.
     </video>
