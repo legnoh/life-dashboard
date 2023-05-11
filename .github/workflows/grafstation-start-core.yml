@@ -6,9 +6,9 @@ on:
     - main
     paths:
     - '.github/workflows/grafstation-start-core.yml'
-    - 'grafstation/configs/epgstation'
-    - 'grafstation/configs/html'
-    - 'grafstation/configs/tado-monitor'
+    - 'grafstation/configs/epgstation/**'
+    - 'grafstation/configs/html/**'
+    - 'grafstation/configs/tado-monitor/**'
     - 'grafstation/configs/docker-compose.yml'
     - 'grafstation/configs/nginx.conf'
     - 'grafstation/configs/prometheus.yml'
