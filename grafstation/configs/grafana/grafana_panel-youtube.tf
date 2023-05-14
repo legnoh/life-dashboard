@@ -32,7 +32,7 @@ resource "grafana_library_panel" "youtube-muted" {
 #     options = {
 #       autoPlay  = true,
 #       videoType = "iframe",
-#       iframeURL = "http://grafstation.local/player/youtube.html?v=Q-sZipetAEc&muted=true",
+#       iframeURL = "https://www.youtube.com/embed/Q-sZipetAEc?mute=1&autoplay=1&loop=1&playsinline=1",
 #     },
 #   })
 # }
@@ -45,7 +45,7 @@ resource "grafana_library_panel" "youtube-nightmode-muted" {
     options = {
       autoPlay  = true,
       videoType = "iframe",
-      iframeURL = "http://grafstation.local/player/youtube.html?v=Q-sZipetAEc&muted=true",
+      iframeURL = "https://www.youtube.com/embed/Q-sZipetAEc?mute=1&autoplay=1&loop=1&playsinline=1",
     },
   })
 }
