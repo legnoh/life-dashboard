@@ -1,6 +1,6 @@
 resource "grafana_playlist" "life-dashboard-refresh" {
   name = "life-dashboard-refresh"
-  interval = "15m"
+  interval = "10m"
   item {
     title = "Life Metrics"
     type = "dashboard_by_uid"
