@@ -50,6 +50,7 @@ jobs:
         cp -r configs/docker-compose.yml ${HOME}/life-dashboard/configs/
         cp -r configs/nginx.conf ${HOME}/life-dashboard/configs/
         cp -r configs/prometheus.yml ${HOME}/life-dashboard/prometheus/prometheus.yml
+        cp -r configs/konomi-config.yml ${HOME}/life-dashboard/konomi-config.yaml
 
     - name: Start node_exporter
       run: |

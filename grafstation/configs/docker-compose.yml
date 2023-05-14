@@ -24,6 +24,17 @@ services:
     - /Users/${USER}/life-dashboard/epgstation/thumbnail:/opt/epgstation/thumbnail
     - /Users/${USER}/life-dashboard/epgstation/logs:/opt/epgstation/logs
     - /Users/${USER}/life-dashboard/epgstation/recorded:/opt/epgstation/recorded
+  konomitv:
+    image: ghcr.io/tsukumijima/konomitv:v0.7.1
+    container_name: konomitv
+    restart: always
+    expose: 
+    - 7000
+    ports:
+    - 7001:7000
+    volumes:
+      - '/Users/${USER}/life-dashboard/konomi-config.yaml:/code/config.yaml'
+      - '/:/host-rootfs/'
   prometheus:
     container_name: prometheus
     image: prom/prometheus
