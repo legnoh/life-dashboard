@@ -71,23 +71,23 @@ resource "grafana_library_panel" "withings-bpm-max" {
   }))
 }
 
-resource "grafana_library_panel" "withings-bpm-min" {
-  name = "Withings - 最低血圧(mmHg)"
+resource "grafana_library_panel" "withings-body-temperature" {
+  name = "Withings - 体温"
   model_json = jsonencode(merge(local.common_base, local.stats_base, local.link.withings, {
-    title = "最低血圧",
+    title = "体温",
     targets = [merge(local.target_base, {
-      expr = "withings_meas_diastolic_blood_pressure{}"
+      expr = "withings_meas_body_temperature{}"
     })]
     fieldConfig = merge(local.field_config_base, {
       defaults = merge(local.field_config_default_base, {
         thresholds = merge(local.thresholds_base, {
           steps = [
-            zipmap(local.thresholds_keys, ["green", null]),
-            zipmap(local.thresholds_keys, ["light-green", 80]),
-            zipmap(local.thresholds_keys, ["yellow", 85]),
-            zipmap(local.thresholds_keys, ["orange", 90]),
-            zipmap(local.thresholds_keys, ["semi-dark-orange", 100]),
-            zipmap(local.thresholds_keys, ["red", 110]),
+            zipmap(local.thresholds_keys, ["blue", null]),
+            zipmap(local.thresholds_keys, ["light-green", 35.5]),
+            zipmap(local.thresholds_keys, ["yellow", 37]),
+            zipmap(local.thresholds_keys, ["orange", 38]),
+            zipmap(local.thresholds_keys, ["semi-dark-orange", 39]),
+            zipmap(local.thresholds_keys, ["red", 40]),
           ]
         })
       })
