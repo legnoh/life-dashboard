@@ -13,7 +13,7 @@ resource "grafana_library_panel" "moneyforward-balancesheet" {
             zipmap(local.thresholds_keys, ["semi-dark-red", -1000000]),
             zipmap(local.thresholds_keys, ["dark-yellow", 0]),
             zipmap(local.thresholds_keys, ["yellow", 100000]),
-            zipmap(local.thresholds_keys, ["semi-green", 300000]),
+            zipmap(local.thresholds_keys, ["light-green", 300000]),
             zipmap(local.thresholds_keys, ["green", 600000]),
           ]
         })
@@ -38,7 +38,7 @@ resource "grafana_library_panel" "moneyforward-balance" {
             zipmap(local.thresholds_keys, ["orange", 0]),
             zipmap(local.thresholds_keys, ["semi-orange", 30000]),
             zipmap(local.thresholds_keys, ["yellow", 50000]),
-            zipmap(local.thresholds_keys, ["semi-green", 70000]),
+            zipmap(local.thresholds_keys, ["light-green", 70000]),
             zipmap(local.thresholds_keys, ["green", 100000]),
           ]
         })
@@ -63,7 +63,7 @@ resource "grafana_library_panel" "moneyforward-deposit-withdrawal" {
             zipmap(local.thresholds_keys, ["dark-red", -1000000]),
             zipmap(local.thresholds_keys, ["semi-dark-red", 0]),
             zipmap(local.thresholds_keys, ["red", 20000]),
-            zipmap(local.thresholds_keys, ["semi-green", 50000]),
+            zipmap(local.thresholds_keys, ["light-green", 50000]),
             zipmap(local.thresholds_keys, ["green", 100000]),
           ]
         })
