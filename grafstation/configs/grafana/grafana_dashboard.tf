@@ -143,7 +143,7 @@ resource "grafana_dashboard" "life-metrics" {
         gridPos      = { h = 5, w = 3, x = 15, y = 3 }
       },
       {
-        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.withings-bpm-min.uid])
+        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.withings-body-temperature.uid])
         gridPos      = { h = 5, w = 3, x = 15, y = 6 }
       },
       {
