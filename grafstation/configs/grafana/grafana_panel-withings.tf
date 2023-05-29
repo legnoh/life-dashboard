@@ -90,6 +90,7 @@ resource "grafana_library_panel" "withings-body-temperature" {
             zipmap(local.thresholds_keys, ["red", 40]),
           ]
         })
+        unit = "celsius"
       })
     })
   }))
