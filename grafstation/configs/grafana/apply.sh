@@ -1,10 +1,7 @@
 #!/opt/homebrew/bin/bash
 
-# set -x
-
 echo "---------------------------------"
 date "+%Y/%m/%d %H:%M:%S"
-min=$(date "+%M")
 ts=$(date "+%Y%m%d%H%M")
 
 JQ="/opt/homebrew/bin/jq"
@@ -246,7 +243,8 @@ fi
 ${TF} apply ${TF_OPTIONS}
 
 # 現在時刻のtfstateをバックアップする
-if [[ "${min}" == "00" ]]; then
+set -x
+if [[ $(date "+%M") == "00" ]]; then
   mkdir -p /tmp/tfstate.bak
   cp /tmp/terraform.tfstate /tmp/tfstate.bak/terraform.tfstate.${ts}
 fi
