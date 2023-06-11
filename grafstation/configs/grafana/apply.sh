@@ -4,7 +4,8 @@
 
 echo "---------------------------------"
 date "+%Y/%m/%d %H:%M:%S"
-
+min=$(date "+%M")
+ts=$(date "+%Y%m%d%H%M")
 
 JQ="/opt/homebrew/bin/jq"
 TF="/opt/homebrew/bin/terraform"
@@ -36,15 +37,6 @@ for i in $( seq 0 $(($len - 1)) ); do
     eval ${val_name}="${channel_id}"
   fi
 done
-
-# グリーンチャンネルが安定しないので、取れなかった場合固定値を入れておく
-# if [ -z "${CHANNEL_BSBS21_2}"]; then
-#   channel_name="グリーンチャンネル"
-#   channel_slag="BSBS21_2"
-#   channel_id="400234"
-#   echo "${channel_name}: CHANNEL_${channel_slag}=${channel_id}"
-#   eval ${val_name}="${channel_id}"
-# fi
 
 # 曜日・時間を取得
 weekday=$(date +%u) # 月-日 = 1-7
@@ -252,3 +244,9 @@ if [[ "${is_exist_main}" == "" ]]; then
 fi
 
 ${TF} apply ${TF_OPTIONS}
+
+# 現在時刻のtfstateをバックアップする
+if [[ "${min}" == "00" ]]; then
+  mkdir -p /tmp/tfstate.bak
+  cp /tmp/terraform.tfstate /tmp/tfstate.bak/terraform.tfstate.${ts}
+fi
