@@ -51,3 +51,11 @@ jobs:
         launchctl unload -w ${PLIST_PATH}
         plutil -lint ${PLIST_PATH}
         launchctl load -w ${PLIST_PATH}
+
+    - name: Install logrotate config
+      run: |
+        cp -r logrotate.conf /opt/homebrew/etc/logrotate.d/terraform-apply.conf
+
+    - name: Restart logrotate
+      run: |
+        brew services restart logrotate
