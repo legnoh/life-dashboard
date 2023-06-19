@@ -54,6 +54,7 @@ jobs:
 
     - name: Install logrotate config
       run: |
+        mkdir -p /opt/homebrew/etc/logrotate.d
         cp -r logrotate.conf /opt/homebrew/etc/logrotate.d/terraform-apply.conf
 
     - name: Restart logrotate
