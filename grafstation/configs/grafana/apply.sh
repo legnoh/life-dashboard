@@ -245,6 +245,6 @@ ${TF} apply ${TF_OPTIONS}
 # 現在時刻のtfstateをバックアップする
 set -x
 if [[ $(date "+%M") == "00" ]]; then
-  mkdir -p /tmp/tfstate.bak
-  cp /tmp/terraform.tfstate /tmp/tfstate.bak/terraform.tfstate.${ts}
+  mkdir -p ${HOME}/tfstate.bak
+  cp /tmp/terraform.tfstate ${HOME}/tfstate.bak/terraform.tfstate.${ts}
 fi
