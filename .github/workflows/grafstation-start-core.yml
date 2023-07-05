@@ -63,6 +63,7 @@ jobs:
         ASKEN_USERNAME: ${{ secrets.ASKEN_USERNAME }}
         MONEYFORWARD_EMAIL: ${{ secrets.MONEYFORWARD_EMAIL }}
         MONEYFORWARD_PASSWORD: ${{ secrets.MONEYFORWARD_PASSWORD }}
+        NATURE_OAUTH_TOKEN: ${{ secrets.NATURE_OAUTH_TOKEN }}
         OPENWEATHER_CITY: ${{ secrets.OPENWEATHER_CITY }}
         OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
         SPEEDTEST_SERVER_IDS: ${{ secrets.SPEEDTEST_SERVER_IDS }}
@@ -74,7 +75,7 @@ jobs:
         WITHINGS_CONSUMER_SECRET: ${{ secrets.WITHINGS_CONSUMER_SECRET }}
         WITHINGS_CREATED: ${{ secrets.WITHINGS_CREATED }}
         WITHINGS_REFRESH_TOKEN: ${{ secrets.WITHINGS_REFRESH_TOKEN }}
-        WITHINGS_TZ: ${{ secrets.WITHINGS_TZ }}
+        WITHINGS_TZ: "Asia/Tokyo"
         WITHINGS_USERID: ${{ secrets.WITHINGS_USERID }}
       run: |
         ./start.sh
