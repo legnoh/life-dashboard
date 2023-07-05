@@ -68,6 +68,13 @@ services:
     environment:
     - OW_APIKEY=${OPENWEATHER_API_KEY}
     - OW_CITY=${OPENWEATHER_CITY}
+  remo-exporter:
+    container_name: remo-exporter
+    image: kenfdev/remo-exporter:latest
+    ports: [ "9352:9352" ]
+    restart: always
+    environment:
+    - OAUTH_TOKEN=${NATURE_OAUTH_TOKEN}
   snmp-exporter:
     container_name: snmp-exporter
     image: prom/snmp-exporter:latest

@@ -25,6 +25,14 @@ scrape_configs:
       regex: '(go|process|promhttp)_(.*)'
       action: drop
     scrape_interval: 60s
+  - job_name: 'remo'
+    static_configs:
+      - targets: [ 'remo-exporter:9352' ]
+    metric_relabel_configs:
+    - source_labels: [__name__]
+      regex: '(go|process|promhttp)_(.*)'
+      action: drop
+    scrape_interval: 60s
   - job_name: 'smartmeter'
     static_configs:
       - targets: [ 'mirasmart.local:9107' ]
