@@ -5,6 +5,7 @@ on:
     branches:
     - main
     paths:
+    - '.github/workflows/grafstation-start-grafana-config.yml'
     - 'grafstation/configs/grafana/**'
   workflow_dispatch:
   workflow_run:
