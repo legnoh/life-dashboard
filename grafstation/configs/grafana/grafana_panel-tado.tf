@@ -1,6 +1,6 @@
 resource "grafana_library_panel" "tado-temperature" {
   name = "Tado - 温度"
-  model_json = jsonencode(merge(local.common_base, local.stats_base, local.link.tado, {
+  model_json = jsonencode(merge(local.common_base, local.stats_base, {
     title = "部屋の温度",
     targets = [merge(local.target_base, {
       expr = "tado_zone_temperature_celsius{zone_name=\"Air Conditioning\"}"
@@ -30,7 +30,7 @@ resource "grafana_library_panel" "tado-temperature" {
 
 resource "grafana_library_panel" "tado-humidity" {
   name = "Tado - 湿度"
-  model_json = jsonencode(merge(local.common_base, local.stats_base, local.link.tado, {
+  model_json = jsonencode(merge(local.common_base, local.stats_base, {
     title = "部屋の湿度",
     targets = [merge(local.target_base, {
       expr = "tado_zone_humidity_percentage{zone_name=\"Air Conditioning\"}",
