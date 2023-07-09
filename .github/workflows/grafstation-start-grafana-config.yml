@@ -30,6 +30,7 @@ jobs:
 
     - name: copy configs
       run: |
+        rm -rf ${HOME}/life-dashboard/configs/grafana
         cp -r ../grafana ${HOME}/life-dashboard/configs/
 
     - name: start terraform daemon
