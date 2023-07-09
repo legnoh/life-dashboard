@@ -34,6 +34,7 @@ jobs:
 
     - name: start terraform daemon
       env:
+        NATURE_REMO_DEVICE_NAME: ${{ secrets.NATURE_REMO_DEVICE_NAME }}
         OPENWEATHER_CITY: ${{ secrets.OPENWEATHER_CITY }}
         YOUTUBE_PLAYLIST_ID: ${{ secrets.YOUTUBE_PLAYLIST_ID }}
         LIST_PATH: "Library/LaunchAgents/io.lkj.life.dashboard.grafstation.grafana.apply.plist"
@@ -41,6 +42,7 @@ jobs:
       run: |
         export PLIST_PATH="${HOME}/${LIST_PATH}"
 
+        NATURE_REMO_DEVICE_NAME="${NATURE_REMO_DEVICE_NAME}" \
         OPENWEATHER_CITY="${OPENWEATHER_CITY}" \
         YOUTUBE_PLAYLIST_ID="${YOUTUBE_PLAYLIST_ID}" \
         HOST=${GRAFSTATION_HOST} \

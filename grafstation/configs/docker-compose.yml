@@ -91,18 +91,6 @@ services:
     restart: always
     environment:
     - server_ids=${SPEEDTEST_SERVER_IDS}
-  tado-monitor:
-    container_name: tado-monitor
-    image: clambin/tado-monitor
-    platform: linux/arm64
-    command: [ "--config=/etc/tado-monitor/config.yaml" ]
-    ports: [ 9104:8080 ]
-    restart: always
-    environment:
-    - TADO_USERNAME=${TADO_USERNAME}
-    - TADO_PASSWORD=${TADO_PASSWORD}
-    volumes:
-    - /Users/${USER}/life-dashboard/configs/tado-monitor:/etc/tado-monitor
   todoist-exporter:
     container_name: todoist-exporter
     image: legnoh/todoist-exporter:latest

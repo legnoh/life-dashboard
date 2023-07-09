@@ -10,6 +10,8 @@
         <string>${HOST}:8888</string>
         <key>TF_VAR_OPENWEATHER_CITY</key>
         <string>${OPENWEATHER_CITY}</string>
+        <key>TF_VAR_NATURE_REMO_DEVICE_NAME</key>
+        <string>${NATURE_REMO_DEVICE_NAME}</string>
         <key>TF_VAR_YOUTUBE_PLAYLIST_ID</key>
         <string>${YOUTUBE_PLAYLIST_ID}</string>
     </dict>

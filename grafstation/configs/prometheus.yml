@@ -33,14 +33,6 @@ scrape_configs:
       regex: '(go|process|promhttp)_(.*)'
       action: drop
     scrape_interval: 60s
-  - job_name: 'smartmeter'
-    static_configs:
-      - targets: [ 'mirasmart.local:9107' ]
-    metric_relabel_configs:
-    - source_labels: [__name__]
-      regex: '(go|process|python|promhttp)_(.*)'
-      action: drop
-    scrape_interval: 60s
   - job_name: 'snmp'
     metrics_path: "/snmp"
     params:
@@ -60,14 +52,6 @@ scrape_configs:
       - targets: [ 'speedtest-exporter:9469' ]
     scrape_interval: 60m
     scrape_timeout: 90s
-  - job_name: 'tado'
-    static_configs:
-      - targets: [ 'tado-monitor:8080' ]
-    metric_relabel_configs:
-    - source_labels: [__name__]
-      regex: '(go|process|promhttp)_(.*)'
-      action: drop
-    scrape_interval: 60s
   - job_name: 'todoist'
     static_configs:
       - targets: [ 'todoist-exporter:8000' ]

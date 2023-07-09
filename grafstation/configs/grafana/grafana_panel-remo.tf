@@ -1,9 +1,9 @@
-resource "grafana_library_panel" "tado-temperature" {
-  name = "Tado - 温度"
-  model_json = jsonencode(merge(local.common_base, local.stats_base, local.link.tado, {
+resource "grafana_library_panel" "remo-temperature" {
+  name = "NatureRemo - 温度"
+  model_json = jsonencode(merge(local.common_base, local.stats_base, {
     title = "部屋の温度",
     targets = [merge(local.target_base, {
-      expr = "tado_zone_temperature_celsius{zone_name=\"${var.TADO_ZONE_NAME}\"}"
+      expr = "remo_temperature{name=\"${var.NATURE_REMO_DEVICE_NAME}\"}"
     })]
     fieldConfig = merge(local.field_config_base, {
       defaults = merge(local.field_config_default_base, {
@@ -28,12 +28,12 @@ resource "grafana_library_panel" "tado-temperature" {
   }))
 }
 
-resource "grafana_library_panel" "tado-humidity" {
-  name = "Tado - 湿度"
-  model_json = jsonencode(merge(local.common_base, local.stats_base, local.link.tado, {
+resource "grafana_library_panel" "remo-humidity" {
+  name = "NatureRemo - 湿度"
+  model_json = jsonencode(merge(local.common_base, local.stats_base, {
     title = "部屋の湿度",
     targets = [merge(local.target_base, {
-      expr = "tado_zone_humidity_percentage{zone_name=\"${var.TADO_ZONE_NAME}\"}",
+      expr = "remo_humidity{name=\"${var.NATURE_REMO_DEVICE_NAME}\"}",
     })]
     fieldConfig = merge(local.field_config_base, {
       defaults = merge(local.field_config_default_base, {
@@ -53,6 +53,30 @@ resource "grafana_library_panel" "tado-humidity" {
           ]
         })
         unit = "percent"
+      })
+    })
+  }))
+}
+
+resource "grafana_library_panel" "remo-power-consumption" {
+  name = "NatureRemo - 瞬間消費電力"
+  model_json = jsonencode(merge(local.common_base, local.stats_base, {
+    title = "瞬間消費電力",
+    targets = [merge(local.target_base, {
+      expr = "remo_measured_instantaneous_energy_watt"
+    })]
+    fieldConfig = merge(local.field_config_base, {
+      defaults = merge(local.field_config_default_base, {
+        thresholds = merge(local.thresholds_base, {
+          steps = [
+            zipmap(local.thresholds_keys, ["text", null]),
+            zipmap(local.thresholds_keys, ["green", 500]),
+            zipmap(local.thresholds_keys, ["yellow", 1000]),
+            zipmap(local.thresholds_keys, ["orange", 2000]),
+            zipmap(local.thresholds_keys, ["red", 2500]),
+          ]
+        })
+        unit = "watt"
       })
     })
   }))

@@ -1,10 +1,10 @@
 export ASKEN_USERNAME="..."
 export ASKEN_PASSWORD="..."
+export NATURE_OAUTH_TOKEN="..."
+export NATURE_REMO_DEVICE_NAME="..."
 export OPENWEATHER_API_KEY="..."
 export OPENWEATHER_CITY="Tokyo, JP"
 export SPEEDTEST_SERVER_IDS=14623
-export TADO_PASSWORD="..."
-export TADO_USERNAME="..."
 export TODOIST_API_KEY="..."
 export WITHINGS_ACCESS_TOKEN="..."
 export WITHINGS_CLIENT_ID="..."

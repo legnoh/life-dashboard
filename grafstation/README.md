@@ -86,7 +86,6 @@ curl -Lo ${HOME}/life-dashboard/configs/html/mpegts.js \
     https://github.com/xqq/mpegts.js/releases/download/v1.7.3/mpegts.js
 curl -Lo ${HOME}/life-dashboard/configs/html/player/mpegts.js.map \
     https://github.com/xqq/mpegts.js/releases/download/v1.7.3/mpegts.js.map
-cp -r grafstation/configs/tado-monitor ${HOME}/life-dashboard/configs/
 cp -r grafstation/configs/epgstation ${HOME}/life-dashboard/epgstation/config
 cp -r grafstation/configs/docker-compose.yml ${HOME}/life-dashboard/configs/
 cp -r grafstation/configs/nginx.conf ${HOME}/life-dashboard/configs/
@@ -99,8 +98,6 @@ export MONEYFORWARD_PASSWORD="..."
 export OPENWEATHER_CITY="..."
 export OPENWEATHER_API_KEY="..."
 export SPEEDTEST_SERVER_IDS="..."
-export TADO_USERNAME="..."
-export TADO_PASSWORD="..."
 export TODOIST_API_KEY="..."
 export WITHINGS_CLIENT_ID="..."
 export WITHINGS_CONSUMER_SECRET="..."

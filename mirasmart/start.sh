@@ -2,11 +2,7 @@
 
 set -eu
 
-export SMARTMETER_ID=${SMARTMETER_ID:?}
-export SMARTMETER_PASSWORD=${SMARTMETER_PASSWORD:?}
 RECREATE_CONTAINER=${RECREATE_CONTAINER:-"false"}
-
-envsubst < docker-compose.yml.tpl > docker-compose.yml
 
 sudo docker compose pull
 

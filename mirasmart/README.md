@@ -1,10 +1,8 @@
 mirasmart.local
 ===
 
-Mac側でカバーできない以下の2つのコンテナ起動を担う Ubuntu サーバです。
+Mac側でカバーできないコンテナ起動を担う Ubuntu サーバです。
 
-- smartmeter-exporter
-  - MacではDockerコンテナで利用するとデバイスと通信できないため
 - mirakc
   - TVキャプチャを使ったTS抜きを行うため
   - TSの映像的な処理はMac側のEPGStation2で行うのでこちらの担当はTSへの映像変換のみ
@@ -72,22 +70,6 @@ Usage
 1. Docker Engine をインストールする。
     - [Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository)
 
-### スマートメーター計測用の準備
-
-0. ここではローム社の[BP35C2](https://www.amazon.co.jp/dp/B01NACWELF) を利用する。
-1. Windows を用意し、[smartmeter-exporterの準備](https://github.com/legnoh/smartmeter-exporter#bp35c2-の準備) 部分を一通り行う。  
-(もしない場合は Macでも代用可能。ただしファームウェアは更新不可)
-1. RaspberryPiの筐体に挿し、正常に認識されていることを確認。
-    ```sh
-    $ ls -al /dev/ttyUSB*
-    crw-rw---- 1 root dialout 188, 0 Mar 24 09:41 /dev/ttyUSB0
-    ```
-1. スマートメータのIDとパスワードは後で使うので控えておく。
-    ```
-    SMARTMETER_ID="${SMARTMETER_ID}"
-    SMARTMETER_PASSWORD="${SMARTMETER_PASSWORD}"
-    ```
-
 ### TVキャプチャ稼働用の準備
 
 0. ここではプレクス社の [PX-W3U4](http://www.plex-net.co.jp/product/px-w3u4/) を利用する。
@@ -106,18 +88,9 @@ Usage
 
 ### 起動
 
-スマートメータのIDとパスワードを渡して起動する。
-
 ```sh
-export SMARTMETER_ID="...."
-export SMARTMETER_PASSWORD="...."
-
 git clone https://github.com/legnoh/life-dashboard.git
 cd life-dashboard/mirasmart
-
-# envsubstで変数部分を展開
-
-
 ./start.sh
 
 # ログを確認しておく

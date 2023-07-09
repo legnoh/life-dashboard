@@ -80,6 +80,20 @@ resource "grafana_dashboard" "life-metrics" {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.moneyforward-deposit-withdrawal.uid])
         gridPos      = { h = 5, w = 3, x = 21, y = 12 }
       },
+      
+      # nature remo
+      {
+        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.remo-temperature.uid])
+        gridPos      = { h = 5, w = 3, x = 18, y = 2 }
+      },
+      {
+        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.remo-humidity.uid])
+        gridPos      = { h = 5, w = 3, x = 18, y = 5 }
+      },
+      {
+        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.remo-power-consumption.uid])
+        gridPos      = { h = 5, w = 3, x = 9, y = 0 }
+      },
 
       # openweather
       {
@@ -95,12 +109,6 @@ resource "grafana_dashboard" "life-metrics" {
         gridPos      = { h = 5, w = 3, x = 21, y = 5 }
       },
 
-      # smartmeter
-      {
-        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.smartmeter-power-consumption.uid])
-        gridPos      = { h = 5, w = 3, x = 9, y = 0 }
-      },
-
       # snmp
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.snmp-in-octets.uid])
@@ -111,16 +119,6 @@ resource "grafana_dashboard" "life-metrics" {
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.speedtest-score.uid])
         gridPos      = { h = 5, w = 3, x = 12, y = 0 }
-      },
-
-      # tado
-      {
-        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.tado-temperature.uid])
-        gridPos      = { h = 5, w = 3, x = 18, y = 2 }
-      },
-      {
-        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.tado-humidity.uid])
-        gridPos      = { h = 5, w = 3, x = 18, y = 5 }
       },
 
       # todoist

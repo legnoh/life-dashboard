@@ -27,7 +27,5 @@ jobs:
     - name: start docker images
       env:
         RECREATE_CONTAINER: ${{ inputs.rm_state }}
-        SMARTMETER_ID: ${{ secrets.SMARTMETER_ID }}
-        SMARTMETER_PASSWORD: ${{ secrets.SMARTMETER_PASSWORD }}
       run: |
         ./start.sh

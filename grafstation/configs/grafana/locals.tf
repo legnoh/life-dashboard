@@ -70,13 +70,6 @@ locals {
         url         = "https://openweathermap.org",
       }]
     }
-    tado = {
-      links = [{
-        targetBlank = true,
-        title       = "Tado",
-        url         = "https://app.tado.com/en/main/home",
-      }]
-    }
     withings = {
       links = [{
         targetBlank = true,

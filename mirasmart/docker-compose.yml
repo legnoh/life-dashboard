@@ -9,17 +9,6 @@ services:
     restart: always
     volumes:
       - '/:/host:ro,rslave'
-  smartmeter-exporter:
-    container_name: smartmeter-exporter
-    image: legnoh/smartmeter-exporter:latest
-    ports: [ 9107:8000 ]
-    restart: always
-    environment:
-      SMARTMETER_LOGLEVEL: 20
-      SMARTMETER_ID: ${SMARTMETER_ID}
-      SMARTMETER_PASSWORD: ${SMARTMETER_PASSWORD}
-    devices:
-      - "/dev/ttyUSB0:/dev/ttyUSB0"
   mirakc:
     container_name: mirakc
     image: collelog/mirakc:latest-alpine-rpi4-64

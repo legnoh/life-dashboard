@@ -8,7 +8,6 @@ on:
     - '.github/workflows/grafstation-start-core.yml'
     - 'grafstation/configs/epgstation/**'
     - 'grafstation/configs/html/**'
-    - 'grafstation/configs/tado-monitor/**'
     - 'grafstation/configs/docker-compose.yml'
     - 'grafstation/configs/nginx.conf'
     - 'grafstation/configs/prometheus.yml'
@@ -45,7 +44,6 @@ jobs:
           https://github.com/xqq/mpegts.js/releases/download/v1.7.3/mpegts.js
         curl -Lo ${HOME}/life-dashboard/configs/html/player/mpegts.js.map \
           https://github.com/xqq/mpegts.js/releases/download/v1.7.3/mpegts.js.map
-        cp -r configs/tado-monitor ${HOME}/life-dashboard/configs/
         cp -r configs/epgstation ${HOME}/life-dashboard/epgstation/config
         cp -r configs/docker-compose.yml ${HOME}/life-dashboard/configs/
         cp -r configs/nginx.conf ${HOME}/life-dashboard/configs/
@@ -67,8 +65,6 @@ jobs:
         OPENWEATHER_CITY: ${{ secrets.OPENWEATHER_CITY }}
         OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
         SPEEDTEST_SERVER_IDS: ${{ secrets.SPEEDTEST_SERVER_IDS }}
-        TADO_PASSWORD: ${{ secrets.TADO_PASSWORD }}
-        TADO_USERNAME: ${{ secrets.TADO_USERNAME }}
         TODOIST_API_KEY: ${{ secrets.TODOIST_API_KEY }}
         WITHINGS_ACCESS_TOKEN: ${{ secrets.WITHINGS_ACCESS_TOKEN }}
         WITHINGS_CLIENT_ID: ${{ secrets.WITHINGS_CLIENT_ID }}

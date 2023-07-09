@@ -43,9 +43,9 @@ variable "IS_YOUTUBE_MUTED" {
   default = true
 }
 
-variable "TADO_ZONE_NAME" {
+variable "NATURE_REMO_DEVICE_NAME" {
   type    = string
-  default = "Air Conditioning"
+  default = "Nature Remo"
 }
 
 variable "OPENWEATHER_CITY" {
