@@ -44,7 +44,7 @@ jobs:
           https://github.com/xqq/mpegts.js/releases/download/v1.7.3/mpegts.js
         curl -Lo ${HOME}/life-dashboard/configs/html/player/mpegts.js.map \
           https://github.com/xqq/mpegts.js/releases/download/v1.7.3/mpegts.js.map
-        cp -r configs/epgstation ${HOME}/life-dashboard/epgstation/config
+        cp -r configs/epgstation/* ${HOME}/life-dashboard/epgstation/config/
         cp -r configs/docker-compose.yml ${HOME}/life-dashboard/configs/
         cp -r configs/nginx.conf ${HOME}/life-dashboard/configs/
         cp -r configs/prometheus.yml ${HOME}/life-dashboard/prometheus/prometheus.yml
