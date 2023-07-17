@@ -27,7 +27,7 @@ on:
 jobs:
   setup:
     runs-on: [self-hosted, grafstation]
-    if: ${{ github.event.push }} || ${{ github.event.workflow_dispatch }} || ${{ github.event.workflow_run.conclusion == 'success' }}
+    if:  ${{ github.event_name == 'push' }} || ${{ github.event_name == 'workflow_dispatch' }} || ${{ github.event.workflow_run.conclusion == 'success' }}
     defaults:
       run:
         working-directory: ./grafstation
@@ -39,6 +39,7 @@ jobs:
     - name: Copy configs
       run: |
         mkdir -p ${HOME}/life-dashboard/{epgstation/{data/{key,streamfiles},drop,img,thumbnail,logs/{EPGUpdater,Operator,Service},recorded},prometheus,configs,withings}
+        mkdir -p ${HOME}/.hap-switch-command
         cp -r configs/html ${HOME}/life-dashboard/configs/
         curl -Lo ${HOME}/life-dashboard/configs/html/player/mpegts.js \
           https://github.com/xqq/mpegts.js/releases/download/v1.7.3/mpegts.js
@@ -48,11 +49,14 @@ jobs:
         cp -r configs/docker-compose.yml ${HOME}/life-dashboard/configs/
         cp -r configs/nginx.conf ${HOME}/life-dashboard/configs/
         cp -r configs/prometheus.yml ${HOME}/life-dashboard/prometheus/prometheus.yml
+        cp -r configs/hap-switch-command.yml ${HOME}/.hap-switch-command/config.yml
 
     - name: Start node_exporter
       run: |
         brew services stop node_exporter
         brew services start node_exporter
+        brew services stop hap-switch-command
+        brew services start hap-switch-command
 
     - name: Start docker images
       env:
