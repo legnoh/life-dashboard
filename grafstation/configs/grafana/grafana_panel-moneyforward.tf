@@ -38,7 +38,7 @@ resource "grafana_library_panel" "moneyforward-balance" {
           steps = [
             zipmap(local.thresholds_keys, ["red", null]),
             zipmap(local.thresholds_keys, ["orange", 0]),
-            zipmap(local.thresholds_keys, ["semi-orange", 30000]),
+            zipmap(local.thresholds_keys, ["light-orange", 30000]),
             zipmap(local.thresholds_keys, ["yellow", 50000]),
             zipmap(local.thresholds_keys, ["light-green", 70000]),
             zipmap(local.thresholds_keys, ["green", 100000]),
