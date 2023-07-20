@@ -55,10 +55,10 @@ if [ ${weekday} -le 5 ]; then
     tv_channel_id1=${CHANNEL_BSBS1_2}
     is_tv_channel1_muted=false
   
-  # 6:25~06:35 / BSテレ東+NHK総合1(体操)
+  # 6:25~06:35 / BSテレ東+NHKEテレ1東京(体操)
   elif [ $( echo "${now} < 6.583" | bc ) == 1 ]; then
     tv_channel_id1=${CHANNEL_BSBS1_2}
-    tv_channel_id2=${CHANNEL_GR27}
+    tv_channel_id2=${CHANNEL_GR26}
     is_tv_channel2_muted=false
 
   # 6:35~07:05 / BSテレ東(ミュート解除)
