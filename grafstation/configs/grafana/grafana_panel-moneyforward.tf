@@ -56,7 +56,7 @@ resource "grafana_library_panel" "moneyforward-deposit-withdrawal" {
   model_json = jsonencode(merge(local.common_base, local.stats_base, local.link.moneyforward, {
     title = "残高足りる?",
     targets = [merge(local.target_base, {
-      expr = "mf_assets_deposit_jpy{account=\"住信SBIネット銀行\",name=\"代表口座-普通\"} + ignoring(name, account) mf_monthly_withdrawal_jpy{name=\"*モバイル\"}",
+      expr = "mf_assets_deposit_jpy{account=\"住信SBIネット銀行\",name=\"代表口座-円普通\"} + mf_monthly_withdrawal_jpy{name=~\"*カード\"}",
     })]
     fieldConfig = merge(local.field_config_base, {
       defaults = merge(local.field_config_default_base, {
