@@ -1,4 +1,5 @@
 resource "grafana_library_panel" "withings-bmi" {
+  org_id = grafana_organization.main.org_id
   name = "Withings - BMI"
   model_json = jsonencode(merge(local.common_base, local.stats_base, local.link.withings, {
     title = "BMI",
@@ -25,6 +26,7 @@ resource "grafana_library_panel" "withings-bmi" {
 }
 
 resource "grafana_library_panel" "withings-fat-ratio" {
+  org_id = grafana_organization.main.org_id
   name = "Withings - 体脂肪率"
   model_json = jsonencode(merge(local.common_base, local.stats_base, local.link.withings, {
     title = "体脂肪率",
@@ -48,6 +50,7 @@ resource "grafana_library_panel" "withings-fat-ratio" {
 }
 
 resource "grafana_library_panel" "withings-bpm-max" {
+  org_id = grafana_organization.main.org_id
   name = "Withings - 最高血圧(mmHg)"
   model_json = jsonencode(merge(local.common_base, local.stats_base, local.link.withings, {
     title = "最高血圧",
@@ -72,6 +75,7 @@ resource "grafana_library_panel" "withings-bpm-max" {
 }
 
 resource "grafana_library_panel" "withings-body-temperature" {
+  org_id = grafana_organization.main.org_id
   name = "Withings - 体温"
   model_json = jsonencode(merge(local.common_base, local.stats_base, local.link.withings, {
     title = "体温",
@@ -97,6 +101,7 @@ resource "grafana_library_panel" "withings-body-temperature" {
 }
 
 resource "grafana_library_panel" "withings-steps" {
+  org_id = grafana_organization.main.org_id
   name = "Withings - 歩数"
   model_json = jsonencode(merge(local.common_base, local.stats_base, local.link.withings, {
     title = "歩数",
@@ -122,6 +127,7 @@ resource "grafana_library_panel" "withings-steps" {
 }
 
 resource "grafana_library_panel" "withings-sleep-score" {
+  org_id = grafana_organization.main.org_id
   name = "Withings - 睡眠スコア"
   model_json = jsonencode(merge(local.common_base, local.stats_base, local.link.withings, {
     title = "睡眠スコア",

@@ -1,4 +1,5 @@
 resource "grafana_library_panel" "todoist-tasknum" {
+  org_id = grafana_organization.main.org_id
   name = "Todoist - タスク残数"
   model_json = jsonencode(merge(local.common_base, local.stats_base, {
     title = "タスク残数",

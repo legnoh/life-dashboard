@@ -1,4 +1,5 @@
 resource "grafana_library_panel" "aphorism" {
+  org_id = grafana_organization.main.org_id
   name = "aphorism"
   model_json = jsonencode(merge(local.common_base, {
     type = "canvas",

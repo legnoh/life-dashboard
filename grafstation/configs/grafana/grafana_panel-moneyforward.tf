@@ -1,4 +1,5 @@
 resource "grafana_library_panel" "moneyforward-balancesheet" {
+  org_id = grafana_organization.main.org_id
   name = "moneyforward-balancesheet"
   model_json = jsonencode(merge(local.common_base, local.stats_base, local.link.moneyforward, {
     title = "バランスシート",
@@ -24,6 +25,7 @@ resource "grafana_library_panel" "moneyforward-balancesheet" {
 }
 
 resource "grafana_library_panel" "moneyforward-balance" {
+  org_id = grafana_organization.main.org_id
   name = "moneyforward-balance"
   model_json = jsonencode(merge(local.common_base, local.stats_base, local.link.moneyforward, {
     title = "当月収支",
@@ -49,6 +51,7 @@ resource "grafana_library_panel" "moneyforward-balance" {
 }
 
 resource "grafana_library_panel" "moneyforward-deposit-withdrawal" {
+  org_id = grafana_organization.main.org_id
   name = "moneyforward-deposit-withdrawal"
   model_json = jsonencode(merge(local.common_base, local.stats_base, local.link.moneyforward, {
     title = "残高足りる?",

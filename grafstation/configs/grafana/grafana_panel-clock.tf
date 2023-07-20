@@ -1,4 +1,5 @@
 resource "grafana_library_panel" "clock" {
+  org_id = grafana_organization.main.org_id
   name = "clock"
   model_json = jsonencode({
     type = "grafana-clock-panel",

@@ -1,4 +1,5 @@
 resource "grafana_library_panel" "snmp-in-octets" {
+  org_id = grafana_organization.main.org_id
   name = "SNMP - 帯域通信量"
   model_json = jsonencode(merge(local.common_base, local.stats_base, {
     title = "帯域通信量",
