@@ -43,6 +43,7 @@ services:
     image: legnoh/aphorism-exporter
     ports: [ "9111:8000" ]
     restart: always
+    platform: linux/amd64
   asken-exporter:
     container_name: asken-exporter
     image: legnoh/asken-exporter
