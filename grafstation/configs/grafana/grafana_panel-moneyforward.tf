@@ -62,7 +62,7 @@ resource "grafana_library_panel" "moneyforward-deposit-withdrawal" {
         refId: "A"
       }),
       merge(local.target_base, {
-        expr = "mf_monthly_withdrawal_jpy{name=~\".*カード\"}"
+        expr = "sum(mf_monthly_withdrawal_jpy{name=~\".*カード\"})"
         hide: true
         refId: "B"
       }),
