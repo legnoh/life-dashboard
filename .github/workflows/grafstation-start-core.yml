@@ -50,7 +50,9 @@ jobs:
         cp -r configs/nginx.conf ${HOME}/life-dashboard/configs/
         cp -r configs/prometheus.yml ${HOME}/life-dashboard/prometheus/prometheus.yml
         cp -r configs/hap-switch-command.yml ${HOME}/.hap-switch-command/config.yml
-        envsubst <  configs/hap-nature-remo.yml > ${HOME}/.hap-nature-remo/config.yml
+        envsubst < configs/hap-nature-remo.yml > ${HOME}/.hap-nature-remo/config.yml
+      env:
+        NATURE_OAUTH_TOKEN: ${{ secrets.NATURE_OAUTH_TOKEN }}
 
     - name: Start homebrew services
       run: |
