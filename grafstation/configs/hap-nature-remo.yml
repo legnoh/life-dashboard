@@ -1,0 +1,3 @@
+name: hap-nature-remo
+pin: "54739174"
+token: ${NATURE_OAUTH_TOKEN}

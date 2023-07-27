@@ -39,7 +39,7 @@ jobs:
     - name: Copy configs
       run: |
         mkdir -p ${HOME}/life-dashboard/{epgstation/{data/{key,streamfiles},drop,img,thumbnail,logs/{EPGUpdater,Operator,Service},recorded},prometheus,configs,withings}
-        mkdir -p ${HOME}/.hap-switch-command
+        mkdir -p ${HOME}/{.hap-switch-command,.hap-nature-remo}
         cp -r configs/html ${HOME}/life-dashboard/configs/
         curl -Lo ${HOME}/life-dashboard/configs/html/player/mpegts.js \
           https://github.com/xqq/mpegts.js/releases/download/v1.7.3/mpegts.js
@@ -50,13 +50,13 @@ jobs:
         cp -r configs/nginx.conf ${HOME}/life-dashboard/configs/
         cp -r configs/prometheus.yml ${HOME}/life-dashboard/prometheus/prometheus.yml
         cp -r configs/hap-switch-command.yml ${HOME}/.hap-switch-command/config.yml
+        envsubst <  configs/hap-nature-remo.yml > ${HOME}/.hap-nature-remo/config.yml
 
-    - name: Start node_exporter
+    - name: Start homebrew services
       run: |
-        brew services stop node_exporter
-        brew services start node_exporter
-        brew services stop hap-switch-command
-        brew services start hap-switch-command
+        brew services restart node_exporter
+        brew services restart hap-switch-command
+        brew services restart hap-nature-remo
 
     - name: Start docker images
       env:
