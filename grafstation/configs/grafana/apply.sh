@@ -68,6 +68,14 @@ if [ ${weekday} -le 5 ]; then
   
   # 07:05~07:55 / BSテレ東
   elif [ $( echo "${now} < 7.916" | bc ) == 1 ]; then
+
+    # 火曜/金曜 7:38~7:43 フジテレビ(ちいかわ)
+    if [ ${weekday} == 2 ] || [ ${weekday} == 5 ]; then
+      if [ $( echo "${now} > 7.633" | bc ) == 1 ] && [ $( echo "${now} < 7.716" | bc ) == 1 ]; then
+        tv_channel_id2=${CHANNEL_GR21}
+        is_tv_channel2_muted=false
+      fi
+    fi
     tv_channel_id1=${CHANNEL_BSBS1_2}
     is_youtube_muted=false
   
