@@ -38,7 +38,7 @@ jobs:
 
     - name: Copy configs
       run: |
-        mkdir -p ${HOME}/life-dashboard/{epgstation/{data/{key,streamfiles},drop,img,thumbnail,logs/{EPGUpdater,Operator,Service},recorded},prometheus,configs,withings}
+        mkdir -p ${HOME}/life-dashboard/{epgstation/{config,data/{key,streamfiles},drop,img,thumbnail,logs/{EPGUpdater,Operator,Service},recorded},prometheus,configs,withings}
         mkdir -p ${HOME}/{.hap-switch-command,.hap-nature-remo}
         cp -r configs/html ${HOME}/life-dashboard/configs/
         curl -Lo ${HOME}/life-dashboard/configs/html/player/mpegts.js \
