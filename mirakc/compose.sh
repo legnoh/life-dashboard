@@ -8,7 +8,7 @@ RECREATE_CONTAINER=${RECREATE_CONTAINER:-"false"}
 ACTION=${1:-"up"}
 
 # docker start
-elif [[ "${ACTION}" == "up" ]]; then
+if [[ "${ACTION}" == "up" ]]; then
 
   sudo ${DOCKER_COMPOSE} pull
   if [[ "${RECREATE_CONTAINER}" == 'true' ]]; then

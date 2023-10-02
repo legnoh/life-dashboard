@@ -48,6 +48,10 @@ Usage
     ```sh
     ssh mirakc.local
     ```
+1. OS手動アップデート
+    ```sh
+    sudo apt update && sudo apt -y upgrade
+    ```
 1. GitHub Hosted Runner をインストールして常時起動状態にする。
     - [Adding self-hosted runners - GitHub Docs](https://docs.github.com/en/actions/hosting-your-own-runners/adding-self-hosted-runners)
       - [Add New Runner](https://github.com/legnoh/life-metrics-grafana-deployment/settings/actions/runners/new?arch=arm64&os=linux)
@@ -76,13 +80,15 @@ Usage
       - [有料放送の契約情報はB-CASカードに入っているのですか？ | B-CAS（ビーキャス）](https://www.b-cas.co.jp/support/faq/category08/faq051.html)
       - [ご視聴に必要な操作(受信待機)とは何ですか(スカパー！)](https://helpcenter.skyperfectv.co.jp/articles/knowledge/AID0408)
     - 事前に別のテレビなどでこの受信待機をやっておくと、この問題を回避できる。
-1. ドライバインストールのために必要なパッケージをインストールする。
-    ```sh
-    sudo apt install -y unzip build-essential dkms
-    ```
-1. px4_drv(chardev版非公式Linuxドライバ) をダウンロード・インストールする。
+1. px4_drv(chardev版非公式Linuxドライバ) とそれに必要なものをダウンロードする。  
     - [nns779/px4_drv: Unofficial Linux driver for PLEX PX4/PX5/PX-MLT series ISDB-T/S receivers (not V4L-DVB)](https://github.com/nns779/px4_drv#%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
-    - TVキャプチャを接続し、認識されていることを確認するところまでやっておく。
+      ```sh
+      sudo apt install -y unzip build-essential dkms
+      git clone https://github.com/nns779/px4_drv.git && cd px4_drv
+      ```
+    - インストールはdkmsを使う手順で問題ない。
+    - 終わったらreboot。
+    - TVキャプチャを接続し、デバイスが認識されていることを確認する。
 
 ### 起動
 
