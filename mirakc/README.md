@@ -1,4 +1,4 @@
-mirasmart.local
+mirakc.local
 ===
 
 Mac側でカバーできないコンテナ起動を担う Ubuntu サーバです。
@@ -26,18 +26,18 @@ Usage
 1. ログイン後のパスワードを作成
     ```sh
     op item create --category="password" \
-    --title="mirasmart.local password" \
+    --title="mirakc.local password" \
     --generate-password="64,letters,digits"
     ```
 1. [RasberryPi Imager](https://www.raspberrypi.com/software/) で以下の設定にしてメモリーカードを作成。
     - Operating System: `Ubuntu Server 22.04.* LTS (64-bit)`
-    - Set hostname: `mirasmart.local`
+    - Set hostname: `mirakc.local`
     - Enable SSH
       - Allow public-key authentication only
-        - Set authorized_keys for '${USER}': `op item get mirasmart.local --fields "public key"`
+        - Set authorized_keys for '${USER}': `op item get mirakc.local --fields "public key"`
     - Set username and password
       - username: `${USER}`
-      - password: `op item get 'mirasmart.local password' --fields 'password'`
+      - password: `op item get 'mirakc.local password' --fields 'password'`
     - Configure Wireless LAN
       - `op item list --categories 'WirelessRouter'`
       - Wireless LAN country: `JP`
@@ -46,7 +46,7 @@ Usage
       - Keyboard layout: `us`
 1. 作成したメモリーカードで RaspberryPi を起動し、SSH ログイン(ここからはUbuntu側での操作)
     ```sh
-    ssh mirasmart.local
+    ssh mirakc.local
     ```
 1. GitHub Hosted Runner をインストールして常時起動状態にする。
     - [Adding self-hosted runners - GitHub Docs](https://docs.github.com/en/actions/hosting-your-own-runners/adding-self-hosted-runners)
@@ -60,11 +60,9 @@ Usage
     # 初期設定ファイルをそのままコピーして配置
     sudo cp /usr/share/doc/avahi-daemon/examples/ssh.service /etc/avahi/services
 
-    # 起動
+    # 起動/永続化
     sudo systemctl start avahi-daemon
     sudo systemctl status avahi-daemon
-
-    # 永続化
     sudo systemctl enable avahi-daemon
     ```
 1. Docker Engine をインストールする。
@@ -90,9 +88,9 @@ Usage
 
 ```sh
 git clone https://github.com/legnoh/life-dashboard.git
-cd life-dashboard/mirasmart
-./start.sh
+cd life-dashboard/mirakc
+./compose.sh
 
 # ログを確認しておく
-docker compose logs -f
+./compose.sh logs
 ```

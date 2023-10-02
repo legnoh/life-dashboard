@@ -21,7 +21,7 @@ on:
   workflow_run:
     workflows:
     - Generate SNMP config
-    - Start mirasmart
+    - Start mirakc
     types: [ completed ]
 
 jobs:

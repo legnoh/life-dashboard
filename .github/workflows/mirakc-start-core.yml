@@ -1,11 +1,11 @@
-name: Start mirasmart
+name: Start mirakc
 
 on:
   push:
     branches:
     - main
     paths:
-    - 'mirasmart/**'
+    - 'mirakc/**'
   workflow_dispatch:
     inputs:
       rm_state:
@@ -15,10 +15,10 @@ on:
 
 jobs:
   setup:
-    runs-on: [self-hosted, mirasmart]
+    runs-on: [self-hosted, mirakc]
     defaults:
       run:
-        working-directory: ./mirasmart
+        working-directory: ./mirakc
     steps:
 
     - name: Checkout Repository
@@ -26,11 +26,11 @@ jobs:
     
     - name: Copy configs
       run: |
-        mkdir -p ${HOME}/life-dashboard/mirasmart/configs
-        cp -r * ${HOME}/life-dashboard/mirasmart/configs/
+        mkdir -p ${HOME}/life-dashboard/mirakc/configs
+        cp -r * ${HOME}/life-dashboard/mirakc/configs/
     
     - name: start docker images
       env:
         RECREATE_CONTAINER: ${{ inputs.rm_state }}
       run: |
-        ./start.sh
+        ./compose.sh
