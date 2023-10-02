@@ -2,7 +2,7 @@
 
 set -eu
 
-DOCKER_COMPOSE_FILE="./tv-recorder/docker-compose.yml"
+DOCKER_COMPOSE_FILE="$HOME/life-dashboard/mirakc/docker-compose.yml"
 DOCKER_COMPOSE="docker compose -f ${DOCKER_COMPOSE_FILE} -p tv-recorder"
 RECREATE_CONTAINER=${RECREATE_CONTAINER:-"false"}
 ACTION=${1:-"up"}
