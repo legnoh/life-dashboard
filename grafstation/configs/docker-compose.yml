@@ -59,6 +59,7 @@ services:
     environment:
     - MONEYFORWARD_EMAIL=${MONEYFORWARD_EMAIL}
     - MONEYFORWARD_PASSWORD=${MONEYFORWARD_PASSWORD}
+    - SE_OFFLINE=false
   openweather-exporter:
     container_name: openweather-exporter
     image: legnoh/openweather-exporter
