@@ -16,6 +16,16 @@ curl "http://www.rtpro.yamaha.co.jp/RT/docs/mib/yamaha-private-mib.tar.gz" \
 make mibs
 
 cat - << EOS > generator.yml
+auths:
+  public_v2:
+    security_level: authPriv
+    auth_protocol: SHA
+    priv_protocol: AES
+    username: ${SNMP_USERNAME}
+    password: ${SNMP_PASSWORD}
+    priv_password: ${SNMP_PRIV_PASSWORD}
+    context_name: ${SNMP_CONTEXT_NAME}
+    version: 3
 modules:
   ${SNMP_EXPORTER_MODULE_NAME}:
     walk:
@@ -28,15 +38,6 @@ modules:
       - yrhMemoryUtil
       - ifInOctets
       - ifOutOctets
-    version: 3
-    auth:
-      security_level: authPriv
-      auth_protocol: SHA
-      priv_protocol: AES
-      username: ${SNMP_USERNAME}
-      password: ${SNMP_PASSWORD}
-      priv_password: ${SNMP_PRIV_PASSWORD}
-      context_name: ${SNMP_CONTEXT_NAME}
 EOS
 
 docker run -i -v "${PWD}:/opt" prom/snmp-generator generate
