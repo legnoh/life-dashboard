@@ -28,6 +28,7 @@ auths:
     version: 3
 modules:
   ${SNMP_EXPORTER_MODULE_NAME}:
+    timeout: 20s
     walk:
       - yrhCpuUtil5sec
       - yrhCpuUtil1min
