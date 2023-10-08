@@ -21,12 +21,29 @@ TFVARS=(
 )
 TF_OPTIONS=${TERRAFORM_OPTIONS:-"-auto-approve"}
 
-# ジャンル検索関数(第1引数に入れたもので現在放送中のチャンネルを返す)
+# ジャンル検索関数(第1引数/第2引数に入れたもので現在放送中のチャンネルを返す)
 function search_channel_by_genre(){
-  genre=${0:-"8"}
-  now="$(date +%s)000"
-  echo "$(curl -s "http://${EPGS_HOST}/api/schedules/broadcasting?isHalfWidth=true" \
-    | jq "[.[] | select(.programs[0].genre1==${genre})|.channel][0].id")"
+  local genre=${1:-"8"}
+  local subgenre=${2:-""}
+  local now="$(date +%s)000"
+  local broadcasting=$(curl -s "http://${EPGS_HOST}/api/schedules/broadcasting?isHalfWidth=true")
+  local channel=""
+
+  if [[ ${subgenre} == "" ]]; then
+    channel=$(echo ${broadcasting} \
+      | jq -r "[.[] \
+        | select( .programs[0].genre1==${genre} )][0]")
+  elif [[ ${subgenre} != "" ]]; then
+    channel=$(echo ${broadcasting} \
+      | jq -r "[.[] \
+        | select( .programs[0].genre1==${genre} \
+            and .programs[0].subGenre1==${subgenre} \
+        )][0]")
+  fi
+
+  if [[ "${channel}" != "null" ]]; then
+    echo ${channel} | jq -r ".channel.id"
+  fi
 }
 
 # 中央競馬をやっている日か確認する
