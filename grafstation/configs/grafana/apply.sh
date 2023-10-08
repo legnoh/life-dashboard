@@ -29,6 +29,25 @@ function search_channel_by_genre(){
     | jq "[.[] | select(.programs[0].genre1==${genre})|.channel][0].id")"
 }
 
+# 中央競馬をやっている日か確認する
+function is_national_raceday(){
+    local yyyymm=${1:-$(date "+%Y%m")}
+    local day=${2:-$(date "+%d")}
+    local num=0
+
+    num=$(curl -s "https://jra.jp/keiba/common/calendar/json/${yyyymm}.json" \
+        | jq -r ".[].data[] | select(.date==\"${day}\") | .info[].race | length")
+    
+    if [[ "${num}" == "" ]]; then
+      num = 0
+    fi
+    if [[ ${num} > 0 ]]; then
+      echo 1
+    else
+      echo 0
+    fi
+}
+
 # ダートグレードレース番組をやっているかを確認する
 function search_dirt_grade_race() {
   echo "$(curl -s "http://${EPGS_HOST}/api/schedules/broadcasting?isHalfWidth=true" \
@@ -166,31 +185,20 @@ elif [ ${weekday} -eq 6 ]; then
   if [ $( echo "${now} < 5.5" | bc ) == 1 ]; then
     :
 
-  # 5:30~09:00 / ドキュメンタリー・教養（ランダム）
-  elif [ $( echo "${now} < 9" | bc ) == 1 ]; then
+  # 5:30~12:00 / ドキュメンタリー・教養（ランダム）
+  elif [ $( echo "${now} < 12" | bc ) == 1 ]; then
     tv_channel_id1=$(search_channel_by_genre 8)
     is_tv_channel1_muted=false
   
-  # 09:00~12:00 / グリーンチャンネル
-  elif [ $( echo "${now} < 12" | bc ) == 1 ]; then
-    tv_channel_id1=${CHANNEL_BSBS21_2}
-    is_tv_channel1_muted=false
-  
-  # 12:00~12:15 / グリーンチャンネル + NHK
-  elif [ $( echo "${now} < 12.25" | bc ) == 1 ]; then
-    tv_channel_id1=${CHANNEL_BSBS21_2}
-    tv_channel_id2=${CHANNEL_GR27}
-    is_tv_channel2_muted=false
-  
-  # 12:15~18:45 / グリーンチャンネル
-  elif [ $( echo "${now} < 18.75" | bc ) == 1 ]; then
-    tv_channel_id1=${CHANNEL_BSBS21_2}
+  ## 12:00~12:25 / NHK総合1(ミュート解除)
+  elif [ $( echo "${now} < 12.416" | bc ) == 1 ]; then
+    tv_channel_id1=${CHANNEL_GR27}
     is_tv_channel1_muted=false
 
-  # 18:45~23:00 / ドキュメンタリー・教養（ランダム）
+  # 12:25~23:00 / ドキュメンタリー・教養（ランダム）
   elif [ $( echo "${now} < 23" | bc ) == 1 ]; then
     tv_channel_id1=$(search_channel_by_genre 8)
-    is_youtube_muted=false
+    is_tv_channel1_muted=false
   
   ## 23:00~24:00 / 停止
   else
@@ -206,38 +214,22 @@ elif [ ${weekday} -le 7 ]; then
   if [ $( echo "${now} < 5.83" | bc ) == 1 ]; then
     :
 
-  # 5:50~09:00 / ドキュメンタリー・教養（ランダム）
-  elif [ $( echo "${now} < 9" | bc ) == 1 ]; then
-    tv_channel_id1=$(search_channel_by_genre 8)
-    is_tv_channel1_muted=false
-  
-  # 09:00~12:00 / グリーンチャンネル
+  # 5:50~12:00 / ドキュメンタリー・教養（ランダム）
   elif [ $( echo "${now} < 12" | bc ) == 1 ]; then
-    tv_channel_id1=${CHANNEL_BSBS21_2}
-    is_tv_channel1_muted=false
-  
-  # 12:00~12:15 / グリーンチャンネル + NHK
-  elif [ $( echo "${now} < 12.25" | bc ) == 1 ]; then
-    tv_channel_id1=${CHANNEL_BSBS21_2}
-    tv_channel_id2=${CHANNEL_GR27}
-    is_tv_channel2_muted=false
-  
-  # 12:15~17:00 / グリーンチャンネル
-  elif [ $( echo "${now} < 17" | bc ) == 1 ]; then
-    tv_channel_id1=${CHANNEL_BSBS21_2}
-    is_tv_channel1_muted=false
-  
-  # 17:00~18:45 / ドキュメンタリー・教養（ランダム）
-  elif [ $( echo "${now} < 17" | bc ) == 1 ]; then
     tv_channel_id1=$(search_channel_by_genre 8)
     is_tv_channel1_muted=false
-
-  # 18:45~21:00 / ドキュメンタリー・教養（ランダム）
+  
+  ## 12:00~12:25 / NHK総合1(ミュート解除)
+  elif [ $( echo "${now} < 12.416" | bc ) == 1 ]; then
+    tv_channel_id1=${CHANNEL_GR27}
+    is_tv_channel1_muted=false
+  
+  # 12:25~21:00 / ドキュメンタリー・教養（ランダム）
   elif [ $( echo "${now} < 21" | bc ) == 1 ]; then
     tv_channel_id1=$(search_channel_by_genre 8)
-    is_youtube_muted=false
+    is_tv_channel1_muted=false
   
-  # 21:00~23:00 / NHK Eテレ
+  # 21:00~23:00 / NHK Eテレ(クラシック音楽館)
   elif [ $( echo "${now} < 23" | bc ) == 1 ]; then
     tv_channel_id1=${CHANNEL_GR26}
     is_tv_channel1_muted=false
@@ -252,11 +244,35 @@ else
   exit 1
 fi
 
-# ダート重賞番組が放送されている場合、強制的にチャンネルをグリーンチャンネルに変更する
-if [[ "$(search_dirt_grade_race)" != "" ]]; then
-    echo "! ダート重賞番組中のため、グリーンチャンネルをつけます !"
+# 中央競馬の放送日は朝9時〜12時、12:15〜17:00までグリーンチャンネルに変更する
+if [[ is_national_raceday > 0 ]]; then
+  echo "中央競馬の開催日です!"
+
+  if [ $( echo "${now} < 9" | bc ) == 1 ]; then
+    :
+  elif [ $( echo "${now} < 12" | bc ) == 1 ]; then
     tv_channel_id1=${CHANNEL_BSBS21_2}
     is_tv_channel1_muted=false
+
+  # 12:00~12:15 / グリーンチャンネル + NHK
+  elif [ $( echo "${now} < 12.25" | bc ) == 1 ]; then
+    tv_channel_id1=${CHANNEL_BSBS21_2}
+    tv_channel_id2=${CHANNEL_GR27}
+    is_tv_channel1_muted=true
+    is_tv_channel2_muted=false
+  fi
+
+  # 12:15~17:00 / グリーンチャンネル
+  elif [ $( echo "${now} < 17" | bc ) == 1 ]; then
+    tv_channel_id1=${CHANNEL_BSBS21_2}
+    is_tv_channel1_muted=false
+fi
+
+# ダート重賞番組が放送されている場合、強制的にチャンネルをグリーンチャンネルに変更する
+if [[ "$(search_dirt_grade_race)" != "" ]]; then
+  echo "! ダート重賞番組中のため、グリーンチャンネルをつけます !"
+  tv_channel_id1=${CHANNEL_BSBS21_2}
+  is_tv_channel1_muted=false
 fi
 
 # 直近で緊急地震速報が発生している場合、強制的にチャンネルをNHKに変更する
