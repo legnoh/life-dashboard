@@ -3,6 +3,7 @@
 echo "---------------------------------"
 date "+%Y/%m/%d %H:%M:%S"
 ts=$(date "+%Y%m%d%H%M")
+tsux=$(date "+%s")
 
 JQ="/opt/homebrew/bin/jq"
 TF="/opt/homebrew/bin/terraform"
@@ -24,8 +25,28 @@ TF_OPTIONS=${TERRAFORM_OPTIONS:-"-auto-approve"}
 function search_channel_by_genre(){
   genre=${0:-"8"}
   now="$(date +%s)000"
-  echo "$(curl -s "http://${EPGS_HOST}/api/schedules/broadcasting?isHalfWidth" \
+  echo "$(curl -s "http://${EPGS_HOST}/api/schedules/broadcasting?isHalfWidth=true" \
     | jq "[.[] | select(.programs[0].genre1==${genre})|.channel][0].id")"
+}
+
+# ダートグレードレース番組をやっているかを確認する
+function search_dirt_grade_race() {
+  echo "$(curl -s "http://${EPGS_HOST}/api/schedules/broadcasting?isHalfWidth=true" \
+    | jq ".[] \
+      | select( .channel.name == \"グリーンチャンネル\" ) \
+      | .programs[0] \
+      | select( .description | test(\"(Jpn1|Jpn2|Jpn3)\") )" )"
+}
+
+# 地震がなかったか確認する
+# https://www.p2pquake.net/develop/
+function check_latest_earthquake() {
+  echo $(curl -s "https://api.p2pquake.net/v2/history?codes=556&limit=1" \
+    | jq -r ".[].time \
+      | split(\".\")[0] \
+      | strptime(\"%Y/%m/%d %H:%M:%S\") \
+      | strftime(\"%s\")" \
+  )
 }
 
 # EPGStationのチャンネル情報を取得して変数展開
@@ -229,6 +250,24 @@ elif [ ${weekday} -le 7 ]; then
 else
   echo "invalid weekday num"
   exit 1
+fi
+
+# ダート重賞番組が放送されている場合、強制的にチャンネルをグリーンチャンネルに変更する
+if [[ "$(search_dirt_grade_race)" != "" ]]; then
+    echo "! ダート重賞番組中のため、グリーンチャンネルをつけます !"
+    tv_channel_id1=${CHANNEL_BSBS21_2}
+    is_tv_channel1_muted=false
+fi
+
+# 直近で緊急地震速報が発生している場合、強制的にチャンネルをNHKに変更する
+latest_earthquake_tsux=$(check_latest_earthquake)
+latest_earthquake_offset=$(( tsux - latest_earthquake_tsux ))
+if (( ${latest_earthquake_offset} < 3600 )); then
+  echo "!!! 直近で緊急地震速報が発報されています（NHKをONにします）!!!"
+  tv_channel_id1=${CHANNEL_GR27}
+  is_tv_channel1_muted=false
+
+  # TODO: ここでテレビ自体のONも挟みたい
 fi
 
 # 05:45~17:30まで画面をライトモードにする
