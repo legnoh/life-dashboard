@@ -20,6 +20,14 @@ TFVARS=(
 )
 TF_OPTIONS=${TERRAFORM_OPTIONS:-"-auto-approve"}
 
+# ジャンル検索関数(第1引数に入れたもので現在放送中のチャンネルを返す)
+function search_channel_by_genre(){
+  genre=${0:-"8"}
+  now="$(date +%s)000"
+  echo "$(curl -s "http://${EPGS_HOST}/api/schedules/broadcasting?isHalfWidth" \
+    | jq "[.[] | select(.programs[0].genre1==${genre})|.channel][0].id")"
+}
+
 # EPGStationのチャンネル情報を取得して変数展開
 len=$(echo ${CHANNELS_JSON} | ${JQ} length)
 for i in $( seq 0 $(($len - 1)) ); do
@@ -79,19 +87,19 @@ if [ ${weekday} -le 5 ]; then
     tv_channel_id1=${CHANNEL_BSBS1_2}
     is_youtube_muted=false
   
-  # 07:55~09:55 / NHK総合1
+  # 07:55~09:55 / ドキュメンタリー・教養（ランダム）
   elif [ $( echo "${now} < 9.916" | bc ) == 1 ]; then
-    tv_channel_id1=${CHANNEL_GR27}
+    tv_channel_id1=$(search_channel_by_genre 8)
   
   # 09:55~10:00 / NHK総合1(体操)
   elif [ $( echo "${now} < 10" | bc ) == 1 ]; then
     tv_channel_id1=${CHANNEL_GR27}
     is_tv_channel1_muted=false
   
-  # 10:00~12:00 / NHK総合1
+  # 10:00~12:00 / ドキュメンタリー・教養（ランダム）
   elif [ $( echo "${now} < 12" | bc ) == 1 ]; then
-    tv_channel_id1=${CHANNEL_GR27}
-  
+    tv_channel_id1=$(search_channel_by_genre 8)
+
   ## 12:00~12:25 / NHK総合1(ミュート解除)
   elif [ $( echo "${now} < 12.416" | bc ) == 1 ]; then
     tv_channel_id1=${CHANNEL_GR27}
@@ -102,18 +110,18 @@ if [ ${weekday} -le 5 ]; then
     tv_channel_id1=${CHANNEL_BSBS15_0}
     is_youtube_muted=false
   
-  # 13:00~13:55 / NHK総合1
+  # 13:00~13:55 / ドキュメンタリー・教養（ランダム）
   elif [ $( echo "${now} < 13.916" | bc ) == 1 ]; then
-    tv_channel_id1=${CHANNEL_GR27}
+    tv_channel_id1=$(search_channel_by_genre 8)
   
   # 13:55~14:00 / NHK総合1(体操)
   elif [ $( echo "${now} < 14" | bc ) == 1 ]; then
     tv_channel_id1=${CHANNEL_GR27}
     is_tv_channel1_muted=false
   
-  # 14:00~20:54 / NHK総合1
+  # 14:00~20:54 / ドキュメンタリー・教養（ランダム）
   elif [ $( echo "${now} < 20.9" | bc ) == 1 ]; then
-    tv_channel_id1=${CHANNEL_GR27}
+    tv_channel_id1=$(search_channel_by_genre 8)
   
   # 20:54~21:54 / BSテレ東
   elif [ $( echo "${now} < 21.9" | bc ) == 1 ]; then
@@ -137,9 +145,9 @@ elif [ ${weekday} -eq 6 ]; then
   if [ $( echo "${now} < 5.5" | bc ) == 1 ]; then
     :
 
-  # 5:30~09:00 / 日テレ
+  # 5:30~09:00 / ドキュメンタリー・教養（ランダム）
   elif [ $( echo "${now} < 9" | bc ) == 1 ]; then
-    tv_channel_id1=${CHANNEL_GR25}
+    tv_channel_id1=$(search_channel_by_genre 8)
     is_tv_channel1_muted=false
   
   # 09:00~12:00 / グリーンチャンネル
@@ -158,9 +166,9 @@ elif [ ${weekday} -eq 6 ]; then
     tv_channel_id1=${CHANNEL_BSBS21_2}
     is_tv_channel1_muted=false
 
-  # 18:45~23:00 / NHK1
+  # 18:45~23:00 / ドキュメンタリー・教養（ランダム）
   elif [ $( echo "${now} < 23" | bc ) == 1 ]; then
-    tv_channel_id1=${CHANNEL_GR27}
+    tv_channel_id1=$(search_channel_by_genre 8)
     is_youtube_muted=false
   
   ## 23:00~24:00 / 停止
@@ -177,9 +185,9 @@ elif [ ${weekday} -le 7 ]; then
   if [ $( echo "${now} < 5.83" | bc ) == 1 ]; then
     :
 
-  # 5:50~09:00 / テレビ朝日
+  # 5:50~09:00 / ドキュメンタリー・教養（ランダム）
   elif [ $( echo "${now} < 9" | bc ) == 1 ]; then
-    tv_channel_id1=${CHANNEL_GR24}
+    tv_channel_id1=$(search_channel_by_genre 8)
     is_tv_channel1_muted=false
   
   # 09:00~12:00 / グリーンチャンネル
@@ -198,14 +206,14 @@ elif [ ${weekday} -le 7 ]; then
     tv_channel_id1=${CHANNEL_BSBS21_2}
     is_tv_channel1_muted=false
   
-  # 17:00~18:45 / TBS
+  # 17:00~18:45 / ドキュメンタリー・教養（ランダム）
   elif [ $( echo "${now} < 17" | bc ) == 1 ]; then
-    tv_channel_id1=${CHANNEL_GR22}
+    tv_channel_id1=$(search_channel_by_genre 8)
     is_tv_channel1_muted=false
 
-  # 18:45~21:00 / NHK1
+  # 18:45~21:00 / ドキュメンタリー・教養（ランダム）
   elif [ $( echo "${now} < 21" | bc ) == 1 ]; then
-    tv_channel_id1=${CHANNEL_GR27}
+    tv_channel_id1=$(search_channel_by_genre 8)
     is_youtube_muted=false
   
   # 21:00~23:00 / NHK Eテレ
