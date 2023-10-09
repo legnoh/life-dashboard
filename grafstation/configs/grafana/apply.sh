@@ -31,18 +31,18 @@ function search_channel_by_genre(){
 
   if [[ ${subgenre} == "" ]]; then
     channel=$(echo ${broadcasting} \
-      | jq -r "[.[] \
+      | ${JQ} -r "[.[] \
         | select( .programs[0].genre1==${genre} )][0]")
   elif [[ ${subgenre} != "" ]]; then
     channel=$(echo ${broadcasting} \
-      | jq -r "[.[] \
+      | ${JQ} -r "[.[] \
         | select( .programs[0].genre1==${genre} \
             and .programs[0].subGenre1==${subgenre} \
         )][0]")
   fi
 
   if [[ "${channel}" != "null" ]]; then
-    echo ${channel} | jq -r ".channel.id"
+    echo ${channel} | ${JQ} -r ".channel.id"
   fi
 }
 
@@ -53,7 +53,7 @@ function is_national_raceday(){
     local num=0
 
     num=$(curl -s "https://jra.jp/keiba/common/calendar/json/${yyyymm}.json" \
-        | jq -r ".[].data[] | select(.date==\"${day}\") | .info[].race | length")
+        | ${JQ} -r ".[].data[] | select(.date==\"${day}\") | .info[].race | length")
     
     if [[ "${num}" == "" ]]; then
       num = 0
@@ -68,7 +68,7 @@ function is_national_raceday(){
 # ダートグレードレース番組をやっているかを確認する
 function search_dirt_grade_race() {
   echo "$(curl -s "http://${EPGS_HOST}/api/schedules/broadcasting?isHalfWidth=true" \
-    | jq ".[] \
+    | ${JQ} ".[] \
       | select( .channel.name == \"グリーンチャンネル\" ) \
       | .programs[0] \
       | select( .description | test(\"(Jpn1|Jpn2|Jpn3)\") )" )"
@@ -78,7 +78,7 @@ function search_dirt_grade_race() {
 # https://www.p2pquake.net/develop/
 function check_latest_earthquake() {
   echo $(curl -s "https://api.p2pquake.net/v2/history?codes=556&limit=1" \
-    | jq -r ".[].time \
+    | ${JQ} -r ".[].time \
       | split(\".\")[0] \
       | strptime(\"%Y/%m/%d %H:%M:%S\") \
       | strftime(\"%s\")" \
