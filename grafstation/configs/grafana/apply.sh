@@ -277,12 +277,12 @@ if [[ $(is_national_raceday) > 0 ]]; then
     tv_channel_id2=${CHANNEL_GR27}
     is_tv_channel1_muted=true
     is_tv_channel2_muted=false
-  fi
 
   # 12:15~17:00 / グリーンチャンネル
   elif [ $( echo "${now} < 17" | bc ) == 1 ]; then
     tv_channel_id1=${CHANNEL_BSBS21_2}
     is_tv_channel1_muted=false
+  fi
 fi
 
 # ダート重賞番組が放送されている場合、強制的にチャンネルをグリーンチャンネルに変更する
