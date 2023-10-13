@@ -262,7 +262,7 @@ else
 fi
 
 # 中央競馬の放送日は朝9時〜12時、12:15〜17:00までグリーンチャンネルに変更する
-if [[ is_national_raceday > 0 ]]; then
+if [[ $(is_national_raceday) > 0 ]]; then
   echo "中央競馬の開催日です!"
 
   if [ $( echo "${now} < 9" | bc ) == 1 ]; then
