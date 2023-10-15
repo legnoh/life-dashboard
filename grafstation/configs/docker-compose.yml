@@ -28,8 +28,7 @@ services:
     image: ghcr.io/tsukumijima/konomitv:v0.7.1
     container_name: konomitv
     restart: always
-    expose: [ 7000 ]
-    ports: [ 7001:7000 ]
+    ports: [ 7000:7000 ]
     volumes:
       - '/Users/${USER}/life-dashboard/konomi/config.yaml:/code/config.yaml'
       - '/Users/${USER}/life-dashboard/konomi/data:/code/server/data'
