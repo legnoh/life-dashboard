@@ -8,6 +8,8 @@ services:
     volumes:
     - /Users/${USER}/life-dashboard/configs/nginx.conf:/etc/nginx/nginx.conf:ro
     - /Users/${USER}/life-dashboard/configs/html:/usr/share/nginx/html:ro
+  
+  # http://grafstation.local:8888/
   epgstation:
     container_name: epgstation
     image: collelog/epgstation:latest-debian-arm64v8
@@ -24,8 +26,10 @@ services:
     - /Users/${USER}/life-dashboard/epgstation/thumbnail:/opt/epgstation/thumbnail
     - /Users/${USER}/life-dashboard/epgstation/logs:/opt/epgstation/logs
     - /Users/${USER}/life-dashboard/epgstation/recorded:/opt/epgstation/recorded
+  
+  # https://192-168-XXX-XXX.local.konomi.tv:7777/
   konomitv:
-    image: ghcr.io/tsukumijima/konomitv:v0.7.1
+    image: ghcr.io/tsukumijima/konomitv:v0.8.0
     container_name: konomitv
     restart: always
     ports: [ 7777:7000 ]
