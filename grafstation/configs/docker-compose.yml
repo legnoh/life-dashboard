@@ -34,8 +34,7 @@ services:
       - '/Users/${USER}/life-dashboard/konomi/config.yaml:/code/config.yaml'
       - '/Users/${USER}/life-dashboard/konomi/data:/code/server/data'
       - '/Users/${USER}/life-dashboard/konomi/logs:/code/server/logs'
-      - '/Users/${USER}/life-dashboard/konomi/recorded:/code/server/recorded'
-      - '/Users/${USER}/life-dashboard/konomi/capture:/code/server/capture'
+      - '/Users/${USER}/life-dashboard/konomi:/host-rootfs'
   prometheus:
     container_name: prometheus
     image: prom/prometheus
