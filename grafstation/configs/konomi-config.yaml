@@ -1,0 +1,18 @@
+general:
+    backend: Mirakurun
+    mirakurun_url: 'http://mirakc.local:40772/'
+    encoder: 'FFmpeg'
+    program_update_interval: 15.0
+    debug: false
+    debug_encoder: false
+server:
+    port: 7000
+    custom_https_certificate: null
+    custom_https_private_key: null
+tv:
+    max_alive_time: 10
+    debug_mode_ts_path: null
+video:
+    recorded_folders: [ '/${HOME}/life-dashboard/konomi/recorded' ]
+capture:
+    upload_folder: '/${HOME}/life-dashboard/konomi/capture'

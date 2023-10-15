@@ -38,7 +38,7 @@ jobs:
 
     - name: Copy configs
       run: |
-        mkdir -p ${HOME}/life-dashboard/{epgstation/{config,data/{key,streamfiles},drop,img,thumbnail,logs/{EPGUpdater,Operator,Service},recorded},prometheus,configs,withings}
+        mkdir -p ${HOME}/life-dashboard/{epgstation/{config,data/{key,streamfiles},drop,img,thumbnail,logs/{EPGUpdater,Operator,Service},recorded},konomi/{data,logs,record,capture},prometheus,configs,withings}
         mkdir -p ${HOME}/{.hap-switch-command,.hap-nature-remo}
         cp -r configs/html ${HOME}/life-dashboard/configs/
         curl -Lo ${HOME}/life-dashboard/configs/html/player/mpegts.js \
@@ -51,6 +51,7 @@ jobs:
         cp -r configs/prometheus.yml ${HOME}/life-dashboard/prometheus/prometheus.yml
         cp -r configs/hap-switch-command.yml ${HOME}/.hap-switch-command/config.yml
         envsubst < configs/hap-nature-remo.yml > ${HOME}/.hap-nature-remo/config.yml
+        envsubst < configs/konomi-config.yaml > ${HOME}/life-dashboard/konomi/config.yaml
       env:
         NATURE_OAUTH_TOKEN: ${{ secrets.NATURE_OAUTH_TOKEN }}
 
