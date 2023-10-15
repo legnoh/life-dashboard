@@ -13,6 +13,6 @@ tv:
     max_alive_time: 10
     debug_mode_ts_path: null
 video:
-    recorded_folders: [ '/${HOME}/life-dashboard/konomi/recorded' ]
+    recorded_folders: [ '${HOME}/life-dashboard/konomi/recorded' ]
 capture:
-    upload_folder: '/${HOME}/life-dashboard/konomi/capture'
+    upload_folder: '${HOME}/life-dashboard/konomi/capture'
