@@ -1,5 +1,6 @@
 general:
     backend: Mirakurun
+    edcb_url: ''
     mirakurun_url: 'http://mirakc.local:40772/'
     encoder: 'FFmpeg'
     program_update_interval: 15.0
