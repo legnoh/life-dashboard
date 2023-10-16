@@ -5,7 +5,7 @@ resource "grafana_dashboard" "life-metrics" {
     description = "Now Channel: ${var.TV_CHANNEL_ID1}, Muted: ${var.IS_TV_CHANNEL1_MUTED}, Theme: ${var.GRAFANA_THEME}",
     timezone    = "browser",
     version     = 0,
-    refresh     = "5m"
+    refresh     = "30m"
     panels = [
 
       # channel1
