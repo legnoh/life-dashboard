@@ -8,9 +8,25 @@ server:
   stream-max-chunks: 100000
 
 channels:
+  - name: 'J:COMテレビ'
+    type: 'GR'
+    channel: '13'
+
+  - name: 'tvk1'
+    type: 'GR'
+    channel: '15'
+
+  - name: 'チバテレ1'
+    type: 'GR'
+    channel: '18'
+
+  - name: 'J:COMチャンネル'
+    type: 'GR'
+    channel: '19'
+
   - name: 'TOKYO MX1'
     type: 'GR'
-    channel: '16'
+    channel: '20'
 
   - name: 'フジテレビ'
     type: 'GR'
