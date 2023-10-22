@@ -17,10 +17,10 @@ resource "grafana_dashboard" "life-metrics" {
           :
             var.GRAFANA_THEME == "light" ?
               var.IS_TV_CHANNEL1_MUTED ?
-                grafana_library_panel.youtube-daymode-bgm.uid : grafana_library_panel.youtube-daymode-muted.uid
+                grafana_library_panel.youtube-daymode-bgm-muted.uid : grafana_library_panel.youtube-daymode.uid
             :
               var.IS_TV_CHANNEL1_MUTED ?
-                grafana_library_panel.youtube-nightmode-bgm.uid : grafana_library_panel.youtube-nightmode-muted.uid
+                grafana_library_panel.youtube-nightmode-bgm-muted.uid : grafana_library_panel.youtube-nightmode.uid
         ])
         gridPos = { h = 11, w = 9, x = 0, y = 0 }
       },

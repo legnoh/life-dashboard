@@ -180,12 +180,16 @@ if [ ${weekday} -le 5 ]; then
   elif [ $( echo "${now} < 20.9" | bc ) == 1 ]; then
     tv_channel_id1=$(search_channel_by_genre 8)
 
-  # 19:00~22:00 / ドキュメンタリー・教養（ランダム・YouTubeミュート解除）
-  elif [ $( echo "${now} < 22" | bc ) == 1 ]; then
+  # 19:00~21:30 / ドキュメンタリー・教養（ランダム・YouTubeミュート解除）
+  elif [ $( echo "${now} < 21.5" | bc ) == 1 ]; then
     tv_channel_id1=$(search_channel_by_genre 8)
     is_youtube_muted=false
-  
-  ## 22:00~24:00 / 停止
+
+  ## 21:30~22:30 / 音楽のみ
+  elif [ $( echo "${now} < 22.5" | bc ) == 1 ]; then
+    is_tv_channel1_muted=false
+
+  ## 22:30~24:00 / 停止
   else
     :
   fi
@@ -209,11 +213,15 @@ elif [ ${weekday} -eq 6 ]; then
     tv_channel_id1=${CHANNEL_GR27}
     is_tv_channel1_muted=false
 
-  # 12:25~22:00 / ドキュメンタリー・教養（ランダム・YouTubeを音つきでつける）
-  elif [ $( echo "${now} < 22" | bc ) == 1 ]; then
+  # 12:25~21:30 / ドキュメンタリー・教養（ランダム・YouTubeを音つきでつける）
+  elif [ $( echo "${now} < 21.5" | bc ) == 1 ]; then
     tv_channel_id1=$(search_channel_by_genre 8)
     is_youtube_muted=false
-  
+
+  ## 21:30~22:30 / 音楽のみ
+  elif [ $( echo "${now} < 22.5" | bc ) == 1 ]; then
+    is_tv_channel1_muted=false
+
   ## 22:00~24:00 / 停止
   else
     :
@@ -238,12 +246,16 @@ elif [ ${weekday} -le 7 ]; then
     tv_channel_id1=${CHANNEL_GR27}
     is_tv_channel1_muted=false
   
-  # 12:25~22:00 / ドキュメンタリー・教養（ランダム・YouTubeを音つきでつける）
-  elif [ $( echo "${now} < 22" | bc ) == 1 ]; then
+  # 12:25~21:30 / ドキュメンタリー・教養（ランダム・YouTubeを音つきでつける）
+  elif [ $( echo "${now} < 21.5" | bc ) == 1 ]; then
     tv_channel_id1=$(search_channel_by_genre 8)
     is_youtube_muted=false
-  
-  ## 22:00~24:00 / 停止
+
+  ## 21:30~22:30 / 音楽のみ
+  elif [ $( echo "${now} < 22.5" | bc ) == 1 ]; then
+    is_tv_channel1_muted=false
+
+  ## 22:30~24:00 / 停止
   else
     :
   fi
