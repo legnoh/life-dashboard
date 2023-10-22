@@ -26,19 +26,47 @@ resource "grafana_library_panel" "youtube-muted" {
   })
 }
 
-# resource "grafana_library_panel" "youtube-daymode-muted" {
-#   org_id = grafana_organization.main.org_id
-#   name = "youtube-daymode-muted"
-#   model_json = jsonencode({
-#     type        = "innius-video-panel",
-#     transparent = true,
-#     options = {
-#       autoPlay  = true,
-#       videoType = "iframe",
-#       iframeURL = "https://www.youtube.com/embed/Q-sZipetAEc?mute=1&autoplay=1&loop=1&playsinline=1",
-#     },
-#   })
-# }
+resource "grafana_library_panel" "youtube-daymode-bgm" {
+  org_id = grafana_organization.main.org_id
+  name = "youtube-daymode-bgm"
+  model_json = jsonencode({
+    type        = "innius-video-panel",
+    transparent = true,
+    options = {
+      autoPlay  = true,
+      videoType = "iframe",
+      iframeURL = "https://www.youtube.com/embed/videoseries?autoplay=1&loop=1&list=PLYyJCobshLZk7cyeHgd69THGzEeFZL9dC",
+    },
+  })
+}
+
+resource "grafana_library_panel" "youtube-nightmode-bgm" {
+  org_id = grafana_organization.main.org_id
+  name = "youtube-nightmode-bgm"
+  model_json = jsonencode({
+    type        = "innius-video-panel",
+    transparent = true,
+    options = {
+      autoPlay  = true,
+      videoType = "iframe",
+      iframeURL = "https://www.youtube.com/embed/6uddGul0oAc?autoplay=1&loop=1&playsinline=1",
+    },
+  })
+}
+
+resource "grafana_library_panel" "youtube-daymode-muted" {
+  org_id = grafana_organization.main.org_id
+  name = "youtube-daymode-muted"
+  model_json = jsonencode({
+    type        = "innius-video-panel",
+    transparent = true,
+    options = {
+      autoPlay  = true,
+      videoType = "iframe",
+      iframeURL = "https://www.youtube.com/embed/videoseries?mute=1&autoplay=1&loop=1&list=PLYyJCobshLZk7cyeHgd69THGzEeFZL9dC",
+    },
+  })
+}
 
 resource "grafana_library_panel" "youtube-nightmode-muted" {
   org_id = grafana_organization.main.org_id
@@ -49,7 +77,7 @@ resource "grafana_library_panel" "youtube-nightmode-muted" {
     options = {
       autoPlay  = true,
       videoType = "iframe",
-      iframeURL = "https://www.youtube.com/embed/Q-sZipetAEc?mute=1&autoplay=1&loop=1&playsinline=1",
+      iframeURL = "https://www.youtube.com/embed/6uddGul0oAc?mute=1&autoplay=1&loop=1&playsinline=1",
     },
   })
 }

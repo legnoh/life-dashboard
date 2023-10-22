@@ -15,7 +15,14 @@ resource "grafana_dashboard" "life-metrics" {
             var.IS_TV_CHANNEL1_MUTED ? 
               grafana_library_panel.tv-muted.uid : grafana_library_panel.tv.uid
           :
-            grafana_library_panel.youtube-nightmode-muted.uid
+            var.GRAFANA_THEME == "light" ?
+              var.IS_TV_CHANNEL1_MUTED ?
+                grafana_library_panel.youtube-daymode-bgm
+              : grafana_library_panel.youtube-daymode-muted
+            :
+              var.IS_TV_CHANNEL1_MUTED ?
+                grafana_library_panel.youtube-nightmode-bgm
+              : grafana_library_panel.youtube-nightmode-muted
         ])
         gridPos = { h = 11, w = 9, x = 0, y = 0 }
       },

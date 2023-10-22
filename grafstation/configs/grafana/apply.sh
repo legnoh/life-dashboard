@@ -303,10 +303,10 @@ if (( ${latest_earthquake_offset} < 3600 )); then
   # TODO: ここでテレビ自体のONも挟みたい
 fi
 
-# 05:45~17:30まで画面をライトモードにする
-# if [ $( echo "${now} > 5.83" | bc ) == 1 ] && [ $( echo "${now} < 17.5" | bc ) == 1 ]; then
-#   grafana_theme="light"
-# fi
+05:45~17:30まで画面をライトモードにする
+if [ $( echo "${now} > 5.83" | bc ) == 1 ] && [ $( echo "${now} < 17.5" | bc ) == 1 ]; then
+  grafana_theme="light"
+fi
 
 # デフォルト外項目のみterraformに変数として渡す
 for var in ${TFVARS[@]}; do
