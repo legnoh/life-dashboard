@@ -12,13 +12,15 @@ resource "grafana_dashboard" "life-metrics" {
       {
         libraryPanel = zipmap(local.libpanel_keys, [
           var.TV_CHANNEL_ID1 != "" ?
-            ( var.IS_TV_CHANNEL1_MUTED ? grafana_library_panel.tv-muted.uid : grafana_library_panel.tv.uid )
+            var.IS_TV_CHANNEL1_MUTED ? 
+              grafana_library_panel.tv-muted.uid : grafana_library_panel.tv.uid
           :
-            ( var.GRAFANA_THEME == "light" ?
-              ( var.IS_TV_CHANNEL1_MUTED ? grafana_library_panel.youtube-daymode-bgm : grafana_library_panel.youtube-daymode-muted )
+            var.GRAFANA_THEME == "light" ?
+              var.IS_TV_CHANNEL1_MUTED ?
+                grafana_library_panel.youtube-daymode-bgm.uid : grafana_library_panel.youtube-daymode-muted.uid
             :
-              ( var.IS_TV_CHANNEL1_MUTED ? grafana_library_panel.youtube-nightmode-bgm : grafana_library_panel.youtube-nightmode-muted )
-            )
+              var.IS_TV_CHANNEL1_MUTED ?
+                grafana_library_panel.youtube-nightmode-bgm.uid : grafana_library_panel.youtube-nightmode-muted.uid
         ])
         gridPos = { h = 11, w = 9, x = 0, y = 0 }
       },
