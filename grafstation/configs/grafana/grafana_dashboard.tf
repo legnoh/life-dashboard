@@ -2,7 +2,7 @@ resource "grafana_dashboard" "life-metrics" {
   org_id = grafana_organization.main.org_id
   config_json = jsonencode({
     title       = "Life Metrics",
-    description = "Now Channel: ${var.TV_CHANNEL_ID1}, Muted: ${var.IS_TV_CHANNEL1_MUTED}, Theme: ${var.GRAFANA_THEME}",
+    description = "Now CH1: ${var.TV_CHANNEL_ID1}, Muted: ${var.IS_TV_CHANNEL1_MUTED}, DayMode: ${var.IS_DAYMODE}",
     timezone    = "browser",
     version     = 0,
     refresh     = "30m"
@@ -15,7 +15,7 @@ resource "grafana_dashboard" "life-metrics" {
             var.IS_TV_CHANNEL1_MUTED ? 
               grafana_library_panel.tv-muted.uid : grafana_library_panel.tv.uid
           :
-            var.GRAFANA_THEME == "light" ?
+            var.IS_DAYMODE ?
               var.IS_TV_CHANNEL1_MUTED ?
                 grafana_library_panel.youtube-daymode-muted.uid : grafana_library_panel.youtube-daymode-bgm.uid
             :

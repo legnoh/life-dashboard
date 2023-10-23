@@ -17,7 +17,7 @@ TFVARS=(
   is_tv_channel1_muted
   is_tv_channel2_muted
   is_youtube_muted
-  grafana_theme
+  is_daymode
 )
 TF_OPTIONS=${TERRAFORM_OPTIONS:-"-auto-approve"}
 
@@ -311,9 +311,9 @@ if (( ${latest_earthquake_offset} < 3600 )); then
   # TODO: ここでテレビ自体のONも挟みたい
 fi
 
-05:45~17:30まで画面をライトモードにする
+# 05:45~17:30までを日中として判定
 if [ $( echo "${now} > 5.83" | bc ) == 1 ] && [ $( echo "${now} < 17.5" | bc ) == 1 ]; then
-  grafana_theme="light"
+  is_daymode=true
 fi
 
 # デフォルト外項目のみterraformに変数として渡す
