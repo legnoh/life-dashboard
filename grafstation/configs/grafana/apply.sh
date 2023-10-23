@@ -133,20 +133,21 @@ if [ ${weekday} -le 5 ]; then
   
   # 07:05~07:55 / BSテレ東
   elif [ $( echo "${now} < 7.916" | bc ) == 1 ]; then
+    tv_channel_id1=${CHANNEL_BSBS1_2}
+    is_youtube_muted=false
 
     # 火曜/金曜 7:38~7:43 フジテレビ(ちいかわ)
     if [ ${weekday} == 2 ] || [ ${weekday} == 5 ]; then
       if [ $( echo "${now} > 7.633" | bc ) == 1 ] && [ $( echo "${now} < 7.716" | bc ) == 1 ]; then
-        tv_channel_id2=${CHANNEL_GR21}
-        is_tv_channel2_muted=false
+        tv_channel_id1=${CHANNEL_GR21}
+        is_tv_channel1_muted=false
+        is_youtube_muted=true
       fi
     fi
-    tv_channel_id1=${CHANNEL_BSBS1_2}
-    is_youtube_muted=false
   
-  # 07:55~09:55 / ドキュメンタリー・教養（ランダム）
+  # 07:55~09:55 / BGMのみ
   elif [ $( echo "${now} < 9.916" | bc ) == 1 ]; then
-    tv_channel_id1=$(search_channel_by_genre 8)
+    is_tv_channel1_muted=false
   
   # 09:55~10:00 / NHK総合1(体操)
   elif [ $( echo "${now} < 10" | bc ) == 1 ]; then
@@ -167,9 +168,9 @@ if [ ${weekday} -le 5 ]; then
     tv_channel_id1=${CHANNEL_BSBS15_0}
     is_youtube_muted=false
   
-  # 13:00~13:55 / ドキュメンタリー・教養（ランダム）
+  # 13:00~13:55 / 停止
   elif [ $( echo "${now} < 13.916" | bc ) == 1 ]; then
-    tv_channel_id1=$(search_channel_by_genre 8)
+    :
   
   # 13:55~14:00 / NHK総合1(体操)
   elif [ $( echo "${now} < 14" | bc ) == 1 ]; then
@@ -222,7 +223,7 @@ elif [ ${weekday} -eq 6 ]; then
   elif [ $( echo "${now} < 22.5" | bc ) == 1 ]; then
     is_tv_channel1_muted=false
 
-  ## 22:00~24:00 / 停止
+  ## 22:30~24:00 / 停止
   else
     :
   fi
