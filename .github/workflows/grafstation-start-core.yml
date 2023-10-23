@@ -54,8 +54,8 @@ jobs:
         envsubst < configs/konomi-config.yaml > ${HOME}/life-dashboard/konomi/config.yaml
         envsubst < scripts/audio-airplay.applescript > ${HOME}/life-dashboard/audio-airplay.applescript
       env:
-        AUDIO_OUTPUT_AIRPLAY: ${{ env.AUDIO_OUTPUT_AIRPLAY }}
-        AUDIO_OUTPUT_LOCAL: ${{ env.AUDIO_OUTPUT_LOCAL }}
+        AUDIO_OUTPUT_AIRPLAY: ${{ vars.AUDIO_OUTPUT_AIRPLAY }}
+        AUDIO_OUTPUT_LOCAL: ${{ vars.AUDIO_OUTPUT_LOCAL }}
         NATURE_OAUTH_TOKEN: ${{ secrets.NATURE_OAUTH_TOKEN }}
 
     - name: Start homebrew services
