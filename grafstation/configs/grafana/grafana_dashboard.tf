@@ -2,7 +2,7 @@ resource "grafana_dashboard" "life-metrics" {
   org_id = grafana_organization.main.org_id
   config_json = jsonencode({
     title       = "Life Metrics",
-    description = "Now CH1: ${var.TV_CHANNEL_ID1}, Muted: ${var.IS_TV_CHANNEL1_MUTED}, DayMode: ${var.IS_DAYMODE}",
+    description = "Now CH1: ${var.TV_CHANNEL_ID1}, Muted: ${var.IS_TV_CHANNEL1_MUTED}, CH2: ${var.TV_CHANNEL_ID2}, Muted: ${var.IS_TV_CHANNEL2_MUTED}, YTMuted: ${var.IS_YOUTUBE_MUTED}, DayMode: ${var.IS_DAYMODE}",
     timezone    = "browser",
     version     = 0,
     refresh     = "30m"
