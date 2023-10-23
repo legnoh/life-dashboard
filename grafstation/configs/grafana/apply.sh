@@ -56,7 +56,7 @@ function is_national_raceday(){
         | ${JQ} -r ".[].data[] | select(.date==\"${day}\") | .info[].race | length")
     
     if [[ "${num}" == "" ]]; then
-      num = 0
+      num=0
     fi
     if [[ ${num} > 0 ]]; then
       echo 1
