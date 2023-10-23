@@ -177,7 +177,7 @@ if [ ${weekday} -le 5 ]; then
     is_tv_channel1_muted=false
 
   # 14:00~19:00 / ドキュメンタリー・教養（ランダム）
-  elif [ $( echo "${now} < 20.9" | bc ) == 1 ]; then
+  elif [ $( echo "${now} < 19" | bc ) == 1 ]; then
     tv_channel_id1=$(search_channel_by_genre 8)
 
   # 19:00~21:30 / ドキュメンタリー・教養（ランダム・YouTubeミュート解除）
