@@ -5,7 +5,7 @@ variable "GRAFANA_HOST" {
 
 variable "IS_DAYMODE" {
   type = bool
-  default = true
+  default = false
 }
 
 variable "TV_EPGSTATION_HOST" {
