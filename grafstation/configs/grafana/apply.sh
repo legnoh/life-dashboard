@@ -200,11 +200,11 @@ elif [ ${weekday} -eq 6 ]; then
   echo "today is saturday"
   echo "now: ${now}"
 
-  # 0:00~05:30 / 停止
-  if [ $( echo "${now} < 5.5" | bc ) == 1 ]; then
+  # 0:00~05:45 / 停止
+  if [ $( echo "${now} < 5.75" | bc ) == 1 ]; then
     :
 
-  # 5:30~12:00 / ドキュメンタリー・教養（ランダム・YouTubeを音つきでつける）
+  # 5:45~12:00 / ドキュメンタリー・教養（ランダム・YouTubeを音つきでつける）
   elif [ $( echo "${now} < 12" | bc ) == 1 ]; then
     tv_channel_id1=$(search_channel_by_genre 8)
     is_youtube_muted=false
@@ -233,11 +233,11 @@ elif [ ${weekday} -le 7 ]; then
   echo "today is sunday"
   echo "now: ${now}"
 
-    # 0:00~05:30 / 停止
-  if [ $( echo "${now} < 5.5" | bc ) == 1 ]; then
+    # 0:00~05:45 / 停止
+  if [ $( echo "${now} < 5.75" | bc ) == 1 ]; then
     :
 
-  # 5:30~12:00 / ドキュメンタリー・教養（ランダム・YouTubeを音つきでつける）
+  # 5:45~12:00 / ドキュメンタリー・教養（ランダム・YouTubeを音つきでつける）
   elif [ $( echo "${now} < 12" | bc ) == 1 ]; then
     tv_channel_id1=$(search_channel_by_genre 8)
     is_youtube_muted=false
