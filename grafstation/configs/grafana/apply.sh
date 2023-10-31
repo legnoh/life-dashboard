@@ -115,23 +115,18 @@ if [ ${weekday} -le 5 ]; then
   if [ $( echo "${now} < 5.75" | bc ) == 1 ]; then
     :
 
-  # 5:45~06:25 / BSテレ東(ミュート解除)
+  # 5:45~06:25 / BSテレ東(YouTubeミュート解除)
   elif [ $( echo "${now} < 6.416" | bc ) == 1 ]; then
     tv_channel_id1=${CHANNEL_BSBS1_2}
-    is_tv_channel1_muted=false
+    is_youtube_muted=false
   
   # 6:25~06:35 / BSテレ東+NHKEテレ1東京(体操)
   elif [ $( echo "${now} < 6.583" | bc ) == 1 ]; then
     tv_channel_id1=${CHANNEL_BSBS1_2}
     tv_channel_id2=${CHANNEL_GR26}
     is_tv_channel2_muted=false
-
-  # 6:35~07:05 / BSテレ東(ミュート解除)
-  elif [ $( echo "${now} < 7.083" | bc ) == 1 ]; then
-    tv_channel_id1=${CHANNEL_BSBS1_2}
-    is_tv_channel1_muted=false
   
-  # 07:05~07:55 / BSテレ東
+  # 06:35~07:55 / BSテレ東(YouTubeミュート解除)
   elif [ $( echo "${now} < 7.916" | bc ) == 1 ]; then
     tv_channel_id1=${CHANNEL_BSBS1_2}
     is_youtube_muted=false
