@@ -67,7 +67,7 @@ services:
     - ASKEN_PASSWORD=${ASKEN_PASSWORD}
   moneyforward-exporter:
     container_name: moneyforward-exporter
-    image: legnoh/moneyforward-exporter
+    image: legnoh/moneyforward-exporter:latest-fixed
     ports: [ "9110:8000" ]
     restart: always
     environment:
