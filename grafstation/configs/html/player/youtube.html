@@ -51,12 +51,11 @@
       }
 
       function onPlayerReady(event) {
-        event.target.setPlaybackQuality("highres");
+        event.target.setPlaybackQuality("hd1080");
         if(isMute == "true") {
           event.target.mute();
         }
         event.target.playVideo();
-        event.target.setPlaybackQuality("highres");
       }
 
       var done = false;
