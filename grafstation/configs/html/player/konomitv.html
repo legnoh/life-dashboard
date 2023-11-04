@@ -27,7 +27,7 @@
           var player = mpegts.createPlayer({
               type: 'mse',
               isLive: true,
-              url: 'https://192-168-100-11.local.konomi.tv:7777/api/streams/live/' + channelId + '/1080p-60fps/mpegts'
+              url: 'http://grafstation.local/konomitv/api/streams/live/' + channelId + '/1080p-60fps/mpegts'
           });
           player.attachMediaElement(videoElement);
           player.load();
