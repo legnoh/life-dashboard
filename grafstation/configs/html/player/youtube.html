@@ -56,6 +56,7 @@
           event.target.mute();
         }
         event.target.playVideo();
+        event.target.setPlaybackQuality("hd1080");
       }
 
       var done = false;
@@ -63,6 +64,7 @@
         if (event.data == YT.PlayerState.PLAYING && !done) {
           done = true;
         }
+        event.target.setPlaybackQuality("hd1080");
       }
     </script>
   </body>
