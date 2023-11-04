@@ -49,7 +49,7 @@ function search_channel_by_genre(){
 # 中央競馬をやっている日か確認する
 function is_national_raceday(){
     local yyyymm=${1:-$(date "+%Y%m")}
-    local day=${2:-$(date "+%d")}
+    local day=${2:-$(date "+%-d")}
     local num=0
 
     num=$(curl -s "https://jra.jp/keiba/common/calendar/json/${yyyymm}.json" \
