@@ -70,6 +70,13 @@ locals {
         url         = "https://openweathermap.org",
       }]
     }
+    oura = {
+      links = [{
+        targetBlank = true,
+        title       = "Oura",
+        url         = "https://cloud.ouraring.com",
+      }]
+    }
     withings = {
       links = [{
         targetBlank = true,

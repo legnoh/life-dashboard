@@ -115,6 +115,20 @@ resource "grafana_dashboard" "life-metrics" {
         gridPos      = { h = 5, w = 3, x = 21, y = 5 }
       },
 
+      # oura
+      {
+        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.oura-readiness-score.uid])
+        gridPos      = { h = 5, w = 3, x = 12, y = 8 }
+      },
+      {
+        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.oura-sleep-score.uid])
+        gridPos      = { h = 5, w = 3, x = 9, y = 12 }
+      },
+      {
+        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.oura-activity-score.uid])
+        gridPos      = { h = 5, w = 3, x = 12, y = 12 }
+      },
+
       # snmp
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.snmp-in-octets.uid])
@@ -139,24 +153,12 @@ resource "grafana_dashboard" "life-metrics" {
         gridPos      = { h = 5, w = 3, x = 9, y = 8 }
       },
       {
-        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.withings-fat-ratio.uid])
-        gridPos      = { h = 5, w = 3, x = 12, y = 8 }
-      },
-      {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.withings-bpm-max.uid])
         gridPos      = { h = 5, w = 3, x = 15, y = 3 }
       },
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.withings-body-temperature.uid])
         gridPos      = { h = 5, w = 3, x = 15, y = 6 }
-      },
-      {
-        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.withings-steps.uid])
-        gridPos      = { h = 5, w = 3, x = 12, y = 12 }
-      },
-      {
-        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.withings-sleep-score.uid])
-        gridPos      = { h = 5, w = 3, x = 9, y = 12 }
       },
     ]
   })
