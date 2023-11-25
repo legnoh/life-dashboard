@@ -83,6 +83,15 @@ services:
     environment:
     - OW_APIKEY=${OPENWEATHER_API_KEY}
     - OW_CITY=${OPENWEATHER_CITY}
+  oura-exporter:
+    container_name: oura-exporter
+    image: legnoh/oura-exporter:latest
+    platform: linux/arm64
+    ports: [ 9112:8000 ]
+    restart: always
+    environment:
+    - OURA_ACCESS_TOKEN=${OURA_ACCESS_TOKEN}
+    - TZ=${OURA_TZ}
   remo-exporter:
     container_name: remo-exporter
     image: kenfdev/remo-exporter:latest

@@ -25,6 +25,10 @@ scrape_configs:
       regex: '(go|process|promhttp)_(.*)'
       action: drop
     scrape_interval: 60s
+  - job_name: 'oura'
+    static_configs:
+      - targets: [ 'oura-exporter:8000' ]
+    scrape_interval: 60s
   - job_name: 'remo'
     static_configs:
       - targets: [ 'remo-exporter:9352' ]
