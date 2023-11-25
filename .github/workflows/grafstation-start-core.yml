@@ -74,6 +74,8 @@ jobs:
         NATURE_OAUTH_TOKEN: ${{ secrets.NATURE_OAUTH_TOKEN }}
         OPENWEATHER_CITY: ${{ secrets.OPENWEATHER_CITY }}
         OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
+        OURA_ACCESS_TOKEN: ${{ secrets.OURA_ACCESS_TOKEN }}
+        OURA_TZ: ${{ secrets.OURA_TZ }}
         SPEEDTEST_SERVER_IDS: ${{ secrets.SPEEDTEST_SERVER_IDS }}
         TODOIST_API_KEY: ${{ secrets.TODOIST_API_KEY }}
         WITHINGS_ACCESS_TOKEN: ${{ secrets.WITHINGS_ACCESS_TOKEN }}
