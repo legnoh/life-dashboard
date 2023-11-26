@@ -97,4 +97,31 @@ locals {
   }
 
   libpanel_keys = ["uid"]
+
+  grid_position = {
+    A1 = { h = 5, w = 3, x = 9,  y = 0 } # oura-readiness
+    A2 = { h = 5, w = 3, x = 12, y = 0 } # oura-activity
+    A3 = { h = 5, w = 3, x = 15, y = 0 } # oura-sleep
+    A4 = { h = 5, w = 3, x = 18, y = 0 } # weather
+    A5 = { h = 5, w = 3, x = 21, y = 0 } # clock
+    B1 = { h = 5, w = 3, x = 9,  y = 4 } # BMI
+    B2 = { h = 5, w = 3, x = 12, y = 4 } # 血圧
+    B3 = { h = 5, w = 3, x = 15, y = 4 } # 体温
+    B4 = { h = 5, w = 3, x = 18, y = 4 } # 部屋室温
+    B5 = { h = 5, w = 3, x = 21, y = 4 } # 外室温
+    C1 = { h = 5, w = 3, x = 9,  y = 8 } # あすけん
+    C2 = { h = 5, w = 3, x = 12, y = 8 } # Todoist(自宅)
+    C3 = { h = 5, w = 3, x = 15, y = 8 } # Todoist(職場)
+    C4 = { h = 5, w = 3, x = 18, y = 8 } # 部屋湿度
+    C5 = { h = 5, w = 3, x = 21, y = 8 } # 外湿度
+    D1 = { h = 5, w = 3, x = 9,  y = 12 } # 当月収支
+    D2 = { h = 5, w = 3, x = 12, y = 12 } # バランスシート
+    D3 = { h = 5, w = 3, x = 15, y = 12 } # 残高確認
+    D4 = { h = 5, w = 3, x = 18, y = 12 } # 電力
+    D5 = { h = 5, w = 3, x = 21, y = 12 } # 帯域利用率
+    E1 = { h = 8, w = 4, x = 9,  y = 20 } # news1
+    E2 = { h = 8, w = 4, x = 13, y = 20 } # news2
+    E3 = { h = 8, w = 4, x = 17, y = 20 } # news3
+    E4 = { h = 8, w = 3, x = 21, y = 20 } # news4
+  }
 }

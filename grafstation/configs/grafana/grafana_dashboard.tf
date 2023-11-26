@@ -46,119 +46,117 @@ resource "grafana_dashboard" "life-metrics" {
       # news
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.news-domestic.uid])
-        gridPos      = { h = 8, w = 4, x = 9, y = 20 }
+        gridPos      = local.grid_position.E1
       },
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.news-world.uid])
-        gridPos      = { h = 8, w = 4, x = 13, y = 20 }
+        gridPos      = local.grid_position.E2
       },
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.news-business.uid])
-        gridPos      = { h = 8, w = 4, x = 17, y = 20 }
+        gridPos      = local.grid_position.E3
       },
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.news-sports.uid])
-        gridPos      = { h = 8, w = 3, x = 21, y = 20 }
+        gridPos      = local.grid_position.E4
       },
 
       # clock
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.clock.uid])
-        gridPos      = { h = 5, w = 3, x = 21, y = 0 }
+        gridPos      = local.grid_position.A5
       },
 
       ### asken
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.asken-score.uid])
-        gridPos      = { h = 5, w = 3, x = 9, y = 4 }
+        gridPos      = local.grid_position.C1
       },
 
       # moneyforward
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.moneyforward-balance.uid])
-        gridPos      = { h = 5, w = 3, x = 15, y = 8 }
+        gridPos      = local.grid_position.D1
       },
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.moneyforward-balancesheet.uid])
-        gridPos      = { h = 5, w = 3, x = 18, y = 8 }
+        gridPos      = local.grid_position.D2
       },
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.moneyforward-deposit-withdrawal.uid])
-        gridPos      = { h = 5, w = 3, x = 21, y = 12 }
+        gridPos      = local.grid_position.D3
       },
       
       # nature remo
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.remo-temperature.uid])
-        gridPos      = { h = 5, w = 3, x = 18, y = 2 }
+        gridPos      = local.grid_position.B4
       },
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.remo-humidity.uid])
-        gridPos      = { h = 5, w = 3, x = 18, y = 5 }
+        gridPos      = local.grid_position.C4
       },
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.remo-power-consumption.uid])
-        gridPos      = { h = 5, w = 3, x = 9, y = 0 }
+        gridPos      = local.grid_position.D4
       },
 
       # openweather
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.openweather-condition.uid])
-        gridPos      = { h = 5, w = 3, x = 18, y = 0 }
+        gridPos      = local.grid_position.A4
       },
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.openweather-temperature.uid])
-        gridPos      = { h = 5, w = 3, x = 21, y = 2 }
+        gridPos      = local.grid_position.B5
       },
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.openweather-humidity.uid])
-        gridPos      = { h = 5, w = 3, x = 21, y = 5 }
+        gridPos      = local.grid_position.C5
       },
 
       # oura
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.oura-readiness-score.uid])
-        gridPos      = { h = 5, w = 3, x = 12, y = 8 }
+        gridPos      = local.grid_position.A1
       },
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.oura-sleep-score.uid])
-        gridPos      = { h = 5, w = 3, x = 9, y = 12 }
+        gridPos      = local.grid_position.A3
       },
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.oura-activity-score.uid])
-        gridPos      = { h = 5, w = 3, x = 12, y = 12 }
+        gridPos      = local.grid_position.A2
       },
 
       # snmp
       {
-        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.snmp-in-octets.uid])
-        gridPos      = { h = 5, w = 3, x = 12, y = 4 }
-      },
-
-      # speedtest
-      {
-        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.speedtest-score.uid])
-        gridPos      = { h = 5, w = 3, x = 12, y = 0 }
+        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.snmp-speedtest-occupancy.uid])
+        gridPos      = local.grid_position.D5
       },
 
       # todoist
       {
-        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.todoist-tasknum.uid])
-        gridPos      = { h = 5, w = 3, x = 15, y = 0 }
+        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.todoist-office.uid])
+        gridPos      = local.grid_position.C3
+      },
+      {
+        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.todoist-private.uid])
+        gridPos      = local.grid_position.C2
       },
 
       # withings
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.withings-bmi.uid])
-        gridPos      = { h = 5, w = 3, x = 9, y = 8 }
+        gridPos      = local.grid_position.B1
       },
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.withings-bpm-max.uid])
-        gridPos      = { h = 5, w = 3, x = 15, y = 3 }
+        gridPos      = local.grid_position.B2
       },
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.withings-body-temperature.uid])
-        gridPos      = { h = 5, w = 3, x = 15, y = 6 }
+        gridPos      = local.grid_position.B3
       },
     ]
   })
