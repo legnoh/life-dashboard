@@ -24,10 +24,9 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v4
     
-    - name: Copy configs
+    - name: Create directory
       run: |
-        mkdir -p ${HOME}/life-dashboard/mirakc/configs
-        cp -r * ${HOME}/life-dashboard/mirakc/configs/
+        mkdir -p ${HOME}/life-dashboard/mirakc/epgstation/{data/{key,streamfiles},drop,img,thumbnail,logs/{EPGUpdater,Operator,Service},recorded}
     
     - name: start docker images
       env:

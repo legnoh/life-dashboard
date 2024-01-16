@@ -11,7 +11,7 @@ services:
       - '/:/host:ro,rslave'
   mirakc:
     container_name: mirakc
-    image: collelog/mirakc:latest-alpine-rpi4-64
+    image: collelog/mirakc:latest-debian-amd64
     ports: [ 40772:40772 ]
     init: true
     restart: always
@@ -20,7 +20,9 @@ services:
       RUST_LOG: info
     volumes:
       - /etc/localtime:/etc/localtime:ro
+      - ./mirakc/sock:/var/run/mirakurun
       - mirakc-epg:/var/lib/mirakc/epg
+      - ./mirakc/logos:/var/lib/mirakc/logos
       - ./mirakc-config.yml:/etc/mirakc/config.yml:ro
     devices:
       - /dev/px4video0
@@ -28,6 +30,26 @@ services:
       - /dev/px4video2
       - /dev/px4video3
       - /dev/bus/usb
+  epgstation:
+    container_name: epgstation
+    image: collelog/epgstation:latest-debian-amd64
+    ports: [ "8888:8888", "8889:8889" ]
+    init: true
+    restart: always
+    environment:
+      TZ: Asia/Tokyo
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./mirakc/sock:/var/run/mirakurun
+      - /Users/${USER}/life-dashboard/mirakc/epgstation/config:/opt/epgstation/config
+      - /Users/${USER}/life-dashboard/mirakc/epgstation/data:/opt/epgstation/data
+      - /Users/${USER}/life-dashboard/mirakc/epgstation/drop:/opt/epgstation/drop
+      - /Users/${USER}/life-dashboard/mirakc/epgstation/img:/opt/epgstation/img
+      - /Users/${USER}/life-dashboard/mirakc/epgstation/thumbnail:/opt/epgstation/thumbnail
+      - /Users/${USER}/life-dashboard/mirakc/epgstation/logs:/opt/epgstation/logs
+      - /Users/${USER}/life-dashboard/mirakc/epgstation/recorded:/opt/epgstation/recorded
+    depends_on: [ mirakc ]
+
 volumes:
   mirakc-epg:
     name: mirakc_epg
