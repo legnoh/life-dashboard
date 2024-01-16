@@ -4,6 +4,7 @@ epg:
 server:
   addrs:
     - http: 0.0.0.0:40772
+    - unix: /var/run/mirakc.sock
   stream-chunk-size: 4096
   stream-max-chunks: 100000
 
