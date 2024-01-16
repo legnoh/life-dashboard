@@ -20,7 +20,6 @@ services:
       RUST_LOG: info
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - ./mirakc/sock:/var/run/mirakurun
       - mirakc-epg:/var/lib/mirakc/epg
       - ./mirakc/logos:/var/lib/mirakc/logos
       - ./mirakc-config.yml:/etc/mirakc/config.yml:ro
@@ -30,25 +29,6 @@ services:
       - /dev/px4video2
       - /dev/px4video3
       - /dev/bus/usb
-  epgstation:
-    container_name: epgstation
-    image: collelog/epgstation:latest-alpine-amd64
-    ports: [ "8888:8888", "8889:8889" ]
-    init: true
-    restart: always
-    environment:
-      TZ: Asia/Tokyo
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - ./mirakc/sock:/var/run/mirakurun
-      - ./epgstation/config:/opt/epgstation/config
-      - ./epgstation/data:/opt/epgstation/data
-      - ./epgstation/drop:/opt/epgstation/drop
-      - ./epgstation/img:/opt/epgstation/img
-      - ./epgstation/thumbnail:/opt/epgstation/thumbnail
-      - ./epgstation/logs:/opt/epgstation/logs
-      - ./epgstation/recorded:/opt/epgstation/recorded
-    depends_on: [ mirakc ]
 
 volumes:
   mirakc-epg:
