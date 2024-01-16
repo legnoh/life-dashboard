@@ -11,7 +11,7 @@ services:
       - '/:/host:ro,rslave'
   mirakc:
     container_name: mirakc
-    image: collelog/mirakc:latest-debian-amd64
+    image: collelog/mirakc:latest-alpine
     ports: [ 40772:40772 ]
     init: true
     restart: always
@@ -32,7 +32,7 @@ services:
       - /dev/bus/usb
   epgstation:
     container_name: epgstation
-    image: collelog/epgstation:latest-debian-amd64
+    image: collelog/epgstation:latest-alpine-amd64
     ports: [ "8888:8888", "8889:8889" ]
     init: true
     restart: always
