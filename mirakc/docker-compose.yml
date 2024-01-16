@@ -41,13 +41,13 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./mirakc/sock:/var/run/mirakurun
-      - /Users/${USER}/life-dashboard/mirakc/epgstation/config:/opt/epgstation/config
-      - /Users/${USER}/life-dashboard/mirakc/epgstation/data:/opt/epgstation/data
-      - /Users/${USER}/life-dashboard/mirakc/epgstation/drop:/opt/epgstation/drop
-      - /Users/${USER}/life-dashboard/mirakc/epgstation/img:/opt/epgstation/img
-      - /Users/${USER}/life-dashboard/mirakc/epgstation/thumbnail:/opt/epgstation/thumbnail
-      - /Users/${USER}/life-dashboard/mirakc/epgstation/logs:/opt/epgstation/logs
-      - /Users/${USER}/life-dashboard/mirakc/epgstation/recorded:/opt/epgstation/recorded
+      - ./epgstation/config:/opt/epgstation/config
+      - ./epgstation/data:/opt/epgstation/data
+      - ./epgstation/drop:/opt/epgstation/drop
+      - ./epgstation/img:/opt/epgstation/img
+      - ./epgstation/thumbnail:/opt/epgstation/thumbnail
+      - ./epgstation/logs:/opt/epgstation/logs
+      - ./epgstation/recorded:/opt/epgstation/recorded
     depends_on: [ mirakc ]
 
 volumes:
