@@ -1,5 +1,5 @@
 port: 8888
-mirakurunPath: http+unix://%2Fvar%2Frun%2Fmirakurun%2Fmirakurun.sock/
+mirakurunPath: http+unix://%2Fvar%2Frun%2Fmirakurun%2Fmirakc.sock/
 
 dbtype: sqlite
 sqlite:
