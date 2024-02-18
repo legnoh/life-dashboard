@@ -70,12 +70,9 @@ Usage
     sudo systemctl enable avahi-daemon
     ```
 1. WiFi を利用する場合、Ubuntu の WiFi Power Save が働かないように無効化しておく
-   ```sh
-   # /etc/NetworkManager/conf.d/default-wifi-powersave-on.conf の power-save を2に変更
-   # https://askubuntu.com/questions/1386217/wifi-power-management-keeps-turning-on
-   sudo sed -i 's/3/2/' /etc/NetworkManager/conf.d/*
-   sudo reboot
-   ```
+  - 下記のtlpを使った手順まですべてやりきっておいた方が良い。  
+  FYI: https://askubuntu.com/a/1386219
+
 1. Docker Engine をインストールする。
     - [Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository)
 
