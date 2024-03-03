@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>io.lkj.life.dashboard.grafstation.grafana.gchls</string>
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>GCH_EMAIL</key>
+        <string>${GCH_EMAIL}</string>
+        <key>GCH_PASSWORD</key>
+        <string>${GCH_PASSWORD}</string>
+        <key>OUTPUT_FILEPATH</key>
+        <string>/Users/${USER}/life-dashboard/configs/grafana/terraform.tfvars</string>
+    </dict>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/${USER}/life-dashboard/configs/grafana/gchls.sh</string>
+    </array>
+    <key>WorkingDirectory</key>
+    <string>/Users/${USER}/life-dashboard/configs/grafana</string>
+    <key>StandardOutPath</key>
+    <string>/tmp/gchls.log</string>
+    <key>StandardErrorPath</key>
+    <string>/tmp/gchls.err</string>
+    <key>StartCalendarInterval</key>
+    <array>
+        <dict>
+            <key>Hour</key>
+            <integer>11</integer>
+            <key>Minute</key>
+            <integer>55</integer>
+        </dict>
+        <dict>
+            <key>Hour</key>
+            <integer>23</integer>
+            <key>Minute</key>
+            <integer>55</integer>
+        </dict>
+    </array>
+</dict>
+</plist>

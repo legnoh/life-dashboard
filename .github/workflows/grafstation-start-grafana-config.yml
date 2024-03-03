@@ -33,6 +33,24 @@ jobs:
       run: |
         rm -rf ${HOME}/life-dashboard/configs/grafana
         cp -r ../grafana ${HOME}/life-dashboard/configs/
+    
+    - name: start gchls daemon
+      env:
+        GCH_USER: ${{ secrets.GCH_USER }}
+        GCH_PASSWORD: ${{ secrets.GCH_PASSWORD }}
+        LIST_PATH: "Library/LaunchAgents/io.lkj.life.dashboard.grafstation.grafana.gchls.plist"
+      run:
+        export PLIST_PATH="${HOME}/${LIST_PATH}"
+
+        GCH_USER="${GCH_USER}" \
+        GCH_PASSWORD="${GCH_PASSWORD}" \
+        USER=${USER} \
+        envsubst < gchls.plist > ${PLIST_PATH}
+
+        chmod 664 ${PLIST_PATH}
+        launchctl unload -w ${PLIST_PATH}
+        plutil -lint ${PLIST_PATH}
+        launchctl load -w ${PLIST_PATH}
 
     - name: start terraform daemon
       env:
