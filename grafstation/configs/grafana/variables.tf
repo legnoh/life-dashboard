@@ -43,6 +43,11 @@ variable "IS_YOUTUBE_MUTED" {
   default = true
 }
 
+variable "GCH_STREAM_URL" {
+  type    = string
+  default = ""
+}
+
 variable "NATURE_REMO_DEVICE_NAME" {
   type    = string
   default = "Nature Remo"
