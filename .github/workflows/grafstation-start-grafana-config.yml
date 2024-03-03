@@ -36,13 +36,13 @@ jobs:
     
     - name: start gchls daemon
       env:
-        GCH_USER: ${{ secrets.GCH_USER }}
+        GCH_EMAIL: ${{ secrets.GCH_EMAIL }}
         GCH_PASSWORD: ${{ secrets.GCH_PASSWORD }}
         LIST_PATH: "Library/LaunchAgents/io.lkj.life.dashboard.grafstation.grafana.gchls.plist"
       run: |
         export PLIST_PATH="${HOME}/${LIST_PATH}"
 
-        GCH_USER="${GCH_USER}" \
+        GCH_EMAIL="${GCH_EMAIL}" \
         GCH_PASSWORD="${GCH_PASSWORD}" \
         USER=${USER} \
         envsubst < gchls.plist > ${PLIST_PATH}
