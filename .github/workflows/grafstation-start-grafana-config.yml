@@ -39,7 +39,7 @@ jobs:
         GCH_USER: ${{ secrets.GCH_USER }}
         GCH_PASSWORD: ${{ secrets.GCH_PASSWORD }}
         LIST_PATH: "Library/LaunchAgents/io.lkj.life.dashboard.grafstation.grafana.gchls.plist"
-      run:
+      run: |
         export PLIST_PATH="${HOME}/${LIST_PATH}"
 
         GCH_USER="${GCH_USER}" \
