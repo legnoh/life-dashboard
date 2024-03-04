@@ -16,6 +16,8 @@
       const urlParams = new URLSearchParams(window.location.search);
       const channelId = urlParams.get('channel');
       const isMute = urlParams.get('muted');
+      const url = 'http://grafstation.local:8888/api/streams/live/' + channelId + '/m2ts?mode=0';
+      
       var video = document.getElementById('video');
 
       if(isMute == "true") {   
@@ -28,7 +30,7 @@
         hls.attachMedia(video);
       }
       else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-        video.src = 'http://grafstation.local:8888/api/streams/live/' + channelId + '/m2ts?mode=0';
+        video.src = url;
       }
     </script>
   </body>
