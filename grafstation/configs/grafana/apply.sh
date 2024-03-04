@@ -18,6 +18,8 @@ TFVARS=(
   is_tv_channel2_muted
   is_youtube_muted
   is_daymode
+  is_refleshtime
+  is_refreshtime_shuffle
   is_racetime
 )
 TF_OPTIONS=${TERRAFORM_OPTIONS:-"-auto-approve"}
@@ -116,18 +118,17 @@ if [ ${weekday} -le 5 ]; then
   if [ $( echo "${now} < 5.75" | bc ) == 1 ]; then
     :
 
-  # 5:45~06:25 / BSテレ東(YouTubeミュート解除)
-  elif [ $( echo "${now} < 6.416" | bc ) == 1 ]; then
+  # 5:45~06:30 / BSテレ東(YouTubeミュート解除)
+  elif [ $( echo "${now} < 6.5" | bc ) == 1 ]; then
     tv_channel1_id=${CHANNEL_BSBS1_2}
     is_youtube_muted=false
-  
-  # 6:25~06:35 / BSテレ東+NHKEテレ1東京(体操)
+
+  # 6:30~07:00 / ストレッチ動画+BSテレ東
   elif [ $( echo "${now} < 6.583" | bc ) == 1 ]; then
-    tv_channel1_id=${CHANNEL_BSBS1_2}
-    tv_channel2_id=${CHANNEL_GR26}
-    is_tv_channel2_muted=false
-  
-  # 06:35~07:55 / BSテレ東(YouTubeミュート解除)
+    is_refleshtime=true
+    tv_channel2_id=${CHANNEL_BSBS1_2}
+
+  # 07:00~07:55 / BSテレ東(YouTubeミュート解除)
   elif [ $( echo "${now} < 7.916" | bc ) == 1 ]; then
     tv_channel1_id=${CHANNEL_BSBS1_2}
     is_youtube_muted=false
@@ -140,7 +141,7 @@ if [ ${weekday} -le 5 ]; then
         is_youtube_muted=true
       fi
     fi
-  
+
   # 07:55~09:55 / BGMのみ
   elif [ $( echo "${now} < 9.916" | bc ) == 1 ]; then
     is_tv_channel1_muted=false
@@ -164,14 +165,13 @@ if [ ${weekday} -le 5 ]; then
     tv_channel1_id=${CHANNEL_BSBS15_0}
     is_youtube_muted=false
   
-  # 13:00~13:55 / 停止
-  elif [ $( echo "${now} < 13.916" | bc ) == 1 ]; then
+  # 13:00~15:00 / 停止
+  elif [ $( echo "${now} < 15" | bc ) == 1 ]; then
     :
   
-  # 13:55~14:00 / NHK総合1(体操)
-  elif [ $( echo "${now} < 14" | bc ) == 1 ]; then
-    tv_channel1_id=${CHANNEL_GR27}
-    is_tv_channel1_muted=false
+  # 15:00~15:15 / ストレッチ動画
+  elif [ $( echo "${now} < 15.25" | bc ) == 1 ]; then
+    is_refleshtime_shuffle=true
 
   # 14:00~19:00 / ドキュメンタリー・教養（ランダム）
   elif [ $( echo "${now} < 19" | bc ) == 1 ]; then
@@ -191,59 +191,20 @@ if [ ${weekday} -le 5 ]; then
     :
   fi
 
-# 土曜日
-elif [ ${weekday} -eq 6 ]; then
-  echo "today is saturday"
+# 土日
+elif [ ${weekday} -eq 6 ] || [ ${weekday} -eq 7 ]; then
+  echo "today is saturday|sunday"
   echo "now: ${now}"
 
-  # 0:00~05:45 / 停止
-  if [ $( echo "${now} < 5.75" | bc ) == 1 ]; then
+  # 0:00~06:30 / 停止
+  if [ $( echo "${now} < 6.5" | bc ) == 1 ]; then
     :
 
-  # 5:45~12:00 / ドキュメンタリー・教養（ランダム・YouTubeを音つきでつける）
-  elif [ $( echo "${now} < 12" | bc ) == 1 ]; then
-    tv_channel1_id=$(search_channel_by_genre 8)
-    is_youtube_muted=false
-  
-  ## 12:00~12:25 / NHK総合1(ミュート解除)
-  elif [ $( echo "${now} < 12.416" | bc ) == 1 ]; then
-    tv_channel1_id=${CHANNEL_GR27}
-    is_tv_channel1_muted=false
+  # 6:30~07:00 / ストレッチ動画
+  elif [ $( echo "${now} < 7" | bc ) == 1 ]; then
+    is_refleshtime=true
 
-  # 12:25~21:30 / ドキュメンタリー・教養（ランダム・YouTubeを音つきでつける）
-  elif [ $( echo "${now} < 21.5" | bc ) == 1 ]; then
-    tv_channel1_id=$(search_channel_by_genre 8)
-    is_youtube_muted=false
-
-  ## 21:30~22:30 / 音楽のみ
-  elif [ $( echo "${now} < 22.5" | bc ) == 1 ]; then
-    is_tv_channel1_muted=false
-
-  ## 22:30~24:00 / 停止
-  else
-    :
-  fi
-
-# 日曜日
-elif [ ${weekday} -le 7 ]; then
-  echo "today is sunday"
-  echo "now: ${now}"
-
-    # 0:00~05:45 / 停止
-  if [ $( echo "${now} < 5.75" | bc ) == 1 ]; then
-    :
-
-  # 5:45~12:00 / ドキュメンタリー・教養（ランダム・YouTubeを音つきでつける）
-  elif [ $( echo "${now} < 12" | bc ) == 1 ]; then
-    tv_channel1_id=$(search_channel_by_genre 8)
-    is_youtube_muted=false
-
-  ## 12:00~12:25 / NHK総合1(ミュート解除)
-  elif [ $( echo "${now} < 12.416" | bc ) == 1 ]; then
-    tv_channel1_id=${CHANNEL_GR27}
-    is_tv_channel1_muted=false
-
-  # 12:25~21:30 / ドキュメンタリー・教養（ランダム・YouTubeを音つきでつける）
+  # 07:00~21:30 / ドキュメンタリー・教養（ランダム・YouTubeを音つきでつける）
   elif [ $( echo "${now} < 21.5" | bc ) == 1 ]; then
     tv_channel1_id=$(search_channel_by_genre 8)
     is_youtube_muted=false
@@ -262,31 +223,16 @@ else
   exit 1
 fi
 
-# 中央競馬の放送日は朝9時〜12時、12:15〜17:00までグリーンチャンネルに変更する
+# 中央競馬の放送日は9:00〜17:00までグリーンチャンネルに変更する
 if [[ $(is_national_raceday) > 0 ]]; then
   echo "中央競馬の開催日です!"
 
   if [ $( echo "${now} < 9" | bc ) == 1 ]; then
     :
-  elif [ $( echo "${now} < 12" | bc ) == 1 ]; then
-    tv_channel1_id=${CHANNEL_BSBS21_2}
-    is_racetime=true
-    is_youtube_muted=true
-
-  # 12:00~12:15 / グリーンチャンネル + NHK
-  elif [ $( echo "${now} < 12.25" | bc ) == 1 ]; then
-    is_racetime=true
-    is_channel1_muted=true
-    tv_channel2_id=${CHANNEL_GR27}
-    is_tv_channel2_muted=false
-    is_youtube_muted=true
-
-  # 12:15~17:00 / グリーンチャンネル
   elif [ $( echo "${now} < 17" | bc ) == 1 ]; then
     is_racetime=true
     is_tv_channel1_muted=false
     is_youtube_muted=true
-  fi
 fi
 
 # ダート重賞番組が放送されている場合、強制的にチャンネルをグリーンチャンネルに変更する

@@ -62,3 +62,13 @@ variable "IS_RACETIME" {
   type    = bool
   default = false
 }
+
+variable "IS_REFRESHTIME" {
+  type    = bool
+  default = false
+}
+
+variable "IS_REFRESHTIME_SHUFFLE" {
+  type    = bool
+  default = false
+}
