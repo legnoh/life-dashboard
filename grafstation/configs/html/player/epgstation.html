@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script src="./mpegts.js"></script>
     <style>
       body {
         margin: 0 auto; /* 左右中央揃え */
@@ -11,27 +10,25 @@
     </style>
   </head>
   <body>
-    <video controls autoplay id="videoElement" width="100%" height="100%"></video>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@1"></script>
+    <video controls autoplay id="video" width="100%" height="100%"></video>
     <script>
       const urlParams = new URLSearchParams(window.location.search);
       const channelId = urlParams.get('channel');
       const isMute = urlParams.get('muted');
+      var video = document.getElementById('video');
 
-      if(isMute == "true") {
-          var videoTag = document.getElementsByTagName('video')[0];
-          videoTag.muted = true;
+      if(isMute == "true") {   
+          video.muted = true;
       }
 
-      if (mpegts.getFeatureList().mseLivePlayback) {
-          var videoElement = document.getElementById('videoElement');
-          var player = mpegts.createPlayer({
-              type: 'mse',
-              isLive: true,
-              url: 'http://grafstation.local:8888/api/streams/live/' + channelId + '/m2ts?mode=0'
-          });
-          player.attachMediaElement(videoElement);
-          player.load();
-          player.play();
+      if (Hls.isSupported()) {
+        var hls = new Hls();
+        hls.loadSource(url);
+        hls.attachMedia(video);
+      }
+      else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = 'http://grafstation.local:8888/api/streams/live/' + channelId + '/m2ts?mode=0';
       }
     </script>
   </body>
