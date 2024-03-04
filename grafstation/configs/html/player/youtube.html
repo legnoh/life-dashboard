@@ -56,9 +56,9 @@
           event.target.mute();
         }
         if(isShuffle == "true") {
-          event.target.setShuffle({'shufflePlaylist' : true});
+          event.target.setShuffle(true);
         }
-        event.target.playVideo();
+        event.target.playVideoAt(0);
         event.target.setPlaybackQuality("highres");
       }
 
