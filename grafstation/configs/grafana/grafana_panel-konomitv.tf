@@ -7,7 +7,7 @@ resource "grafana_library_panel" "konomitv" {
     options = {
       autoPlay  = true,
       videoType = "iframe",
-      iframeURL = "http://grafstation.local/player/konomitv.html?channel=${var.TV_CHANNEL_ID1}",
+      iframeURL = "http://grafstation.local/player/konomitv.html?channel=${var.TV_CHANNEL1_ID}",
     },
   })
 }
@@ -21,7 +21,7 @@ resource "grafana_library_panel" "konomitv-muted" {
     options = {
       autoPlay  = true,
       videoType = "iframe",
-      iframeURL = "http://grafstation.local/player/konomitv.html?channel=${var.TV_CHANNEL_ID1}&muted=true",
+      iframeURL = "http://grafstation.local/player/konomitv.html?channel=${var.TV_CHANNEL1_ID}&muted=true",
     },
   })
 }
@@ -35,7 +35,7 @@ resource "grafana_library_panel" "konomitv2" {
     options = {
       autoPlay  = true,
       videoType = "iframe",
-      iframeURL = "http://grafstation.local/player/konomitv.html?channel=${var.TV_CHANNEL_ID2}",
+      iframeURL = "http://grafstation.local/player/konomitv.html?channel=${var.TV_CHANNEL2_ID}",
     },
   })
 }
@@ -49,7 +49,7 @@ resource "grafana_library_panel" "konomitv2-muted" {
     options = {
       autoPlay  = true,
       videoType = "iframe",
-      iframeURL = "http://grafstation.local/player/konomitv.html?channel=${var.TV_CHANNEL_ID2}&muted=true",
+      iframeURL = "http://grafstation.local/player/konomitv.html?channel=${var.TV_CHANNEL2_ID}&muted=true",
     },
   })
 }

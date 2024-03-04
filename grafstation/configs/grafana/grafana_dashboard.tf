@@ -2,7 +2,7 @@ resource "grafana_dashboard" "life-metrics" {
   org_id = grafana_organization.main.org_id
   config_json = jsonencode({
     title       = "Life Metrics",
-    description = "Now CH1: ${var.TV_CHANNEL_ID1}, Muted: ${var.IS_TV_CHANNEL1_MUTED}, CH2: ${var.TV_CHANNEL_ID2}, Muted: ${var.IS_TV_CHANNEL2_MUTED}, YTMuted: ${var.IS_YOUTUBE_MUTED}, DayMode: ${var.IS_DAYMODE}",
+    description = "Now CH1: ${var.TV_CHANNEL1_ID}, Muted: ${var.IS_TV_CHANNEL1_MUTED}, CH2: ${var.TV_CHANNEL2_ID}, Muted: ${var.IS_TV_CHANNEL2_MUTED}, YTMuted: ${var.IS_YOUTUBE_MUTED}, DayMode: ${var.IS_DAYMODE}",
     timezone    = "browser",
     version     = 0,
     refresh     = "30m"
@@ -11,16 +11,20 @@ resource "grafana_dashboard" "life-metrics" {
       # channel1
       {
         libraryPanel = zipmap(local.libpanel_keys, [
-          var.TV_CHANNEL_ID1 != "" ?
+          var.IS_RACETIME ?
+            var.IS_TV_CHANNEL1_MUTED ?
+              grafana_library_panel.greench-muted : grafana_library_panel.greench
+          :
+          var.TV_CHANNEL1_ID != "" ?
             var.IS_TV_CHANNEL1_MUTED ? 
               grafana_library_panel.tv-muted.uid : grafana_library_panel.tv.uid
           :
-            var.IS_DAYMODE ?
-              var.IS_TV_CHANNEL1_MUTED ?
-                grafana_library_panel.youtube-daymode-muted.uid : grafana_library_panel.youtube-daymode-bgm.uid
-            :
-              var.IS_TV_CHANNEL1_MUTED ?
-                grafana_library_panel.youtube-nightmode-muted.uid : grafana_library_panel.youtube-nightmode-bgm.uid
+          var.IS_DAYMODE ?
+            var.IS_TV_CHANNEL1_MUTED ?
+              grafana_library_panel.youtube-daymode-muted.uid : grafana_library_panel.youtube-daymode-bgm.uid
+          :
+          var.IS_TV_CHANNEL1_MUTED ?
+            grafana_library_panel.youtube-nightmode-muted.uid : grafana_library_panel.youtube-nightmode-bgm.uid
         ])
         gridPos = { h = 11, w = 9, x = 0, y = 0 }
       },
@@ -28,7 +32,7 @@ resource "grafana_dashboard" "life-metrics" {
       # channel2/youtube
       {
         libraryPanel = zipmap(local.libpanel_keys, [
-          var.TV_CHANNEL_ID2 != "" ?
+          var.TV_CHANNEL2_ID != "" ?
           var.IS_TV_CHANNEL2_MUTED ?
           grafana_library_panel.tv2-muted.uid : grafana_library_panel.tv2.uid
           : var.IS_YOUTUBE_MUTED ?

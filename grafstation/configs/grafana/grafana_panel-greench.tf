@@ -16,7 +16,7 @@ resource "grafana_library_panel" "greench" {
   })
 }
 
-resource "grafana_library_panel" "greench_muted" {
+resource "grafana_library_panel" "greench-muted" {
   org_id = grafana_organization.main.org_id
   name = "GREEN ch.(muted)"
   model_json = jsonencode({

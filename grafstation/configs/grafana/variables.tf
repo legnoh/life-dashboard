@@ -13,12 +13,12 @@ variable "TV_EPGSTATION_HOST" {
   default = "grafstation.local:8888"
 }
 
-variable "TV_CHANNEL_ID1" {
+variable "TV_CHANNEL1_ID" {
   type    = string
   default = ""
 }
 
-variable "TV_CHANNEL_ID2" {
+variable "TV_CHANNEL2_ID" {
   type    = string
   default = ""
 }
@@ -56,4 +56,9 @@ variable "NATURE_REMO_DEVICE_NAME" {
 variable "OPENWEATHER_CITY" {
   type    = string
   default = "Tokyo, JP"
+}
+
+variable "IS_RACETIME" {
+  type    = bool
+  default = false
 }
