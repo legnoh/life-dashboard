@@ -11,7 +11,7 @@ resource "grafana_library_panel" "greench" {
     options = {
       autoPlay  = true,
       videoType = "iframe",
-      iframeURL = "http://grafstation.local/player/general.html?url=" + local.gch_stream_url_encode,
+      iframeURL = "http://grafstation.local/player/general.html?url=${local.gch_stream_url_encode}",
     },
   })
 }
@@ -25,7 +25,7 @@ resource "grafana_library_panel" "greench_muted" {
     options = {
       autoPlay  = true,
       videoType = "iframe",
-      iframeURL = "http://grafstation.local/player/general.html?url=" + local.gch_stream_url_encode + "&muted=true",
+      iframeURL = "http://grafstation.local/player/general.html?url=${local.gch_stream_url_encode}&muted=true",
     },
   })
 }
