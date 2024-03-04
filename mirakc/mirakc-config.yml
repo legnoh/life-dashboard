@@ -182,11 +182,6 @@ channels:
     channel: 'BS15_0'
     services: [102]
 
-  - name: 'グリーンチャンネル'
-    type: 'BS'
-    channel: 'BS21_2'
-    services: [234]
-
   - name: 'BS松竹東急'
     type: 'BS'
     channel: BS23_3
