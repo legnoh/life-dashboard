@@ -96,7 +96,7 @@ resource "grafana_library_panel" "youtube-stretch" {
   })
 }
 
-resource "grafana_library_panel" "youtube-strech-shuffle" {
+resource "grafana_library_panel" "youtube-stretch-shuffle" {
   org_id = grafana_organization.main.org_id
   name = "youtube-stretch-shuffle"
   model_json = jsonencode({
