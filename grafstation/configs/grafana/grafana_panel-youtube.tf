@@ -81,3 +81,59 @@ resource "grafana_library_panel" "youtube-nightmode-muted" {
     },
   })
 }
+
+resource "grafana_library_panel" "youtube-stretch" {
+  org_id = grafana_organization.main.org_id
+  name = "youtube-stretch"
+  model_json = jsonencode({
+    type        = "innius-video-panel",
+    transparent = true,
+    options = {
+      autoPlay  = true,
+      videoType = "iframe",
+      iframeURL = "http://grafstation.local/player/youtube.html?list=PLBdI4smwsafrarcK6lLLIpdXAEymQBGPo",
+    },
+  })
+}
+
+resource "grafana_library_panel" "youtube-strech-shuffle" {
+  org_id = grafana_organization.main.org_id
+  name = "youtube-stretch-shuffle"
+  model_json = jsonencode({
+    type        = "innius-video-panel",
+    transparent = true,
+    options = {
+      autoPlay  = true,
+      videoType = "iframe",
+      iframeURL = "http://grafstation.local/player/youtube.html?list=PLBdI4smwsafrarcK6lLLIpdXAEymQBGPo&shuffle=true",
+    },
+  })
+}
+
+resource "grafana_library_panel" "youtube-japanews24" {
+  org_id = grafana_organization.main.org_id
+  name = "youtube-japanews24"
+  model_json = jsonencode({
+    type        = "innius-video-panel",
+    transparent = true,
+    options = {
+      autoPlay  = true,
+      videoType = "iframe",
+      iframeURL = "https://www.youtube.com/embed/coYw-eVU0Ks?autoplay=1&loop=1&playsinline=1",
+    },
+  })
+}
+
+resource "grafana_library_panel" "youtube-japanews24-muted" {
+  org_id = grafana_organization.main.org_id
+  name = "youtube-japanews24-muted"
+  model_json = jsonencode({
+    type        = "innius-video-panel",
+    transparent = true,
+    options = {
+      autoPlay  = true,
+      videoType = "iframe",
+      iframeURL = "https://www.youtube.com/embed/coYw-eVU0Ks?mute=1&autoplay=1&loop=1&playsinline=1",
+    },
+  })
+}
