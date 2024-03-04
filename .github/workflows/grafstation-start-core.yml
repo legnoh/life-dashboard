@@ -41,6 +41,10 @@ jobs:
         mkdir -p ${HOME}/life-dashboard/{epgstation/{config,data/{key,streamfiles},drop,img,thumbnail,logs/{EPGUpdater,Operator,Service},recorded},konomi/{data,logs,recorded,capture},prometheus,configs,withings}
         mkdir -p ${HOME}/{.hap-switch-command,.hap-nature-remo}
         cp -r configs/html ${HOME}/life-dashboard/configs/
+        curl -Lo ${HOME}/life-dashboard/configs/html/player/mpegts.js \
+          https://github.com/xqq/mpegts.js/releases/download/v1.7.3/mpegts.js
+        curl -Lo ${HOME}/life-dashboard/configs/html/player/mpegts.js.map \
+          https://github.com/xqq/mpegts.js/releases/download/v1.7.3/mpegts.js.map
         cp -r configs/epgstation/* ${HOME}/life-dashboard/epgstation/config/
         cp -r configs/docker-compose.yml ${HOME}/life-dashboard/configs/
         cp -r configs/nginx.conf ${HOME}/life-dashboard/configs/
