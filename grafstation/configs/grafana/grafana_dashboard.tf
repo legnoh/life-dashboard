@@ -13,10 +13,10 @@ resource "grafana_dashboard" "life-metrics" {
         libraryPanel = zipmap(local.libpanel_keys, [
           var.IS_RACETIME ?
             var.IS_TV_CHANNEL1_MUTED ?
-              grafana_library_panel.greench-muted : grafana_library_panel.greench
+              grafana_library_panel.greench-muted.uid : grafana_library_panel.greench.uid
           :
           var.TV_CHANNEL1_ID != "" ?
-            var.IS_TV_CHANNEL1_MUTED ? 
+            var.IS_TV_CHANNEL1_MUTED ?
               grafana_library_panel.tv-muted.uid : grafana_library_panel.tv.uid
           :
           var.IS_DAYMODE ?
