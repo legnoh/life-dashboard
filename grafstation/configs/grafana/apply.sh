@@ -1,5 +1,7 @@
 #!/opt/homebrew/bin/bash
 
+set -x
+
 echo "---------------------------------"
 date "+%Y/%m/%d %H:%M:%S"
 ts=$(date "+%Y%m%d%H%M")
@@ -18,7 +20,7 @@ TFVARS=(
   is_tv_channel2_muted
   is_youtube_muted
   is_daymode
-  is_refleshtime
+  is_refreshtime
   is_refreshtime_shuffle
   is_racetime
 )
@@ -125,7 +127,7 @@ if [ ${weekday} -le 5 ]; then
 
   # 6:30~07:00 / ストレッチ動画+BSテレ東
   elif [ $( echo "${now} < 6.583" | bc ) == 1 ]; then
-    is_refleshtime=true
+    is_refreshtime=true
     tv_channel2_id=${CHANNEL_BSBS1_2}
 
   # 07:00~07:55 / BSテレ東(YouTubeミュート解除)
@@ -164,14 +166,14 @@ if [ ${weekday} -le 5 ]; then
   elif [ $( echo "${now} < 13" | bc ) == 1 ]; then
     tv_channel1_id=${CHANNEL_BSBS15_0}
     is_youtube_muted=false
-  
+
   # 13:00~15:00 / 停止
   elif [ $( echo "${now} < 15" | bc ) == 1 ]; then
     :
-  
+
   # 15:00~15:15 / ストレッチ動画
   elif [ $( echo "${now} < 15.25" | bc ) == 1 ]; then
-    is_refleshtime_shuffle=true
+    is_refreshtime_shuffle=true
 
   # 14:00~19:00 / ドキュメンタリー・教養（ランダム）
   elif [ $( echo "${now} < 19" | bc ) == 1 ]; then
@@ -192,7 +194,7 @@ if [ ${weekday} -le 5 ]; then
   fi
 
 # 土日
-elif [ ${weekday} -eq 6 ] || [ ${weekday} -eq 7 ]; then
+elif [ ${weekday} -eq 6 ] || [ ${weekday} -eq 7 ] ; then
   echo "today is saturday|sunday"
   echo "now: ${now}"
 
@@ -202,7 +204,7 @@ elif [ ${weekday} -eq 6 ] || [ ${weekday} -eq 7 ]; then
 
   # 6:30~07:00 / ストレッチ動画
   elif [ $( echo "${now} < 7" | bc ) == 1 ]; then
-    is_refleshtime=true
+    is_refreshtime=true
 
   # 07:00~21:30 / ドキュメンタリー・教養（ランダム・YouTubeを音つきでつける）
   elif [ $( echo "${now} < 21.5" | bc ) == 1 ]; then
@@ -233,6 +235,9 @@ if [[ $(is_national_raceday) > 0 ]]; then
     is_racetime=true
     is_tv_channel1_muted=false
     is_youtube_muted=true
+  else
+    :
+  fi
 fi
 
 # ダート重賞番組が放送されている場合、強制的にチャンネルをグリーンチャンネルに変更する
