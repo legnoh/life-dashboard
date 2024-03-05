@@ -256,7 +256,10 @@ fi
 
 # 05:45~17:30までを日中として判定
 if [ $( echo "${now} > 5.83" | bc ) == 1 ] && [ $( echo "${now} < 17.5" | bc ) == 1 ]; then
+  echo "時間帯: 昼"
   is_daymode=true
+else
+  echo "時間帯: 夜"
 fi
 
 # デフォルト外項目のみterraformに変数として渡す
