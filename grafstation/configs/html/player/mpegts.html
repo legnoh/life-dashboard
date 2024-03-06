@@ -22,16 +22,14 @@
           video.muted = true;
       }
 
-      if (mpegts.getFeatureList().mseLivePlayback) {
-          var player = mpegts.createPlayer({
-              type: 'mpegts',
-              isLive: true,
-              url: url
-          });
-          player.attachMediaElement(video);
-          player.load();
-          player.play();
-      }
+      var player = mpegts.createPlayer({
+          type: 'mpegts',
+          isLive: true,
+          url: url
+      });
+      player.attachMediaElement(video);
+      player.load();
+      player.play();
     </script>
   </body>
 </html>
