@@ -21,7 +21,7 @@ resource "grafana_library_panel" "streamlink-muted" {
     options = {
       autoPlay  = true,
       videoType = "iframe",
-      iframeURL = "http://grafstation.local/player/mpegts.html?url=http%3A%2F%2Fgrafstation.local%2Fstreamlink&muted=1",
+      iframeURL = "http://grafstation.local/player/mpegts.html?url=http%3A%2F%2Fgrafstation.local%2Fstreamlink&muted=true",
     },
   })
 }
