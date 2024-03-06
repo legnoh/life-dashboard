@@ -12,9 +12,9 @@ resource "grafana_library_panel" "streamlink" {
   })
 }
 
-resource "grafana_library_panel" "streamlink" {
+resource "grafana_library_panel" "streamlink-muted" {
   org_id = grafana_organization.main.org_id
-  name = "Streamlink"
+  name = "Streamlink(muted)"
   model_json = jsonencode({
     type        = "innius-video-panel",
     transparent = true,
