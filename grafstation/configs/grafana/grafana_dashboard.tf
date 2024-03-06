@@ -14,9 +14,6 @@ resource "grafana_dashboard" "life-metrics" {
           var.IS_REFRESHTIME ?
             grafana_library_panel.youtube-stretch.uid
           :
-          var.IS_REFRESHTIME_SHUFFLE ?
-            grafana_library_panel.youtube-stretch-shuffle.uid
-          :
           var.IS_RACETIME ?
             var.IS_TV_CHANNEL1_MUTED ?
               grafana_library_panel.greench-muted.uid : grafana_library_panel.greench.uid

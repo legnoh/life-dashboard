@@ -21,7 +21,6 @@ TFVARS=(
   is_youtube_muted
   is_daymode
   is_refreshtime
-  is_refreshtime_shuffle
   is_racetime
 )
 TF_OPTIONS=${TERRAFORM_OPTIONS:-"-auto-approve"}
@@ -173,7 +172,7 @@ if [ ${weekday} -le 5 ]; then
 
   # 15:00~15:15 / ストレッチ動画
   elif [ $( echo "${now} < 15.25" | bc ) == 1 ]; then
-    is_refreshtime_shuffle=true
+    is_refreshtime=true
 
   # 14:00~19:00 / ドキュメンタリー・教養（ランダム）
   elif [ $( echo "${now} < 19" | bc ) == 1 ]; then

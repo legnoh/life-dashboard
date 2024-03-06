@@ -91,21 +91,7 @@ resource "grafana_library_panel" "youtube-stretch" {
     options = {
       autoPlay  = true,
       videoType = "iframe",
-      iframeURL = "http://grafstation.local/player/youtube.html?list=PLBdI4smwsafrarcK6lLLIpdXAEymQBGPo",
-    },
-  })
-}
-
-resource "grafana_library_panel" "youtube-stretch-shuffle" {
-  org_id = grafana_organization.main.org_id
-  name = "youtube-stretch-shuffle"
-  model_json = jsonencode({
-    type        = "innius-video-panel",
-    transparent = true,
-    options = {
-      autoPlay  = true,
-      videoType = "iframe",
-      iframeURL = "http://grafstation.local/player/youtube.html?list=PLBdI4smwsafrarcK6lLLIpdXAEymQBGPo&shuffle=true",
+      iframeURL = "https://www.youtube.com/embed/5haAgY-JxcA?autoplay=1&start=299",
     },
   })
 }
