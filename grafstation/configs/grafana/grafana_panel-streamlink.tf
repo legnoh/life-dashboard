@@ -1,31 +1,27 @@
-locals {
-  gch_stream_url_encode = urlencode( var.GCH_STREAM_URL )
-}
-
-resource "grafana_library_panel" "greench" {
+resource "grafana_library_panel" "streamlink" {
   org_id = grafana_organization.main.org_id
-  name = "GREEN ch."
+  name = "Streamlink"
   model_json = jsonencode({
     type        = "innius-video-panel",
     transparent = true,
     options = {
       autoPlay  = true,
       videoType = "iframe",
-      iframeURL = "http://grafstation.local/player/hls.html?url=${local.gch_stream_url_encode}",
+      iframeURL = "http://grafstation.local/player/mpegts.html?url=http%3A%2F%2Fgrafstation.local%2Fstreamlink",
     },
   })
 }
 
-resource "grafana_library_panel" "greench-muted" {
+resource "grafana_library_panel" "streamlink" {
   org_id = grafana_organization.main.org_id
-  name = "GREEN ch.(muted)"
+  name = "Streamlink"
   model_json = jsonencode({
     type        = "innius-video-panel",
     transparent = true,
     options = {
       autoPlay  = true,
       videoType = "iframe",
-      iframeURL = "http://grafstation.local/player/hls.html?url=${local.gch_stream_url_encode}&muted=true",
+      iframeURL = "http://grafstation.local/player/mpegts.html?url=http%3A%2F%2Fgrafstation.local%2Fstreamlink&muted=1",
     },
   })
 }
