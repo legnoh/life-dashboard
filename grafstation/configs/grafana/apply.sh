@@ -43,9 +43,9 @@ function is_national_raceday(){
       num=0
     fi
     if [[ ${num} > 0 ]]; then
-      echo 1
+      return 0
     else
-      echo 0
+      return 1
     fi
 }
 
@@ -84,9 +84,9 @@ function is_mleague_onair() {
       | select(.startAt < ${now_unixtime} and .endAt > ${now_unixtime} ) \
       | .id")
     if [[ ${mleague_onair_slot} != "" ]]; then
-      return 1
-    else
       return 0
+    else
+      return 1
     fi
 }
 
@@ -184,7 +184,7 @@ else
 fi
 
 # Mリーグの放送中はStreamlinkをつける
-if [[ $(is_mleague_onair "${tsux}") > 0 ]]; then
+if $(is_mleague_onair ${tsux}) ; then
   echo "Mリーグが放送されています!"
   is_stream_onair=true
   is_tv_channel1_muted=false
@@ -192,7 +192,7 @@ if [[ $(is_mleague_onair "${tsux}") > 0 ]]; then
 fi
 
 # 中央競馬の放送日は9:00〜17:00までグリーンチャンネルに変更する
-if [[ $(is_national_raceday) > 0 ]]; then
+if is_national_raceday; then
   echo "中央競馬の開催日です!"
 
   if [ $( echo "${now} < 9" | bc ) == 1 ]; then
