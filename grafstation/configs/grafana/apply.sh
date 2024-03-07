@@ -74,7 +74,7 @@ function fetch_abema_slots() {
 # Mリーグをやっているか確認する
 function is_mleague_onair() {
 
-  local now_unixtime=${1:?}
+  local now_unixtime=${tsux}
   local filepath=${ABEMA_SLOTS_FILE}
 
   local mleague_onair_slot=$(cat ${filepath} \
@@ -184,7 +184,7 @@ else
 fi
 
 # Mリーグの放送中はStreamlinkをつける
-if $(is_mleague_onair ${tsux}) ; then
+if is_mleague_onair; then
   echo "Mリーグが放送されています!"
   is_stream_onair=true
   is_tv_channel1_muted=false
