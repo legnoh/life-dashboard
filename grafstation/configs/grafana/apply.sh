@@ -78,7 +78,7 @@ function is_mleague_onair() {
   local filepath=${ABEMA_SLOTS_FILE}
 
   local mleague_onair_slot=$(cat ${filepath} \
-    | jq ".slots[] \
+    | ${JQ} ".slots[] \
       | select(.channelId == \"mahjong\" \
           and .mark.live == true \
         ) \
