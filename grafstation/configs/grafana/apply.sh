@@ -1,6 +1,6 @@
 #!/opt/homebrew/bin/bash
 
-set -x
+# set -x
 
 echo "---------------------------------"
 date "+%Y/%m/%d %H:%M:%S"
@@ -104,7 +104,7 @@ function check_latest_earthquake() {
   )
 }
 
-fetch_abema_slots
+fetch_abema_slots "${ABEMA_JWT_TOKEN}"
 
 # 曜日・時間を取得
 weekday=$(date +%u) # 月-日 = 1-7
@@ -187,7 +187,7 @@ else
 fi
 
 # Mリーグの放送中はStreamlinkをつける
-if [[ $(is_mleague_onair) > 0 ]]; then
+if [[ $(is_mleague_onair "${tsux}") > 0 ]]; then
   echo "Mリーグが放送されています!"
   is_stream_onair=true
   is_tv_channel1_muted=false
