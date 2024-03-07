@@ -78,13 +78,13 @@ function is_mleague_onair() {
   local filepath=${ABEMA_SLOTS_FILE}
 
   local mleague_onair_slot=$(cat ${filepath} \
-    | ${JQ} ".slots[] \
+    | ${JQ} -r ".slots[] \
       | select(.channelId == \"mahjong\" \
           and .mark.live == true \
         ) \
-      | select(.title | contains(\"Mリーグ\") ) \
+      | select(.title | contains(\"Mリーグ\")) \
       | select(.startAt < ${now_unixtime} and .endAt > ${now_unixtime}) \
-      | .id"
+      | .id")
     if [[ ${mleague_onair_slot} != "" ]]; then
       return 1
     else
