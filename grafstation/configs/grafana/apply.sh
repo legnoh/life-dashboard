@@ -1,6 +1,6 @@
 #!/opt/homebrew/bin/bash
 
-# set -x
+set -x
 
 echo "---------------------------------"
 date "+%Y/%m/%d %H:%M:%S"
