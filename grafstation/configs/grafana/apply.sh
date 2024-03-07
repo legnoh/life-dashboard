@@ -79,12 +79,13 @@ function is_mleague_onair() {
 
   local mleague_onair_slot=$(cat ${filepath} \
     | ${JQ} -r ".slots[] \
-      | select(.channelId == \"mahjong\" \
+      | select( .channelId == \"mahjong\" \
           and .mark.live == true \
         ) \
-      | select(.title | contains(\"Mリーグ\")) \
-      | select(.startAt < ${now_unixtime} and .endAt > ${now_unixtime}) \
-      | .id")
+      | select(.title | contains(\"Mリーグ\") ) \
+      | select(.startAt < ${now_unixtime} and .endAt > ${now_unixtime} ) \
+      | .id" \
+    )
     if [[ ${mleague_onair_slot} != "" ]]; then
       return 1
     else
