@@ -10,53 +10,33 @@ tsux=$(date "+%s")
 JQ="/opt/homebrew/bin/jq"
 TF="/opt/homebrew/bin/terraform"
 
-EPGS_HOST="grafstation.local:8888"
-CHANNELS_JSON=$(curl "http://${EPGS_HOST}/api/channels" 2>/dev/null)
+# EPGS_HOST="grafstation.local:8888"
+# CHANNELS_JSON=$(curl "http://${EPGS_HOST}/api/channels" 2>/dev/null)
+ABEMA_JWT_TOKEN=${ABEMA_JWT_TOKEN:-""}
+ABEMA_SLOTS_FILE="/tmp/abema_slots.json"
 
 TFVARS=(
-  tv_channel1_id
-  tv_channel2_id
   is_tv_channel1_muted
   is_tv_channel2_muted
   is_youtube_muted
   is_daymode
-  is_refreshtime
+  is_newstime_domestic
+  is_newstime_global
   is_racetime
+  is_refreshtime
+  is_stream_onair
+  is_earthquake
 )
 TF_OPTIONS=${TERRAFORM_OPTIONS:-"-auto-approve"}
-
-# ジャンル検索関数(第1引数/第2引数に入れたもので現在放送中のチャンネルを返す)
-function search_channel_by_genre(){
-  local genre=${1:-"8"}
-  local subgenre=${2:-""}
-  local now="$(date +%s)000"
-  local broadcasting=$(curl -s "http://${EPGS_HOST}/api/schedules/broadcasting?isHalfWidth=true")
-  local channel=""
-
-  if [[ ${subgenre} == "" ]]; then
-    channel=$(echo ${broadcasting} \
-      | ${JQ} -r "[.[] \
-        | select( .programs[0].genre1==${genre} )][0]")
-  elif [[ ${subgenre} != "" ]]; then
-    channel=$(echo ${broadcasting} \
-      | ${JQ} -r "[.[] \
-        | select( .programs[0].genre1==${genre} \
-            and .programs[0].subGenre1==${subgenre} \
-        )][0]")
-  fi
-
-  if [[ "${channel}" != "null" ]]; then
-    echo ${channel} | ${JQ} -r ".channel.id"
-  fi
-}
 
 # 中央競馬をやっている日か確認する
 function is_national_raceday(){
     local yyyymm=${1:-$(date "+%Y%m")}
     local day=${2:-$(date "+%-d")}
     local num=0
+    local jra_json_url="https://jra.jp/keiba/common/calendar/json/"
 
-    num=$(curl -s "https://jra.jp/keiba/common/calendar/json/${yyyymm}.json" \
+    num=$(curl -s "${jra_json_url}/${yyyymm}.json" \
         | ${JQ} -r ".[].data[] | select(.date==\"${day}\") | .info[].race | length")
     
     if [[ "${num}" == "" ]]; then
@@ -70,12 +50,47 @@ function is_national_raceday(){
 }
 
 # ダートグレードレース番組をやっているかを確認する
-function search_dirt_grade_race() {
-  echo "$(curl -s "http://${EPGS_HOST}/api/schedules/broadcasting?isHalfWidth=true" \
-    | ${JQ} ".[] \
-      | select( .channel.name == \"グリーンチャンネル\" ) \
-      | .programs[0] \
-      | select( .description | test(\"(Jpn1|Jpn2|Jpn3)\") )" )"
+# function search_dirt_grade_race() {
+#   echo "$(curl -s "http://${EPGS_HOST}/api/schedules/broadcasting?isHalfWidth=true" \
+#     | ${JQ} ".[] \
+#       | select( .channel.name == \"グリーンチャンネル\" ) \
+#       | .programs[0] \
+#       | select( .description | test(\"(Jpn1|Jpn2|Jpn3)\") )" )"
+# }
+
+# ABEMAの番組表をバックアップする
+function fetch_abema_slots() {
+  local token=${1:?}
+  local timetable_url="https://api.p-c3-e.abema-tv.com/v1/timetable/dataSet?debug=false"
+  local filepath=${ABEMA_SLOTS_FILE}
+
+  local onair_slot=$(curl -o - -q -L \
+    -H "Accept-Encoding: gzip" \
+    -H "Authorization: Bearer ${token}" "${timetable_url}" \
+    | gunzip)
+  echo ${onair_slot} > ${filepath}
+}
+
+# Mリーグをやっているか確認する
+function is_mleague_onair() {
+
+  local now_unixtime=${1:?}
+  local filepath=${ABEMA_SLOTS_FILE}
+
+  local mleague_onair_slot=$(cat ${filepath} \
+    | jq ".slots[] \
+      | select(.channelId == \"mahjong\" \
+          and .mark.live == true \
+        ) \
+      | select(.title | contains(\"Mリーグ\") ) \
+      | select(.startAt < ${now_unixtime} and .endAt > ${now_unixtime}) \
+      | .id"
+    if [[ ${mleague_onair_slot} != "" ]]; then
+      return 1
+    else
+      return 0
+    fi
+  )
 }
 
 # 地震がなかったか確認する
@@ -89,20 +104,7 @@ function check_latest_earthquake() {
   )
 }
 
-# EPGStationのチャンネル情報を取得して変数展開
-len=$(echo ${CHANNELS_JSON} | ${JQ} length)
-for i in $( seq 0 $(($len - 1)) ); do
-  channel_info=$(echo "${CHANNELS_JSON}" | ${JQ} -r ".[${i}]")
-  channel_name=$(echo "${channel_info}" | ${JQ} -r ".halfWidthName")
-  channel_slag=$(echo "${channel_info}" | ${JQ} -r ".channelType + .channel")
-  channel_id=$(echo "${channel_info}" | ${JQ} -r ".id")
-  val_name="CHANNEL_${channel_slag}"
-
-  if [ -z "${!val_name}" ]; then
-    echo "${channel_name}: CHANNEL_${channel_slag}=${channel_id}"
-    eval ${val_name}="${channel_id}"
-  fi
-done
+fetch_abema_slots
 
 # 曜日・時間を取得
 weekday=$(date +%u) # 月-日 = 1-7
@@ -110,118 +112,86 @@ hour=$(date +%-H)
 min=$(date +%-M)
 now=$(echo "scale=3; ${hour} + (${min} / 60)" | bc)
 
-# 平日の場合
-if [ ${weekday} -le 5 ]; then
-  echo "today: weekday"
-  echo "now: ${now}"
+echo "today: weekday"
+echo "now: ${now}"
 
-  # 0:00~05:45 / 停止
-  if [ $( echo "${now} < 5.75" | bc ) == 1 ]; then
-    :
+# 0:00~05:45 / 停止
+if [ $( echo "${now} < 5.75" | bc ) == 1 ]; then
+  :
 
-  # 5:45~06:30 / BSテレ東(YouTubeミュート解除)
-  elif [ $( echo "${now} < 6.5" | bc ) == 1 ]; then
-    tv_channel1_id=${CHANNEL_BSBS1_2}
-    is_youtube_muted=false
+# 5:45~06:30 / ミュート解除
+elif [ $( echo "${now} < 6.5" | bc ) == 1 ]; then
+  is_youtube_muted=false
 
-  # 6:30~07:00 / ストレッチ動画+BSテレ東
-  elif [ $( echo "${now} < 6.583" | bc ) == 1 ]; then
-    is_refreshtime=true
-    tv_channel2_id=${CHANNEL_BSBS1_2}
+# 6:30~06:35 / ストレッチ
+elif [ $( echo "${now} < 6.583" | bc ) == 1 ]; then
+  is_refreshtime=true
 
-  # 07:00~07:55 / BSテレ東(YouTubeミュート解除)
-  elif [ $( echo "${now} < 7.916" | bc ) == 1 ]; then
-    tv_channel1_id=${CHANNEL_BSBS1_2}
-    is_youtube_muted=false
+# 07:00~07:55 / ミュート解除
+elif [ $( echo "${now} < 7.916" | bc ) == 1 ]; then
+  is_youtube_muted=false
 
-    # 火曜/金曜 7:38~7:43 フジテレビ(ちいかわ)
-    if [ ${weekday} == 2 ] || [ ${weekday} == 5 ]; then
-      if [ $( echo "${now} > 7.633" | bc ) == 1 ] && [ $( echo "${now} < 7.716" | bc ) == 1 ]; then
-        tv_channel1_id=${CHANNEL_GR21}
-        is_tv_channel1_muted=false
-        is_youtube_muted=true
-      fi
-    fi
+# 07:55~09:55 / BGMのみ
+elif [ $( echo "${now} < 9.916" | bc ) == 1 ]; then
+  is_tv_channel1_muted=false
 
-  # 07:55~09:55 / BGMのみ
-  elif [ $( echo "${now} < 9.916" | bc ) == 1 ]; then
-    is_tv_channel1_muted=false
-  
-  # 09:55~10:00 / NHK総合1(体操)
-  elif [ $( echo "${now} < 10" | bc ) == 1 ]; then
-    tv_channel1_id=${CHANNEL_GR27}
-    is_tv_channel1_muted=false
-  
-  # 10:00~12:00 / ドキュメンタリー・教養（ランダム）
-  elif [ $( echo "${now} < 12" | bc ) == 1 ]; then
-    tv_channel1_id=$(search_channel_by_genre 8)
+# 09:55~10:00 / ストレッチ
+elif [ $( echo "${now} < 10" | bc ) == 1 ]; then
+  is_refreshtime=true
 
-  ## 12:00~12:25 / NHK総合1(ミュート解除)
-  elif [ $( echo "${now} < 12.416" | bc ) == 1 ]; then
-    tv_channel1_id=${CHANNEL_GR27}
-    is_tv_channel1_muted=false
+# 10:00~12:00 / 停止
+elif [ $( echo "${now} < 12" | bc ) == 1 ]; then
+  :
 
-  # 12:25~13:00 / BS NHK(YouTubeミュート解除)
-  elif [ $( echo "${now} < 13" | bc ) == 1 ]; then
-    tv_channel1_id=${CHANNEL_BSBS15_0}
-    is_youtube_muted=false
+## 12:00~12:20 / ニュース(国内)
+elif [ $( echo "${now} < 12.33" | bc ) == 1 ]; then
+  is_newstime_domestic=true
+  is_tv_channel1_muted=false
 
-  # 13:00~15:00 / 停止
-  elif [ $( echo "${now} < 15" | bc ) == 1 ]; then
-    :
+# 12:20~12:40 / ニュース(国外)
+elif [ $( echo "${now} < 12.66" | bc ) == 1 ]; then
+  is_newstime_global=true
+  is_tv_channel1_muted=false
 
-  # 15:00~15:15 / ストレッチ動画
-  elif [ $( echo "${now} < 15.25" | bc ) == 1 ]; then
-    is_refreshtime=true
+# 12:40~12:55 / 停止
+elif [ $( echo "${now} < 12.916" | bc ) == 1 ]; then
+  :
 
-  # 14:00~19:00 / ドキュメンタリー・教養（ランダム）
-  elif [ $( echo "${now} < 19" | bc ) == 1 ]; then
-    tv_channel1_id=$(search_channel_by_genre 8)
+# 12:55~13:00 / ストレッチ
+elif [ $( echo "${now} < 13" | bc ) == 1 ]; then
+  is_refreshtime=true
 
-  # 19:00~21:30 / ドキュメンタリー・教養（ランダム・YouTubeミュート解除）
-  elif [ $( echo "${now} < 21.5" | bc ) == 1 ]; then
-    tv_channel1_id=$(search_channel_by_genre 8)
-    is_youtube_muted=false
+# 13:00~15:00 / 停止
+elif [ $( echo "${now} < 15" | bc ) == 1 ]; then
+  :
 
-  ## 21:30~22:30 / 音楽のみ
-  elif [ $( echo "${now} < 22.5" | bc ) == 1 ]; then
-    is_tv_channel1_muted=false
+# 15:00~15:05 / ストレッチ
+elif [ $( echo "${now} < 15.083" | bc ) == 1 ]; then
+  is_refreshtime=true
 
-  ## 22:30~24:00 / 停止
-  else
-    :
-  fi
+# 15:05~18:55 / 停止
+elif [ $( echo "${now} < 18.916" | bc ) == 1 ]; then
+  :
 
-# 土日
-elif [ ${weekday} -eq 6 ] || [ ${weekday} -eq 7 ] ; then
-  echo "today is saturday|sunday"
-  echo "now: ${now}"
+# 18:55~19:00 / ストレッチ
+elif [ $( echo "${now} < 19" | bc ) == 1 ]; then
+  is_refreshtime=true
 
-  # 0:00~06:30 / 停止
-  if [ $( echo "${now} < 6.5" | bc ) == 1 ]; then
-    :
+# 19:00~22:30 / メインチャンネルのミュートを解除
+elif [ $( echo "${now} < 22.5" | bc ) == 1 ]; then
+  is_tv_channel1_muted=false
 
-  # 6:30~07:00 / ストレッチ動画
-  elif [ $( echo "${now} < 7" | bc ) == 1 ]; then
-    is_refreshtime=true
-
-  # 07:00~21:30 / ドキュメンタリー・教養（ランダム・YouTubeを音つきでつける）
-  elif [ $( echo "${now} < 21.5" | bc ) == 1 ]; then
-    tv_channel1_id=$(search_channel_by_genre 8)
-    is_youtube_muted=false
-
-  ## 21:30~22:30 / 音楽のみ
-  elif [ $( echo "${now} < 22.5" | bc ) == 1 ]; then
-    is_tv_channel1_muted=false
-
-  ## 22:30~24:00 / 停止
-  else
-    :
-  fi
-
+## 22:30~24:00 / 停止
 else
-  echo "invalid weekday num"
-  exit 1
+  :
+fi
+
+# Mリーグの放送中はStreamlinkをつける
+if [[ $(is_mleague_onair) > 0 ]]; then
+  echo "Mリーグが放送されています!"
+  is_stream_onair=true
+  is_tv_channel1_muted=false
+  is_youtube_muted=true
 fi
 
 # 中央競馬の放送日は9:00〜17:00までグリーンチャンネルに変更する
@@ -240,19 +210,17 @@ if [[ $(is_national_raceday) > 0 ]]; then
 fi
 
 # ダート重賞番組が放送されている場合、強制的にチャンネルをグリーンチャンネルに変更する
-if [[ "$(search_dirt_grade_race)" != "" ]]; then
-  echo "! ダート重賞番組中のため、グリーンチャンネルをつけます !"
-  is_racetime=true
-  is_tv_channel1_muted=false
-  is_youtube_muted=true
-fi
+# if [[ "$(search_dirt_grade_race)" != "" ]]; then
+#   echo "! ダート重賞番組中のため、グリーンチャンネルをつけます !"
+#   is_racetime=true
+# fi
 
-# 直近で緊急地震速報が発生している場合、強制的にチャンネルをNHKに変更する
+# 直近で緊急地震速報が発生している場合、強制的にチャンネルをニュースに変更する
 latest_earthquake_tsux=$(check_latest_earthquake)
 latest_earthquake_offset=$(( tsux - latest_earthquake_tsux ))
 if (( ${latest_earthquake_offset} < 3600 )); then
-  echo "!!! 直近で緊急地震速報が発報されています（NHKをONにします）!!!"
-  tv_channel1_id=${CHANNEL_GR27}
+  echo "!!! 直近で緊急地震速報が発報されています（ニュースをONにします）!!!"
+  is_earthquake=true
   is_tv_channel1_muted=false
 
   # TODO: ここでテレビ自体のONも挟みたい

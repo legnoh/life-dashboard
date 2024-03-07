@@ -54,6 +54,7 @@ jobs:
 
     - name: start terraform daemon
       env:
+        ABEMA_JWT_TOKEN: ${{ secrets.ABEMA_JWT_TOKEN }}
         NATURE_REMO_DEVICE_NAME: ${{ secrets.NATURE_REMO_DEVICE_NAME }}
         OPENWEATHER_CITY: ${{ secrets.OPENWEATHER_CITY }}
         YOUTUBE_PLAYLIST_ID: ${{ secrets.YOUTUBE_PLAYLIST_ID }}
@@ -62,6 +63,7 @@ jobs:
       run: |
         export PLIST_PATH="${HOME}/${LIST_PATH}"
 
+        ABEMA_JWT_TOKEN=${ABEMA_JWT_TOKEN} \
         NATURE_REMO_DEVICE_NAME="${NATURE_REMO_DEVICE_NAME}" \
         OPENWEATHER_CITY="${OPENWEATHER_CITY}" \
         YOUTUBE_PLAYLIST_ID="${YOUTUBE_PLAYLIST_ID}" \

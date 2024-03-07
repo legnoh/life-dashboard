@@ -2,7 +2,7 @@ resource "grafana_dashboard" "life-metrics" {
   org_id = grafana_organization.main.org_id
   config_json = jsonencode({
     title       = "Life Metrics",
-    description = "Now CH1: ${var.TV_CHANNEL1_ID}, Muted: ${var.IS_TV_CHANNEL1_MUTED}, CH2: ${var.TV_CHANNEL2_ID}, Muted: ${var.IS_TV_CHANNEL2_MUTED}, YTMuted: ${var.IS_YOUTUBE_MUTED}, DayMode: ${var.IS_DAYMODE}",
+    description = "E:${var.IS_EARTHQUAKE} RE:${var.IS_REFRESHTIME} RA:${var.IS_RACETIME} DAY:${var.IS_DAYMODE} S:${var.IS_STREAM_ONAIR} C1M:${var.IS_TV_CHANNEL1_MUTED}, C2M:${var.IS_TV_CHANNEL2_MUTED}, YM:${var.IS_YOUTUBE_MUTED}",
     timezone    = "browser",
     version     = 0,
     refresh     = "30m"
@@ -11,16 +11,27 @@ resource "grafana_dashboard" "life-metrics" {
       # channel1
       {
         libraryPanel = zipmap(local.libpanel_keys, [
+          var.IS_EARTHQUAKE ?
+            grafana_library_panel.youtube-earthquake.uid
+          :
           var.IS_REFRESHTIME ?
             grafana_library_panel.youtube-stretch.uid
+          :
+          var.IS_NEWSTIME_DOMESTIC ?
+            var.IS_TV_CHANNEL1_MUTED ?
+              grafana_library_panel.youtube-news-domestic-muted.uid : grafana_library_panel.youtube-news-domestic.uid
+          :
+          var.IS_NEWSTIME_GLOBAL ?
+            var.IS_TV_CHANNEL1_MUTED ?
+              grafana_library_panel.youtube-news-global-muted.uid : grafana_library_panel.youtube-news-global.uid
+          :
+          var.IS_STREAM_ONAIR ?
+            var.IS_TV_CHANNEL1_MUTED ?
+              grafana_library_panel.stream1-muted.uid : grafana_library_panel.stream1.uid
           :
           var.IS_RACETIME ?
             var.IS_TV_CHANNEL1_MUTED ?
               grafana_library_panel.greench-muted.uid : grafana_library_panel.greench.uid
-          :
-          var.TV_CHANNEL1_ID != "" ?
-            var.IS_TV_CHANNEL1_MUTED ?
-              grafana_library_panel.tv-muted.uid : grafana_library_panel.tv.uid
           :
           var.IS_DAYMODE ?
             var.IS_TV_CHANNEL1_MUTED ?
@@ -35,11 +46,8 @@ resource "grafana_dashboard" "life-metrics" {
       # channel2/youtube
       {
         libraryPanel = zipmap(local.libpanel_keys, [
-          var.TV_CHANNEL2_ID != "" ?
-          var.IS_TV_CHANNEL2_MUTED ?
-          grafana_library_panel.tv2-muted.uid : grafana_library_panel.tv2.uid
-          : var.IS_YOUTUBE_MUTED ?
-          grafana_library_panel.youtube-muted.uid : grafana_library_panel.youtube.uid
+          var.IS_YOUTUBE_MUTED ?
+            grafana_library_panel.youtube-muted.uid : grafana_library_panel.youtube.uid
         ])
         gridPos = { h = 11, w = 9, x = 0, y = 11 }
       },

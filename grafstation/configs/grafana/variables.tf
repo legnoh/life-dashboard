@@ -3,26 +3,6 @@ variable "GRAFANA_HOST" {
   default = "localhost:3000"
 }
 
-variable "IS_DAYMODE" {
-  type = bool
-  default = false
-}
-
-variable "TV_EPGSTATION_HOST" {
-  type = string
-  default = "grafstation.local:8888"
-}
-
-variable "TV_CHANNEL1_ID" {
-  type    = string
-  default = ""
-}
-
-variable "TV_CHANNEL2_ID" {
-  type    = string
-  default = ""
-}
-
 variable "IS_TV_CHANNEL1_MUTED" {
   type    = bool
   default = true
@@ -58,6 +38,21 @@ variable "OPENWEATHER_CITY" {
   default = "Tokyo, JP"
 }
 
+variable "IS_DAYMODE" {
+  type = bool
+  default = false
+}
+
+variable "IS_NEWSTIME_DOMESTIC" {
+  type    = bool
+  default = false
+}
+
+variable "IS_NEWSTIME_GLOBAL" {
+  type    = bool
+  default = false
+}
+
 variable "IS_RACETIME" {
   type    = bool
   default = false
@@ -68,7 +63,12 @@ variable "IS_REFRESHTIME" {
   default = false
 }
 
-variable "IS_REFRESHTIME_SHUFFLE" {
+variable "IS_STREAM_ONAIR" {
+  type    = bool
+  default = false
+}
+
+variable "IS_EARTHQUAKE" {
   type    = bool
   default = false
 }
