@@ -79,19 +79,15 @@ function is_mleague_onair() {
 
   local mleague_onair_slot=$(cat ${filepath} \
     | ${JQ} -r ".slots[] \
-      | select( .channelId == \"mahjong\" \
-          and .mark.live == true \
-        ) \
+      | select( .channelId == \"mahjong\" and .mark.live == true ) \
       | select(.title | contains(\"Mリーグ\") ) \
       | select(.startAt < ${now_unixtime} and .endAt > ${now_unixtime} ) \
-      | .id" \
-    )
+      | .id")
     if [[ ${mleague_onair_slot} != "" ]]; then
       return 1
     else
       return 0
     fi
-  )
 }
 
 # 地震がなかったか確認する
