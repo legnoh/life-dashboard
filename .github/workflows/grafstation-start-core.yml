@@ -46,7 +46,6 @@ jobs:
         cp -r configs/docker-compose.yml ${HOME}/life-dashboard/configs/
         cp -r configs/nginx.conf ${HOME}/life-dashboard/configs/
         cp -r configs/prometheus.yml ${HOME}/life-dashboard/prometheus/prometheus.yml
-        cp -r configs/hap-switch-command.yml ${HOME}/.hap-switch-command/config.yml
         envsubst < configs/hap-nature-remo.yml > ${HOME}/.hap-nature-remo/config.yml
         envsubst < scripts/audio-airplay.applescript > ${HOME}/life-dashboard/audio-airplay.applescript
       env:
@@ -57,7 +56,6 @@ jobs:
     - name: Start homebrew services
       run: |
         brew services restart node_exporter
-        brew services restart hap-switch-command
         brew services restart hap-nature-remo
 
     - name: Start docker images
