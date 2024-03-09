@@ -7,7 +7,7 @@
     <key>ProgramArguments</key>
     <array>
         <string>/opt/homebrew/bin/streamlink</string>
-        <string>"${STREAMLINK_ORIGIN_URL}"</string>
+        <string>${STREAMLINK_ORIGIN_URL}</string>
         <string>best</string>
         <string>--player-external-http</string>
         <string>--player-external-http-port=${STREAMLINK_HTTP_PORT}</string>
