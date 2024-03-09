@@ -1,7 +1,7 @@
 grafstation
 ===
 
-grafana, prometheus と各種 exporter に加え、epgstation のホストを行います。  
+grafana, prometheus と各種 exporter のホストを行います。  
 
 Usage
 ---
@@ -56,7 +56,7 @@ Homebrew と Docker for Mac をインストールしておく。
     ```
 - 設定等の格納用に`${HOME}/life-dashboard` ディレクトリ配下に空ディレクトリを作成
     ```sh
-    mkdir -p ${HOME}/life-dashboard/{epgstation/{data/{key,streamfiles},drop,img,thumbnail,logs/{EPGUpdater,Operator,Service},recorded},prometheus,configs,withings}
+    mkdir -p ${HOME}/life-dashboard/{prometheus,configs,withings}
     ```
 - dockerd を起動
     ```sh
@@ -86,7 +86,6 @@ curl -Lo ${HOME}/life-dashboard/configs/html/mpegts.js \
     https://github.com/xqq/mpegts.js/releases/download/v1.7.3/mpegts.js
 curl -Lo ${HOME}/life-dashboard/configs/html/player/mpegts.js.map \
     https://github.com/xqq/mpegts.js/releases/download/v1.7.3/mpegts.js.map
-cp -r grafstation/configs/epgstation ${HOME}/life-dashboard/epgstation/config
 cp -r grafstation/configs/docker-compose.yml ${HOME}/life-dashboard/configs/
 cp -r grafstation/configs/nginx.conf ${HOME}/life-dashboard/configs/
 cp -r grafstation/configs/prometheus.yml ${HOME}/life-dashboard/prometheus/

@@ -24,5 +24,6 @@ cask 'docker'
 cask 'flux'
 cask 'google-chrome'
 cask 'logi-options-plus'
+cask 'vlc'
 
 mas 'Genki Arcade', id:1555925018

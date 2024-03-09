@@ -1,8 +1,9 @@
 # life-dashboard
 
-- Mac mini + RaspberryPi で人生に必要なメトリクス・情報を取得するための Prometheus+Grafana セットです。
+- Mac mini で人生に必要なメトリクス・情報を取得するための Prometheus+Grafana セットです。
 - 慣れれば1時間かからないくらいで必要なものが揃うようになっています。
 - GitHub Actions の self-hosted ランナーによってデプロイされますので、自動でCDが実行できます。
+- YouTube, その他動画サービスの情報を画面に出すことができ、動画とメトリクスを一画面で見ることができます。
 
 ![dashboard-sample](https://user-images.githubusercontent.com/706834/236629238-3730ee10-3a4b-414e-9699-3c820b05b638.png)
 
@@ -28,8 +29,6 @@ TBD
 | [legnoh/withings-exporter](https://github.com/legnoh/withings-exporter) | Withings の 身体測定情報 |
 | [RSS一覧 - Yahoo!ニュース](https://news.yahoo.co.jp/rss) | 最新ニュースのヘッドライン |
 | [legnoh/youtube-playlist-creator](https://github.com/legnoh/youtube-playlist-creator) | 嗜好に基づいたYouTubeLiveのプレイリスト生成 |
-| [l3tnun/EPGStation](https://github.com/l3tnun/EPGStation) | TV再生(フロントエンド) |
-| [mirakc/mirakc](https://github.com/mirakc/mirakc) | TV再生(バックエンド) |
 
 development
 ----

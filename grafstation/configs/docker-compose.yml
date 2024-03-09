@@ -8,36 +8,6 @@ services:
     volumes:
     - /Users/${USER}/life-dashboard/configs/nginx.conf:/etc/nginx/nginx.conf:ro
     - /Users/${USER}/life-dashboard/configs/html:/usr/share/nginx/html:ro
-  
-  # http://grafstation.local:8888/
-  epgstation:
-    container_name: epgstation
-    image: collelog/epgstation:latest-debian-arm64v8
-    ports: ["8888:8888", "8889:8889"]
-    restart: always
-    environment:
-      TZ: Asia/Tokyo
-    volumes:
-    - /etc/localtime:/etc/localtime:ro
-    - /Users/${USER}/life-dashboard/epgstation/config:/opt/epgstation/config
-    - /Users/${USER}/life-dashboard/epgstation/data:/opt/epgstation/data
-    - /Users/${USER}/life-dashboard/epgstation/drop:/opt/epgstation/drop
-    - /Users/${USER}/life-dashboard/epgstation/img:/opt/epgstation/img
-    - /Users/${USER}/life-dashboard/epgstation/thumbnail:/opt/epgstation/thumbnail
-    - /Users/${USER}/life-dashboard/epgstation/logs:/opt/epgstation/logs
-    - /Users/${USER}/life-dashboard/epgstation/recorded:/opt/epgstation/recorded
-  
-  # https://192-168-XXX-XXX.local.konomi.tv:7777/
-  konomitv:
-    image: ghcr.io/tsukumijima/konomitv:v0.8.0
-    container_name: konomitv
-    restart: always
-    ports: [ 7777:7000 ]
-    volumes:
-      - '/Users/${USER}/life-dashboard/konomi/config.yaml:/code/config.yaml'
-      - '/Users/${USER}/life-dashboard/konomi/data:/code/server/data'
-      - '/Users/${USER}/life-dashboard/konomi/logs:/code/server/logs'
-      - '/Users/${USER}/life-dashboard/konomi:/host-rootfs'
   prometheus:
     container_name: prometheus
     image: prom/prometheus

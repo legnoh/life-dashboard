@@ -8,8 +8,6 @@
     <dict>
         <key>ABEMA_JWT_TOKEN</key>
         <string>${ABEMA_JWT_TOKEN}</string>
-        <key>TF_VAR_TV_EPGSTATION_HOST</key>
-        <string>${HOST}:8888</string>
         <key>TF_VAR_OPENWEATHER_CITY</key>
         <string>${OPENWEATHER_CITY}</string>
         <key>TF_VAR_NATURE_REMO_DEVICE_NAME</key>

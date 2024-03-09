@@ -6,7 +6,6 @@ on:
     - main
     paths:
     - '.github/workflows/grafstation-start-core.yml'
-    - 'grafstation/configs/epgstation/**'
     - 'grafstation/configs/html/**'
     - 'grafstation/configs/docker-compose.yml'
     - 'grafstation/configs/nginx.conf'
@@ -21,7 +20,6 @@ on:
   workflow_run:
     workflows:
     - Generate SNMP config
-    - Start mirakc
     types: [ completed ]
 
 jobs:
@@ -38,20 +36,18 @@ jobs:
 
     - name: Copy configs
       run: |
-        mkdir -p ${HOME}/life-dashboard/{epgstation/{config,data/{key,streamfiles},drop,img,thumbnail,logs/{EPGUpdater,Operator,Service},recorded},konomi/{data,logs,recorded,capture},prometheus,configs,withings}
+        mkdir -p ${HOME}/life-dashboard/{prometheus,configs,withings}
         mkdir -p ${HOME}/{.hap-switch-command,.hap-nature-remo}
         cp -r configs/html ${HOME}/life-dashboard/configs/
         curl -Lo ${HOME}/life-dashboard/configs/html/player/mpegts.js \
           https://github.com/xqq/mpegts.js/releases/download/v1.7.3/mpegts.js
         curl -Lo ${HOME}/life-dashboard/configs/html/player/mpegts.js.map \
           https://github.com/xqq/mpegts.js/releases/download/v1.7.3/mpegts.js.map
-        cp -r configs/epgstation/* ${HOME}/life-dashboard/epgstation/config/
         cp -r configs/docker-compose.yml ${HOME}/life-dashboard/configs/
         cp -r configs/nginx.conf ${HOME}/life-dashboard/configs/
         cp -r configs/prometheus.yml ${HOME}/life-dashboard/prometheus/prometheus.yml
         cp -r configs/hap-switch-command.yml ${HOME}/.hap-switch-command/config.yml
         envsubst < configs/hap-nature-remo.yml > ${HOME}/.hap-nature-remo/config.yml
-        envsubst < configs/konomi-config.yaml > ${HOME}/life-dashboard/konomi/config.yaml
         envsubst < scripts/audio-airplay.applescript > ${HOME}/life-dashboard/audio-airplay.applescript
       env:
         AUDIO_OUTPUT_AIRPLAY: ${{ secrets.AUDIO_OUTPUT_AIRPLAY }}
