@@ -92,7 +92,7 @@ function is_national_raceday(){
 }
 
 # ダートグレード競走をやっているか確認する
-function search_dirt_grade_race() {
+function is_dirt_grade_race() {
   local num=0
 
   num=$(cat ${DIRT_RACE_JSON} \
