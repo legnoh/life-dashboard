@@ -25,7 +25,7 @@ TFVARS=(
   is_stream_onair
   is_earthquake
 )
-TF_OPTIONS=${TERRAFORM_OPTIONS:-"-auto-approve"}
+TF_OPTIONS=${TERRAFORM_OPTIONS:-"-auto-approve -var-file=/tmp/gchls.tfvars"}
 
 # ABEMAの番組表をバックアップする
 function fetch_abema_slots_data() {

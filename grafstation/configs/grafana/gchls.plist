@@ -11,7 +11,7 @@
         <key>GCH_PASSWORD</key>
         <string>${GCH_PASSWORD}</string>
         <key>OUTPUT_FILEPATH</key>
-        <string>/Users/${USER}/life-dashboard/configs/grafana/terraform.tfvars</string>
+        <string>/tmp/gchls.tfvars</string>
     </dict>
     <key>ProgramArguments</key>
     <array>
