@@ -7,7 +7,7 @@ resource "grafana_library_panel" "stream1" {
     options = {
       autoPlay  = true,
       videoType = "iframe",
-      iframeURL = "http://grafstation.local/player/mpegts.html?url=http%3A%2F%2Fgrafstation.local%2Fstream%2F1",
+      iframeURL = "http://grafstation.local/player/hls.html?url=http%3A%2F%2Fgrafstation.local%2Fstream%2Fstream.m3u8",
     },
   })
 }
@@ -21,7 +21,7 @@ resource "grafana_library_panel" "stream1-muted" {
     options = {
       autoPlay  = true,
       videoType = "iframe",
-      iframeURL = "http://grafstation.local/player/mpegts.html?url=http%3A%2F%2Fgrafstation.local%2Fstream%2F1&muted=true",
+      iframeURL = "http://grafstation.local/player/hls.html?url=http%3A%2F%2Fgrafstation.local%2Fstream%2Fstream.m3u8&muted=true",
     },
   })
 }
