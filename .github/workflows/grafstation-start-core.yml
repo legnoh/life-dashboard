@@ -7,6 +7,7 @@ on:
     paths:
     - '.github/workflows/grafstation-start-core.yml'
     - 'grafstation/configs/html/**'
+    - 'grafstation/configs/stream/**'
     - 'grafstation/configs/docker-compose.yml'
     - 'grafstation/configs/nginx.conf'
     - 'grafstation/configs/prometheus.yml'
@@ -38,7 +39,9 @@ jobs:
       run: |
         mkdir -p ${HOME}/life-dashboard/{prometheus,configs,withings}
         mkdir -p ${HOME}/{.hap-switch-command,.hap-nature-remo}
+        cp -r configs/stream ${HOME}/life-dashboard/configs/
         cp -r configs/html ${HOME}/life-dashboard/configs/
+        mkdir -p ${HOME}/life-dashboard/configs/html/stream
         curl -Lo ${HOME}/life-dashboard/configs/html/player/mpegts.js \
           https://github.com/xqq/mpegts.js/releases/download/v1.7.3/mpegts.js
         curl -Lo ${HOME}/life-dashboard/configs/html/player/mpegts.js.map \
@@ -57,6 +60,12 @@ jobs:
       run: |
         brew services restart node_exporter
         brew services restart hap-nature-remo
+    
+    - name: Install stream logrotate config
+      run: |
+        mkdir -p /opt/homebrew/etc/logrotate.d
+        cp -r configs/stream/logrotate.conf /opt/homebrew/etc/logrotate.d/stream.conf
+        brew services restart logrotate
 
     - name: Start docker images
       env:

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>${LA_DOMAIN}</string>
+    <key>EnvironmentVariables</key>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/opt/homebrew/bin/streamlink</string>
+        <string>"${STREAMLINK_ORIGIN_URL}"</string>
+        <string>best</string>
+        <string>--player-external-http</string>
+        <string>--player-external-http-port=${STREAMLINK_HTTP_PORT}</string>
+    </array>
+    <key>WorkingDirectory</key>
+    <string>/tmp</string>
+    <key>StandardOutPath</key>
+    <string>/tmp/stl.log</string>
+    <key>StandardErrorPath</key>
+    <string>/tmp/stl.err</string>
+    <key>RunAtLoad</key>
+    <true/>
+</dict>
+</plist>
