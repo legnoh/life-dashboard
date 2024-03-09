@@ -31,31 +31,32 @@ TF_OPTIONS=${TERRAFORM_OPTIONS:-"-auto-approve -var-file=/tmp/gchls.tfvars"}
 function fetch_abema_slots_data() {
   local token=${1:?}
   local timetable_url="https://api.p-c3-e.abema-tv.com/v1/timetable/dataSet?debug=false"
-  local filepath=${ABEMA_SLOTS_FILE}
 
   if [[ ! -e "${ABEMA_SLOTS_FILE}" ]] || [[ $(date "+%M") == "00" ]]; then
     local onair_slot=$(curl -o - -q -L \
       -H "Accept-Encoding: gzip" \
       -H "Authorization: Bearer ${token}" "${timetable_url}" \
       | gunzip)
-    echo ${onair_slot} > ${filepath}
+    echo ${onair_slot} > ${ABEMA_SLOTS_FILE}
   fi
 }
 
 # 中央競馬レース情報を取得する
 function fetch_jra_race_data() {
   local yyyymm=${1:-$(date "+%Y%m")}
-  local jra_json_url="https://jra.jp/keiba/common/calendar/json/"
+  local json_root_url="https://jra.jp/keiba/common/calendar/json/"
 
   if [[ ! -e "${JRA_RACE_JSON}" ]] || [[ $(date "+%M") == "00" ]]; then
-    curl -s -o "${JRA_RACE_JSON}" "${jra_json_url}/${yyyymm}.json"
+    curl -s -o "${JRA_RACE_JSON}" "${json_root_url}/${yyyymm}.json"
   fi
 }
 
 # ダートレース情報を取得する
 function fetch_dirt_race_data() {
+  local json_url="https://jra.event.lkj.io/graderaces_dirtgrade.json"
+
   if [[ ! -e "${DIRT_RACE_JSON}" ]] || [[ $(date "+%M") == "00" ]]; then
-    curl -s -o "${DIRT_RACE_JSON}" "https://jra.event.lkj.io/graderaces_dirtgrade.json"
+    curl -s -o "${DIRT_RACE_JSON}" "${json_url}"
   fi
 }
 
