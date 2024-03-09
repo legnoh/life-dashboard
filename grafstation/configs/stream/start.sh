@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function load_launchd() {
-    local LA_DOMAIN=${1:?}
+    export LA_DOMAIN=${1:?}
     local TEMPLATE_PATH=${2:?}
     local LA="${HOME}/Library/LaunchAgents"
     local PLIST_PATH="${LA}/${LA_DOMAIN}.plist"
