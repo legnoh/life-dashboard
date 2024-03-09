@@ -8,7 +8,7 @@ function load_launchd() {
 
     /opt/homebrew/bin/envsubst < ${TEMPLATE_PATH} > ${PLIST_PATH}
     chmod 664 ${PLIST_PATH}
-    if [[ launchctl list ${LA_DOMAIN} == 0 ]]; then
+    if launchctl list ${LA_DOMAIN} == 0; then
         launchctl unload -w ${PLIST_PATH}
     fi
     plutil -lint ${PLIST_PATH}
