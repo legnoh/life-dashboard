@@ -15,10 +15,10 @@
     </dict>
     <key>ProgramArguments</key>
     <array>
-        <string>/Users/${USER}/life-dashboard/configs/grafana/gchls.sh</string>
+        <string>/Users/${USER}/life-dashboard/configs/gchls/gchls.sh</string>
     </array>
     <key>WorkingDirectory</key>
-    <string>/Users/${USER}/life-dashboard/configs/grafana</string>
+    <string>/Users/${USER}/life-dashboard/configs/gchls</string>
     <key>StandardOutPath</key>
     <string>/tmp/gchls.log</string>
     <key>StandardErrorPath</key>
