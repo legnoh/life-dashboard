@@ -33,24 +33,30 @@ function fetch_abema_slots_data() {
   local timetable_url="https://api.p-c3-e.abema-tv.com/v1/timetable/dataSet?debug=false"
   local filepath=${ABEMA_SLOTS_FILE}
 
-  local onair_slot=$(curl -o - -q -L \
-    -H "Accept-Encoding: gzip" \
-    -H "Authorization: Bearer ${token}" "${timetable_url}" \
-    | gunzip)
-  echo ${onair_slot} > ${filepath}
+  if [[ ! -e "${ABEMA_SLOTS_FILE}" ]] || [[ $(date "+%M") == "00" ]]; then
+    local onair_slot=$(curl -o - -q -L \
+      -H "Accept-Encoding: gzip" \
+      -H "Authorization: Bearer ${token}" "${timetable_url}" \
+      | gunzip)
+    echo ${onair_slot} > ${filepath}
+  fi
 }
 
 # 中央競馬レース情報を取得する
 function fetch_jra_race_data() {
   local yyyymm=${1:-$(date "+%Y%m")}
   local jra_json_url="https://jra.jp/keiba/common/calendar/json/"
-  
-  curl -s -o "${JRA_RACE_JSON}" "${jra_json_url}/${yyyymm}.json"
+
+  if [[ ! -e "${JRA_RACE_JSON}" ]] || [[ $(date "+%M") == "00" ]]; then
+    curl -s -o "${JRA_RACE_JSON}" "${jra_json_url}/${yyyymm}.json"
+  fi
 }
 
 # ダートレース情報を取得する
 function fetch_dirt_race_data() {
-  curl -s -o "${DIRT_RACE_JSON}" "https://jra.event.lkj.io/graderaces_dirtgrade.json"
+  if [[ ! -e "${DIRT_RACE_JSON}" ]] || [[ $(date "+%M") == "00" ]]; then
+    curl -s -o "${DIRT_RACE_JSON}" "https://jra.event.lkj.io/graderaces_dirtgrade.json"
+  fi
 }
 
 # Mリーグをやっているか確認する
@@ -125,12 +131,10 @@ function main(){
   echo "---------------------------------"
   date "+%Y/%m/%d %H:%M:%S"
 
-  # データがない、または毎時0分に外部データを取得する
-  if [[ ! -e "${ABEMA_SLOTS_FILE}" ]] || [[ $(date "+%M") == "00" ]]; then
-    fetch_abema_slots_data "${ABEMA_JWT_TOKEN}"
-    fetch_jra_race_data
-    fetch_dirt_race_data
-  fi
+  # 外部データ取得処理
+  fetch_abema_slots_data "${ABEMA_JWT_TOKEN}"
+  fetch_jra_race_data
+  fetch_dirt_race_data
 
   # 曜日・時間を取得
   weekday=$(date +%u) # 月-日 = 1-7
