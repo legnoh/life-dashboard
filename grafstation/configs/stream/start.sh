@@ -19,7 +19,7 @@ function main() {
     export STREAMLINK_HTTP_PORT=${2:-"45081"}
     export STREAM_KEY=${3:-"stream"}
     export STREAMLINK_HTTP_URL="http://127.0.0.1:${STREAMLINK_HTTP_PORT}"
-    load_launchd "io.lkj.life.dashboard.grafstation.stream.${STREAM_KEY}.stl" "./stl.plist" 
+    load_launchd "io.lkj.life.dashboard.grafstation.stream.${STREAM_KEY}.stl" "./stl.plist"
     load_launchd "io.lkj.life.dashboard.grafstation.stream.${STREAM_KEY}.vlc" "./vlc.plist"
 }
 

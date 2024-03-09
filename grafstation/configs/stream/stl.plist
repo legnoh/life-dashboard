@@ -4,7 +4,6 @@
 <dict>
     <key>Label</key>
     <string>${LA_DOMAIN}</string>
-    <key>EnvironmentVariables</key>
     <key>ProgramArguments</key>
     <array>
         <string>/opt/homebrew/bin/streamlink</string>

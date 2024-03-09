@@ -4,13 +4,6 @@
 <dict>
     <key>Label</key>
     <string>${LA_DOMAIN}</string>
-    <key>EnvironmentVariables</key>
-    <dict>
-        <key>HOST_URL</key>
-        <string>http://grafstation.local</string>
-        <key>HOST_DIR</key>
-        <string>/Users/${USER}/life-dashboard/configs/html</string>
-    </dict>
     <key>ProgramArguments</key>
     <array>
         <string>/opt/homebrew/bin/vlc</string>
@@ -20,7 +13,7 @@
         <string>0</sting>
         <string>${STREAMLINK_HTTP_URL}</sting>
         <string>vlc://quit</sting>
-        <string>--sout='#transcode{width=1920,height=1080,fps=30,vcodec=h264,vb=256,venc=x264{aud,profile=baseline,level=30,keyint=30,ref=1},acodec=mp3,ab=96}:std{access=livehttp{seglen=10,delsegs=true,numsegs=5,index=${HOST_DIR}/stream/${STREAM_KEY}.m3u8,index-url=${HOST_URL}/stream/${STREAM_KEY}-########.ts},mux=ts{use-key-frames},dst=${HOST_DIR}</sting>
+        <string>--sout='#transcode{width=1920,height=1080,fps=30,vcodec=h264,vb=256,venc=x264{aud,profile=baseline,level=30,keyint=30,ref=1},acodec=mp3,ab=96}:std{access=livehttp{seglen=10,delsegs=true,numsegs=5,index=/Users/${USER}/life-dashboard/configs/html/stream/${STREAM_KEY}.m3u8,index-url=http://grafstation.local/stream/${STREAM_KEY}-########.ts},mux=ts{use-key-frames},dst=/Users/${USER}/life-dashboard/configs/html</sting>
     </array>
     <key>WorkingDirectory</key>
     <string>/tmp</string>
