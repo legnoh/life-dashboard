@@ -38,9 +38,9 @@ locals {
     }
   }
 
-  tv_channel1 = lookup(local.stream_urls[var.TV_CHANNEL1], local.stream_urls.daymode-bgm)
+  tv_channel1 = lookup(local.stream_urls, var.TV_CHANNEL1, local.stream_urls.nightmode-bgm)
   tv_channel1_url = var.IS_TV_CHANNEL1_MUTED ? format("%s&mute=1", tv_channel1.url) : tv_channel1.url
-  tv_channel2 = lookup(local.stream_urls[var.TV_CHANNEL2], local.stream_urls.daymode-bgm)
+  tv_channel2 = lookup(local.stream_urls, var.TV_CHANNEL2, local.stream_urls.vtuber)
   tv_channel2_url = var.IS_TV_CHANNEL2_MUTED ? format("%s&mute=1", tv_channel2.url) : tv_channel2.url
 }
 
