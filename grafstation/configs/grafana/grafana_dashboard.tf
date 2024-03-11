@@ -10,45 +10,13 @@ resource "grafana_dashboard" "life-metrics" {
 
       # channel1
       {
-        libraryPanel = zipmap(local.libpanel_keys, [
-          var.IS_EARTHQUAKE ?
-            grafana_library_panel.youtube-earthquake.uid
-          :
-          var.IS_REFRESHTIME ?
-            grafana_library_panel.youtube-stretch.uid
-          :
-          var.IS_NEWSTIME_DOMESTIC ?
-            var.IS_TV_CHANNEL1_MUTED ?
-              grafana_library_panel.youtube-news-domestic-muted.uid : grafana_library_panel.youtube-news-domestic.uid
-          :
-          var.IS_NEWSTIME_GLOBAL ?
-            var.IS_TV_CHANNEL1_MUTED ?
-              grafana_library_panel.youtube-news-global-muted.uid : grafana_library_panel.youtube-news-global.uid
-          :
-          var.IS_STREAM_ONAIR ?
-            var.IS_TV_CHANNEL1_MUTED ?
-              grafana_library_panel.stream1-muted.uid : grafana_library_panel.stream1.uid
-          :
-          var.IS_RACETIME ?
-            var.IS_TV_CHANNEL1_MUTED ?
-              grafana_library_panel.greench-muted.uid : grafana_library_panel.greench.uid
-          :
-          var.IS_DAYMODE ?
-            var.IS_TV_CHANNEL1_MUTED ?
-              grafana_library_panel.youtube-daymode-muted.uid : grafana_library_panel.youtube-daymode-bgm.uid
-          :
-          var.IS_TV_CHANNEL1_MUTED ?
-            grafana_library_panel.youtube-nightmode-muted.uid : grafana_library_panel.youtube-nightmode-bgm.uid
-        ])
+        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.channel1.uid])
         gridPos = { h = 11, w = 9, x = 0, y = 0 }
       },
 
-      # channel2/youtube
+      # channel2
       {
-        libraryPanel = zipmap(local.libpanel_keys, [
-          var.IS_YOUTUBE_MUTED ?
-            grafana_library_panel.youtube-vtuber-muted.uid : grafana_library_panel.youtube-vtuber.uid
-        ])
+        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.channel2.uid])
         gridPos = { h = 11, w = 9, x = 0, y = 11 }
       },
 
