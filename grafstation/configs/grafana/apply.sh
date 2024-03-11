@@ -10,22 +10,14 @@ TF="/opt/homebrew/bin/terraform"
 ABEMA_JWT_TOKEN=${ABEMA_JWT_TOKEN:-""}
 
 ABEMA_SLOTS_FILE="/tmp/abema_slots.json"
-JRA_RACE_JSON="/tmp/jra_races.json"
 DIRT_RACE_JSON="/tmp/dirt_races.json"
+GCH_ONAIR_JSON="/tmp/gch_onair.json"
 
 TFVARS=(
   tv_channel1
   tv_channel2
   is_tv_channel1_muted
   is_tv_channel2_muted
-  is_youtube_muted
-  is_daymode
-  is_newstime_domestic
-  is_newstime_global
-  is_racetime
-  is_refreshtime
-  is_stream_onair
-  is_earthquake
 )
 TF_OPTIONS=${TERRAFORM_OPTIONS:-"-auto-approve -var-file=/tmp/gchls.tfvars"}
 
@@ -43,13 +35,13 @@ function fetch_abema_slots_data() {
   fi
 }
 
-# 中央競馬レース情報を取得する
-function fetch_jra_race_data() {
-  local yyyymm=${1:-$(date "+%Y%m")}
-  local json_root_url="https://jra.jp/keiba/common/calendar/json/"
+# 中央競馬中継放送情報を取得する
+function fetch_gch_onair_data() {
+  local ymd=$(date "+%Y%m%d")
+  local url="https://sp.gch.jp/api_epg/?channel_code=ch1&date_from=${ymd}&date_to=${ymd}"
 
-  if [[ ! -e "${JRA_RACE_JSON}" ]] || [[ $(date "+%M") == "00" ]]; then
-    curl -s -o "${JRA_RACE_JSON}" "${json_root_url}/${yyyymm}.json"
+  if [[ ! -e "${GCH_ONAIR_JSON}" ]] || [[ $(date "+%M") == "00" ]]; then
+    curl -s -o "${GCH_ONAIR_JSON}" "${url}"
   fi
 }
 
@@ -81,13 +73,18 @@ function is_mleague_onair() {
     fi
 }
 
-# 中央競馬をやっている日か確認する
-function is_national_raceday(){
-  local day=${1:-$(date "+%-d")}
+# 中央競馬の中継中か確認する
+function is_national_racetime(){
+  local ts=$(date +%s)
   local num=0
 
-  num=$(cat ${JRA_RACE_JSON} \
-    | ${JQ} -r ".[].data[] | select(.date==\"${day}\") | .info[].race | length"
+  num=$(cat ${GCH_ONAIR_JSON} \
+    | ${JQ} -r "[ .[][] \
+      | select(.category_name==\"中継\") \
+      | select(.program_name | contains(\"中央競馬\")) \
+      | .live_start_datetime = ( .live_start_datetime | strptime(\"%Y-%m-%d %T\") | strftime(\"%s\") | tonumber) \
+      | .live_end_datetime   = ( .live_end_datetime | strptime(\"%Y-%m-%d %T\") | strftime(\"%s\") | tonumber ) \
+      | select( .live_start_datetime < ${ts} and .live_end_datetime > ${ts} ) ] | length" \
   )
 
   if [[ "${num}" == "" ]]; then
@@ -136,7 +133,7 @@ function main(){
 
   # 外部データ取得処理
   fetch_abema_slots_data "${ABEMA_JWT_TOKEN}"
-  fetch_jra_race_data
+  fetch_gch_onair_data
   fetch_dirt_race_data
 
   # 曜日・時間を取得
@@ -152,66 +149,132 @@ function main(){
   if [ $( echo "${now} < 5.75" | bc ) == 1 ]; then
     :
 
-  # 5:45~06:30 / ミュート解除
+  # 5:45~06:30 / CH2(Youtube)
   elif [ $( echo "${now} < 6.5" | bc ) == 1 ]; then
-    is_youtube_muted=false
+    tv_channel1="daymode-bgm"
+    is_tv_channel2_muted=false
 
-  # 6:30~06:35 / ストレッチ
+  # 6:30~06:35 / CH1(ストレッチ)
   elif [ $( echo "${now} < 6.583" | bc ) == 1 ]; then
-    is_refreshtime=true
-
-  # 07:00~07:55 / ミュート解除
-  elif [ $( echo "${now} < 7.916" | bc ) == 1 ]; then
-    is_youtube_muted=false
-
-  # 07:55~09:55 / BGMのみ
-  elif [ $( echo "${now} < 9.916" | bc ) == 1 ]; then
+    tv_channel1="stretch"
     is_tv_channel1_muted=false
+
+  # 07:00~07:55 / CH2(Youtube)
+  elif [ $( echo "${now} < 7.916" | bc ) == 1 ]; then
+    tv_channel1="daymode-bgm"
+    is_tv_channel2_muted=false
+
+  # 07:55~09:55 / CH1(BGM)
+  elif [ $( echo "${now} < 9.916" | bc ) == 1 ]; then
+    tv_channel1="daymode-bgm"
+    is_tv_channel1_muted=false
+
+    # 中央競馬の放送中ならグリーンチャンネルに変更
+    if is_national_racetime; then
+      tv_channel1="greench"
+      is_tv_channel1_muted=false
+    fi
 
   # 09:55~10:00 / ストレッチ
   elif [ $( echo "${now} < 10" | bc ) == 1 ]; then
-    is_refreshtime=true
-
-  # 10:00~12:00 / 停止
-  elif [ $( echo "${now} < 12" | bc ) == 1 ]; then
-    :
-
-  ## 12:00~12:20 / ニュース(国内)
-  elif [ $( echo "${now} < 12.33" | bc ) == 1 ]; then
-    is_newstime_domestic=true
+    tv_channel1="stretch"
     is_tv_channel1_muted=false
+
+    if is_national_racetime; then
+      tv_channel2="greench"
+    fi
+
+  # 10:00~12:00 / ニュース(国内)
+  elif [ $( echo "${now} < 12" | bc ) == 1 ]; then
+    tv_channel1="news-domestic"
+    if is_national_racetime; then
+      tv_channel1="greench"
+      tv_channel2="vtuber"
+      is_tv_channel1_muted=false
+    fi
+
+  ## 12:00~12:20 / ニュース(国内外)
+  elif [ $( echo "${now} < 12.33" | bc ) == 1 ]; then
+    tv_channel1="news-domestic"
+    is_tv_channel1_muted=false
+    tv_channel2="news-global"
+
+    if is_national_racetime; then
+      tv_channel1="greench"
+      tv_channel2="news-domestic"
+      is_tv_channel1_muted=false
+    fi
 
   # 12:20~12:40 / ニュース(国外)
   elif [ $( echo "${now} < 12.66" | bc ) == 1 ]; then
-    is_newstime_global=true
+    tv_channel1="daymode-bgm"
     is_tv_channel1_muted=false
+    if is_national_racetime; then
+      tv_channel1="greench"
+      is_tv_channel1_muted=false
+    fi
 
   # 12:40~12:55 / 停止
   elif [ $( echo "${now} < 12.916" | bc ) == 1 ]; then
-    :
+    if is_national_racetime; then
+      tv_channel1="greench"
+      is_tv_channel1_muted=false
+    fi
 
   # 12:55~13:00 / ストレッチ
   elif [ $( echo "${now} < 13" | bc ) == 1 ]; then
-    is_refreshtime=true
+    tv_channel1="stretch"
+    is_tv_channel1_muted=false
+    if is_national_racetime; then
+      tv_channel2="greench"
+    fi
 
-  # 13:00~15:00 / 停止
+  # 13:00~15:00 / ニュース(国内)
   elif [ $( echo "${now} < 15" | bc ) == 1 ]; then
-    :
+    tv_channel1="news-domestic"
+    if is_national_racetime; then
+      tv_channel1="greench"
+      is_tv_channel1_muted=false
+    fi
 
   # 15:00~15:05 / ストレッチ
   elif [ $( echo "${now} < 15.083" | bc ) == 1 ]; then
-    is_refreshtime=true
+    tv_channel1="stretch"
+    is_tv_channel1_muted=false
+    if is_national_racetime; then
+      tv_channel1="greench"
+      tv_channel2="stretch"
+    fi
 
   # 15:05~18:55 / 停止
   elif [ $( echo "${now} < 18.916" | bc ) == 1 ]; then
-    :
+    tv_channel1="news-domestic"
+    if is_national_racetime; then
+      tv_channel1="greench"
+      is_tv_channel1_muted=false
+    fi
 
   # 18:55~19:00 / ストレッチ
   elif [ $( echo "${now} < 19" | bc ) == 1 ]; then
-    is_refreshtime=true
+    tv_channel1="stretch"
+    is_tv_channel1_muted=false
 
   # 19:00~21:30 / メインチャンネルのミュートを解除
-  elif [ $( echo "${now} < 22.5" | bc ) == 1 ]; then
+  elif [ $( echo "${now} < 21.5" | bc ) == 1 ]; then
+    is_tv_channel1_muted=false
+
+    # Mリーグの放送中ならMリーグをつける
+    if is_mleague_onair; then
+      tv_channel1="mahjong"
+      is_tv_channel1_muted=false
+    else
+      tv_channel1="vtuber"
+      is_tv_channel1_muted=false
+      tv_channel2="news-domestic"
+    fi
+
+  # 21:30~22:30 / 睡眠準備のためBGMのみ
+  elif [ $( echo "${now} < 22" | bc ) == 1 ]; then
     is_tv_channel1_muted=false
 
   ## 22:30~24:00 / 停止
@@ -219,35 +282,11 @@ function main(){
     :
   fi
 
-  # Mリーグの放送中はStreamlinkをつける
-  if is_mleague_onair; then
-    echo "Mリーグが放送されています!"
-    is_stream_onair=true
-    is_tv_channel1_muted=false
-    is_youtube_muted=true
-  fi
-
-  # 中央競馬の放送日は9:00〜17:00までグリーンチャンネルに変更する
-  if is_national_raceday; then
-    echo "中央競馬の開催日です!"
-
-    if [ $( echo "${now} < 9" | bc ) == 1 ]; then
-      :
-    elif [ $( echo "${now} < 17" | bc ) == 1 ]; then
-      is_racetime=true
-      is_tv_channel1_muted=false
-      is_youtube_muted=true
-    else
-      :
-    fi
-  fi
-
   # ダート重賞番組が放送されている場合、強制的にチャンネルをグリーンチャンネルに変更する
   if is_dirt_grade_race; then
     echo "ダート重賞が始まります!"
-    is_racetime=true
+    tv_channel1="greench"
     is_tv_channel1_muted=false
-    is_youtube_muted=true
   fi
 
   # 直近で緊急地震速報が発生している場合、強制的にチャンネルをニュースに変更する
@@ -255,18 +294,10 @@ function main(){
   latest_earthquake_offset=$(( TIMESTAMP - latest_earthquake_tsux ))
   if (( ${latest_earthquake_offset} < 3600 )); then
     echo "!!! 直近で緊急地震速報が発報されています（ニュースをONにします）!!!"
-    is_earthquake=true
+    tv_channel1="earthquake"
     is_tv_channel1_muted=false
 
     # TODO: ここでテレビ自体のONも挟みたい
-  fi
-
-  # 05:45~17:30までを日中として判定
-  if [ $( echo "${now} > 5.83" | bc ) == 1 ] && [ $( echo "${now} < 17.5" | bc ) == 1 ]; then
-    echo "時間帯: 昼"
-    is_daymode=true
-  else
-    echo "時間帯: 夜"
   fi
 
   # デフォルト外項目のみterraformに変数として渡す
