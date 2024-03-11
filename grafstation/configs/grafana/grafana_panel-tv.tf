@@ -53,7 +53,7 @@ resource "grafana_library_panel" "channel1" {
     options = {
       autoPlay  = true,
       videoType = "iframe",
-      iframeURL = loca.tv_channel1_url,
+      iframeURL = local.tv_channel1_url,
     },
   })
 }
