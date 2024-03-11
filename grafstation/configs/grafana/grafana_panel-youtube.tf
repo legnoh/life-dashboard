@@ -1,6 +1,6 @@
 resource "grafana_library_panel" "youtube-vtuber" {
   org_id = grafana_organization.main.org_id
-  name = "youtube"
+  name = "youtube-vtuber"
   model_json = jsonencode({
     type        = "innius-video-panel",
     transparent = true,
@@ -14,7 +14,7 @@ resource "grafana_library_panel" "youtube-vtuber" {
 
 resource "grafana_library_panel" "youtube-vtuber-muted" {
   org_id = grafana_organization.main.org_id
-  name = "youtube-muted"
+  name = "youtube-vtuber-muted"
   model_json = jsonencode({
     type        = "innius-video-panel",
     transparent = true,
@@ -98,7 +98,7 @@ resource "grafana_library_panel" "youtube-stretch" {
 
 resource "grafana_library_panel" "youtube-stretch-muted" {
   org_id = grafana_organization.main.org_id
-  name = "youtube-stretch"
+  name = "youtube-stretch-muted"
   model_json = jsonencode({
     type        = "innius-video-panel",
     transparent = true,
