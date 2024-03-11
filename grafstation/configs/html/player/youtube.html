@@ -16,7 +16,7 @@
       const urlParams = new URLSearchParams(window.location.search);
       const playlistId = urlParams.get('list');
       const videoId = urlParams.get('v');
-      const isMute = urlParams.get('muted');
+      const isMute = urlParams.get('mute');
       const isShuffle = urlParams.get('shuffle');
 
       var player;
@@ -52,7 +52,7 @@
       }
 
       function onPlayerReady(event) {
-        if(isMute == "true") {
+        if(isMute == "1") {
           event.target.mute();
         }
         if(isShuffle == "true") {

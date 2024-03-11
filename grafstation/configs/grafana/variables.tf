@@ -3,6 +3,24 @@ variable "GRAFANA_HOST" {
   default = "localhost:3000"
 }
 
+variable "TV_CHANNEL1" {
+  type = string
+  default = "daymode-bgm"
+  validation {
+    condition     = "daymode-bgm" || "nightmode-bgm" || "stretch" || "news-domestic" || "news-global" || "vtuber" || "mahjong" || "greench" || "earthquake"
+    error_message = "This value is not permitted in condition!"
+  }
+}
+
+variable "TV_CHANNEL2" {
+  type = string
+  default = "vtuber"
+  validation {
+    condition     = "daymode-bgm" || "nightmode-bgm" || "stretch" || "news-domestic" || "news-global" || "vtuber" || "mahjong" || "greench" || "earthquake"
+    error_message = "This value is not permitted in condition!"
+  }
+}
+
 variable "IS_TV_CHANNEL1_MUTED" {
   type    = bool
   default = true

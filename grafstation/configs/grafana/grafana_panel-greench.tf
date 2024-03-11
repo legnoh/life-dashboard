@@ -25,7 +25,7 @@ resource "grafana_library_panel" "greench-muted" {
     options = {
       autoPlay  = true,
       videoType = "iframe",
-      iframeURL = "http://grafstation.local/player/hls.html?url=${local.gch_stream_url_encode}&muted=true",
+      iframeURL = "http://grafstation.local/player/hls.html?url=${local.gch_stream_url_encode}&mute=1",
     },
   })
 }

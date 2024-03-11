@@ -1,4 +1,4 @@
-resource "grafana_library_panel" "youtube" {
+resource "grafana_library_panel" "youtube-vtuber" {
   org_id = grafana_organization.main.org_id
   name = "youtube"
   model_json = jsonencode({
@@ -12,7 +12,7 @@ resource "grafana_library_panel" "youtube" {
   })
 }
 
-resource "grafana_library_panel" "youtube-muted" {
+resource "grafana_library_panel" "youtube-vtuber-muted" {
   org_id = grafana_organization.main.org_id
   name = "youtube-muted"
   model_json = jsonencode({
@@ -21,7 +21,7 @@ resource "grafana_library_panel" "youtube-muted" {
     options = {
       autoPlay  = true,
       videoType = "iframe",
-      iframeURL = "http://grafstation.local/player/youtube.html?list=${var.YOUTUBE_PLAYLIST_ID}&muted=true",
+      iframeURL = "http://grafstation.local/player/youtube.html?list=${var.YOUTUBE_PLAYLIST_ID}&mute=1",
     },
   })
 }
@@ -92,6 +92,20 @@ resource "grafana_library_panel" "youtube-stretch" {
       autoPlay  = true,
       videoType = "iframe",
       iframeURL = "https://www.youtube.com/embed/5haAgY-JxcA?autoplay=1&start=299",
+    },
+  })
+}
+
+resource "grafana_library_panel" "youtube-stretch-muted" {
+  org_id = grafana_organization.main.org_id
+  name = "youtube-stretch"
+  model_json = jsonencode({
+    type        = "innius-video-panel",
+    transparent = true,
+    options = {
+      autoPlay  = true,
+      videoType = "iframe",
+      iframeURL = "https://www.youtube.com/embed/5haAgY-JxcA?mute=1autoplay=1&start=299",
     },
   })
 }

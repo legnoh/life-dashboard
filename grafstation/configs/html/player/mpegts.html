@@ -15,10 +15,10 @@
     <script>
       const urlParams = new URLSearchParams(window.location.search);
       const url = urlParams.get('url');
-      const isMute = urlParams.get('muted');
+      const isMute = urlParams.get('mute');
       var video = document.getElementById('video');
 
-      if(isMute == "true") {
+      if(isMute == "1") {
           video.muted = true;
       }
       var media = {

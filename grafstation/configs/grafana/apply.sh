@@ -14,6 +14,8 @@ JRA_RACE_JSON="/tmp/jra_races.json"
 DIRT_RACE_JSON="/tmp/dirt_races.json"
 
 TFVARS=(
+  tv_channel1
+  tv_channel2
   is_tv_channel1_muted
   is_tv_channel2_muted
   is_youtube_muted
@@ -208,7 +210,7 @@ function main(){
   elif [ $( echo "${now} < 19" | bc ) == 1 ]; then
     is_refreshtime=true
 
-  # 19:00~22:30 / メインチャンネルのミュートを解除
+  # 19:00~21:30 / メインチャンネルのミュートを解除
   elif [ $( echo "${now} < 22.5" | bc ) == 1 ]; then
     is_tv_channel1_muted=false
 

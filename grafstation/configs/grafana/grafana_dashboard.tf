@@ -47,7 +47,7 @@ resource "grafana_dashboard" "life-metrics" {
       {
         libraryPanel = zipmap(local.libpanel_keys, [
           var.IS_YOUTUBE_MUTED ?
-            grafana_library_panel.youtube-muted.uid : grafana_library_panel.youtube.uid
+            grafana_library_panel.youtube-vtuber-muted.uid : grafana_library_panel.youtube-vtuber.uid
         ])
         gridPos = { h = 11, w = 9, x = 0, y = 11 }
       },
