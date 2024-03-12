@@ -23,6 +23,8 @@
     <string>/tmp/gchls.log</string>
     <key>StandardErrorPath</key>
     <string>/tmp/gchls.err</string>
+    <key>RunAtLoad</key>
+    <true/>
     <key>StartCalendarInterval</key>
     <array>
         <dict>
