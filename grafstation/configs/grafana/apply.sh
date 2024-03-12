@@ -79,8 +79,8 @@ function restart_stream(){
   local mleague_url="https://abema.tv/now-on-air/mahjong"
 
   if [[ ! -e "${STREAM_START_FILE}" ]]; then
-    echo "ストリームを再起動します"
-    ../stream/start.sh "${mleague_url}"
+    echo "ストリームを再起動します(ファイルなし)"
+    cd ../stream && ./start.sh "${mleague_url}" && cd -
     return 0
   fi
 
@@ -88,8 +88,8 @@ function restart_stream(){
   local stream_start_unixtime=$(date -r ${STREAM_START_FILE} +%s)
   local elapsed_time=$(( ${now_unixtime} - ${stream_start_unixtime} ))
   if [[ ${elapsed_time} > 18000 ]]; then
-    echo "ストリームを再起動します"
-    ../stream/start.sh "${mleague_url}"
+    echo "ストリームを再起動します(5時間経過)"
+    cd ../stream && ./start.sh "${mleague_url}" && cd -
   fi
 }
 
