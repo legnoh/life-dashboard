@@ -87,7 +87,7 @@ function restart_stream(){
   local now_unixtime=${TIMESTAMP}
   local stream_start_unixtime=$(date -r ${STREAM_START_FILE} +%s)
   local elapsed_time=$(( ${now_unixtime} - ${stream_start_unixtime} ))
-  if [[ ${elapsed_time} > 18000 ]]; then
+  if (( ${elapsed_time} > 18000 )); then
     echo "ストリームを再起動します(5時間経過)"
     cd ../stream && ./start.sh "${mleague_url}" && cd -
   fi
