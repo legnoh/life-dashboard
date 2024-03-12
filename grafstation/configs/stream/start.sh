@@ -1,5 +1,7 @@
 #!/bin/bash
 
+STREAM_START_FILE="/tmp/start.stream"
+
 function load_launchd() {
     export LA_DOMAIN=${1:?}
     local TEMPLATE_PATH=${2:?}
@@ -23,6 +25,7 @@ function main() {
     export STREAMLINK_HTTP_URL="http://grafstation.local:${STREAMLINK_HTTP_PORT}"
     load_launchd "io.lkj.life.dashboard.grafstation.stream.${STREAM_KEY}.stl" "./stl.plist"
     load_launchd "io.lkj.life.dashboard.grafstation.stream.${STREAM_KEY}.vlc" "./vlc.plist"
+    touch ${STREAM_START_FILE} # 開始時刻把握のためにファイルを更新する
 }
 
 main $@

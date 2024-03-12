@@ -12,6 +12,7 @@ ABEMA_JWT_TOKEN=${ABEMA_JWT_TOKEN:-""}
 ABEMA_SLOTS_FILE="/tmp/abema_slots.json"
 DIRT_RACE_JSON="/tmp/dirt_races.json"
 GCH_ONAIR_JSON="/tmp/gch_onair.json"
+STREAM_START_FILE="/tmp/start.stream"
 
 TFVARS=(
   tv_channel1
@@ -71,6 +72,25 @@ function is_mleague_onair() {
     else
       return 1
     fi
+}
+
+# ストリームの開始時間を確認し、5時間以上経過していたら再起動する
+function restart_stream(){
+  local mleague_url="https://abema.tv/now-on-air/mahjong"
+
+  if [[ ! -e "${STREAM_START_FILE}" ]]; then
+    echo "ストリームを再起動します"
+    ../stream/start.sh "${mleague_url}"
+    return 0
+  fi
+
+  local now_unixtime=${TIMESTAMP}
+  local stream_start_unixtime=$(date -r ${STREAM_START_FILE} +%s)
+  local elapsed_time=$(( ${now_unixtime} - ${stream_start_unixtime} ))
+  if [[ ${elapsed_time} > 18000 ]]; then
+    echo "ストリームを再起動します"
+    ../stream/start.sh "${mleague_url}"
+  fi
 }
 
 # 中央競馬の中継中か確認する
@@ -265,6 +285,7 @@ function main(){
 
     # Mリーグの放送中ならMリーグをつける
     if is_mleague_onair; then
+      restart_stream
       tv_channel1="mahjong"
       is_tv_channel1_muted=false
     else
