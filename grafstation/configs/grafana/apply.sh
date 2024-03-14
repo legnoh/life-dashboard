@@ -90,6 +90,9 @@ function restart_stream(){
   if (( ${elapsed_time} > 18000 )); then
     echo "ストリームを再起動します(5時間経過)"
     cd ../stream && ./start.sh "${mleague_url}" && cd -
+
+    # キャッシュクリアのため、grafana-kioskも再起動する
+    brew services restart grafana-kiosk
   fi
 }
 
