@@ -7,7 +7,7 @@ variable "TV_CHANNEL1" {
   type = string
   default = "nightmode-bgm"
   validation {
-    condition     = contains(["daymode-bgm", "nightmode-bgm", "stretch", "news-domestic", "news-global", "vtuber", "mahjong", "greench", "earthquake"], var.TV_CHANNEL1)
+    condition     = contains(["daymode-bgm", "nightmode-bgm", "sleep-bgm", "stretch", "news-domestic", "news-global", "vtuber", "mahjong", "greench", "earthquake"], var.TV_CHANNEL1)
     error_message = "This value is not permitted in condition!"
   }
 }
@@ -16,7 +16,7 @@ variable "TV_CHANNEL2" {
   type = string
   default = "vtuber"
   validation {
-    condition     = contains(["daymode-bgm", "nightmode-bgm", "stretch", "news-domestic", "news-global", "vtuber", "mahjong", "greench", "earthquake"], var.TV_CHANNEL2)
+    condition     = contains(["daymode-bgm", "nightmode-bgm", "sleep-bgm", "stretch", "news-domestic", "news-global", "vtuber", "mahjong", "greench", "earthquake"], var.TV_CHANNEL2)
     error_message = "This value is not permitted in condition!"
   }
 }
