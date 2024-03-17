@@ -8,6 +8,10 @@ locals {
       name = "TOKYO Cafe: Night Coffee Shop Ambience - Cafe Music BGM channel"
       url = "https://www.youtube.com/embed/6uddGul0oAc?autoplay=1"
     }
+    sleep-bgm = {
+      name = "睡眠導入用BGM"
+      url = "https://www.youtube.com/embed/UtO59mdkF7I?autoplay=1"
+    }
     stretch = {
       name = "施術のプロが考案！ 1回3分でできる「痩せるスゴレッチ」"
       url = "https://www.youtube.com/embed/5haAgY-JxcA?autoplay=1&start=299"

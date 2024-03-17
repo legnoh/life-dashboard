@@ -168,8 +168,13 @@ function main(){
   echo "today: weekday"
   echo "now: ${now}"
 
-  # 0:00~05:45 / 停止
-  if [ $( echo "${now} < 5.75" | bc ) == 1 ]; then
+  # 0:00~03:00 / 睡眠導入用BGM
+  if [ $( echo "${now} < 3" | bc ) == 1 ]; then
+    tv_channel1="sleep-bgm"
+    is_tv_channel1_muted=false
+  
+  # 03:00~05:45 / 停止
+  elif [ $( echo "${now} < 5.75" | bc ) == 1 ]; then
     :
 
   # 5:45~06:30 / CH2(Youtube)
@@ -301,9 +306,10 @@ function main(){
   elif [ $( echo "${now} < 22" | bc ) == 1 ]; then
     is_tv_channel1_muted=false
 
-  ## 22:30~24:00 / 停止
+  ## 22:30~24:00 / 睡眠導入用BGM
   else
-    :
+    tv_channel1="sleep-bgm"
+    is_tv_channel1_muted=false
   fi
 
   # ダート重賞番組が放送されている場合、強制的にチャンネルをグリーンチャンネルに変更する
