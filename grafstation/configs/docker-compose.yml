@@ -8,6 +8,8 @@ services:
     volumes:
     - /Users/${USER}/life-dashboard/configs/nginx.conf:/etc/nginx/nginx.conf:ro
     - /Users/${USER}/life-dashboard/configs/html:/usr/share/nginx/html:ro
+    extra_hosts:
+      - "grafstation.local:172.17.0.1"
   prometheus:
     container_name: prometheus
     image: prom/prometheus
