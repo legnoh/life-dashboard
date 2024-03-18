@@ -304,7 +304,7 @@ function main(){
     fi
 
   # 21:30~22:30 / 睡眠準備のためBGMのみ
-  elif [ $( echo "${now} < 22" | bc ) == 1 ]; then
+  elif [ $( echo "${now} < 22.5" | bc ) == 1 ]; then
     is_tv_channel1_muted=false
 
   ## 22:30~24:00 / 睡眠導入用BGM
