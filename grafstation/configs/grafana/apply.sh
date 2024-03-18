@@ -6,6 +6,7 @@ TIMESTAMP=$(date "+%s")
 
 JQ="/opt/homebrew/bin/jq"
 TF="/opt/homebrew/bin/terraform"
+BREW="/opt/homebrew/bin/brew"
 
 ABEMA_JWT_TOKEN=${ABEMA_JWT_TOKEN:-""}
 
@@ -92,7 +93,7 @@ function restart_stream(){
     cd ../stream && ./start.sh "${mleague_url}" && cd -
 
     # キャッシュクリアのため、grafana-kioskも再起動する
-    brew services restart grafana-kiosk
+    ${BREW} services restart grafana-kiosk
   fi
 }
 
