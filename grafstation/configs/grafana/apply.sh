@@ -10,6 +10,7 @@ BREW="/opt/homebrew/bin/brew"
 
 ABEMA_JWT_TOKEN=${ABEMA_JWT_TOKEN:-""}
 
+DND_JSON_FILE="${HOME}/Library/DoNotDisturb/DB/Assertions.json"
 ABEMA_SLOTS_FILE="/tmp/abema_slots.json"
 DIRT_RACE_JSON="/tmp/dirt_races.json"
 GCH_ONAIR_JSON="/tmp/gch_onair.json"
@@ -22,6 +23,15 @@ TFVARS=(
   is_tv_channel2_muted
 )
 TF_OPTIONS=${TERRAFORM_OPTIONS:-"-auto-approve -var-file=/tmp/gchls.tfvars"}
+
+# 現在の集中モード(focus)を確認する
+# FYI: cat $HOME/Library/DoNotDisturb/DB/ModeConfigurations.json | jq ".data[0].modeConfigurations | keys"
+# 特に設定がないときはnullが帰る
+function get_focus_mode(){
+  return $(cat ${DND_JSON_FILE} \
+    | ${JQ} -r \
+      ".data[0].storeAssertionRecords[0].assertionDetails.assertionDetailsModeIdentifier")
+}
 
 # ABEMAの番組表をバックアップする
 function fetch_abema_slots_data() {
@@ -320,6 +330,12 @@ function main(){
     is_tv_channel1_muted=false
   fi
 
+  # 集中モードでフィットネスが設定された場合、音を止めておく
+  if get_focus_mode == "com.apple.donotdisturb.mode.workout"; then
+    is_tv_channel1_muted=true
+    is_tv_channel2_muted=true
+  fi
+
   # 直近で緊急地震速報が発生している場合、強制的にチャンネルをニュースに変更する
   latest_earthquake_tsux=$(check_latest_earthquake)
   latest_earthquake_offset=$(( TIMESTAMP - latest_earthquake_tsux ))
@@ -328,7 +344,7 @@ function main(){
     tv_channel1="earthquake"
     is_tv_channel1_muted=false
 
-    # TODO: ここでテレビ自体のONも挟みたい
+    # TODO: ここでテレビ自体のONとチャンネル変更も挟みたい
   fi
 
   # デフォルト外項目のみterraformに変数として渡す
