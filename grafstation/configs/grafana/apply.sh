@@ -28,7 +28,7 @@ TF_OPTIONS=${TERRAFORM_OPTIONS:-"-auto-approve -var-file=/tmp/gchls.tfvars"}
 # FYI: cat $HOME/Library/DoNotDisturb/DB/ModeConfigurations.json | jq ".data[0].modeConfigurations | keys"
 # 特に設定がないときはnullが帰る
 function get_focus_mode(){
-  return $(cat ${DND_JSON_FILE} \
+  echo $(cat ${DND_JSON_FILE} \
     | ${JQ} -r \
       ".data[0].storeAssertionRecords[0].assertionDetails.assertionDetailsModeIdentifier")
 }
@@ -331,7 +331,7 @@ function main(){
   fi
 
   # 集中モードでフィットネスが設定された場合、音を止めておく
-  if [ $(get_focus_mode) = "com.apple.donotdisturb.mode.workout" ]; then
+  if [ "$(get_focus_mode)" = "com.apple.donotdisturb.mode.workout" ]; then
     echo "ワークアウト中のため、音をミュートにします"
     is_tv_channel1_muted=true
     is_tv_channel2_muted=true
