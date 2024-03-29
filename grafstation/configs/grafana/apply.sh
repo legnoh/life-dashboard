@@ -331,7 +331,7 @@ function main(){
   fi
 
   # 集中モードでフィットネスが設定された場合、音を止めておく
-  if get_focus_mode == "com.apple.donotdisturb.mode.workout"; then
+  if [ get_focus_mode = "com.apple.donotdisturb.mode.workout" ]; then
     echo "ワークアウト中のため、音をミュートにします"
     is_tv_channel1_muted=true
     is_tv_channel2_muted=true
