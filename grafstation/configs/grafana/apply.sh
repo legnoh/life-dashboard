@@ -16,6 +16,12 @@ DIRT_RACE_JSON="/tmp/dirt_races.json"
 GCH_ONAIR_JSON="/tmp/gch_onair.json"
 STREAM_START_FILE="/tmp/start.stream"
 
+MODE_WORKOUT="com.apple.donotdisturb.mode.workout"
+MODE_GAME="com.apple.focus.gaming"
+MODE_LUNCH="com.apple.donotdisturb.mode.forkknife"
+MODE_ZZZ="com.apple.donotdisturb.mode.sunsetfill"
+MODE_SLEEP="com.apple.sleep.sleep-mode"
+
 TFVARS=(
   tv_channel1
   tv_channel2
@@ -179,14 +185,18 @@ function main(){
   echo "today: weekday"
   echo "now: ${now}"
 
-  # 0:00~03:00 / 睡眠導入用BGM
-  if [ $( echo "${now} < 3" | bc ) == 1 ]; then
+  # 集中モードを取得
+  focusmode="$(get_focus_mode)"
+
+  # "zzz"モードの場合、睡眠準備モードに入る
+  if [ "${focusmode}" = "${MODE_ZZZ}" ]; then
+    tv_channel1="nightmode-bgm"
+    is_tv_channel1_muted=false
+
+  # "sleep"モードの場合、睡眠導入用BGMに切り替える
+  elif [ "${focusmode}" = "${MODE_SLEEP}" ]; then
     tv_channel1="sleep-bgm"
     is_tv_channel1_muted=false
-  
-  # 03:00~05:45 / 停止
-  elif [ $( echo "${now} < 5.75" | bc ) == 1 ]; then
-    :
 
   # 5:45~06:30 / CH2(Youtube)
   elif [ $( echo "${now} < 6.5" | bc ) == 1 ]; then
@@ -312,15 +322,6 @@ function main(){
       is_tv_channel1_muted=false
       tv_channel2="news-domestic"
     fi
-
-  # 21:30~22:30 / 睡眠準備のためBGMのみ
-  elif [ $( echo "${now} < 22.5" | bc ) == 1 ]; then
-    is_tv_channel1_muted=false
-
-  ## 22:30~24:00 / 睡眠導入用BGM
-  else
-    tv_channel1="sleep-bgm"
-    is_tv_channel1_muted=false
   fi
 
   # ダート重賞番組が放送されている場合、強制的にチャンネルをグリーンチャンネルに変更する
@@ -331,7 +332,7 @@ function main(){
   fi
 
   # 集中モードでフィットネスが設定された場合、音を止めておく
-  if [ "$(get_focus_mode)" = "com.apple.donotdisturb.mode.workout" ]; then
+  if [ "$(get_focus_mode)" = "${MODE_WORKOUT}" ]; then
     echo "ワークアウト中のため、音をミュートにします"
     is_tv_channel1_muted=true
     is_tv_channel2_muted=true
