@@ -16,11 +16,11 @@ DIRT_RACE_JSON="/tmp/dirt_races.json"
 GCH_ONAIR_JSON="/tmp/gch_onair.json"
 STREAM_START_FILE="/tmp/start.stream"
 
-MODE_WORKOUT="com.apple.donotdisturb.mode.workout"
-MODE_GAME="com.apple.focus.gaming"
-MODE_LUNCH="com.apple.donotdisturb.mode.forkknife"
-MODE_ZZZ="com.apple.donotdisturb.mode.sunsetfill"
-MODE_SLEEP="com.apple.sleep.sleep-mode"
+MODE_WORKOUT="フィットネス"
+MODE_GAME="ゲーム"
+MODE_LUNCH="Lunch"
+MODE_ZZZ="ZZZ"
+MODE_SLEEP="睡眠"
 
 TFVARS=(
   tv_channel1
@@ -31,12 +31,42 @@ TFVARS=(
 TF_OPTIONS=${TERRAFORM_OPTIONS:-"-auto-approve -var-file=/tmp/gchls.tfvars"}
 
 # 現在の集中モード(focus)を確認する
-# FYI: cat $HOME/Library/DoNotDisturb/DB/ModeConfigurations.json | jq ".data[0].modeConfigurations | keys"
+# FYI: https://gist.github.com/drewkerr/0f2b61ce34e2b9e3ce0ec6a92ab05c18
 # 特に設定がないときはnullが帰る
-function get_focus_mode(){
-  echo $(cat ${DND_JSON_FILE} \
-    | ${JQ} -r \
-      ".data[0].storeAssertionRecords[0].assertionDetails.assertionDetailsModeIdentifier")
+function get_focus_mode() {
+    local assertions_path="${HOME}/Library/DoNotDisturb/DB/Assertions.json"
+    local configurations_path="${HOME}/Library/DoNotDisturb/DB/ModeConfigurations.json"
+    local focus="null"
+
+    local assertions_data=$(cat "$assertions_path")
+    local configurations_data=$(cat "$configurations_path")
+
+    local modeid=$(echo "$assertions_data" | ${JQ} -r '.data[0].storeAssertionRecords[0].assertionDetails.assertionDetailsModeIdentifier')
+    if [ ! -z "$modeid" ]; then
+        focus=$(echo "$configurations_data" | ${JQ} -r --arg modeid "$modeid" '.data[0].modeConfigurations[$modeid].mode.name')
+    else
+        local now=$(date +%H:%M)
+        for modeid in $(echo "$configurations_data" | ${JQ} -r '.data[0].modeConfigurations | keys[]'); do
+            local triggers=$(echo "$configurations_data" | ${JQ} -r --arg modeid "$modeid" '.data[0].modeConfigurations[$modeid].triggers.triggers[0]')
+            local enabledSetting=$(echo "$triggers" | ${JQ} -r '.enabledSetting')
+            if [ "$enabledSetting" == "2" ]; then
+                local start=$(echo "$triggers" | ${JQ} -r '.timePeriodStartTimeHour * 60 + .timePeriodStartTimeMinute')
+                local end=$(echo "$triggers" | ${JQ} -r '.timePeriodEndTimeHour * 60 + .timePeriodEndTimeMinute')
+                if [ $start -lt $end ]; then
+                    if [ "$now" -ge "$start" ] && [ "$now" -lt "$end" ]; then
+                        focus=$(echo "$configurations_data" | ${JQ} -r --arg modeid "$modeid" '.data[0].modeConfigurations[$modeid].mode.name')
+                        break
+                    fi
+                else
+                    if [ "$now" -ge "$start" ] || [ "$now" -lt "$end" ]; then
+                        focus=$(echo "$configurations_data" | ${JQ} -r --arg modeid "$modeid" '.data[0].modeConfigurations[$modeid].mode.name')
+                        break
+                    fi
+                fi
+            fi
+        done
+    fi
+    echo "$focus"
 }
 
 # ABEMAの番組表をバックアップする
