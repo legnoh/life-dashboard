@@ -42,10 +42,12 @@ function get_focus_mode() {
     local configurations_data=$(cat "$configurations_path")
 
     local modeid=$(echo "$assertions_data" | ${JQ} -r '.data[0].storeAssertionRecords[0].assertionDetails.assertionDetailsModeIdentifier')
-    if [ ! -z "$modeid" ]; then
+    if [ "$modeid" != "null" ]; then
         focus=$(echo "$configurations_data" | ${JQ} -r --arg modeid "$modeid" '.data[0].modeConfigurations[$modeid].mode.name')
     else
-        local now=$(date +%H:%M)
+        local hour=$(date +%H)
+        local min=$(date +%M)
+        local now=$(( $hour * 60 + $min ))
         for modeid in $(echo "$configurations_data" | ${JQ} -r '.data[0].modeConfigurations | keys[]'); do
             local triggers=$(echo "$configurations_data" | ${JQ} -r --arg modeid "$modeid" '.data[0].modeConfigurations[$modeid].triggers.triggers[0]')
             local enabledSetting=$(echo "$triggers" | ${JQ} -r '.enabledSetting')
