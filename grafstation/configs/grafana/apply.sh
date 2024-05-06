@@ -16,10 +16,10 @@ DIRT_RACE_JSON="/tmp/dirt_races.json"
 GCH_ONAIR_JSON="/tmp/gch_onair.json"
 STREAM_START_FILE="/tmp/start.stream"
 
+MODE_MEAL="食事"
 MODE_WORKOUT="フィットネス"
-MODE_GAME="ゲーム"
-MODE_LUNCH="Lunch"
-MODE_ZZZ="ZZZ"
+MODE_STRETCH="ストレッチ"
+MODE_PRESLEEP="睡眠導入"
 MODE_SLEEP="睡眠"
 
 TFVARS=(
@@ -218,165 +218,59 @@ function main(){
   # 集中モードを取得
   focusmode="$(get_focus_mode)"
 
-  # "zzz"モードの場合、睡眠準備モードに入る
-  if [ "${focusmode}" = "${MODE_ZZZ}" ]; then
-    tv_channel1="nightmode-bgm"
-    is_tv_channel1_muted=false
-
-  # "sleep"モードの場合、睡眠導入用BGMに切り替える
-  elif [ "${focusmode}" = "${MODE_SLEEP}" ]; then
-    tv_channel1="sleep-bgm"
-    is_tv_channel1_muted=false
-
-  # 5:45~06:30 / CH2(Youtube)
-  elif [ $( echo "${now} < 6.5" | bc ) == 1 ]; then
-    tv_channel1="daymode-bgm"
-    is_tv_channel2_muted=false
-
-  # 6:30~06:35 / CH1(ストレッチ)
-  elif [ $( echo "${now} < 6.583" | bc ) == 1 ]; then
-    tv_channel1="stretch"
-    is_tv_channel1_muted=false
-
-  # 07:00~07:55 / CH2(Youtube)
-  elif [ $( echo "${now} < 7.916" | bc ) == 1 ]; then
-    tv_channel1="daymode-bgm"
-    is_tv_channel2_muted=false
-
-  # 07:55~09:55 / CH1(BGM)
-  elif [ $( echo "${now} < 9.916" | bc ) == 1 ]; then
-    tv_channel1="daymode-bgm"
-    is_tv_channel1_muted=false
-
-    # 中央競馬の放送中ならグリーンチャンネルに変更
-    if is_national_racetime; then
-      tv_channel1="greench"
-      is_tv_channel1_muted=false
-    fi
-
-  # 09:55~10:00 / ストレッチ
-  elif [ $( echo "${now} < 10" | bc ) == 1 ]; then
-    tv_channel1="stretch"
-    is_tv_channel1_muted=false
-
-    if is_national_racetime; then
-      tv_channel2="greench"
-    fi
-
-  # 10:00~12:00 / ニュース(国内)
-  elif [ $( echo "${now} < 12" | bc ) == 1 ]; then
-    tv_channel1="news-domestic"
-    if is_national_racetime; then
-      tv_channel1="greench"
-      tv_channel2="vtuber"
-      is_tv_channel1_muted=false
-    fi
-
-  ## 12:00~12:20 / ニュース(国内外)
-  elif [ $( echo "${now} < 12.33" | bc ) == 1 ]; then
-    tv_channel1="news-domestic"
-    is_tv_channel1_muted=false
-    tv_channel2="news-global"
-
-    if is_national_racetime; then
-      tv_channel1="greench"
-      tv_channel2="news-domestic"
-      is_tv_channel1_muted=false
-    fi
-
-  # 12:20~12:40 / ニュース(国外)
-  elif [ $( echo "${now} < 12.66" | bc ) == 1 ]; then
-    tv_channel1="daymode-bgm"
-    is_tv_channel1_muted=false
-    if is_national_racetime; then
-      tv_channel1="greench"
-      is_tv_channel1_muted=false
-    fi
-
-  # 12:40~12:55 / 停止
-  elif [ $( echo "${now} < 12.916" | bc ) == 1 ]; then
-    if is_national_racetime; then
-      tv_channel1="greench"
-      is_tv_channel1_muted=false
-    fi
-
-  # 12:55~13:00 / ストレッチ
-  elif [ $( echo "${now} < 13" | bc ) == 1 ]; then
-    tv_channel1="stretch"
-    is_tv_channel1_muted=false
-    if is_national_racetime; then
-      tv_channel2="greench"
-    fi
-
-  # 13:00~15:00 / ニュース(国内)
-  elif [ $( echo "${now} < 15" | bc ) == 1 ]; then
-    tv_channel1="news-domestic"
-    if is_national_racetime; then
-      tv_channel1="greench"
-      is_tv_channel1_muted=false
-    fi
-
-  # 15:00~15:05 / ストレッチ
-  elif [ $( echo "${now} < 15.083" | bc ) == 1 ]; then
-    tv_channel1="stretch"
-    is_tv_channel1_muted=false
-    if is_national_racetime; then
-      tv_channel1="greench"
-      tv_channel2="stretch"
-    fi
-
-  # 15:05~18:55 / 停止
-  elif [ $( echo "${now} < 18.916" | bc ) == 1 ]; then
-    tv_channel1="news-domestic"
-    if is_national_racetime; then
-      tv_channel1="greench"
-      is_tv_channel1_muted=false
-    fi
-
-  # 18:55~19:00 / ストレッチ
-  elif [ $( echo "${now} < 19" | bc ) == 1 ]; then
-    tv_channel1="stretch"
-    is_tv_channel1_muted=false
-
-  # 19:00~21:30 / メインチャンネルのミュートを解除
-  elif [ $( echo "${now} < 21.5" | bc ) == 1 ]; then
-    is_tv_channel1_muted=false
-
-    # Mリーグの放送中ならMリーグをつける
-    if is_mleague_onair; then
-      restart_stream
-      tv_channel1="mahjong"
-      is_tv_channel1_muted=false
-    else
-      tv_channel1="vtuber"
-      is_tv_channel1_muted=false
-      tv_channel2="news-domestic"
-    fi
-  fi
-
-  # ダート重賞番組が放送されている場合、強制的にチャンネルをグリーンチャンネルに変更する
-  if is_dirt_grade_race; then
-    echo "ダート重賞が始まります!"
-    tv_channel1="greench"
-    is_tv_channel1_muted=false
-  fi
-
-  # 集中モードでフィットネスが設定された場合、音を止めておく
-  if [ "$(get_focus_mode)" = "${MODE_WORKOUT}" ]; then
-    echo "ワークアウト中のため、音をミュートにします"
-    is_tv_channel1_muted=true
-    is_tv_channel2_muted=true
-  fi
-
-  # 直近で緊急地震速報が発生している場合、強制的にチャンネルをニュースに変更する
+  # 地震情報を取得
   latest_earthquake_tsux=$(check_latest_earthquake)
   latest_earthquake_offset=$(( TIMESTAMP - latest_earthquake_tsux ))
-  if (( ${latest_earthquake_offset} < 3600 )); then
-    echo "!!! 直近で緊急地震速報が発報されています（ニュースをONにします）!!!"
-    tv_channel1="earthquake"
-    is_tv_channel1_muted=false
 
-    # TODO: ここでテレビ自体のONとチャンネル変更も挟みたい
+  # 優先度の高い順に、画面の構成判定を行う
+  # 地震 > 運動 > ストレッチ > 睡眠 > ZZZ > 競馬 > Mリーグ > 食事
+
+  ## 直近で緊急地震速報が発生している場合、地震速報を表示する
+  ## TODO: ここでテレビ自体のONと入力変更も挟みたい
+  if (( ${latest_earthquake_offset} < 3600 )); then
+    echo "モード判定: 地震"
+    tv_channel1="earthquake"
+  
+  ## "フィットネス"モードの場合、音を止めておく
+  elif [ "${focusmode}" = "${MODE_WORKOUT}" ]; then
+    echo "モード判定: 運動"
+    is_tv_channel1_muted=true
+
+  ## "ストレッチ"モードの場合、ストレッチ動画を流す
+  elif [ "${focusmode}" = "${MODE_STRETCH}" ]; then
+    echo "モード判定: ストレッチ"
+    tv_channel1="stretch"
+
+  ## "睡眠"モードの場合、睡眠導入用BGMに切り替える
+  elif [ "${focusmode}" = "${MODE_SLEEP}" ]; then
+    echo "モード判定: 睡眠"
+    tv_channel1="sleep-bgm"
+  
+  ## "睡眠導入"モードの場合、睡眠準備のために夜間用音楽に切り替える
+  elif [ "${focusmode}" = "${MODE_PRESLEEP}" ]; then
+    echo "モード判定: 睡眠導入"
+    tv_channel1="nightmode-bgm"
+  
+  ## 中央競馬/ダート重賞番組が放送されている場合、グリーンチャンネルに変更する
+  elif is_national_racetime || is_dirt_grade_race; then
+    echo "モード判定: 競馬"
+    tv_channel1="greench"
+
+  ## Mリーグの放送中ならMリーグをつける
+  elif is_mleague_onair; then
+    echo "モード判定: Mリーグ"
+    restart_stream
+    tv_channel1="mahjong"
+
+  ## "食事"モードの場合はニュースをつける
+  elif [ "${focusmode}" = "${MODE_MEAL}" ]; then
+    echo "モード判定: 食事"
+    tv_channel1="news-domestic"
+    tv_channel2="news-global"
+  
+  ## 特にどれにも該当しなかった場合はモードなしとする
+  else
+    echo "モード判定: なし"
   fi
 
   # デフォルト外項目のみterraformに変数として渡す

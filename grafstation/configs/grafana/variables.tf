@@ -5,7 +5,7 @@ variable "GRAFANA_HOST" {
 
 variable "TV_CHANNEL1" {
   type = string
-  default = "nightmode-bgm"
+  default = "daymode-bgm"
   validation {
     condition     = contains(["daymode-bgm", "nightmode-bgm", "sleep-bgm", "stretch", "news-domestic", "news-global", "vtuber", "mahjong", "greench", "earthquake"], var.TV_CHANNEL1)
     error_message = "This value is not permitted in condition!"
@@ -23,7 +23,7 @@ variable "TV_CHANNEL2" {
 
 variable "IS_TV_CHANNEL1_MUTED" {
   type    = bool
-  default = true
+  default = false
 }
 
 variable "IS_TV_CHANNEL2_MUTED" {
