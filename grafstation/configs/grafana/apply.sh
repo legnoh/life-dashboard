@@ -45,8 +45,8 @@ function get_focus_mode() {
     if [ "$modeid" != "null" ]; then
         focus=$(echo "$configurations_data" | ${JQ} -r --arg modeid "$modeid" '.data[0].modeConfigurations[$modeid].mode.name')
     else
-        local hour=$(date +%H)
-        local min=$(date +%M)
+        local hour=$(date +%-H)
+        local min=$(date +%-M)
         local now=$(( $hour * 60 + $min ))
         for modeid in $(echo "$configurations_data" | ${JQ} -r '.data[0].modeConfigurations | keys[]'); do
             local triggers=$(echo "$configurations_data" | ${JQ} -r --arg modeid "$modeid" '.data[0].modeConfigurations[$modeid].triggers.triggers[0]')
