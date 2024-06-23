@@ -30,47 +30,6 @@ TFVARS=(
 )
 TF_OPTIONS=${TERRAFORM_OPTIONS:-"-auto-approve -var-file=/tmp/gchls.tfvars"}
 
-# 現在の集中モード(focus)を確認する
-# FYI: https://gist.github.com/drewkerr/0f2b61ce34e2b9e3ce0ec6a92ab05c18
-# 特に設定がないときはnullが帰る
-function get_focus_mode() {
-    local assertions_path="${HOME}/Library/DoNotDisturb/DB/Assertions.json"
-    local configurations_path="${HOME}/Library/DoNotDisturb/DB/ModeConfigurations.json"
-    local focus="null"
-
-    local assertions_data=$(cat "$assertions_path")
-    local configurations_data=$(cat "$configurations_path")
-
-    local modeid=$(echo "$assertions_data" | ${JQ} -r '.data[0].storeAssertionRecords[0].assertionDetails.assertionDetailsModeIdentifier')
-    if [ "$modeid" != "null" ]; then
-        focus=$(echo "$configurations_data" | ${JQ} -r --arg modeid "$modeid" '.data[0].modeConfigurations[$modeid].mode.name')
-    else
-        local hour=$(date +%-H)
-        local min=$(date +%-M)
-        local now=$(( $hour * 60 + $min ))
-        for modeid in $(echo "$configurations_data" | ${JQ} -r '.data[0].modeConfigurations | keys[]'); do
-            local triggers=$(echo "$configurations_data" | ${JQ} -r --arg modeid "$modeid" '.data[0].modeConfigurations[$modeid].triggers.triggers[0]')
-            local enabledSetting=$(echo "$triggers" | ${JQ} -r '.enabledSetting')
-            if [ "$enabledSetting" == "2" ]; then
-                local start=$(echo "$triggers" | ${JQ} -r '.timePeriodStartTimeHour * 60 + .timePeriodStartTimeMinute')
-                local end=$(echo "$triggers" | ${JQ} -r '.timePeriodEndTimeHour * 60 + .timePeriodEndTimeMinute')
-                if [ $start -lt $end ]; then
-                    if [ "$now" -ge "$start" ] && [ "$now" -lt "$end" ]; then
-                        focus=$(echo "$configurations_data" | ${JQ} -r --arg modeid "$modeid" '.data[0].modeConfigurations[$modeid].mode.name')
-                        break
-                    fi
-                else
-                    if [ "$now" -ge "$start" ] || [ "$now" -lt "$end" ]; then
-                        focus=$(echo "$configurations_data" | ${JQ} -r --arg modeid "$modeid" '.data[0].modeConfigurations[$modeid].mode.name')
-                        break
-                    fi
-                fi
-            fi
-        done
-    fi
-    echo "$focus"
-}
-
 # ABEMAの番組表をバックアップする
 function fetch_abema_slots_data() {
   local token=${1:?}
@@ -218,7 +177,7 @@ function main(){
   echo "now: ${now}"
 
   # 集中モードを取得
-  focusmode="$(get_focus_mode)"
+  focusmode="$(/opt/homebrew/bin/focus)"
 
   # 地震情報を取得
   latest_earthquake_tsux=$(check_latest_earthquake)
