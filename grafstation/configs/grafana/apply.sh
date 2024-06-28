@@ -177,7 +177,7 @@ function main(){
   echo "now: ${now}"
 
   # 集中モードを取得
-  focusmode="$(/opt/homebrew/bin/focus)"
+  focusmode="$(/opt/homebrew/bin/focus get)"
 
   # 地震情報を取得
   latest_earthquake_tsux=$(check_latest_earthquake)
