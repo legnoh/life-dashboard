@@ -1,6 +1,6 @@
 resource "grafana_library_panel" "snmp-in-octets" {
   org_id = grafana_organization.main.org_id
-  name = "SNMP - 帯域通信量"
+  name   = "SNMP - 帯域通信量"
   model_json = jsonencode(merge(local.common_base, local.stats_base, {
     title = "帯域通信量",
     targets = [merge(local.target_base, {
@@ -30,29 +30,29 @@ resource "grafana_library_panel" "snmp-in-octets" {
 
 resource "grafana_library_panel" "snmp-speedtest-occupancy" {
   org_id = grafana_organization.main.org_id
-  name = "SNMP/Speedtest - 帯域利用率"
+  name   = "SNMP/Speedtest - 帯域利用率"
   model_json = jsonencode(merge(local.common_base, local.stats_base, {
     title = "帯域利用率",
     targets = [
       merge(local.target_base, {
-        expr = "sum(delta(ifInOctets[180s])) * 8 / 180",
-        hide = true,
+        expr  = "sum(delta(ifInOctets[180s])) * 8 / 180",
+        hide  = true,
         refId = "A"
       }),
       merge(local.target_base, {
-        expr = "speedtest_downloadedbytes_bytes{}",
-        hide = true,
+        expr  = "speedtest_downloadedbytes_bytes{}",
+        hide  = true,
         refId = "B"
       }),
       {
-        datasource: {
-          name: "Expression"
-          type: "__expr__"
-          uid: "__expr__"
+        datasource : {
+          name : "Expression"
+          type : "__expr__"
+          uid : "__expr__"
         }
-        expression: "$A/$B"
-        refId: "C"
-        type: "math"
+        expression : "$A/$B"
+        refId : "C"
+        type : "math"
       }
     ]
     fieldConfig = merge(local.field_config_base, {

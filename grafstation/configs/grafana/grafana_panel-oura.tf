@@ -1,6 +1,6 @@
 resource "grafana_library_panel" "oura-bmi" {
   org_id = grafana_organization.main.org_id
-  name = "Oura - BMI"
+  name   = "Oura - BMI"
   model_json = jsonencode(merge(local.common_base, local.stats_base, local.link.oura, {
     title = "BMI",
     targets = [merge(local.target_base, {
@@ -27,7 +27,7 @@ resource "grafana_library_panel" "oura-bmi" {
 
 resource "grafana_library_panel" "oura-readiness-score" {
   org_id = grafana_organization.main.org_id
-  name = "Oura - コンディションスコア"
+  name   = "Oura - コンディションスコア"
   model_json = jsonencode(merge(local.common_base, local.stats_base, local.link.oura, {
     title = "コンディションスコア",
     targets = [merge(local.target_base, {
@@ -50,7 +50,7 @@ resource "grafana_library_panel" "oura-readiness-score" {
 
 resource "grafana_library_panel" "oura-sleep-score" {
   org_id = grafana_organization.main.org_id
-  name = "Oura - 睡眠スコア"
+  name   = "Oura - 睡眠スコア"
   model_json = jsonencode(merge(local.common_base, local.stats_base, local.link.oura, {
     title = "睡眠スコア",
     targets = [merge(local.target_base, {
@@ -73,7 +73,7 @@ resource "grafana_library_panel" "oura-sleep-score" {
 
 resource "grafana_library_panel" "oura-activity-score" {
   org_id = grafana_organization.main.org_id
-  name = "Oura - アクティビティスコア"
+  name   = "Oura - アクティビティスコア"
   model_json = jsonencode(merge(local.common_base, local.stats_base, local.link.oura, {
     title = "アクティビティスコア",
     targets = [merge(local.target_base, {
@@ -96,7 +96,7 @@ resource "grafana_library_panel" "oura-activity-score" {
 
 resource "grafana_library_panel" "oura-steps" {
   org_id = grafana_organization.main.org_id
-  name = "Oura - 歩数"
+  name   = "Oura - 歩数"
   model_json = jsonencode(merge(local.common_base, local.stats_base, local.link.oura, {
     title = "歩数",
     targets = [merge(local.target_base, {

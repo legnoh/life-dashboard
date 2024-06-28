@@ -1,10 +1,10 @@
 variable "GRAFANA_HOST" {
-  type = string
+  type    = string
   default = "localhost:3000"
 }
 
 variable "TV_CHANNEL1" {
-  type = string
+  type    = string
   default = "daymode-bgm"
   validation {
     condition     = contains(["daymode-bgm", "nightmode-bgm", "sleep-bgm", "stretch", "news-domestic", "news-global", "vtuber", "mahjong", "greench", "earthquake"], var.TV_CHANNEL1)
@@ -13,7 +13,7 @@ variable "TV_CHANNEL1" {
 }
 
 variable "TV_CHANNEL2" {
-  type = string
+  type    = string
   default = "vtuber"
   validation {
     condition     = contains(["daymode-bgm", "nightmode-bgm", "sleep-bgm", "stretch", "news-domestic", "news-global", "vtuber", "mahjong", "greench", "earthquake"], var.TV_CHANNEL2)
@@ -57,7 +57,7 @@ variable "OPENWEATHER_CITY" {
 }
 
 variable "IS_DAYMODE" {
-  type = bool
+  type    = bool
   default = false
 }
 

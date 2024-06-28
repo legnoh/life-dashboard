@@ -6,18 +6,18 @@ resource "grafana_dashboard" "life-metrics" {
     timezone    = "browser",
     version     = 0,
     refresh     = "30m"
-    panels = [
-
+    panels = var.TV_CHANNEL1 != "fitness" ? [
+      # 通常モード
       # channel1
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.channel1.uid])
-        gridPos = { h = 11, w = 9, x = 0, y = 0 }
+        gridPos      = { h = 11, w = 9, x = 0, y = 0 }
       },
 
       # channel2
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.channel2.uid])
-        gridPos = { h = 11, w = 9, x = 0, y = 11 }
+        gridPos      = { h = 11, w = 9, x = 0, y = 11 }
       },
 
       # aphorism
@@ -69,7 +69,7 @@ resource "grafana_dashboard" "life-metrics" {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.moneyforward-deposit-withdrawal.uid])
         gridPos      = local.grid_position.D3
       },
-      
+
       # nature remo
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.remo-temperature.uid])
@@ -140,6 +140,68 @@ resource "grafana_dashboard" "life-metrics" {
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.withings-body-temperature.uid])
         gridPos      = local.grid_position.B3
+      },
+      ] : [
+      # フィットネスモード
+
+      # メイン画面
+      {
+        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.channel1.uid])
+        gridPos      = { h = 20, w = 16, x = 4, y = 0 }
+      },
+
+      # 左(Oura+あすけん)
+      {
+        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.oura-readiness-score.uid])
+        gridPos      = local.panorama_position.L1
+      },
+      {
+        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.oura-sleep-score.uid])
+        gridPos      = local.panorama_position.L2
+      },
+      {
+        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.oura-activity-score.uid])
+        gridPos      = local.panorama_position.L3
+      },
+      {
+        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.asken-score.uid])
+        gridPos      = local.panorama_position.L4
+      },
+
+      # 右(時計+天気+外温度+内温度)
+      {
+        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.clock.uid])
+        gridPos      = local.panorama_position.R1
+      },
+      {
+        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.openweather-condition.uid])
+        gridPos      = local.panorama_position.R2
+      },
+      {
+        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.openweather-temperature.uid])
+        gridPos      = local.panorama_position.R3
+      },
+      {
+        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.remo-temperature.uid])
+        gridPos      = local.panorama_position.R4
+      },
+
+      # 下(歩数+体脂肪率+BMI+湿度)
+      {
+        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.oura-steps.uid])
+        gridPos      = local.panorama_position.U1
+      },
+      {
+        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.withings-fat-ratio.uid])
+        gridPos      = local.panorama_position.U2
+      },
+      {
+        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.withings-bmi.uid])
+        gridPos      = local.panorama_position.U3
+      },
+      {
+        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.remo-humidity.uid])
+        gridPos      = local.panorama_position.U4
       },
     ]
   })

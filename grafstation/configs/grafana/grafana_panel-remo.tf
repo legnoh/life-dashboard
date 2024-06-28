@@ -1,6 +1,6 @@
 resource "grafana_library_panel" "remo-temperature" {
   org_id = grafana_organization.main.org_id
-  name = "NatureRemo - 温度"
+  name   = "NatureRemo - 温度"
   model_json = jsonencode(merge(local.common_base, local.stats_base, {
     title = "部屋の温度",
     targets = [merge(local.target_base, {
@@ -31,7 +31,7 @@ resource "grafana_library_panel" "remo-temperature" {
 
 resource "grafana_library_panel" "remo-humidity" {
   org_id = grafana_organization.main.org_id
-  name = "NatureRemo - 湿度"
+  name   = "NatureRemo - 湿度"
   model_json = jsonencode(merge(local.common_base, local.stats_base, {
     title = "部屋の湿度",
     targets = [merge(local.target_base, {
@@ -62,7 +62,7 @@ resource "grafana_library_panel" "remo-humidity" {
 
 resource "grafana_library_panel" "remo-power-consumption" {
   org_id = grafana_organization.main.org_id
-  name = "NatureRemo - 瞬間消費電力"
+  name   = "NatureRemo - 瞬間消費電力"
   model_json = jsonencode(merge(local.common_base, local.stats_base, {
     title = "瞬間消費電力",
     targets = [merge(local.target_base, {

@@ -1,6 +1,6 @@
 resource "grafana_library_panel" "openweather-temperature" {
   org_id = grafana_organization.main.org_id
-  name = "openweather-temperature"
+  name   = "openweather-temperature"
   model_json = jsonencode(merge(local.common_base, local.stats_base, local.link.openweather, {
     title = "外の温度",
     targets = [merge(local.target_base, {
@@ -31,7 +31,7 @@ resource "grafana_library_panel" "openweather-temperature" {
 
 resource "grafana_library_panel" "openweather-humidity" {
   org_id = grafana_organization.main.org_id
-  name = "OpenWeather - 湿度"
+  name   = "OpenWeather - 湿度"
   model_json = jsonencode(merge(local.common_base, local.stats_base, local.link.openweather, {
     title = "外の湿度",
     targets = [merge(local.target_base, {
@@ -62,7 +62,7 @@ resource "grafana_library_panel" "openweather-humidity" {
 
 resource "grafana_library_panel" "openweather-condition" {
   org_id = grafana_organization.main.org_id
-  name = "OpenWeather - 現在の天気"
+  name   = "OpenWeather - 現在の天気"
   model_json = jsonencode(merge(local.common_base, local.stats_base, local.link.openweather, {
     targets = [merge(local.target_base, {
       expr = "openweather_currentconditions{location=\"${var.OPENWEATHER_CITY}\"}",

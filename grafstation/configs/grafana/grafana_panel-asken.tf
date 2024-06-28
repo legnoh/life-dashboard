@@ -1,6 +1,6 @@
 resource "grafana_library_panel" "asken-score" {
   org_id = grafana_organization.main.org_id
-  name = "asken-score"
+  name   = "asken-score"
   model_json = jsonencode(merge(local.common_base, local.stats_base, local.link.asken, {
     title = "あすけん健康度",
     targets = [merge(local.target_base, {

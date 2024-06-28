@@ -194,8 +194,8 @@ function main(){
   
   ## "フィットネス"モードの場合、音を止めておく
   elif [ "${focusmode}" = "${MODE_WORKOUT}" ]; then
-    echo "モード判定: 運動"
-    is_tv_channel1_muted=true
+    echo "モード判定: フィットネス"
+    tv_channel1="fitness"
 
   ## "ストレッチ"モードの場合、ストレッチ動画を流す
   elif [ "${focusmode}" = "${MODE_STRETCH}" ]; then

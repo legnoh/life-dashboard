@@ -1,6 +1,6 @@
 resource "grafana_library_panel" "moneyforward-balancesheet" {
   org_id = grafana_organization.main.org_id
-  name = "moneyforward-balancesheet"
+  name   = "moneyforward-balancesheet"
   model_json = jsonencode(merge(local.common_base, local.stats_base, local.link.moneyforward, {
     title = "バランスシート",
     targets = [merge(local.target_base, {
@@ -26,7 +26,7 @@ resource "grafana_library_panel" "moneyforward-balancesheet" {
 
 resource "grafana_library_panel" "moneyforward-balance" {
   org_id = grafana_organization.main.org_id
-  name = "moneyforward-balance"
+  name   = "moneyforward-balance"
   model_json = jsonencode(merge(local.common_base, local.stats_base, local.link.moneyforward, {
     title = "当月収支",
     targets = [merge(local.target_base, {
@@ -52,29 +52,29 @@ resource "grafana_library_panel" "moneyforward-balance" {
 
 resource "grafana_library_panel" "moneyforward-deposit-withdrawal" {
   org_id = grafana_organization.main.org_id
-  name = "moneyforward-deposit-withdrawal"
+  name   = "moneyforward-deposit-withdrawal"
   model_json = jsonencode(merge(local.common_base, local.stats_base, local.link.moneyforward, {
     title = "残高足りる?",
     targets = [
       merge(local.target_base, {
         expr = "mf_assets_deposit_jpy{account=\"住信SBIネット銀行\",name=\"代表口座 - 円普通\"}"
-        hide: true
-        refId: "A"
+        hide : true
+        refId : "A"
       }),
       merge(local.target_base, {
         expr = "sum(mf_monthly_withdrawal_jpy{name=~\".*カード\"})"
-        hide: true
-        refId: "B"
+        hide : true
+        refId : "B"
       }),
       {
-        datasource: {
-          name: "Expression"
-          type: "__expr__"
-          uid: "__expr__"
+        datasource : {
+          name : "Expression"
+          type : "__expr__"
+          uid : "__expr__"
         }
-        expression: "$A + $B"
-        refId: "C"
-        type: "math"
+        expression : "$A + $B"
+        refId : "C"
+        type : "math"
       }
     ]
     fieldConfig = merge(local.field_config_base, {
