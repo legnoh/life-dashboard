@@ -5,8 +5,8 @@ locals {
       url  = "https://www.youtube.com/embed/videoseries?autoplay=1&list=PLYyJCobshLZkNKdbhWzRMhtqe0S6shnB1"
     }
     nightmode-bgm = {
-      name = "TOKYO Cafe: Night Coffee Shop Ambience - Cafe Music BGM channel"
-      url  = "https://www.youtube.com/embed/6uddGul0oAc?autoplay=1"
+      name = "名曲クラシック"
+      url  = "https://www.youtube.com/embed/S3o_jlSWXNI?autoplay=1"
     }
     sleep-bgm = {
       name = "睡眠導入用BGM"

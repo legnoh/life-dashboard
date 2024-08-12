@@ -146,6 +146,31 @@ function is_dirt_grade_race() {
     fi
 }
 
+# 海外競馬の中継中か確認する
+function is_world_racetime(){
+  local ts=$(date +%s)
+  local num=0
+
+  # 無料中継が行われるのは海外競馬のみなので、この2つの条件で絞る
+  num=$(cat ${GCH_ONAIR_JSON} \
+    | ${JQ} -r "[ .[][] \
+      | select(.category_name==\"中継\") \
+      | select(.is_free==\"1\") \
+      | .live_start_datetime = ( .live_start_datetime | strptime(\"%Y-%m-%d %T\") | strftime(\"%s\") | tonumber) \
+      | .live_end_datetime   = ( .live_end_datetime | strptime(\"%Y-%m-%d %T\") | strftime(\"%s\") | tonumber ) \
+      | select( .live_start_datetime < ${ts} and .live_end_datetime > ${ts} ) ] | length" \
+  )
+
+  if [[ "${num}" == "" ]]; then
+    num=0
+  fi
+  if [[ ${num} > 0 ]]; then
+    return 0
+  else
+    return 1
+  fi
+}
+
 # 地震がなかったか確認する
 # https://www.p2pquake.net/develop/
 function check_latest_earthquake() {
@@ -206,14 +231,14 @@ function main(){
   elif [ "${focusmode}" = "${MODE_SLEEP}" ]; then
     echo "モード判定: 睡眠"
     tv_channel1="sleep-bgm"
-  
+
   ## "睡眠導入"モードの場合、睡眠準備のために夜間用音楽に切り替える
   elif [ "${focusmode}" = "${MODE_PRESLEEP}" ]; then
     echo "モード判定: 睡眠導入"
     tv_channel1="nightmode-bgm"
-  
-  ## 中央競馬/ダート重賞番組が放送されている場合、グリーンチャンネルに変更する
-  elif is_national_racetime || is_dirt_grade_race; then
+
+  ## 中央競馬/ダート重賞番組/海外競馬が放送されている場合、グリーンチャンネルに変更する
+  elif is_national_racetime || is_dirt_grade_race || is_world_racetime; then
     echo "モード判定: 競馬"
     tv_channel1="greench"
 
