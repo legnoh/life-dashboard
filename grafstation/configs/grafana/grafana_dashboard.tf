@@ -222,23 +222,23 @@ resource "grafana_dashboard" "gch" {
     panels      = [
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.gch[0].uid])
-        gridPos      = { h = 14, w = 12, x = 0,  y = 0 }
+        gridPos      = { h = 15, w = 12, x = 0,  y = 0 }
       },
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.gch[1].uid])
-        gridPos      = { h = 14, w = 12, x = 12, y = 0 }
+        gridPos      = { h = 15, w = 12, x = 12, y = 0 }
       },
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.gch[2].uid])
-        gridPos      = { h = 11, w = 7,  x = 0,  y = 14 }
+        gridPos      = { h = 13, w = 8,  x = 0,  y = 15 }
       },
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.gch[3].uid])
-        gridPos      = { h = 11, w = 7,  x = 8,  y = 14 }
+        gridPos      = { h = 13, w = 8,  x = 8,  y = 15 }
       },
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.gch[4].uid])
-        gridPos      = { h = 11, w = 7, x = 16, y = 14 }
+        gridPos      = { h = 13, w = 8, x = 16, y = 15 }
       },
     ]
   })
