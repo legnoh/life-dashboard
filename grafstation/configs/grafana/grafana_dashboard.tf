@@ -237,7 +237,7 @@ resource "grafana_dashboard" "gch" {
             }
           :
             {
-              libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.gch_not_onair])
+              libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.gch_not_onair.uid])
               gridPos      = local.gch_position[i]
             }
     ]
