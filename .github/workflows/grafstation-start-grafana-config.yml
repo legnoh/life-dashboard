@@ -27,6 +27,7 @@ jobs:
     - name: Upgrade .terraform.lock.hcl
       env:
         LIST_PATH: "Library/LaunchAgents/io.lkj.life.dashboard.grafstation.grafana.apply.plist"
+        GRAFANA_AUTH: "admin:${{ secrets.GRAFANA_ADMIN_PASSWORD }}"
       run: |
         export PLIST_PATH="${HOME}/${LIST_PATH}"
         chmod 664 ${PLIST_PATH}
@@ -46,7 +47,7 @@ jobs:
     - name: start terraform daemon
       env:
         ABEMA_JWT_TOKEN: ${{ secrets.ABEMA_JWT_TOKEN }}
-        GRAFANA_ADMIN_PASSWORD: ${{ secrets.GRAFANA_ADMIN_PASSWORD }}
+        GRAFANA_AUTH: admin:${{ secrets.GRAFANA_ADMIN_PASSWORD }}
         NATURE_REMO_DEVICE_NAME: ${{ secrets.NATURE_REMO_DEVICE_NAME }}
         OPENWEATHER_CITY: ${{ secrets.OPENWEATHER_CITY }}
         YOUTUBE_PLAYLIST_ID: ${{ secrets.YOUTUBE_PLAYLIST_ID }}
