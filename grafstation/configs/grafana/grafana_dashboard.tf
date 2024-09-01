@@ -238,7 +238,7 @@ resource "grafana_dashboard" "gch" {
       },
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.gch[4].uid])
-        gridPos      = { h = 11, w = 17, x = 16, y = 14 }
+        gridPos      = { h = 11, w = 7, x = 16, y = 14 }
       },
     ]
   })
