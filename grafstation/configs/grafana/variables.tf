@@ -47,7 +47,11 @@ variable "GCH_STREAMS" {
     program_name = string
     stream_url   = string
   }))
-  default = []
+  default = [{
+    channel = "ch1"
+    program_name = "dummy"
+    stream_url = "https://example.com"
+  }]
 }
 
 variable "NATURE_REMO_DEVICE_NAME" {
