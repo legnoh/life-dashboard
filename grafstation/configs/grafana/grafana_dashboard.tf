@@ -210,3 +210,14 @@ resource "grafana_dashboard" "life-metrics" {
 resource "grafana_dashboard" "node-exporter" {
   config_json = data.curl.node-exporter-full.response
 }
+
+resource "grafana_dashboard" "gch" {
+  org_id = grafana_organization.main.org_id
+  config_json = jsonencode({
+    title       = "GreenCH",
+    description = "最終更新",
+    timezone    = "browser",
+    version     = 0,
+    refresh     = "30m"
+  })
+}

@@ -9,7 +9,7 @@ resource "grafana_library_panel" "gch" {
     options = {
       autoPlay  = true,
       videoType = "iframe",
-      iframeURL = "http://grafstation.local/player/hls.html?url=${urlencode(var.GCH_STREAMS[count.index].stream_url)}",
+      iframeURL = "http://grafstation.local/player/hls.html?url=${urlencode(var.GCH_STREAMS[count.index].stream_url)}?mute=${count.index > 0 ? 1 : 0}",
     },
   })
 }
