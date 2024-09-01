@@ -38,15 +38,13 @@ locals {
     }
     greench = {
       name = "GREEN Ch."
-      url  = "http://grafstation.local/player/hls.html?url=${local.gch_stream_url_encode}"
+      url  = "http://grafstation.local/player/hls.html?url=${urlencode(var.GCH_STREAMS[0].stream_url)}"
     }
     earthquake = {
       name = "地震速報"
       url  = "https://www.youtube.com/embed/HXGANE2pRrA?autoplay=1"
     }
   }
-
-  gch_stream_url_encode = urlencode(var.GCH_STREAM_URL)
 
   tv_channel1     = lookup(local.stream_urls, var.TV_CHANNEL1, local.stream_urls.nightmode-bgm)
   tv_channel1_url = var.IS_TV_CHANNEL1_MUTED ? format("%s&mute=1", local.tv_channel1.url) : local.tv_channel1.url

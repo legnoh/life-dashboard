@@ -28,7 +28,7 @@ TFVARS=(
   is_tv_channel1_muted
   is_tv_channel2_muted
 )
-TF_OPTIONS=${TERRAFORM_OPTIONS:-"-auto-approve -var-file=/tmp/gchls.tfvars"}
+TF_OPTIONS=${TERRAFORM_OPTIONS:-"-auto-approve -var-file=/tmp/gchls.tfvars.json"}
 
 # ABEMAの番組表をバックアップする
 function fetch_abema_slots_data() {
