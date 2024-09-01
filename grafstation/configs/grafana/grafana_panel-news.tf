@@ -46,14 +46,14 @@ resource "grafana_library_panel" "news-sports" {
   })
 }
 
-resource "grafana_library_panel" "news-keibalab" {
+resource "grafana_library_panel" "news-netkeiba" {
   org_id = grafana_organization.main.org_id
-  name   = "news-keiba"
+  name   = "news-netkeiba"
   model_json = jsonencode({
     type = "news",
     options = {
       showImage = false,
-      feedUrl   = "http://grafstation.local/news/yahoo/media/keibalab/all.xml",
+      feedUrl   = "http://grafstation.local/news/netkeiba?pid=rss_netkeiba&site=netkeiba",
     },
   })
 }
