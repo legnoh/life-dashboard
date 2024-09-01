@@ -23,6 +23,9 @@ services:
     restart: always
     environment:
     - GF_INSTALL_PLUGINS=grafana-clock-panel,innius-video-panel,aidanmountford-html-panel
+    - GF_SECURITY_ADMIN_PASSWORD__FILE=/run/secrets/grafana_admin_password
+    secrets:
+    - grafana_admin_password
   aphorism-exporter:
     container_name: aphorism-exporter
     image: legnoh/aphorism-exporter
@@ -112,3 +115,7 @@ services:
     - WITHINGS_CREATED=${WITHINGS_CREATED}
     volumes:
     - /Users/${USER}/life-dashboard/withings:/usr/src/app/config/tmp
+
+secrets:
+  grafana_admin_password:
+    environment: GRAFANA_ADMIN_PASSWORD

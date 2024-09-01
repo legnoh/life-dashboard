@@ -46,6 +46,7 @@ jobs:
     - name: start terraform daemon
       env:
         ABEMA_JWT_TOKEN: ${{ secrets.ABEMA_JWT_TOKEN }}
+        GRAFANA_ADMIN_PASSWORD: ${{ secrets.GRAFANA_ADMIN_PASSWORD }}
         NATURE_REMO_DEVICE_NAME: ${{ secrets.NATURE_REMO_DEVICE_NAME }}
         OPENWEATHER_CITY: ${{ secrets.OPENWEATHER_CITY }}
         YOUTUBE_PLAYLIST_ID: ${{ secrets.YOUTUBE_PLAYLIST_ID }}
@@ -54,12 +55,13 @@ jobs:
       run: |
         export PLIST_PATH="${HOME}/${LIST_PATH}"
 
-        ABEMA_JWT_TOKEN=${ABEMA_JWT_TOKEN} \
+        ABEMA_JWT_TOKEN="${ABEMA_JWT_TOKEN}" \
+        GRAFANA_ADMIN_PASSWORD="${GRAFANA_ADMIN_PASSWORD}" \
         NATURE_REMO_DEVICE_NAME="${NATURE_REMO_DEVICE_NAME}" \
         OPENWEATHER_CITY="${OPENWEATHER_CITY}" \
         YOUTUBE_PLAYLIST_ID="${YOUTUBE_PLAYLIST_ID}" \
-        HOST=${GRAFSTATION_HOST} \
-        USER=${USER} \
+        HOST="${GRAFSTATION_HOST}" \
+        USER="${USER}" \
         envsubst < apply.plist > ${PLIST_PATH}
 
         chmod 664 ${PLIST_PATH}

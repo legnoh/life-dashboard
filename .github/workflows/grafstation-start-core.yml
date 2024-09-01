@@ -72,6 +72,7 @@ jobs:
         RECREATE_CONTAINER: ${{ inputs.rm_state }}
         ASKEN_PASSWORD: ${{ secrets.ASKEN_PASSWORD }}
         ASKEN_USERNAME: ${{ secrets.ASKEN_USERNAME }}
+        GRAFANA_ADMIN_PASSWORD: ${{ secrets.GRAFANA_ADMIN_PASSWORD }}
         MONEYFORWARD_EMAIL: ${{ secrets.MONEYFORWARD_EMAIL }}
         MONEYFORWARD_PASSWORD: ${{ secrets.MONEYFORWARD_PASSWORD }}
         NATURE_OAUTH_TOKEN: ${{ secrets.NATURE_OAUTH_TOKEN }}
