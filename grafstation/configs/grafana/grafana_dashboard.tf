@@ -218,7 +218,7 @@ resource "grafana_dashboard" "gch" {
     description = "最終更新",
     timezone    = "browser",
     refresh     = "30m"
-    panels      = [
+    panels      = zipmap([
       for i, s in var.GCH_STREAMS
       :
         s.channel_id == "ch1"
@@ -239,6 +239,12 @@ resource "grafana_dashboard" "gch" {
               libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.gch_not_onair.uid])
               gridPos      = local.gch_position[i]
             }
-    ]
+      ],[
+        {
+          libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.news-keibalab.uid])
+          gridPos      = { h = 3, w = 24, x = 0, y = 26 }
+        }
+      ]
+    )
   })
 }
