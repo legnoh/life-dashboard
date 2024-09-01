@@ -220,26 +220,10 @@ resource "grafana_dashboard" "gch" {
     version     = 0,
     refresh     = "30m"
     panels      = [
-      {
-        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.gch[0].uid])
-        gridPos      = { h = 15, w = 12, x = 0,  y = 0 }
-      },
-      {
-        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.gch[1].uid])
-        gridPos      = { h = 15, w = 12, x = 12, y = 0 }
-      },
-      {
-        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.gch[2].uid])
-        gridPos      = { h = 11, w = 8,  x = 0,  y = 15 }
-      },
-      {
-        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.gch[3].uid])
-        gridPos      = { h = 11, w = 8,  x = 8,  y = 15 }
-      },
-      {
-        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.gch[4].uid])
-        gridPos      = { h = 11, w = 8, x = 16, y = 15 }
-      },
+      for i, s in grafana_library_panel.gch : {
+        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.gch[i].uid])
+        gridPos      = local.gch_position[i]
+      }
     ]
   })
 }
