@@ -43,35 +43,19 @@ variable "IS_YOUTUBE_MUTED" {
 
 variable "GCH_STREAMS" {
   type = list(object({
-    channel      = string
+    channel_id   = string
     program_name = string
     stream_url   = string
+    start_at     = string
+    end_at       = string
   }))
   default = [
     {
-      channel = "ch1"
+      channel_id   = "ch1"
       program_name = "dummy"
-      stream_url = "https://example.com"
-    },
-    {
-      channel = "ch2"
-      program_name = "dummy"
-      stream_url = "https://example.com"
-    },
-    {
-      channel = "ch3"
-      program_name = "dummy"
-      stream_url = "https://example.com"
-    },
-    {
-      channel = "ch4"
-      program_name = "dummy"
-      stream_url = "https://example.com"
-    },
-    {
-      channel = "ch5"
-      program_name = "dummy"
-      stream_url = "https://example.com"
+      stream_url   = "https://example.com"
+      start_at     = "2024-09-01T09:00:00+09:00"
+      end_at       = "2024-09-01T17:00:00+09:00"
     },
   ]
 }

@@ -220,10 +220,23 @@ resource "grafana_dashboard" "gch" {
     version     = 0,
     refresh     = "30m"
     panels      = [
-      for i, s in grafana_library_panel.gch : {
-        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.gch[i].uid])
-        gridPos      = local.gch_position[i]
-      }
+      for i, s in var.GCH_STREAMS
+      :
+        s.channel_id == "ch1"
+        ?
+          {
+            libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.gch[i].uid])
+            gridPos      = local.gch_position[i]
+          }
+        :
+          timecmp(timestamp(), s.end_at) < 0
+          ?
+            {
+              libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.gch[i].uid])
+              gridPos      = local.gch_position[i]
+            }
+          :
+            null
     ]
   })
 }
