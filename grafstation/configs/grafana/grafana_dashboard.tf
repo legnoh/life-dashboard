@@ -217,7 +217,6 @@ resource "grafana_dashboard" "gch" {
     title       = "GreenCH",
     description = "最終更新",
     timezone    = "browser",
-    version     = 0,
     refresh     = "30m"
     panels      = [
       for i, s in var.GCH_STREAMS
