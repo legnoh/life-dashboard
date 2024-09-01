@@ -236,7 +236,10 @@ resource "grafana_dashboard" "gch" {
               gridPos      = local.gch_position[i]
             }
           :
-            null
+            {
+              libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.gch_not_onair])
+              gridPos      = local.gch_position[i]
+            }
     ]
   })
 }

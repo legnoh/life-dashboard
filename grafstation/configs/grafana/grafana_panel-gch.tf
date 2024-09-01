@@ -13,3 +13,17 @@ resource "grafana_library_panel" "gch" {
     },
   })
 }
+
+resource "grafana_library_panel" "gch_not_onair" {
+  org_id = grafana_organization.main.org_id
+  name   = "GREEN Ch.(not onair)"
+  model_json = jsonencode({
+    title       = "放送休止",
+    type        = "innius-video-panel",
+    transparent = true,
+    options = {
+      autoPlay  = false,
+      videoType = "iframe",
+    },
+  })
+}
