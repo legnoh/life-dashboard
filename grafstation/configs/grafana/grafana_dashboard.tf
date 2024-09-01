@@ -241,7 +241,7 @@ resource "grafana_dashboard" "gch" {
             }
       ],[
         {
-          libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.news-keibalab.uid])
+          libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.news-netkeiba.uid])
           gridPos      = { h = 3, w = 24, x = 0, y = 26 }
         }
       ]
