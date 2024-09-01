@@ -5,7 +5,7 @@ resource "grafana_library_panel" "news-domestic" {
     type = "news",
     options = {
       showImage = false,
-      feedUrl   = "http://grafstation.local/news/yahoo/domestic.xml",
+      feedUrl   = "http://grafstation.local/news/yahoo/topics/domestic.xml",
     },
   })
 }
@@ -17,7 +17,7 @@ resource "grafana_library_panel" "news-world" {
     type = "news",
     options = {
       showImage = false,
-      feedUrl   = "http://grafstation.local/news/yahoo/world.xml",
+      feedUrl   = "http://grafstation.local/news/yahoo/topics/world.xml",
     },
   })
 }
@@ -29,7 +29,7 @@ resource "grafana_library_panel" "news-business" {
     type = "news",
     options = {
       showImage = false,
-      feedUrl   = "http://grafstation.local/news/yahoo/business.xml",
+      feedUrl   = "http://grafstation.local/news/yahoo/topics/business.xml",
     },
   })
 }
@@ -41,7 +41,19 @@ resource "grafana_library_panel" "news-sports" {
     type = "news",
     options = {
       showImage = false,
-      feedUrl   = "http://grafstation.local/news/yahoo/sports.xml",
+      feedUrl   = "http://grafstation.local/news/yahoo/topics/sports.xml",
+    },
+  })
+}
+
+resource "grafana_library_panel" "news-keibalab" {
+  org_id = grafana_organization.main.org_id
+  name   = "news-keiba"
+  model_json = jsonencode({
+    type = "news",
+    options = {
+      showImage = false,
+      feedUrl   = "http://grafstation.local/news/yahoo/media/keibalab/all.xml",
     },
   })
 }
