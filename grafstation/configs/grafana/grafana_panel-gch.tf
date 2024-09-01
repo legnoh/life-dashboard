@@ -1,7 +1,7 @@
 resource "grafana_library_panel" "gch" {
   count  = length(var.GCH_STREAMS)
   org_id = grafana_organization.main.org_id
-  name   = "GREEN Ch.(ch${count.index})"
+  name   = "GREEN Ch.(ch${count.index + 1})"
   model_json = jsonencode({
     title       = var.GCH_STREAMS[count.index].program_name,
     type        = "innius-video-panel",
