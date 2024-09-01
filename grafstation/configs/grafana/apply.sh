@@ -279,7 +279,6 @@ function main(){
     ${TF} import grafana_organization.main 1
   fi
 
-  ${TF} apply -target={grafana_dashboard.life-metrics, grafana_dashboard.gch} ${TF_OPTIONS}
   ${TF} apply ${TF_OPTIONS}
 
   # 現在時刻のtfstateをバックアップする
