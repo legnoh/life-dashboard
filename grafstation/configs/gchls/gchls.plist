@@ -15,7 +15,7 @@
     </dict>
     <key>ProgramArguments</key>
     <array>
-        <string>/Users/${USER}/life-dashboard/configs/gchls/gchls.sh</string>
+        <string>/opt/homebrew/bin/gchls</string>
     </array>
     <key>WorkingDirectory</key>
     <string>/Users/${USER}/life-dashboard/configs/gchls</string>
@@ -29,13 +29,13 @@
     <array>
         <dict>
             <key>Hour</key>
-            <integer>11</integer>
+            <integer>8</integer>
             <key>Minute</key>
             <integer>55</integer>
         </dict>
         <dict>
             <key>Hour</key>
-            <integer>23</integer>
+            <integer>20</integer>
             <key>Minute</key>
             <integer>55</integer>
         </dict>
