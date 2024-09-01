@@ -12,4 +12,8 @@ resource "grafana_library_panel" "gch" {
       iframeURL = "http://grafstation.local/player/hls.html?mute=${count.index > 0 ? 1 : 0}&url=${urlencode(var.GCH_STREAMS[count.index].stream_url)}",
     },
   })
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
