@@ -218,7 +218,7 @@ resource "grafana_dashboard" "gch" {
     description = "最終更新",
     timezone    = "browser",
     refresh     = "30m"
-    panels      = zipmap([
+    panels      = concat([
       for i, s in var.GCH_STREAMS
       :
         s.channel_id == "ch1"
