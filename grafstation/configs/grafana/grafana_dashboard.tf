@@ -223,7 +223,7 @@ resource "grafana_dashboard" "gch" {
       :
           {
             libraryPanel = zipmap(local.libpanel_keys, [
-                timecmp(timestamp(), s.end_at) < 0 && s.channel_id != "ch1"
+                timecmp(timestamp(), s.end_at) < 0 || s.channel_id == "ch1"
                 ?
                   grafana_library_panel.gch[i].uid
                 :
