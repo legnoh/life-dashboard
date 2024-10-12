@@ -24,6 +24,7 @@ services:
     environment:
     - GF_INSTALL_PLUGINS=grafana-clock-panel,innius-video-panel,aidanmountford-html-panel
     - GF_SECURITY_ADMIN_PASSWORD__FILE=/run/secrets/grafana_admin_password
+    - GF_PANELS_DISABLE_SANITIZE_HTML=true
     secrets:
     - grafana_admin_password
   aphorism-exporter:
