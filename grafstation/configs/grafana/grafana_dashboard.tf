@@ -242,7 +242,9 @@ resource "grafana_dashboard" "gch" {
                   local.gch_position[3]
                 :
                 s.channel_id == "ch5" ?
-                  local.gch_position[4] : 0
+                  local.gch_position[4]
+                :
+                { h = 0, w = 0,  x = 0, y = 0 }
               )
           }
       ],[

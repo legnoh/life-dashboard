@@ -270,11 +270,7 @@ function main(){
   # 設定反映(org/adminをimportしてない場合は再度importする)
   ${TF} init -upgrade
 
-  is_exist_admin=$(${TF} state list grafana_user.admin)
   is_exist_main=$(${TF} state list grafana_organization.main)
-  if [[ "${is_exist_admin}" == "" ]]; then
-    ${TF} import grafana_user.admin 1
-  fi
   if [[ "${is_exist_main}" == "" ]]; then
     ${TF} import grafana_organization.main 1
   fi
