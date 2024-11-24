@@ -21,6 +21,8 @@ MODE_WORKOUT="フィットネス"
 MODE_STRETCH="ストレッチ"
 MODE_PRESLEEP="睡眠導入"
 MODE_SLEEP="睡眠"
+MODE_GAME="ゲーム"
+MODE_LIVE="配信中"
 
 TFVARS=(
   tv_channel1
@@ -216,8 +218,8 @@ function main(){
   if (( ${latest_earthquake_offset} < 3600 )); then
     echo "モード判定: 地震"
     tv_channel1="earthquake"
-  
-  ## "フィットネス"モードの場合、音を止めておく
+
+  ## "フィットネス"モードの場合、筋トレ動画を流す
   elif [ "${focusmode}" = "${MODE_WORKOUT}" ]; then
     echo "モード判定: フィットネス"
     tv_channel1="fitness"
@@ -236,6 +238,18 @@ function main(){
   elif [ "${focusmode}" = "${MODE_PRESLEEP}" ]; then
     echo "モード判定: 睡眠導入"
     tv_channel1="nightmode-bgm"
+
+  ## "ゲーム"モードの場合、音をミュートする
+  elif [ "${focusmode}" = "${MODE_GAME}" ]; then
+    echo "モード判定: ゲーム"
+    is_tv_channel1_muted=true
+    is_tv_channel2_muted=true
+
+  ## "配信中"モードの場合、音をミュートする
+  elif [ "${focusmode}" = "${MODE_LIVE}" ]; then
+    echo "モード判定: 配信中"
+    is_tv_channel1_muted=true
+    is_tv_channel2_muted=true
 
   ## 中央競馬/ダート重賞番組/海外競馬が放送されている場合、グリーンチャンネルに変更する
   elif is_national_racetime || is_dirt_grade_race || is_world_racetime; then
