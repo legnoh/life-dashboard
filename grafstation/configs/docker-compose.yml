@@ -18,7 +18,7 @@ services:
     - /Users/${USER}/life-dashboard/prometheus/:/etc/prometheus/
   grafana:
     container_name: grafana
-    image: grafana/grafana
+    image: grafana/grafana:11.2.4
     ports: [ 3000:3000 ]
     restart: always
     environment:

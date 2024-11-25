@@ -6,6 +6,9 @@ resource "grafana_dashboard" "life-metrics" {
     timezone    = "browser",
     version     = 0,
     refresh     = "30m"
+    # timepicker = {
+    #   hidden = true
+    # }
     panels = var.TV_CHANNEL1 != "fitness" ? [
       # 通常モード
       # channel1
