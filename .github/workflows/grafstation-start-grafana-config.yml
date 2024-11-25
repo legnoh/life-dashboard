@@ -30,14 +30,18 @@ jobs:
         GRAFANA_AUTH: "admin:${{ secrets.GRAFANA_ADMIN_PASSWORD }}"
       run: |
         export PLIST_PATH="${HOME}/${LIST_PATH}"
-        chmod 664 ${PLIST_PATH}
-        launchctl unload -w ${PLIST_PATH}
-
+        if [[ -f "${PLIST_PATH}" ]]; then
+          chmod 664 ${PLIST_PATH}
+          launchctl unload -w ${PLIST_PATH}
+        fi
+        
         terraform init -upgrade
         terraform plan
 
-        plutil -lint ${PLIST_PATH}
-        launchctl load -w ${PLIST_PATH}
+        if [[ -f "${PLIST_PATH}" ]]; then
+          plutil -lint ${PLIST_PATH}
+          launchctl load -w ${PLIST_PATH}
+        fi
 
     - name: copy configs
       run: |
