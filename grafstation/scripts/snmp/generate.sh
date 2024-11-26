@@ -41,6 +41,6 @@ modules:
       - ifOutOctets
 EOS
 
-docker run -i -v "${PWD}:/opt" prom/snmp-generator generate
+docker run -i -v "${PWD}:/opt" prom/snmp-generator generate --no-fail-on-parse-errors
 
 cp -r snmp.yml ${HOME}/life-dashboard/configs/snmp.yml
