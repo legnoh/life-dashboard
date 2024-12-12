@@ -115,21 +115,21 @@ resource "grafana_dashboard" "life-metrics" {
         gridPos      = local.grid_position.A2
       },
 
+      # reminders
+      {
+        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.reminders-outdated.uid])
+        gridPos      = local.grid_position.C3
+      },
+      {
+        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.reminders-asap.uid])
+        gridPos      = local.grid_position.C2
+      },
+
       # snmp
       {
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.snmp-speedtest-occupancy.uid])
         gridPos      = local.grid_position.D5
       },
-
-      # todoist
-      # {
-      #   libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.todoist-office.uid])
-      #   gridPos      = local.grid_position.C3
-      # },
-      # {
-      #   libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.todoist-private.uid])
-      #   gridPos      = local.grid_position.C2
-      # },
 
       # withings
       {
