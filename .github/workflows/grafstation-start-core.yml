@@ -38,7 +38,7 @@ jobs:
     - name: Copy configs
       run: |
         mkdir -p ${HOME}/life-dashboard/{prometheus,configs,withings}
-        mkdir -p ${HOME}/{.hap-switch-command,.hap-nature-remo}
+        mkdir -p ${HOME}/{.hap-switch-command,.hap-nature-remo,.reminders-exporter}
         cp -r configs/stream ${HOME}/life-dashboard/configs/
         cp -r configs/html ${HOME}/life-dashboard/configs/
         mkdir -p ${HOME}/life-dashboard/configs/html/stream
@@ -50,6 +50,7 @@ jobs:
         cp -r configs/nginx.conf ${HOME}/life-dashboard/configs/
         cp -r configs/prometheus.yml ${HOME}/life-dashboard/prometheus/prometheus.yml
         envsubst < configs/hap-nature-remo.yml > ${HOME}/.hap-nature-remo/config.yml
+        cp -r configs/reminders-exporter.yml ${HOME}/.reminders-exporter/config.yml
         envsubst < scripts/audio-airplay.applescript > ${HOME}/life-dashboard/audio-airplay.applescript
       env:
         AUDIO_OUTPUT_AIRPLAY: ${{ secrets.AUDIO_OUTPUT_AIRPLAY }}
@@ -60,6 +61,7 @@ jobs:
       run: |
         brew services restart node_exporter
         brew services restart hap-nature-remo
+        brew services restart reminders-exporter
     
     - name: Install stream logrotate config
       run: |

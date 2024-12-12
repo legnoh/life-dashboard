@@ -56,10 +56,14 @@ scrape_configs:
       - targets: [ 'speedtest-exporter:9469' ]
     scrape_interval: 60m
     scrape_timeout: 90s
-  - job_name: 'todoist'
+  - job_name: 'reminders'
     static_configs:
-      - targets: [ 'todoist-exporter:8000' ]
+      - targets: [ 'grafstation.local:9101' ]
     scrape_interval: 60s
+    metric_relabel_configs:
+    - source_labels: [__name__]
+      regex: '(go|promhttp)_(.*)'
+      action: drop
   - job_name: 'withings'
     static_configs:
       - targets: [ withings-exporter:8000 ]

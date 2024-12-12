@@ -122,14 +122,14 @@ resource "grafana_dashboard" "life-metrics" {
       },
 
       # todoist
-      {
-        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.todoist-office.uid])
-        gridPos      = local.grid_position.C3
-      },
-      {
-        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.todoist-private.uid])
-        gridPos      = local.grid_position.C2
-      },
+      # {
+      #   libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.todoist-office.uid])
+      #   gridPos      = local.grid_position.C3
+      # },
+      # {
+      #   libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.todoist-private.uid])
+      #   gridPos      = local.grid_position.C2
+      # },
 
       # withings
       {
