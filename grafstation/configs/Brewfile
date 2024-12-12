@@ -1,4 +1,3 @@
-tap 'homebrew/cask-drivers'
 tap 'legnoh/etc', 'https://github.com/legnoh/homebrew-etc.git'
 tap 'keith/formulae', 'https://github.com/keith/homebrew-formulae.git'
 
