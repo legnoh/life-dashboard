@@ -40,6 +40,7 @@ services:
     environment:
     - ASKEN_USERNAME=${ASKEN_USERNAME}
     - ASKEN_PASSWORD=${ASKEN_PASSWORD}
+    shm_size: 2gb
   moneyforward-exporter:
     container_name: moneyforward-exporter
     image: legnoh/moneyforward-exporter:latest
@@ -49,6 +50,7 @@ services:
     - MONEYFORWARD_EMAIL=${MONEYFORWARD_EMAIL}
     - MONEYFORWARD_PASSWORD=${MONEYFORWARD_PASSWORD}
     - SE_OFFLINE=false
+    shm_size: 2gb
   openweather-exporter:
     container_name: openweather-exporter
     image: legnoh/openweather-exporter
