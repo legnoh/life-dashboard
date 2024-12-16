@@ -112,6 +112,7 @@ function stop_stream(){
   if [[ -e "${STREAM_START_FILE}" ]]; then
     echo "ストリームを停止します"
     cd ../stream && ./stop.sh && cd -
+    rm -rf ${STREAM_START_FILE}
     return 0
   fi
 }
