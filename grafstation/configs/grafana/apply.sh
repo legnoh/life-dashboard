@@ -106,6 +106,16 @@ function restart_stream(){
   fi
 }
 
+# ストリームを停止する
+function stop_stream(){
+  # ストリーム開始ファイルがある場合のみ停止処理を実行する
+  if [[ -e "${STREAM_START_FILE}" ]]; then
+    echo "ストリームを停止します"
+    cd ../stream && ./stop.sh && cd -
+    return 0
+  fi
+}
+
 # 中央競馬の中継中か確認する
 function is_national_racetime(){
   local ts=$(date +%s)
@@ -271,6 +281,11 @@ function main(){
   ## 特にどれにも該当しなかった場合はモードなしとする
   else
     echo "モード判定: なし"
+  fi
+
+  # Mリーグ放送中でない場合、ストリームを停止させておく
+  if [[ tv_channel1 != "mahjong" ]]; then
+    stop_stream
   fi
 
   # デフォルト外項目のみterraformに変数として渡す
