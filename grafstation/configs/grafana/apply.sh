@@ -285,7 +285,7 @@ function main(){
   fi
 
   # Mリーグ放送中でない場合、ストリームを停止させておく
-  if [[ tv_channel1 != "mahjong" ]]; then
+  if [[ "${tv_channel1}" != "mahjong" ]]; then
     stop_stream
   fi
 
