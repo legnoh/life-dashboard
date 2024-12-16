@@ -91,6 +91,9 @@ function restart_stream(){
   if [[ ! -e "${STREAM_START_FILE}" ]]; then
     echo "ストリームを再起動します(ファイルなし)"
     cd ../stream && ./start.sh "${mleague_url}" && cd -
+
+    # キャッシュクリアのため、grafana-kioskも再起動する
+    ${BREW} services restart grafana-kiosk
     return 0
   fi
 
@@ -100,10 +103,10 @@ function restart_stream(){
   if (( ${elapsed_time} > 18000 )); then
     echo "ストリームを再起動します(5時間経過)"
     cd ../stream && ./start.sh "${mleague_url}" && cd -
-  fi
 
-  # キャッシュクリアのため、grafana-kioskも再起動する
-  ${BREW} services restart grafana-kiosk
+    # キャッシュクリアのため、grafana-kioskも再起動する
+    ${BREW} services restart grafana-kiosk
+  fi
 }
 
 # ストリームを停止する
