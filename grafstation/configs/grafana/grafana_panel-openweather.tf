@@ -60,6 +60,76 @@ resource "grafana_library_panel" "openweather-humidity" {
   }))
 }
 
+resource "grafana_library_panel" "openweather-thi" {
+  org_id = grafana_organization.main.org_id
+  name   = "openweather-thi"
+  model_json = jsonencode(merge(local.common_base, local.stats_base, local.link.openweather, {
+    title = "外: 不快指数",
+    targets = [
+      merge(local.target_base, {
+        expr = "(openweather_temperature{location=\"${var.OPENWEATHER_CITY}\"} - 32)/1.8"
+        hide = true
+        refId = "temp"
+      }),
+      merge(local.target_base, {
+        expr = "openweather_humidity{location=\"${var.OPENWEATHER_CITY}\"}",
+        hide = true
+        refId = "humd"
+      }),
+      {
+        datasource = {
+          name = "Expression"
+          type = "__expr__"
+          uid = "__expr__"
+        }
+        expression = "(0.81 * $temp) + (0.01 * $humd) * ( (0.99 * $temp) - 14.3 ) + 46.3",
+        hide = false,
+        refId = "THI",
+        type = "math"
+      }
+    ]
+    fieldConfig = merge(local.field_config_base, {
+      defaults = merge(local.field_config_default_base, {
+        mappings = [
+          { 
+            type = "range",
+            options = { from = 0,  to = 55,  result = { index = 0 , color = "dark-blue" , text = "寒" } },
+          },
+          { 
+            type = "range", 
+            options = { from = 55, to = 60,  result = { index = 1 , color = "blue" , text = "稍寒" } },
+          },
+          { 
+            type = "range", 
+            options = { from = 60, to = 65,  result = { index = 2 , color = "super-light-green" , text = "普通(-)" } },
+          },
+          { 
+            type = "range", 
+            options = { from = 65, to = 70,  result = { index = 3 , color = "green" , text = "快適" } },
+          },
+          { 
+            type = "range", 
+            options = { from = 70, to = 75,  result = { index = 4 , color = "super-light-yellow" , text = "普通(+)" } },
+          },
+          { 
+            type = "range", 
+            options = { from = 75, to = 80,  result = { index = 5 , color = "orange" , text = "稍暑" } },
+          },
+          { 
+            type = "range", 
+            options = { from = 80, to = 85,  result = { index = 6 , color = "red" , text = "暑" } },
+          },
+          { 
+            type = "range", 
+            options = { from = 85, to = 120, result = { index = 7 , color = "dark-red" , text = "猛暑" } },
+          },
+        ]
+        thresholds = local.thresholds_base
+      })
+    })
+  }))
+}
+
 resource "grafana_library_panel" "openweather-condition" {
   org_id = grafana_organization.main.org_id
   name   = "OpenWeather - 現在の天気"
