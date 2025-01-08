@@ -8,7 +8,4 @@ resource "grafana_playlist" "life-dashboard-refresh" {
     value = grafana_dashboard.life-metrics.uid
     order = 1
   }
-  lifecycle {
-    ignore_changes = [ item[0].title ]
-  }
 }
