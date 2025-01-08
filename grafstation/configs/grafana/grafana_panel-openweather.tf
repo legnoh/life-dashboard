@@ -93,7 +93,7 @@ resource "grafana_library_panel" "openweather-thi" {
         mappings = [
           { 
             type = "range",
-            options = { from = 0,  to = 55,  result = { index = 0 , color = "dark-blue" , text = "寒" } },
+            options = { from = 0,  to = 55,  result = { index = 0 , color = "dark-blue" , text = "寒🥶" } },
           },
           { 
             type = "range", 
@@ -124,7 +124,11 @@ resource "grafana_library_panel" "openweather-thi" {
             options = { from = 85, to = 120, result = { index = 7 , color = "dark-red" , text = "猛暑" } },
           },
         ]
-        thresholds = local.thresholds_base
+        thresholds = merge(local.thresholds_base, {
+          steps = [
+            zipmap(local.thresholds_keys, ["text", null]),
+          ]
+        })
       })
     })
   }))
