@@ -23,7 +23,7 @@ resource "grafana_library_panel" "gch_not_onair" {
     transparent = true,
     options = {
       autoPlay  = false,
-      videoType = "iframe",
+      videoType = "url",
     },
   })
 }
