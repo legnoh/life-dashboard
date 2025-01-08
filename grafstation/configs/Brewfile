@@ -1,8 +1,8 @@
 tap 'legnoh/etc', 'https://github.com/legnoh/homebrew-etc.git'
 tap 'keith/formulae', 'https://github.com/keith/homebrew-formulae.git'
 
-brew 'coreutils'
 brew 'focus-cli'
+brew 'gettext' # for envsubst
 brew 'grafana-kiosk'
 brew 'hap-nature-remo'
 brew 'jq'
