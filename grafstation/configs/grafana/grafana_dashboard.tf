@@ -218,39 +218,40 @@ resource "grafana_dashboard" "gch" {
   org_id = grafana_organization.main.org_id
   config_json = jsonencode({
     title       = "GreenCH"
-    description = "最終更新"
+    description = ""
     timezone    = "browser"
     version     = 0
     refresh     = "30m"
-    panels      = concat([
-      for i, s in var.GCH_STREAMS
-      :
-          {
-            libraryPanel = zipmap(local.libpanel_keys, [
-                timecmp(timestamp(), s.end_at) < 0 || s.channel_id == "ch1"
-                ?
-                  grafana_library_panel.gch[i].uid
-                :
-                  grafana_library_panel.gch_not_onair.uid])
-            gridPos = (
-                s.channel_id == "ch1" ?
-                  local.gch_position[0]
-                :
-                s.channel_id == "ch2" ?
-                  local.gch_position[1]
-                :
-                s.channel_id == "ch3" ?
-                  local.gch_position[2]
-                :
-                s.channel_id == "ch4" ?
-                  local.gch_position[3]
-                :
-                s.channel_id == "ch5" ?
-                  local.gch_position[4]
-                :
-                { h = 0, w = 0,  x = 0, y = 0 }
-              )
-          }
+    panels      = concat(
+      [
+        for i, s in var.GCH_STREAMS
+        :
+            {
+              libraryPanel = zipmap(local.libpanel_keys, [
+                  timecmp(timestamp(), s.end_at) < 0 || s.channel_id == "ch1"
+                  ?
+                    grafana_library_panel.gch[i].uid
+                  :
+                    grafana_library_panel.gch_not_onair.uid])
+              gridPos = (
+                  s.channel_id == "ch1" ?
+                    local.gch_position[0]
+                  :
+                  s.channel_id == "ch2" ?
+                    local.gch_position[1]
+                  :
+                  s.channel_id == "ch3" ?
+                    local.gch_position[2]
+                  :
+                  s.channel_id == "ch4" ?
+                    local.gch_position[3]
+                  :
+                  s.channel_id == "ch5" ?
+                    local.gch_position[4]
+                  :
+                  { h = 0, w = 0,  x = 0, y = 0 }
+                )
+            }
       ],[
         {
           libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.news-netkeiba.uid])
