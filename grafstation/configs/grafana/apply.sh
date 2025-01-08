@@ -92,7 +92,8 @@ function restart_stream(){
     echo "ストリームを再起動します(ファイルなし)"
     cd ../stream && ./start.sh "${mleague_url}" && cd -
 
-    sleep 10
+    # ストリーム起動後にデータが出揃うまで待つ
+    sleep 30
 
     # キャッシュクリアのため、grafana-kioskも再起動する
     ${BREW} services restart grafana-kiosk
