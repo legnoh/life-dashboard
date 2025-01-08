@@ -3,7 +3,7 @@ resource "grafana_playlist" "life-dashboard-refresh" {
   name     = "life-dashboard-refresh"
   interval = "10m"
   item {
-    title = "Life Metrics"
+    title = "" # work around of omit blank state
     type  = "dashboard_by_uid"
     value = grafana_dashboard.life-metrics.uid
     order = 1
