@@ -92,6 +92,8 @@ function restart_stream(){
     echo "ストリームを再起動します(ファイルなし)"
     cd ../stream && ./start.sh "${mleague_url}" && cd -
 
+    sleep 10
+
     # キャッシュクリアのため、grafana-kioskも再起動する
     ${BREW} services restart grafana-kiosk
     return 0
