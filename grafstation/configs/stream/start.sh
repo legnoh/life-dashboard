@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 STREAM_START_FILE="/tmp/start.stream"
 

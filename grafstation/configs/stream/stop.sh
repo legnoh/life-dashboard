@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 function unload_launchd() {
     export LA_DOMAIN=${1:?}

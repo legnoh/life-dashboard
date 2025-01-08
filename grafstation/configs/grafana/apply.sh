@@ -1,4 +1,4 @@
-#!/opt/homebrew/bin/bash
+#!/usr/bin/env zsh
 
 # set -x
 
@@ -383,9 +383,9 @@ function main(){
 
   # デフォルト外項目のみterraformに変数として渡す
   for var in ${TFVARS[@]}; do
-    if [[ -n "${!var}" ]]; then
-      echo "${var}: ${!var}"
-      export TF_VAR_${var^^}=${!var}
+    if [[ -n "${(P)var}" ]]; then
+      echo "${var}: ${(P)var}"
+      export TF_VAR_${(U)var}=${(P)var}
     fi
   done
 
@@ -397,7 +397,7 @@ function main(){
     ${TF} import grafana_organization.main 1
   fi
 
-  ${TF} apply ${TF_OPTIONS}
+  ${TF} apply ${(QQ)=TF_OPTIONS}
 
   # 現在時刻のtfstateをバックアップする
   if [[ $(date "+%M") == "00" ]]; then
@@ -405,7 +405,6 @@ function main(){
     ts=$(date "+%Y%m%d%H%M")
     cp /tmp/terraform.tfstate ${HOME}/tfstate.bak/terraform.tfstate.${ts}
   fi
-
 }
 
 main $@
