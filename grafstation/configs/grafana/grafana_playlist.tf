@@ -9,6 +9,6 @@ resource "grafana_playlist" "life-dashboard-refresh" {
     order = 1
   }
   lifecycle {
-    ignore_changes = [ item.0.title ]
+    ignore_changes = [ "item.0.title" ]
   }
 }
