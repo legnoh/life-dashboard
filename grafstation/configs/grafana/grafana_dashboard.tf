@@ -217,9 +217,10 @@ resource "grafana_dashboard" "node-exporter" {
 resource "grafana_dashboard" "gch" {
   org_id = grafana_organization.main.org_id
   config_json = jsonencode({
-    title       = "GreenCH",
-    description = "最終更新",
-    timezone    = "browser",
+    title       = "GreenCH"
+    description = "最終更新"
+    timezone    = "browser"
+    version     = 0
     refresh     = "30m"
     panels      = concat([
       for i, s in var.GCH_STREAMS
