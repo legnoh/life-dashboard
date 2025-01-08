@@ -7,14 +7,27 @@ TIMESTAMP=$(date "+%s")
 JQ="/opt/homebrew/bin/jq"
 TF="/opt/homebrew/bin/terraform"
 BREW="/opt/homebrew/bin/brew"
+STREAMLINK="/opt/homebrew/bin/streamlink"
 
 ABEMA_JWT_TOKEN=${ABEMA_JWT_TOKEN:-""}
+GREENCH_EMAIL=${GREENCH_EMAIL:?}
+GREENCH_PASSWORD=${GREENCH_PASSWORD:?}
 
-DND_JSON_FILE="${HOME}/Library/DoNotDisturb/DB/Assertions.json"
 ABEMA_SLOTS_FILE="/tmp/abema_slots.json"
 DIRT_RACE_JSON="/tmp/dirt_races.json"
-GCH_ONAIR_JSON="/tmp/gch_onair.json"
+GCH_ONAIR_JSON_CH1="/tmp/gch_onair_ch1.json"
+GCH_ONAIR_JSON_CH2="/tmp/gch_onair_ch2.json"
+GCH_ONAIR_JSON_CH3="/tmp/gch_onair_ch3.json"
+GCH_ONAIR_JSON_CH4="/tmp/gch_onair_ch4.json"
+GCH_ONAIR_JSON_CH5="/tmp/gch_onair_ch5.json"
+GCH_NOW_ONAIR_TITLE_CH1="/tmp/gch_now_onair_ch1.txt"
+GCH_NOW_ONAIR_TITLE_CH2="/tmp/gch_now_onair_ch2.txt"
+GCH_NOW_ONAIR_TITLE_CH3="/tmp/gch_now_onair_ch3.txt"
+GCH_NOW_ONAIR_TITLE_CH4="/tmp/gch_now_onair_ch4.txt"
+GCH_NOW_ONAIR_TITLE_CH5="/tmp/gch_now_onair_ch5.txt"
+GCH_STREAMS_TFVARS_FILE="/tmp/gch.tfvars.json"
 STREAM_START_FILE="/tmp/start.stream"
+
 
 MODE_MEAL="食事"
 MODE_WORKOUT="フィットネス"
@@ -30,7 +43,7 @@ TFVARS=(
   is_tv_channel1_muted
   is_tv_channel2_muted
 )
-TF_OPTIONS=${TERRAFORM_OPTIONS:-"-auto-approve -var-file=/tmp/gchls.tfvars.json"}
+TF_OPTIONS=${TERRAFORM_OPTIONS:-"-auto-approve -var-file=/tmp/gch.tfvars.json"}
 
 # ABEMAの番組表をバックアップする
 function fetch_abema_slots_data() {
@@ -49,10 +62,13 @@ function fetch_abema_slots_data() {
 # 中央競馬中継放送情報を取得する
 function fetch_gch_onair_data() {
   local ymd=$(date "+%Y%m%d")
-  local url="https://sp.gch.jp/api_epg/?channel_code=ch1&date_from=${ymd}&date_to=${ymd}"
-
-  if [[ ! -e "${GCH_ONAIR_JSON}" ]] || [[ $(date "+%M") == "00" ]]; then
-    curl -s -o "${GCH_ONAIR_JSON}" "${url}"
+  if [[ ! -e "${GCH_ONAIR_JSON_CH1}" ]] || [[ $(date "+%M") == "00" ]]; then
+    for channel_code in {1..5}
+    do
+      local url="https://sp.gch.jp/api_epg/?channel_code=ch${channel_code}&date_from=${ymd}&date_to=${ymd}"
+      local filename=$(eval echo '$'GCH_ONAIR_JSON_CH${channel_code})
+      curl -s -o "${filename}" "${url}"
+    done
   fi
 }
 
@@ -62,6 +78,32 @@ function fetch_dirt_race_data() {
 
   if [[ ! -e "${DIRT_RACE_JSON}" ]] || [[ $(date "+%M") == "00" ]]; then
     curl -s -o "${DIRT_RACE_JSON}" "${json_url}"
+  fi
+}
+
+# グリーンチャンネルの指定チャンネルでストリームURLを取得する
+function get_greench_stream_url() {
+  local channel_code=${1:-"1"}
+  ${STREAMLINK} "https://sp.gch.jp/#ch${channel_codee}" \
+    --greenchannel-email="${GREENCH_EMAIL}" \
+    --greenchannel-password="${GREENCH_PASSWORD}" \
+    best --stream-url
+}
+
+# グリーンチャンネルの現在放送中の番組タイトルを取得する
+function get_greench_now_onair_title() {
+  local channel_code=${1:-"1"}
+  local filename=$(eval echo '$'GCH_ONAIR_JSON_CH${channel_code})
+  local ts=$(date +%s)
+  title=$(cat ${filename} \
+    | ${JQ} -r "[ .[][] \
+      | .live_start_datetime = ( .live_start_datetime | strptime(\"%Y-%m-%d %T\") | strftime(\"%s\") | tonumber) \
+      | .live_end_datetime   = ( .live_end_datetime | strptime(\"%Y-%m-%d %T\") | strftime(\"%s\") | tonumber ) \
+      | select( .live_start_datetime < ${ts} and .live_end_datetime > ${ts} ) ] | .[0].program_name")
+  if [[ "${title}" == "null" ]]; then
+    echo "放送休止"
+  else
+    echo "${title}"
   fi
 }
 
@@ -128,7 +170,7 @@ function is_national_racetime(){
   local ts=$(date +%s)
   local num=0
 
-  num=$(cat ${GCH_ONAIR_JSON} \
+  num=$(cat ${GCH_ONAIR_JSON_CH1} \
     | ${JQ} -r "[ .[][] \
       | select(.category_name==\"中継\") \
       | select(.program_name | contains(\"中央競馬\")) \
@@ -171,7 +213,7 @@ function is_world_racetime(){
   local num=0
 
   # 無料中継が行われるのは海外競馬のみなので、この2つの条件で絞る
-  num=$(cat ${GCH_ONAIR_JSON} \
+  num=$(cat ${GCH_ONAIR_JSON_CH1} \
     | ${JQ} -r "[ .[][] \
       | select(.category_name==\"中継\") \
       | select(.is_free==\"1\") \
@@ -188,6 +230,46 @@ function is_world_racetime(){
   else
     return 1
   fi
+}
+
+# GCH_STREAMS の情報を入れるためのtfvarsを生成する
+function create_gch_streams_json() {
+  local tfvars='{"GCH_STREAMS": []}'
+  if [[ ! -e ${GCH_STREAMS_TFVARS_FILE} ]]; then
+    tfvars='{"GCH_STREAMS": []}'
+  else
+    tfvars=$(cat ${GCH_STREAMS_TFVARS_FILE})
+  fi
+
+  for channel_code in {1..5}
+  do
+    # 番組名とキャッシュ済の番組名を取得・比較し、差分がなければスルー、あれば更新
+    local program_name=$(get_greench_now_onair_title ${channel_code})
+    local title_filename=$(eval echo '$'GCH_NOW_ONAIR_TITLE_CH${channel_code})
+    if [[ -e ${title_filename} ]] && [[ "${program_name}" == $(cat ${title_filename}) ]]; then
+        echo "ch${channel_code}: ${program_name} (not updated)"
+        continue
+    else
+        echo "ch${channel_code}: ${program_name} (updated!)"
+        echo ${program_name} > ${title_filename}
+    fi
+
+    # 放送休止でない場合はストリーミングURLを取得
+    if [[ ${program_name} != "放送休止" ]]; then
+      local stream_url=$(get_greench_stream_url ${channel_code})
+    else
+      local stream_url="https://dummy.com/"
+    fi
+
+    # tfvarsファイルを更新
+    local channel_index=$((${channel_code}-1))
+    tfvars=$(echo -n ${tfvars} | jq ".GCH_STREAMS[${channel_index}] |= . + {
+      \"channel_id\": \"ch${channel_code}\",
+      \"program_name\": \"${program_name}\",
+      \"stream_url\": \"${stream_url}\",
+    }")
+    echo -n $tfvars > ${GCH_STREAMS_TFVARS_FILE}
+  done
 }
 
 # 地震がなかったか確認する
@@ -215,6 +297,7 @@ function main(){
   weekday=$(date +%u) # 月-日 = 1-7
   hour=$(date +%-H)
   min=$(date +%-M)
+  ts=$(date +%s)
   now=$(echo "scale=3; ${hour} + (${min} / 60)" | bc)
 
   echo "today: weekday"
@@ -222,6 +305,9 @@ function main(){
 
   # 集中モードを取得
   focusmode="$(/opt/homebrew/bin/focus get)"
+
+  # グリーンチャンネルのデータ更新処理
+  create_gch_streams_json
 
   # 地震情報を取得
   latest_earthquake_tsux=$(check_latest_earthquake)

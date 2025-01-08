@@ -39,6 +39,7 @@ jobs:
       run: |
         mkdir -p ${HOME}/life-dashboard/{prometheus,configs,withings}
         mkdir -p ${HOME}/{.hap-switch-command,.hap-nature-remo,.reminders-exporter}
+        mkdir -p "${HOME}/Library/Application Support/streamlink/plugins"
         cp -r configs/stream ${HOME}/life-dashboard/configs/
         cp -r configs/html ${HOME}/life-dashboard/configs/
         mkdir -p ${HOME}/life-dashboard/configs/html/stream
@@ -46,6 +47,8 @@ jobs:
           https://github.com/xqq/mpegts.js/releases/download/v1.7.3/mpegts.js
         curl -Lo ${HOME}/life-dashboard/configs/html/player/mpegts.js.map \
           https://github.com/xqq/mpegts.js/releases/download/v1.7.3/mpegts.js.map
+        curl -o "${HOME}/Library/Application Support/streamlink/plugins/greenchannel.py" \
+          https://raw.githubusercontent.com/legnoh/streamlink-plugin-greenchannel/refs/heads/main/greenchannel.py
         cp -r configs/docker-compose.yml ${HOME}/life-dashboard/configs/
         cp -r configs/nginx.conf ${HOME}/life-dashboard/configs/
         cp -r configs/prometheus.yml ${HOME}/life-dashboard/prometheus/prometheus.yml

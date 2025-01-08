@@ -10,6 +10,10 @@
         <string>${ABEMA_JWT_TOKEN}</string>
         <key>GRAFANA_AUTH</key>
         <string>${GRAFANA_AUTH}</string>
+        <key>GREENCH_EMAIL</key>
+        <string>${GREENCH_EMAIL}</string>
+        <key>GREENCH_PASSWORD</key>
+        <string>${GREENCH_PASSWORD}</string>
         <key>TF_VAR_OPENWEATHER_CITY</key>
         <string>${OPENWEATHER_CITY}</string>
         <key>TF_VAR_NATURE_REMO_DEVICE_NAME</key>
