@@ -61,11 +61,12 @@ function fetch_abema_slots_data() {
 
 # 中央競馬中継放送情報を取得する
 function fetch_gch_onair_data() {
-  local ymd=$(date "+%Y%m%d")
+  local today=$(date "+%Y%m%d")
+  local tomorrow=$(date -v '+1d' "+%Y%m%d")
   if [[ ! -e "${GCH_ONAIR_JSON_CH1}" ]] || [[ $(date "+%M") == "00" ]]; then
     for channel_code in {1..5}
     do
-      local url="https://sp.gch.jp/api_epg/?channel_code=ch${channel_code}&date_from=${ymd}&date_to=${ymd}"
+      local url="https://sp.gch.jp/api_epg/?channel_code=ch${channel_code}&date_from=${today}&date_to=${tomorrow}"
       local filename=$(eval echo '$'GCH_ONAIR_JSON_CH${channel_code})
       curl -s -o "${filename}" "${url}"
     done
