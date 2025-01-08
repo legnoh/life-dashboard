@@ -59,8 +59,7 @@ resource "grafana_library_panel" "snmp-speedtest-occupancy" {
       defaults = merge(local.field_config_default_base, {
         thresholds = merge(local.thresholds_base, {
           steps = [
-            zipmap(local.thresholds_keys, ["text", null]),
-            zipmap(local.thresholds_keys, ["green", 0.2]),
+            zipmap(local.thresholds_keys, ["green", null]),
             zipmap(local.thresholds_keys, ["yellow", 0.4]),
             zipmap(local.thresholds_keys, ["orange", 0.6]),
             zipmap(local.thresholds_keys, ["red", 0.8]),
