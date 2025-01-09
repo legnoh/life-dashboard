@@ -1,11 +1,10 @@
 resource "grafana_dashboard" "life-metrics" {
   org_id = grafana_organization.main.org_id
   config_json = jsonencode({
-    title       = "Life Metrics",
-    description = "Ch1:${var.TV_CHANNEL1} M:${var.IS_TV_CHANNEL1_MUTED} / Ch2:${var.TV_CHANNEL2} M:${var.IS_TV_CHANNEL2_MUTED}",
-    timezone    = "browser",
-    version     = 0,
-    refresh     = "30m"
+    title       = "Life Metrics"
+    description = "Ch1:${var.TV_CHANNEL1} M:${var.IS_TV_CHANNEL1_MUTED} / Ch2:${var.TV_CHANNEL2} M:${var.IS_TV_CHANNEL2_MUTED}"
+    timezone    = "browser"
+    version     = 0
     # timepicker = {
     #   hidden = true
     # }
@@ -221,7 +220,6 @@ resource "grafana_dashboard" "gch" {
     description = ""
     timezone    = "browser"
     version     = 0
-    refresh     = "30m"
     panels      = concat(
       [
         for i, s in var.GCH_STREAMS
