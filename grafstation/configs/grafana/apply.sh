@@ -50,11 +50,13 @@ function fetch_abema_slots_data() {
   local token=${1:?}
   local timetable_url="https://api.p-c3-e.abema-tv.com/v1/timetable/dataSet?debug=false"
 
-  if [[ ! -e "${ABEMA_SLOTS_FILE}" ]] || [[ $(date "+%M") == "00" ]]; then
+  if [[ ! -e "${ABEMA_SLOTS_FILE}" ]] || [[ $(date "+%M") == "55" ]]; then
+
+    # たまに制御文字が紛れ込むことがあるので消す
     local onair_slot=$(curl -o - -q -L \
       -H "Accept-Encoding: gzip" \
       -H "Authorization: Bearer ${token}" "${timetable_url}" \
-      | gunzip)
+      | gunzip | tr -d "\t" | tr -d "\n)
     echo ${onair_slot} > ${ABEMA_SLOTS_FILE}
   fi
 }
