@@ -56,8 +56,8 @@ function fetch_abema_slots_data() {
     local onair_slot=$(curl -o - -q -L \
       -H "Accept-Encoding: gzip" \
       -H "Authorization: Bearer ${token}" "${timetable_url}" \
-      | gunzip | tr -d "\t" | tr -d "\n")
-    echo ${onair_slot} > ${ABEMA_SLOTS_FILE}
+      | gunzip)
+    echo ${onair_slot} | tr -d "\t" | tr -d "\n" > ${ABEMA_SLOTS_FILE}
   fi
 }
 
