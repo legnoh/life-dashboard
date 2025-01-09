@@ -4,9 +4,11 @@ function unload_launchd() {
     export LA_DOMAIN=${1:?}
     local LA="${HOME}/Library/LaunchAgents"
     local PLIST_PATH="${LA}/${LA_DOMAIN}.plist"
-    chmod 664 ${PLIST_PATH}
-    if launchctl list ${LA_DOMAIN} != 0; then
-        launchctl unload -w ${PLIST_PATH}
+    if [[ -f ${PLIST_PATH} ]]; then
+        chmod 664 ${PLIST_PATH}
+        if ! launchctl list ${LA_DOMAIN} &> /dev/null; then
+            launchctl unload -w ${PLIST_PATH}
+        fi
     fi
 }
 
