@@ -110,7 +110,7 @@ function get_greench_now_onair_title() {
   fi
 }
 
-# Mリーグをやっているか確認する
+# Mリーグをやっているか確認する(フェニックスの出場日のみ)
 function is_mleague_onair() {
 
   local now_unixtime=${TIMESTAMP}
@@ -121,6 +121,7 @@ function is_mleague_onair() {
       | select( .channelId == \"mahjong\" and .mark.live == true ) \
       | select(.title | contains(\"Mリーグ\") ) \
       | select(.startAt < ${now_unixtime} and .endAt > ${now_unixtime} ) \
+      | select(.detailHighlight | contains(\"セガサミーフェニックス\") )
       | .id")
     if [[ ${mleague_onair_slot} != "" ]]; then
       return 0
