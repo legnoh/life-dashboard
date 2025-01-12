@@ -1,0 +1,21 @@
+---
+grafstation_sudo_pass: "{{ lookup('ansible.builtin.env', 'GRAFSTATION_SUDO_PASS', default=Undefined) }}"
+
+brew_packages:
+- focus-cli
+- gettext # for envsubst
+- grafana-kiosk
+- hap-nature-remo
+- jq
+- logrotate
+- node_exporter
+- reminders-exporter
+- streamlink
+- terraform
+
+cask_packages:
+- docker
+- flux
+- google-chrome
+- logi-options+
+- vlc

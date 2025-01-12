@@ -1,0 +1,30 @@
+---
+
+- name: Update homebrew
+  community.general.homebrew:
+    update_homebrew: true
+
+- name: Tap custom repos
+  community.general.homebrew_tap:
+    name: 
+    - legnoh/etc
+    - keith/formulae
+
+- name: Install Brew packages
+  community.general.homebrew:
+    name: "{{ brew_packages }}"
+
+- name: Install Cask Packages
+  community.general.homebrew_cask:
+    name: "{{ cask_packages }}"
+    sudo_password: "{{ grafstation_sudo_pass }}"
+
+- name: Upgrade existed Brew packages
+  community.general.homebrew:
+    upgrade_all: true
+
+- name: Upgrade existed Cask packages
+  community.general.homebrew_cask:
+    upgrade_all: true
+    greedy: true
+    sudo_password: "{{ grafstation_sudo_pass }}"

@@ -6,30 +6,18 @@ on:
     - main
     paths:
     - '.github/workflows/grafstation-install-core.yml'
-    - 'grafstation/configs/Brewfile'
+    - 'roles/install-brew-packages/**'
   workflow_dispatch:
 
 jobs:
   install:
     runs-on: [self-hosted, grafstation]
-    defaults:
-      run:
-        working-directory: ./grafstation
     steps:
 
     - name: Checkout Repository
       uses: actions/checkout@v4
     
-    - name: Install Core Packages
-      run: |
-        curl -Lo ~/.Brewfile https://github.com/legnoh/life-dashboard/raw/main/grafstation/configs/Brewfile
-        brew bundle --global
-    
-    - name: Update existed Packages
-      run: |
-        brew update
-        brew upgrade
-    
-    - name: Open docker
-      run: |
-        open --background -a Docker
+    - name: Execute
+      run: ansible-playbook site.yml -i inventory/localhost.yml -t "brew" -v
+      env:
+        GRAFSTATION_SUDO_PASS: ${{ secrets.GRAFSTATION_SUDO_PASS }}
