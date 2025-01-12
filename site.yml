@@ -1,0 +1,5 @@
+---
+- hosts: grafstation
+  roles:
+    - role: install-brew-packages
+      tags: [ brew ]
