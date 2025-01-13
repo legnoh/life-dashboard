@@ -32,7 +32,7 @@ Installation
   - [Apple Account にサインインする - Apple サポート (日本)](https://support.apple.com/ja-jp/111001#macos)
 - 自己ホストランナーをインストールして、サービスが起動した状態にする
   - [自己ホストランナーの追加 - GitHub Docs](https://docs.github.com/ja/actions/hosting-your-own-runners/managing-self-hosted-runners/adding-self-hosted-runners)
-  - [Runners · legnoh/life-dashboard](https://github.com/legnoh/life-dashboard/settings/actions/runners)
+  - [Add new self-hosted runner · legnoh/life-dashboard](https://github.com/legnoh/life-dashboard/settings/actions/runners/new)
 - 自己ホストランナーをサービスとして起動した状態にする
   - [自己ホストランナーアプリケーションをサービスとして設定する - GitHub Docs](https://docs.github.com/ja/actions/hosting-your-own-runners/managing-self-hosted-runners/configuring-the-self-hosted-runner-application-as-a-service)
     ```sh
