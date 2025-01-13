@@ -35,7 +35,7 @@ jobs:
         fi
 
     - name: Install ansible
-      if: !steps.check-ansible.outputs.installed
+      if: ${{ !steps.check-ansible.outputs.installed }}
       run: brew install ansible
 
     - name: Update ansible
