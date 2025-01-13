@@ -20,23 +20,29 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v4
 
-    - name: Install/Update ansible
-      if: |
-        github.event_name == 'push'
-        && contains(github.event.head_commit.message, 'bump')
-        && contains(github.event.head_commit.message, 'ansible')
+    - name: Set up Homebrew
+      uses: Homebrew/actions/setup-homebrew@master
+
+    - name: Check ansible installed
+      id: check-ansible
       run: |
-        which ansible > /dev/null
-        if [[ $? != 0 ]]; then
-          brew install ansible
+        if which ansible > /dev/null; then
+          echo "installed=false" >> $GITHUB_OUTPUT
         else
-          brew upgrade ansible
-        fi
+          echo "installed=true" >> $GITHUB_OUTPUT
+
+    - name: Install ansible
+      if: ! steps.check-ansible.outputs.installed
+      run: brew install ansible
+
+    - name: Update ansible
+      if: steps.check-ansible.outputs.installed
+      run: brew upgrade ansible
       env:
         HOMEBREW_NO_INSTALL_UPGRADE: true
 
     - name: Set ansible mode
-      id: set_mode
+      id: set-mode
       run: |
           if [[ "${{ github.event_name }}" == "pull_request_target" ]]; then
             echo "execute with normal mode"
@@ -50,7 +56,7 @@ jobs:
       uses: dawidd6/action-ansible-playbook@v2
       with:
         playbook: site.yml
-        options: --inventory ./inventory/localhost.yml ${{ steps.set_mode.outputs.options }}
+        options: --inventory ./inventory/localhost.yml ${{ steps.set-mode.outputs.options }}
       env:
         ABEMA_JWT_TOKEN: ${{ secrets.ABEMA_JWT_TOKEN }}
         ASKEN_PASSWORD: ${{ secrets.ASKEN_PASSWORD }}
