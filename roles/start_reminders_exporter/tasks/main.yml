@@ -5,6 +5,7 @@
     name: legnoh/etc
 
 - name: Install Brew packages
+  when: not ansible_check_mode
   community.general.homebrew:
     name: reminders-exporter
     state: upgraded
