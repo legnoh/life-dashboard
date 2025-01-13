@@ -26,11 +26,11 @@ jobs:
     - name: Check ansible installed
       id: check-ansible
       run: |
-        which ansible > /dev/null
-        if [[ $? == 0 ]]; then
+        if which ansible > /dev/null; then
           echo "installed=false" >> $GITHUB_OUTPUT
         else
           echo "installed=true" >> $GITHUB_OUTPUT
+        fi
 
     - name: Install ansible
       if: steps.check-ansible.outputs.installed == false
