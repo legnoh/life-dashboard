@@ -3,8 +3,6 @@ name: 'Merge Dependencies'
 on: 
   pull_request_target:
     branches: [main]
-    paths:
-    - roles/start_grafana_config/files/grafana/**
 
 permissions:
   pull-requests: write
