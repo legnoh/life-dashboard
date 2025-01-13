@@ -32,11 +32,11 @@ jobs:
           echo "installed=true" >> $GITHUB_OUTPUT
 
     - name: Install ansible
-      if: ! steps.check-ansible.outputs.installed
+      if: steps.check-ansible.outputs.installed == false
       run: brew install ansible
 
     - name: Update ansible
-      if: steps.check-ansible.outputs.installed
+      if: steps.check-ansible.outputs.installed == true
       run: brew upgrade ansible
       env:
         HOMEBREW_NO_INSTALL_UPGRADE: true
