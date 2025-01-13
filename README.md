@@ -28,17 +28,19 @@
 Installation
 ----
 
-- GitHub Action hosted runnerをインストールして、serviceとして起動した状態にする
-    - https://docs.github.com/en/actions/hosting-your-own-runners/adding-self-hosted-runners
-    - https://github.com/legnoh/life-dashboard/settings/actions/runners
-    - https://docs.github.com/en/actions/hosting-your-own-runners/configuring-the-self-hosted-runner-application-as-a-service
+- iCloudにログインする
+  - [Mac で iCloud を設定する - Apple サポート (日本)](https://support.apple.com/ja-jp/102314)
+- 自己ホストランナーをインストールして、サービスとして起動した状態にする
+    - [自己ホストランナーの追加 - GitHub Docs](https://docs.github.com/ja/actions/hosting-your-own-runners/managing-self-hosted-runners/adding-self-hosted-runners)
+    - [自己ホストランナーアプリケーションをサービスとして設定する - GitHub Docs](https://docs.github.com/ja/actions/hosting-your-own-runners/managing-self-hosted-runners/configuring-the-self-hosted-runner-application-as-a-service)
+    - [Runners · legnoh/life-dashboard](https://github.com/legnoh/life-dashboard/settings/actions/runners)
     ```sh
     cd ~/actions-runner
     sudo ./svc.sh install
     sudo ./svc.sh start
     sudo ./svc.sh status
     ```
-- GitHub Action(Ansible)を使って、以下を実行する
+- GitHub Actionの Deploy 経由で以下がすべて実行される
   - Homebrew をインストールする
   - 必要な設定やパッケージをインストールする
   - 設定ファイルを作成・コピーする
