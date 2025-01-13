@@ -19,7 +19,7 @@ jobs:
       id: check_latest
       run: |
         latest_version=$(brew info ansible --json | jq -r ".[0].versions.stable")
-        major_version="${latest_version%.*}"
+        major_version="${latest_version%%.*}"
         latest_revision=$(brew info ansible --json | jq -r ".[0].revision")
         if [[ "$latest_revision" != "0" ]]; then
           latest_releasever="${latest_version}_${latest_revision}"
@@ -31,7 +31,7 @@ jobs:
         echo "major_version=${major_version}" >> $GITHUB_OUTPUT
         echo "latest_releasever: ${latest_releasever}"
         echo "major_version: ${major_version}"
-        echo "full_version: ${latest_version}"
+        echo "version: ${latest_version}"
 
     - name: Check installed version
       id: check_installed
@@ -39,8 +39,8 @@ jobs:
         installed_releasever=$(cat ./inventory/localhost.yml \
           | yq ".all.vars.ansible_python_interpreter" \
           | awk 'match($0, "([0-9\.\_]+)") {print substr($0, RSTART, RLENGTH)}')
-        echo "releasever=$installed_version" >> $GITHUB_OUTPUT
-        echo "installed_releasever: $installed_releasever"
+        echo "releasever=${installed_releasever}" >> $GITHUB_OUTPUT
+        echo "installed_releasever: ${installed_releasever}"
 
     - name: Edit inventory file
       if: steps.check_latest.outputs.releasever != steps.check_installed.outputs.releasever
