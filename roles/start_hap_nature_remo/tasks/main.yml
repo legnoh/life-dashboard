@@ -23,6 +23,7 @@
     mode: '0644'
 
 - name: Start Service
+  when: not ansible_check_mode
   community.general.homebrew_services:
     name: hap-nature-remo
     state: restarted
