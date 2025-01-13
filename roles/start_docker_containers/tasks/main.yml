@@ -40,32 +40,35 @@
     mode: '0644'
 
 - name: Pull docker images
+  when: not ansible_check_mode
   community.docker.docker_compose_v2_pull:
     project_src: "{{ home_dir }}/life-dashboard/configs"
 
 - name: Stop docker containers
-  when: not start_docker_containers_recreate_container
+  when: not start_docker_containers_recreate_container and not ansible_check_mode
   community.docker.docker_compose_v2:
     project_src: "{{ home_dir }}/life-dashboard/configs"
     state: stopped
 
 - name: Delete docker containers
-  when: start_docker_containers_recreate_container
+  when: start_docker_containers_recreate_container and not ansible_check_mode
   community.docker.docker_compose_v2:
     project_src: "{{ home_dir }}/life-dashboard/configs"
     state: absent
 
 - name: Delete terraform.tfstate
-  when: start_docker_containers_recreate_container
+  when: start_docker_containers_recreate_container and not ansible_check_mode
   ansible.builtin.file:
     state: absent
     path: /tmp/terraform.tfstate
 
 - name: Start docker containers
+  when: not ansible_check_mode
   community.docker.docker_compose_v2:
     project_src: "{{ home_dir }}/life-dashboard/configs"
 
 - name: Prune unused resources
+  when: not ansible_check_mode
   community.docker.docker_prune:
     builder_cache: true
     containers: true
