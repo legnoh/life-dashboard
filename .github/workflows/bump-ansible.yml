@@ -1,0 +1,82 @@
+name: Bump Version(ansible)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  install:
+    runs-on: macos-latest
+    steps:
+
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Set up Homebrew
+      id: set-up-homebrew
+      uses: Homebrew/actions/setup-homebrew@master
+
+    - name: Install yq & jq
+      run: brew install jq yq
+
+    - name: Check latest version
+      id: check_latest
+      run: |
+        latest_version=$(brew info ansible --json | jq -r ".[0].versions.stable")
+        major_version="${latest_version%.*}"
+        latest_revision=$(brew info ansible --json | jq -r ".[0].revision")
+        if [[ "$latest_revision" != "0" ]]; then
+          latest_releasever="${latest_version}_${latest_revision}"
+        else
+          latest_releasever="${latest_version}"
+        fi
+        echo "releasever=${latest_releasever}" >> $GITHUB_OUTPUT
+        echo "major_version=${major_version}" >> $GITHUB_OUTPUT
+        echo "version=${latest_version}" >> $GITHUB_OUTPUT
+
+    - name: Check installed version
+      id: check_installed
+      run: |
+        installed_releasever=$(cat ./inventory/localhost.yml \
+          | yq ".all.vars.ansible_python_interpreter" \
+          | awk 'match($0, "([0-9\.\_]+)") {print substr($0, RSTART, RLENGTH)}')
+        echo "releasever=$installed_version" >> $GITHUB_OUTPUT
+
+    - name: Edit inventory file
+      if: steps.check_latest.outputs.releasever != steps.check_installed.outputs.releasever
+      run: |
+        lr=${{ steps.check_latest.outputs.releasever }}
+        ir=${{ steps.check_installed.outputs.releasever }}
+        sed -i "s/${ir}/${lr}/" inventory/grafstation.yml
+        sed -i "s/${ir}/${lr}/" inventory/localhost.yml
+
+    - name: Create GitHub App Token
+      uses: actions/create-github-app-token@v1
+      id: app-token
+      if: steps.check_latest.outputs.releasever != steps.check_installed.outputs.releasever
+      with:
+        app-id: ${{ secrets.APP_ID }}
+        private-key: ${{ secrets.APP_PRIVATE_KEY }}
+
+    - name: Get GitHub App User ID
+      id: get-user-id
+      if: steps.check_latest.outputs.releasever != steps.check_installed.outputs.releasever
+      run: echo "user-id=$(gh api "/users/${{ steps.app-token.outputs.app-slug }}[bot]" --jq .id)" >> "$GITHUB_OUTPUT"
+      env:
+        GH_TOKEN: ${{ steps.app-token.outputs.token }}
+    
+    - name: Create bump PR
+      id: create-pull-request
+      if: steps.check_latest.outputs.releasever != steps.check_installed.outputs.releasever
+      uses: peter-evans/create-pull-request@v7
+      env:
+        RELEASE_POLICY_URL: https://docs.ansible.com/ansible/latest/reference_appendices/release_and_maintenance.html
+        RELEASE_NOTES_URL: https://github.com/ansible-community/ansible-build-data/blob/main/${{ steps.check_latest.outputs.major_version }}/CHANGELOG-v${{ steps.check_latest.outputs.major_version }}.md#release-summary
+      with:
+        title: "bump: ansible v${{ steps.check_latest.outputs.releasever }}"
+        committer: "${{ steps.app-token.outputs.app-slug }}[bot] <${{ steps.get-user-id.outputs.user-id }}+${{ steps.app-token.outputs.app-slug }}[bot]@users.noreply.github.com>"
+        commit-message: "bump: ansible v${{ steps.check_latest.outputs.releasever }}"
+        branch: ansible-${{ steps.check_latest.outputs.releasever }}
+        token: ${{ steps.app-token.outputs.token }}
+        body: |
+          - [Release Policy](${{ env.RELEASE_POLICY_URL }})
+          - [Release Notes](${{ env.RELEASE_NOTES_URL }})

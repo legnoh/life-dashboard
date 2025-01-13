@@ -7,11 +7,6 @@
 
 ![dashboard-sample](https://user-images.githubusercontent.com/706834/236629238-3730ee10-3a4b-414e-9699-3c820b05b638.png)
 
-Usage
-----
-
-TBD
-
 お品書き
 ----
 
@@ -34,9 +29,14 @@ Installation
 ----
 
 - [Homebrew](https://brew.sh/)をインストールする
+  ```sh
+  bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  echo 'eval $(/opt/homebrew/bin/brew shellenv)' >> ${HOME}/.zprofile
+  eval $(/opt/homebrew/bin/brew shellenv)
+  ```
 - GitHub Action hosted runnerをインストールして、serviceとして起動した状態にする
     - https://docs.github.com/en/actions/hosting-your-own-runners/adding-self-hosted-runners
-    - https://github.com/legnoh/life-metrics-grafana-deployment/settings/actions/runners
+    - https://github.com/legnoh/life-dashboard/settings/actions/runners
     - https://docs.github.com/en/actions/hosting-your-own-runners/configuring-the-self-hosted-runner-application-as-a-service
     ```sh
     cd ~/actions-runner
@@ -44,6 +44,10 @@ Installation
     sudo ./svc.sh start
     sudo ./svc.sh status
     ```
+- ansibleをインストールする
+  ```sh
+  brew install ansible
+  ```
 - GitHub Action(Ansible)を使って、以下を実行する
     - Homebrew 経由で必要なパッケージをインストールする
     - 設定ファイルをコピーする
