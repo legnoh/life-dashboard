@@ -5,6 +5,7 @@
     name: legnoh/etc
 
 - name: Install grafana-kiosk
+  when: not ansible_check_mode
   community.general.homebrew:
     name: grafana-kiosk
     state: upgraded
