@@ -40,13 +40,14 @@
 - name: Copy config files
   when: not ansible_check_mode
   ansible.builtin.copy:
-    src: "{{ item }}/"
-    dest: "{{ home_dir }}/life-dashboard/configs/{{ item }}/"
-    mode: '0644'
+    src: "{{ item.path }}"
+    dest: "{{ home_dir }}/life-dashboard/configs/{{ item.path }}"
+    mode: "{{ item.mod }}"
     force: true
   loop:
-    - grafana
-    - stream
+    - { path: 'grafana/', mod: '0644' }
+    - { path: 'grafana/apply.sh', mod: '0755' }
+    - { path: 'stream/', mod: '0644' }
 
 - name: Download remote files(streamlink plugin)
   when: not ansible_check_mode
@@ -78,4 +79,3 @@
   community.general.launchd:
     name: io.lkj.life.dashboard.grafstation.grafana.apply
     state: reloaded
-    enabled: true
