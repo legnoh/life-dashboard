@@ -30,8 +30,11 @@ jobs:
           latest_releasever="${latest_version}"
         fi
         echo "releasever=${latest_releasever}" >> $GITHUB_OUTPUT
-        echo "major_version=${major_version}" >> $GITHUB_OUTPUT
         echo "version=${latest_version}" >> $GITHUB_OUTPUT
+        echo "major_version=${major_version}" >> $GITHUB_OUTPUT
+        echo "releasever: ${latest_releasever}"
+        echo "major_version: ${major_version}"
+        echo "full_version: ${latest_version}"
 
     - name: Check installed version
       id: check_installed
@@ -40,14 +43,15 @@ jobs:
           | yq ".all.vars.ansible_python_interpreter" \
           | awk 'match($0, "([0-9\.\_]+)") {print substr($0, RSTART, RLENGTH)}')
         echo "releasever=$installed_version" >> $GITHUB_OUTPUT
+        echo "installed_version: $installed_version"
 
     - name: Edit inventory file
       if: steps.check_latest.outputs.releasever != steps.check_installed.outputs.releasever
       run: |
         lr=${{ steps.check_latest.outputs.releasever }}
         ir=${{ steps.check_installed.outputs.releasever }}
-        sed -i "s/${ir}/${lr}/" inventory/grafstation.yml
-        sed -i "s/${ir}/${lr}/" inventory/localhost.yml
+        sed -i "" "s/${ir}/${lr}/" ./inventory/grafstation.yml
+        sed -i "" "s/${ir}/${lr}/" ./inventory/localhost.yml
 
     - name: Create GitHub App Token
       uses: actions/create-github-app-token@v1
