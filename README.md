@@ -34,13 +34,7 @@ Installation
   - [自己ホストランナーの追加 - GitHub Docs](https://docs.github.com/ja/actions/hosting-your-own-runners/managing-self-hosted-runners/adding-self-hosted-runners)
   - [Add new self-hosted runner · legnoh/life-dashboard](https://github.com/legnoh/life-dashboard/settings/actions/runners/new?arch=arm64&os=osx)
 - 自己ホストランナーをサービスとして起動した状態にする
-  - [自己ホストランナーアプリケーションをサービスとして設定する - GitHub Docs](https://docs.github.com/ja/actions/hosting-your-own-runners/managing-self-hosted-runners/configuring-the-self-hosted-runner-application-as-a-service)
-    ```sh
-    cd ~/actions-runner
-    sudo ./svc.sh install
-    sudo ./svc.sh start
-    sudo ./svc.sh status
-    ```
+  - [自己ホストランナーアプリケーションをサービスとして設定する - GitHub Docs](https://docs.github.com/ja/actions/hosting-your-own-runners/managing-self-hosted-runners/configuring-the-self-hosted-runner-application-as-a-service?platform=mac)
 - GitHub Actionの Deploy 経由で以下がすべて実行される
   - Homebrew をインストールする
   - 必要な設定やパッケージをインストールする
