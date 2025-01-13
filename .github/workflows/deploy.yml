@@ -21,7 +21,7 @@ jobs:
     - name: Read inventory file
       id: read_inventory
       run: |
-        inventory_file=$(cat ./inventory/localhost.yml)"
+        inventory_file=$(cat ./inventory/localhost.yml)
         echo "inventory_file<<EOF"$'\n'"$inventory_file"$'\n'EOF >> "$GITHUB_OUTPUT"
 
     - name: Run playbook
