@@ -27,17 +27,23 @@ jobs:
       id: check-ansible
       run: |
         if which ansible > /dev/null; then
+          echo "ansible is not installed"
           echo "installed=false" >> $GITHUB_OUTPUT
         else
+          echo "ansible has already installed"
           echo "installed=true" >> $GITHUB_OUTPUT
         fi
 
     - name: Install ansible
-      if: steps.check-ansible.outputs.installed == false
+      if: !steps.check-ansible.outputs.installed
       run: brew install ansible
 
     - name: Update ansible
-      if: steps.check-ansible.outputs.installed == true
+      if: |
+        github.event_name == 'push'
+        && steps.check-ansible.outputs.installed
+        && startsWith(github.event.head_commit.message, 'bump')
+        && contains(github.event.head_commit.message, 'ansible')
       run: brew upgrade ansible
       env:
         HOMEBREW_NO_INSTALL_UPGRADE: true
@@ -47,10 +53,10 @@ jobs:
       run: |
           if [[ "${{ github.event_name }}" == "pull_request_target" ]]; then
             echo "execute with normal mode"
-            echo "options=''" >> $GITHUB_OUTPUT
+            echo "options=" >> $GITHUB_OUTPUT
           else
             echo "execute with check mode"
-            echo "options='--check'" >> $GITHUB_OUTPUT
+            echo "options=--check" >> $GITHUB_OUTPUT
           fi
 
     - name: Run playbook
