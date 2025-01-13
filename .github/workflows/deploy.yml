@@ -1,4 +1,4 @@
-name: Install core packages
+name: Deploy
 
 on:
   push:
