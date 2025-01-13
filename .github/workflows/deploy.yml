@@ -18,10 +18,15 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v4
     
+    - name: Read inventory file
+      id: read_inventory
+      run: echo "inventory_file=$(cat ./inventory/localhost.yml)" >> $GITHUB_OUTPUT
+    
     - name: Run playbook
       uses: dawidd6/action-ansible-playbook@v2
       with:
         playbook: site.yml
+        inventory: ${{ steps.read_inventory.outputs.inventory_file }}
       env:
         ABEMA_JWT_TOKEN: ${{ secrets.ABEMA_JWT_TOKEN }}
         ASKEN_PASSWORD: ${{ secrets.ASKEN_PASSWORD }}
