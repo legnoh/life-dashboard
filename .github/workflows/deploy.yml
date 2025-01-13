@@ -9,22 +9,6 @@ on:
         description: 'inject docker compose down'
         type: boolean
         default: false
-      tags:
-        description: 'ansible-playbook tags'
-        default: null
-        type: choice
-        options:
-          - install_core_settings
-          - install_misc_packages
-          - start_dockerd
-          - generate_snmp_config
-          - start_node_exporter
-          - start_reminders_exporter
-          - start_hap_nature_remo
-          - start_docker_containers
-          - start_grafana_config
-          - start_grafana_kiosk
-          - start_logrotate
 
 jobs:
   execute:
@@ -34,8 +18,10 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v4
     
-    - name: Execute
-      run: ansible-playbook site.yml -i inventory/localhost.yml
+    - name: Run playbook
+      uses: dawidd6/action-ansible-playbook@v2
+      with:
+        playbook: site.yml
       env:
         ABEMA_JWT_TOKEN: ${{ secrets.ABEMA_JWT_TOKEN }}
         ASKEN_PASSWORD: ${{ secrets.ASKEN_PASSWORD }}
