@@ -1,11 +1,10 @@
-name: terraform ci
+name: Test Terraform Provider 
 
 on:
   pull_request:
-    branches:
-    - main
+    branches: [main]
     paths:
-    - roles/start-grafana-config/files/grafana/**
+    - roles/start_grafana_config/files/grafana/**
   workflow_dispatch:
 
 jobs:
@@ -13,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./roles/start-grafana-config/files/grafana/
+        working-directory: ./roles/start_grafana_config/files/grafana/
     steps:
 
     - name: Checkout Repository
@@ -21,6 +20,6 @@ jobs:
 
     - name: Setup Terraform command
       uses: hashicorp/setup-terraform@v3
-    
+
     - name: init
       run: terraform init

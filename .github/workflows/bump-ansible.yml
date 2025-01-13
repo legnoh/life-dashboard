@@ -1,6 +1,8 @@
 name: Bump Version(ansible)
 
 on:
+  schedule:
+    - cron: 0 4 * * 1
   workflow_dispatch:
 
 jobs:
@@ -65,7 +67,7 @@ jobs:
       run: echo "user-id=$(gh api "/users/${{ steps.app-token.outputs.app-slug }}[bot]" --jq .id)" >> "$GITHUB_OUTPUT"
       env:
         GH_TOKEN: ${{ steps.app-token.outputs.token }}
-    
+
     - name: Create bump PR
       id: create-pull-request
       if: steps.check_latest.outputs.releasever != steps.check_installed.outputs.releasever
