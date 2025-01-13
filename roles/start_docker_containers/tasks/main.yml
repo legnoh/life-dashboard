@@ -23,6 +23,7 @@
     - { src: prometheus.yml, dst: prometheus/prometheus.yml }
 
 - name: Download remote files(mpegts)
+  when: not ansible_check_mode
   ansible.builtin.get_url:
     url: "https://github.com/xqq/mpegts.js/releases/download/v1.7.3/{{ item }}"
     dest: "{{ home_dir }}/life-dashboard/configs/html/player/{{ item }}"
@@ -32,6 +33,7 @@
     - mpegts.js.map
 
 - name: Create .env file
+  when: not ansible_check_mode
   ansible.builtin.template:
     src: .env.j2
     dest: "{{ home_dir }}/life-dashboard/configs/.env"
