@@ -28,12 +28,6 @@
 Installation
 ----
 
-- [Homebrew](https://brew.sh/)をインストールする
-  ```sh
-  bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  echo 'eval $(/opt/homebrew/bin/brew shellenv)' >> ${HOME}/.zprofile
-  eval $(/opt/homebrew/bin/brew shellenv)
-  ```
 - GitHub Action hosted runnerをインストールして、serviceとして起動した状態にする
     - https://docs.github.com/en/actions/hosting-your-own-runners/adding-self-hosted-runners
     - https://github.com/legnoh/life-dashboard/settings/actions/runners
@@ -45,9 +39,10 @@ Installation
     sudo ./svc.sh status
     ```
 - GitHub Action(Ansible)を使って、以下を実行する
-    - Homebrew 経由で必要なパッケージをインストールする
-    - 設定ファイルをコピーする
-    - SNMP設定ファイルを作成する
-    - Dockerコンテナを立ち上げる
-    - Terraform経由でGrafanaの基本設定を投入する
-    - grafana-kioskを起動する
+  - Homebrew をインストールする
+  - 必要な設定やパッケージをインストールする
+  - 設定ファイルを作成・コピーする
+  - SNMP設定ファイルを作成する
+  - Dockerコンテナを立ち上げる
+  - Terraform経由でGrafanaの基本設定を投入する
+  - grafana-kioskを起動する
