@@ -32,7 +32,7 @@ jobs:
         echo "releasever=${latest_releasever}" >> $GITHUB_OUTPUT
         echo "version=${latest_version}" >> $GITHUB_OUTPUT
         echo "major_version=${major_version}" >> $GITHUB_OUTPUT
-        echo "releasever: ${latest_releasever}"
+        echo "latest_releasever: ${latest_releasever}"
         echo "major_version: ${major_version}"
         echo "full_version: ${latest_version}"
 
@@ -43,7 +43,7 @@ jobs:
           | yq ".all.vars.ansible_python_interpreter" \
           | awk 'match($0, "([0-9\.\_]+)") {print substr($0, RSTART, RLENGTH)}')
         echo "releasever=$installed_version" >> $GITHUB_OUTPUT
-        echo "installed_version: $installed_version"
+        echo "installed_releasever: $installed_releasever"
 
     - name: Edit inventory file
       if: steps.check_latest.outputs.releasever != steps.check_installed.outputs.releasever
