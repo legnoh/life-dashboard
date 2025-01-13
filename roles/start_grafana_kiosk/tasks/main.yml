@@ -26,12 +26,14 @@
   register: grafana_playlist
 
 - name: Copy config file
+  when: not ansible_check_mode
   ansible.builtin.template:
     src: .grafana-kiosk-config.yml.j2
     dest: "{{ home_dir }}/.grafana-kiosk-config.yml"
     mode: '0644'
 
 - name: Start Service
+  when: not ansible_check_mode
   community.general.homebrew_services:
     name: grafana-kiosk
     state: restarted

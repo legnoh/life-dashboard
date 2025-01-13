@@ -54,7 +54,7 @@
 - name: Check terraform init & upgrade
   community.general.terraform:
     project_path: "{{ home_dir }}/life-dashboard/configs/grafana"
-    plan_file: /dev/null
+    plan_file: /tmp/grafana-plan.log
     force_init: true
     provider_upgrade: true
     state: planned

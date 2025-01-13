@@ -44,10 +44,6 @@ Installation
     sudo ./svc.sh start
     sudo ./svc.sh status
     ```
-- ansibleをインストールする
-  ```sh
-  brew install ansible
-  ```
 - GitHub Action(Ansible)を使って、以下を実行する
     - Homebrew 経由で必要なパッケージをインストールする
     - 設定ファイルをコピーする

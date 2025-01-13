@@ -4,7 +4,7 @@ on:
   pull_request_target:
     branches: [main]
     paths:
-    - grafstation/configs/grafana/*
+    - roles/start_grafana_config/files/grafana/**
 
 permissions:
   pull-requests: write
