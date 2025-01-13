@@ -19,6 +19,8 @@ jobs:
 
     - name: Checkout Repository
       uses: actions/checkout@v4
+      with: 
+        ref: ${{ github.head_ref }}
 
     - name: Set up Homebrew
       uses: Homebrew/actions/setup-homebrew@master
