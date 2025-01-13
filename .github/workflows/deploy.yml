@@ -27,11 +27,11 @@ jobs:
       id: check-ansible
       run: |
         if which ansible > /dev/null; then
-          echo "ansible is not installed"
-          echo "installed=false" >> $GITHUB_OUTPUT
-        else
           echo "ansible has already installed"
           echo "installed=true" >> $GITHUB_OUTPUT
+        else
+          echo "ansible is not installed"
+          echo "installed=false" >> $GITHUB_OUTPUT
         fi
 
     - name: Install ansible
