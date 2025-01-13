@@ -52,18 +52,18 @@ jobs:
       id: set-mode
       run: |
           if [[ "${{ github.event_name }}" == "pull_request_target" ]]; then
-            echo "execute with normal mode"
-            echo "options=" >> $GITHUB_OUTPUT
-          else
             echo "execute with check mode"
             echo "options=--check" >> $GITHUB_OUTPUT
+          else
+            echo "execute with normal mode"
+            echo "options=" >> $GITHUB_OUTPUT
           fi
 
     - name: Run playbook
       uses: dawidd6/action-ansible-playbook@v2
       with:
         playbook: site.yml
-        options: --inventory ./inventory/localhost.yml ${{ steps.set-mode.outputs.options }}
+        options: -i inventory/localhost.yml ${{ steps.set-mode.outputs.options }}
       env:
         ABEMA_JWT_TOKEN: ${{ secrets.ABEMA_JWT_TOKEN }}
         ASKEN_PASSWORD: ${{ secrets.ASKEN_PASSWORD }}
