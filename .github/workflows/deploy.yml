@@ -20,6 +20,21 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v4
 
+    - name: Install/Update ansible
+      if: |
+        github.event_name == 'push'
+        && contains(github.event.head_commit.message, 'bump')
+        && contains(github.event.head_commit.message, 'ansible')
+      run: |
+        which ansible > /dev/null
+        if [[ $? != 0 ]]; then
+          brew install ansible
+        else
+          brew upgrade ansible
+        fi
+      env:
+        HOMEBREW_NO_INSTALL_UPGRADE: true
+
     - name: Set ansible mode
       id: set_mode
       run: |
