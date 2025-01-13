@@ -13,8 +13,23 @@ on:
         default: false
 
 jobs:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      runner: ${{ steps.check-pr.outputs.runner }}
+    steps:
+    - name: check-pr
+      id: check-pr
+      run: |
+        if [ ${{ github.event_name }} == 'pull_request_target' ]; then
+          echo "runner=macos-latest" >> $GITHUB_OUTPUT
+        else
+          echo "runner=grafstation" >> $GITHUB_OUTPUT
+        fi
+
   execute:
-    runs-on: [self-hosted, grafstation]
+    needs: [setup]
+    runs-on: ${{ needs.setup.outputs.runner }}
     steps:
 
     - name: Checkout Repository
@@ -37,7 +52,7 @@ jobs:
         fi
 
     - name: Install ansible
-      if: ${{ !steps.check-ansible.outputs.installed }}
+      if: ${{ !steps.check-ansible.outputs.installed || github.event_name == 'pull_request_target' }}
       run: brew install ansible
 
     - name: Update ansible
