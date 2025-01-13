@@ -15,9 +15,6 @@ jobs:
       id: set-up-homebrew
       uses: Homebrew/actions/setup-homebrew@master
 
-    - name: Install yq & jq
-      run: brew install jq yq
-
     - name: Check latest version
       id: check_latest
       run: |
@@ -48,10 +45,11 @@ jobs:
     - name: Edit inventory file
       if: steps.check_latest.outputs.releasever != steps.check_installed.outputs.releasever
       run: |
-        lr=${{ steps.check_latest.outputs.releasever }}
-        ir=${{ steps.check_installed.outputs.releasever }}
-        sed -i "" "s/${ir}/${lr}/" ./inventory/grafstation.yml
-        sed -i "" "s/${ir}/${lr}/" ./inventory/localhost.yml
+        latest_rv="${{ steps.check_latest.outputs.releasever }}"
+        installed_rv="${{ steps.check_installed.outputs.releasever }}"
+        echo "bump ${installed_rv} to ${latest_rv}"
+        sed -i "" "s/${installed_rv}/${latest_rv}/g" ./inventory/grafstation.yml
+        sed -i "" "s/${installed_rv}/${latest_rv}/g" ./inventory/localhost.yml
 
     - name: Create GitHub App Token
       uses: actions/create-github-app-token@v1
