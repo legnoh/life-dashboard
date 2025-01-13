@@ -23,6 +23,7 @@
     - vlc.conf
 
 - name: Start logrotate
+  when: not ansible_check_mode
   community.general.homebrew_services:
     name: logrotate
     state: restarted
