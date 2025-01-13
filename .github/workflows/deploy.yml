@@ -17,7 +17,7 @@ jobs:
 
     - name: Checkout Repository
       uses: actions/checkout@v4
-    
+
     - name: Upgrade ansible
       run: |
         brew update
