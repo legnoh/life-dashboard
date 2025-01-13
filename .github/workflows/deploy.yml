@@ -46,18 +46,13 @@ jobs:
             echo "options='--check'" >> $GITHUB_OUTPUT
           fi
 
-    - name: Read inventory file
-      id: read_inventory
-      run: |
-        inventory_file=$(cat ./inventory/localhost.yml)
-        echo "inventory_file<<EOF"$'\n'"$inventory_file"$'\n'EOF >> "$GITHUB_OUTPUT"
-
     - name: Run playbook
       uses: dawidd6/action-ansible-playbook@v2
       with:
         playbook: site.yml
-        inventory: ${{ steps.read_inventory.outputs.inventory_file }}
-        options: ${{ steps.set_mode.outputs.options }}
+        options: |
+          --inventory ./inventory/localhost.yml
+          ${{ steps.set_mode.outputs.options }}
       env:
         ABEMA_JWT_TOKEN: ${{ secrets.ABEMA_JWT_TOKEN }}
         ASKEN_PASSWORD: ${{ secrets.ASKEN_PASSWORD }}
