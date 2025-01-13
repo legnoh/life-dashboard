@@ -2,8 +2,7 @@ name: 'Merge Dependencies'
 
 on: 
   pull_request_target:
-    branches:
-    - main
+    branches: [main]
     paths:
     - grafstation/configs/grafana/*
 

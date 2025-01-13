@@ -1,5 +1,36 @@
 ---
-- hosts: grafstation
+- name: Deploy grafstation
+  hosts: grafstation
   roles:
-    - role: install-brew-packages
-      tags: [ brew ]
+    - role: install_core_settings
+      tags: [install_core_settings]
+
+    - role: install_misc_packages
+      tags: [install_misc_packages]
+
+    - role: start_dockerd
+      tags: [start_dockerd]
+
+    - role: generate_snmp_config
+      tags: [generate_snmp_config]
+
+    - role: start_node_exporter
+      tags: [start_node_exporter]
+
+    - role: start_reminders_exporter
+      tags: [start_reminders_exporter]
+
+    - role: start_hap_nature_remo
+      tags: [start_hap_nature_remo]
+
+    - role: start_docker_containers
+      tags: [start_docker_containers]
+
+    - role: start_grafana_config
+      tags: [start_grafana_config]
+
+    - role: start_grafana_kiosk
+      tags: [start_grafana_kiosk]
+
+    - role: start_logrotate
+      tags: [start_logrotate]

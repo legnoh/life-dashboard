@@ -1,0 +1,23 @@
+auths:
+  public_v2:
+    security_level: authPriv
+    auth_protocol: SHA
+    priv_protocol: AES
+    username: {{ generate_snmp_config_snmp_username }}
+    password: {{ generate_snmp_config_snmp_password }}
+    priv_password: {{ generate_snmp_config_snmp_priv_password }}
+    context_name: {{ generate_snmp_config_snmp_context_name }}
+    version: 3
+modules:
+  {{ generate_snmp_config_snmp_exporter_module_name }}:
+    timeout: 20s
+    walk:
+      - yrhCpuUtil5sec
+      - yrhCpuUtil1min
+      - yrhCpuUtil5min
+      - yrfRevision
+      - yrhInboxTemperature
+      - yrfUpTime
+      - yrhMemoryUtil
+      - ifInOctets
+      - ifOutOctets

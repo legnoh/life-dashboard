@@ -1,6 +1,7 @@
 all:
   vars:
-    ansible_python_interpreter: /opt/homebrew/bin/python3
+    ansible_python_interpreter: /opt/homebrew/Cellar/ansible/11.1.0_1/libexec/bin/python3
+    home_dir: "{{ lookup('ansible.builtin.env', 'HOME', default=Undefined) }}"
 
 grafstation:
   hosts:

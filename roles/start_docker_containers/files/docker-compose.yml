@@ -1,0 +1,116 @@
+services:
+  nginx:
+    container_name: nginx
+    image: nginx:stable
+    ports: [80:80]
+    restart: always
+    volumes:
+      - /Users/${USER}/life-dashboard/configs/nginx.conf:/etc/nginx/nginx.conf:ro
+      - /Users/${USER}/life-dashboard/configs/html:/usr/share/nginx/html:ro
+    extra_hosts:
+      - "grafstation.local:172.17.0.1"
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus
+    ports: [9090:9090]
+    restart: always
+    volumes:
+      - /Users/${USER}/life-dashboard/prometheus/:/etc/prometheus/
+  grafana:
+    container_name: grafana
+    image: grafana/grafana:11.2.4
+    ports: [3000:3000]
+    restart: always
+    environment:
+      - GF_INSTALL_PLUGINS=grafana-clock-panel,innius-video-panel,aidanmountford-html-panel
+      - GF_SECURITY_ADMIN_PASSWORD__FILE=/run/secrets/grafana_admin_password
+      - GF_PANELS_DISABLE_SANITIZE_HTML=true
+    secrets:
+      - grafana_admin_password
+  aphorism-exporter:
+    container_name: aphorism-exporter
+    image: legnoh/aphorism-exporter
+    ports: [9111:8000]
+    restart: always
+  asken-exporter:
+    container_name: asken-exporter
+    image: legnoh/asken-exporter
+    ports: [9109:8000]
+    restart: always
+    environment:
+      - ASKEN_USERNAME=${ASKEN_USERNAME}
+      - ASKEN_PASSWORD=${ASKEN_PASSWORD}
+    shm_size: 2gb
+  moneyforward-exporter:
+    container_name: moneyforward-exporter
+    image: legnoh/moneyforward-exporter:latest
+    ports: [9110:8000]
+    restart: always
+    environment:
+      - MONEYFORWARD_EMAIL=${MONEYFORWARD_EMAIL}
+      - MONEYFORWARD_PASSWORD=${MONEYFORWARD_PASSWORD}
+      - SE_OFFLINE=false
+    shm_size: 2gb
+  openweather-exporter:
+    container_name: openweather-exporter
+    image: legnoh/openweather-exporter
+    platform: linux/arm
+    ports: [9103:9091]
+    restart: always
+    environment:
+      - OW_APIKEY=${OPENWEATHER_API_KEY}
+      - OW_CITY=${OPENWEATHER_CITY}
+  oura-exporter:
+    container_name: oura-exporter
+    image: legnoh/oura-exporter:latest
+    platform: linux/arm64
+    ports: [9112:8000]
+    restart: always
+    environment:
+      - OURA_ACCESS_TOKEN=${OURA_ACCESS_TOKEN}
+      - TZ=${OURA_TZ}
+  remo-exporter:
+    container_name: remo-exporter
+    image: kenfdev/remo-exporter:latest
+    ports: [9352:9352]
+    restart: always
+    environment:
+      - OAUTH_TOKEN=${NATURE_OAUTH_TOKEN}
+  snmp-exporter:
+    container_name: snmp-exporter
+    image: prom/snmp-exporter:latest
+    platform: linux/arm64
+    ports: [9106:9116]
+    restart: always
+    volumes:
+      - /Users/${USER}/life-dashboard/configs/snmp.yml:/etc/snmp_exporter/snmp.yml
+  speedtest-exporter:
+    container_name: speedtest-exporter
+    image: billimek/prometheus-speedtest-exporter:latest
+    platform: linux/arm64
+    ports: [9469:9469]
+    restart: always
+    environment:
+      - server_ids=${SPEEDTEST_SERVER_IDS}
+  withings-exporter:
+    container_name: withings-exporter
+    image: legnoh/withings-exporter:latest
+    platform: linux/arm64
+    ports: [9108:8000]
+    restart: always
+    environment:
+      - TZ=${WITHINGS_TZ}
+      - WITHINGS_CLIENT_ID=${WITHINGS_CLIENT_ID}
+      - WITHINGS_CONSUMER_SECRET=${WITHINGS_CONSUMER_SECRET}
+      - WITHINGS_ACCESS_TOKEN=${WITHINGS_ACCESS_TOKEN}
+      - WITHINGS_TOKEN_TYPE=Bearer
+      - WITHINGS_REFRESH_TOKEN=${WITHINGS_REFRESH_TOKEN}
+      - WITHINGS_USERID=${WITHINGS_USERID}
+      - WITHINGS_EXPIRES_IN=10800
+      - WITHINGS_CREATED=${WITHINGS_CREATED}
+    volumes:
+      - /Users/${USER}/life-dashboard/withings:/usr/src/app/config/tmp
+
+secrets:
+  grafana_admin_password:
+    environment: GRAFANA_ADMIN_PASSWORD

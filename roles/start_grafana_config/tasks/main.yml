@@ -1,0 +1,74 @@
+---
+
+- name: Stop grafana-config daemon
+  community.general.launchd:
+    name: io.lkj.life.dashboard.grafstation.grafana.apply
+    state: unloaded
+
+- name: Tap custom repos
+  community.general.homebrew_tap:
+    name: legnoh/etc
+
+- name: Install Brew packages
+  community.general.homebrew:
+    name:
+      - focus-cli
+      - gettext # for envsubst
+      - jq
+      - streamlink
+      - terraform
+    state: upgraded
+
+- name: Install Cask Packages
+  community.general.homebrew_cask:
+    name: vlc
+    state: upgraded
+
+- name: Create config directories
+  ansible.builtin.file:
+    path: "{{ home_dir }}/{{ item }}"
+    state: directory
+    recurse: true
+    mode: '0755'
+  loop:
+    - life-dashboard/configs/grafana
+    - life-dashboard/configs/stream
+    - "Library/Application Support/streamlink/plugins"
+
+- name: Copy config files
+  ansible.builtin.copy:
+    src: "{{ item }}/"
+    dest: "{{ home_dir }}/life-dashboard/configs/{{ item }}/"
+    mode: '0644'
+    force: true
+  loop:
+    - grafana
+    - stream
+
+- name: Download remote files(streamlink plugin)
+  ansible.builtin.get_url:
+    url: "https://raw.githubusercontent.com/legnoh/streamlink-plugin-greenchannel/refs/heads/main/greenchannel.py"
+    dest: "{{ home_dir }}/Library/Application Support/streamlink/plugins/greenchannel.py"
+    mode: '0644'
+
+- name: Check terraform init & upgrade
+  community.general.terraform:
+    project_path: "{{ home_dir }}/life-dashboard/configs/grafana"
+    plan_file: /dev/null
+    force_init: true
+    provider_upgrade: true
+    state: planned
+  environment:
+    GRAFANA_AUTH: "admin:{{ start_grafana_config_grafana_admin_password }}"
+
+- name: Create launchd definition file
+  ansible.builtin.template:
+    src: apply.plist.j2
+    dest: "{{ home_dir }}/Library/LaunchAgents/io.lkj.life.dashboard.grafstation.grafana.apply.plist"
+    mode: '0644'
+
+- name: Start grafana-config daemon
+  community.general.launchd:
+    name: io.lkj.life.dashboard.grafstation.grafana.apply
+    state: reloaded
+    enabled: true

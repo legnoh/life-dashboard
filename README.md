@@ -30,7 +30,24 @@ TBD
 | [RSS一覧 - Yahoo!ニュース](https://news.yahoo.co.jp/rss) | 最新ニュースのヘッドライン |
 | [legnoh/youtube-playlist-creator](https://github.com/legnoh/youtube-playlist-creator) | 嗜好に基づいたYouTubeLiveのプレイリスト生成 |
 
-development
+Installation
 ----
 
-TBD
+- [Homebrew](https://brew.sh/)をインストールする
+- GitHub Action hosted runnerをインストールして、serviceとして起動した状態にする
+    - https://docs.github.com/en/actions/hosting-your-own-runners/adding-self-hosted-runners
+    - https://github.com/legnoh/life-metrics-grafana-deployment/settings/actions/runners
+    - https://docs.github.com/en/actions/hosting-your-own-runners/configuring-the-self-hosted-runner-application-as-a-service
+    ```sh
+    cd ~/actions-runner
+    sudo ./svc.sh install
+    sudo ./svc.sh start
+    sudo ./svc.sh status
+    ```
+- GitHub Action(Ansible)を使って、以下を実行する
+    - Homebrew 経由で必要なパッケージをインストールする
+    - 設定ファイルをコピーする
+    - SNMP設定ファイルを作成する
+    - Dockerコンテナを立ち上げる
+    - Terraform経由でGrafanaの基本設定を投入する
+    - grafana-kioskを起動する

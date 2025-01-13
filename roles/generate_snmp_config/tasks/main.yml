@@ -1,0 +1,58 @@
+---
+
+- name: Install gnu-tar(for ansible unarchive module)
+  community.general.homebrew:
+    name: gnu-tar
+    state: upgraded
+
+- name: Create a temp directory
+  ansible.builtin.file:
+    path: "{{ generate_snmp_config_tmp_dir }}/mibs"
+    state: directory
+    recurse: true
+    mode: '0755'
+
+- name: Download Makefile
+  ansible.builtin.get_url:
+    url: https://github.com/prometheus/snmp_exporter/raw/main/generator/Makefile
+    dest: "{{ generate_snmp_config_tmp_dir }}/Makefile"
+    mode: '0644'
+
+- name: Download Common mib file with Makefile
+  make:
+    chdir: "{{ generate_snmp_config_tmp_dir }}"
+    target: mibs
+
+- name: Download YAMAHA private mib
+  ansible.builtin.get_url:
+    url: http://www.rtpro.yamaha.co.jp/RT/docs/mib/yamaha-private-mib.tar.gz
+    dest: "{{ generate_snmp_config_tmp_dir }}/yamaha-private-mib.tar.gz"
+    mode: '0644'
+
+- name: Unarchive private mib
+  ansible.builtin.unarchive:
+    src: "{{ generate_snmp_config_tmp_dir }}/yamaha-private-mib.tar.gz"
+    dest: "{{ generate_snmp_config_tmp_dir }}"
+    extra_opts: ['--strip-components', '1', -C, 'mibs']
+
+- name: Create generator.yml
+  ansible.builtin.template:
+    src: generator.yml.j2
+    dest: "{{ generate_snmp_config_tmp_dir }}/generator.yml"
+    mode: '0644'
+
+- name: Run generate script in Container
+  community.docker.docker_container:
+    name: snmp-generator
+    image: prom/snmp-generator:latest
+    command: generate --no-fail-on-parse-errors
+    volumes:
+      - "{{ generate_snmp_config_tmp_dir }}:/opt"
+    detach: false
+
+- name: Copy snmp.yml to snmp-exporter config dir
+  ansible.builtin.copy:
+    remote_src: true
+    src: "{{ generate_snmp_config_tmp_dir }}/snmp.yml"
+    dest: "{{ home_dir }}/life-dashboard/configs/snmp.yml"
+    mode: '0644'

@@ -1,0 +1,2 @@
+---
+install_misc_packages_grafstation_sudo_pass: "{{ lookup('ansible.builtin.env', 'GRAFSTATION_SUDO_PASS', default=Undefined) }}"

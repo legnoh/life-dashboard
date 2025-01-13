@@ -1,0 +1,72 @@
+---
+
+- name: Create config directories
+  ansible.builtin.file:
+    path: "{{ home_dir }}/life-dashboard/{{ item }}"
+    state: directory
+    recurse: true
+    mode: '0755'
+  loop:
+    - configs/html/player
+    - prometheus
+    - withings
+
+- name: Copy config files
+  ansible.builtin.copy:
+    src: "{{ item.src }}"
+    dest: "{{ home_dir }}/life-dashboard/{{ item.dst }}"
+    mode: '0644'
+  loop:
+    - { src: html/, dst: configs/html/ }
+    - { src: docker-compose.yml, dst: configs/docker-compose.yml }
+    - { src: nginx.conf, dst: configs/nginx.conf }
+    - { src: prometheus.yml, dst: prometheus/prometheus.yml }
+
+- name: Download remote files(mpegts)
+  ansible.builtin.get_url:
+    url: "https://github.com/xqq/mpegts.js/releases/download/v1.7.3/{{ item }}"
+    dest: "{{ home_dir }}/life-dashboard/configs/html/player/{{ item }}"
+    mode: '0644'
+  loop:
+    - mpegts.js
+    - mpegts.js.map
+
+- name: Create .env file
+  ansible.builtin.template:
+    src: .env.j2
+    dest: "{{ home_dir }}/life-dashboard/configs/.env"
+    mode: '0644'
+
+- name: Pull docker images
+  community.docker.docker_compose_v2_pull:
+    project_src: "{{ home_dir }}/life-dashboard/configs"
+
+- name: Stop docker containers
+  when: not start_docker_containers_recreate_container
+  community.docker.docker_compose_v2:
+    project_src: "{{ home_dir }}/life-dashboard/configs"
+    state: stopped
+
+- name: Delete docker containers
+  when: start_docker_containers_recreate_container
+  community.docker.docker_compose_v2:
+    project_src: "{{ home_dir }}/life-dashboard/configs"
+    state: absent
+
+- name: Delete terraform.tfstate
+  when: start_docker_containers_recreate_container
+  ansible.builtin.file:
+    state: absent
+    path: /tmp/terraform.tfstate
+
+- name: Start docker containers
+  community.docker.docker_compose_v2:
+    project_src: "{{ home_dir }}/life-dashboard/configs"
+
+- name: Prune unused resources
+  community.docker.docker_prune:
+    builder_cache: true
+    containers: true
+    images: true
+    networks: true
+    volumes: true

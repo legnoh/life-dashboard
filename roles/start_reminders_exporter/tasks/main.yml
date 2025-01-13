@@ -1,0 +1,27 @@
+---
+
+- name: Tap custom repos
+  community.general.homebrew_tap:
+    name: legnoh/etc
+
+- name: Install Brew packages
+  community.general.homebrew:
+    name: reminders-exporter
+    state: upgraded
+
+- name: Create a config directory
+  ansible.builtin.file:
+    path: "{{ home_dir }}/.reminders-exporter"
+    state: directory
+    mode: '0755'
+
+- name: Copy config file
+  ansible.builtin.copy:
+    src: config.yml
+    dest: "{{ home_dir }}/.reminders-exporter/config.yml"
+    mode: '0644'
+
+- name: Start Service
+  community.general.homebrew_services:
+    name: reminders-exporter
+    state: restarted

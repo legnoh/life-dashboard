@@ -1,0 +1,67 @@
+name: Install core packages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      rm_state:
+        description: 'inject docker compose down'
+        type: boolean
+        default: false
+      tags:
+        description: 'ansible-playbook tags'
+        default: null
+        type: choice
+        options:
+          - install_core_settings
+          - install_misc_packages
+          - start_dockerd
+          - generate_snmp_config
+          - start_node_exporter
+          - start_reminders_exporter
+          - start_hap_nature_remo
+          - start_docker_containers
+          - start_grafana_config
+          - start_grafana_kiosk
+          - start_logrotate
+
+jobs:
+  install:
+    runs-on: [self-hosted, grafstation]
+    steps:
+
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+    
+    - name: Execute
+      run: ansible-playbook site.yml -i inventory/localhost.yml
+      env:
+        ABEMA_JWT_TOKEN: ${{ secrets.ABEMA_JWT_TOKEN }}
+        ASKEN_PASSWORD: ${{ secrets.ASKEN_PASSWORD }}
+        ASKEN_USERNAME: ${{ secrets.ASKEN_USERNAME }}
+        GRAFANA_ADMIN_PASSWORD: ${{ secrets.GRAFANA_ADMIN_PASSWORD }}
+        GRAFSTATION_SUDO_PASS: ${{ secrets.GRAFSTATION_SUDO_PASS }}
+        GREENCH_EMAIL: ${{ secrets.GREENCH_EMAIL }}
+        GREENCH_PASSWORD: ${{ secrets.GREENCH_PASSWORD }}
+        MONEYFORWARD_EMAIL: ${{ secrets.MONEYFORWARD_EMAIL }}
+        MONEYFORWARD_PASSWORD: ${{ secrets.MONEYFORWARD_PASSWORD }}
+        NATURE_DEVICE_NAME: ${{ secrets.NATURE_DEVICE_NAME }}
+        NATURE_OAUTH_TOKEN: ${{ secrets.NATURE_OAUTH_TOKEN }}
+        OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
+        OPENWEATHER_CITY: ${{ secrets.OPENWEATHER_CITY }}
+        OURA_ACCESS_TOKEN: ${{ secrets.OURA_ACCESS_TOKEN }}
+        OURA_TZ: ${{ secrets.OURA_TZ }}
+        RECREATE_CONTAINER: ${{ inputs.rm_state }}
+        SNMP_PASSWORD: ${{ secrets.SNMP_PASSWORD }}
+        SNMP_PRIV_PASSWORD: ${{ secrets.SNMP_PRIV_PASSWORD }}
+        SNMP_USERNAME: ${{ secrets.SNMP_USERNAME }}
+        SPEEDTEST_SERVER_IDS: ${{ secrets.SPEEDTEST_SERVER_IDS }}
+        WITHINGS_ACCESS_TOKEN: ${{ secrets.WITHINGS_ACCESS_TOKEN }}
+        WITHINGS_CLIENT_ID: ${{ secrets.WITHINGS_CLIENT_ID }}
+        WITHINGS_CONSUMER_SECRET: ${{ secrets.WITHINGS_CONSUMER_SECRET }}
+        WITHINGS_CREATED: ${{ secrets.WITHINGS_CREATED }}
+        WITHINGS_REFRESH_TOKEN: ${{ secrets.WITHINGS_REFRESH_TOKEN }}
+        WITHINGS_TZ: "Asia/Tokyo"
+        WITHINGS_USERID: ${{ secrets.WITHINGS_USERID }}
+        YOUTUBE_PLAYLIST_ID: ${{ secrets.YOUTUBE_PLAYLIST_ID }}

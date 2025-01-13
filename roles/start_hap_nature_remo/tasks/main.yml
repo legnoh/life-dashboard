@@ -1,0 +1,27 @@
+---
+
+- name: Tap custom repos
+  community.general.homebrew_tap:
+    name: legnoh/etc
+
+- name: Install Brew packages
+  community.general.homebrew:
+    name: hap-nature-remo
+    state: upgraded
+
+- name: Create a config directory
+  ansible.builtin.file:
+    path: "{{ home_dir }}/.hap-nature-remo"
+    state: directory
+    mode: '0755'
+
+- name: Copy config file
+  ansible.builtin.template:
+    src: config.yml.j2
+    dest: "{{ home_dir }}/.hap-nature-remo/config.yml"
+    mode: '0644'
+
+- name: Start Service
+  community.general.homebrew_services:
+    name: hap-nature-remo
+    state: restarted

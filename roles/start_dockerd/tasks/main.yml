@@ -1,0 +1,26 @@
+---
+
+- name: Install Docker Desktop
+  community.general.homebrew_cask:
+    name: docker # sudo required
+    state: upgraded
+    sudo_password: "{{ start_dockerd_grafstation_sudo_pass }}"
+
+- name: Start Dockerd
+  ansible.builtin.command:
+    cmd: /usr/bin/open --background -a Docker
+  changed_when: false
+
+- name: Wait dockerd is running
+  ansible.builtin.shell: |
+      while true
+      do
+        docker ps > /dev/null
+        if [[ $? = 0 ]]; then
+          echo "dockerd is running!"
+          exit 0
+        fi
+        echo "dockerd is starting..."
+        sleep 5
+      done
+  changed_when: false

@@ -1,0 +1,9 @@
+---
+
+start_grafana_config_abema_jwt_token: "{{ lookup('ansible.builtin.env', 'ABEMA_JWT_TOKEN', default=Undefined) }}"
+start_grafana_config_grafana_admin_password: "{{ lookup('ansible.builtin.env', 'GRAFANA_ADMIN_PASSWORD', default=Undefined) }}"
+start_grafana_config_greench_email: "{{ lookup('ansible.builtin.env', 'GREENCH_EMAIL', default=Undefined) }}"
+start_grafana_config_greench_password: "{{ lookup('ansible.builtin.env', 'GREENCH_PASSWORD', default=Undefined) }}"
+start_grafana_config_nature_remo_device_name: "{{ lookup('ansible.builtin.env', 'NATURE_DEVICE_NAME', default=Undefined) }}"
+start_grafana_config_openweather_city: "{{ lookup('ansible.builtin.env', 'OPENWEATHER_CITY', default=Undefined) }}"
+start_grafana_config_youtube_playlist_id: "{{ lookup('ansible.builtin.env', 'YOUTUBE_PLAYLIST_ID', default=Undefined) }}"

@@ -1,0 +1,28 @@
+---
+
+- name: Install Brew packages
+  community.general.homebrew:
+    name: logrotate
+    state: upgraded
+
+- name: Create config directories
+  ansible.builtin.file:
+    path: /opt/homebrew/etc/logrotate.d
+    state: directory
+    recurse: true
+    mode: '0755'
+
+- name: Copy config files
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "/opt/homebrew/etc/logrotate.d/{{ item }}"
+    mode: '0644'
+  loop:
+    - grafana-apply.conf
+    - streamlink.conf
+    - vlc.conf
+
+- name: Start logrotate
+  community.general.homebrew_services:
+    name: logrotate
+    state: restarted

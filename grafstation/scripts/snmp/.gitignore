@@ -1,8 +1,0 @@
-# env files
-.env
-.envrc
-*.env
-generator.yml
-snmp.yml
-mibs
-Makefile

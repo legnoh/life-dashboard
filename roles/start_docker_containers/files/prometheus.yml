@@ -1,0 +1,67 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    monitor: 'codelab-monitor'
+
+scrape_configs:
+  - job_name: 'aphorism'
+    static_configs:
+      - targets: [aphorism-exporter:8000]
+    scrape_interval: 300s
+  - job_name: 'asken'
+    static_configs:
+      - targets: [asken-exporter:8000]
+    scrape_interval: 300s
+  - job_name: 'moneyforward'
+    static_configs:
+      - targets: [moneyforward-exporter:8000]
+    scrape_interval: 300s
+  - job_name: 'openweather'
+    static_configs:
+      - targets: [openweather-exporter:9091]
+    metric_relabel_configs:
+      - { source_labels: [__name__], regex: '(go|process|promhttp)_(.*)', action: drop }
+    scrape_interval: 60s
+  - job_name: 'oura'
+    static_configs:
+      - targets: [oura-exporter:8000]
+    scrape_interval: 60s
+  - job_name: 'remo'
+    static_configs:
+      - targets: [remo-exporter:9352]
+    metric_relabel_configs:
+      - { source_labels: [__name__], regex: '(go|process|promhttp)_(.*)', action: drop }
+    scrape_interval: 60s
+  - job_name: 'snmp'
+    metrics_path: "/snmp"
+    params:
+      module: [rtx1300]
+      target: [setup.netvolante.jp]
+    static_configs:
+      - targets: [snmp-exporter:9116]
+    metric_relabel_configs:
+      - { source_labels: [__name__], regex: '(go|process|promhttp)_(.*)', action: drop }
+  - job_name: 'speedtest'
+    metrics_path: /probe
+    params:
+      script: [speedtest]
+    static_configs:
+      - targets: [speedtest-exporter:9469]
+    scrape_interval: 60m
+    scrape_timeout: 90s
+  - job_name: 'reminders'
+    static_configs:
+      - targets: [grafstation.local:9101]
+    scrape_interval: 60s
+    metric_relabel_configs:
+      - { source_labels: [__name__], regex: '(go|process|promhttp)_(.*)', action: drop }
+  - job_name: 'withings'
+    static_configs:
+      - targets: [withings-exporter:8000]
+    scrape_interval: 300s
+  - job_name: 'node'
+    static_configs:
+      - targets: [grafstation.local:9100]
+    metric_relabel_configs:
+      - { source_labels: [__name__], regex: '(go|process|promhttp)_(.*)', action: drop }

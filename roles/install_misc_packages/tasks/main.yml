@@ -1,0 +1,9 @@
+---
+
+- name: Install misc Cask Packages
+  community.general.homebrew_cask:
+    name:
+      - flux
+      - logi-options+ # sudo required
+    state: upgraded
+    sudo_password: "{{ install_misc_packages_grafstation_sudo_pass }}"

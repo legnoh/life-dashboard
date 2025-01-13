@@ -1,0 +1,37 @@
+---
+
+- name: Tap custom repos
+  community.general.homebrew_tap:
+    name: legnoh/etc
+
+- name: Install grafana-kiosk
+  community.general.homebrew:
+    name: grafana-kiosk
+    state: upgraded
+
+- name: Install google-chrome
+  community.general.homebrew_cask:
+    name: google-chrome
+    state: upgraded
+
+- name: Check Playlist ID
+  ansible.builtin.uri:
+    url: http://localhost:3000/api/playlists
+    force_basic_auth: true
+    user: admin
+    password: "{{ start_grafana_kiosk_grafana_admin_password }}"
+    status_code: 200
+    body_format: json
+    return_content: true
+  register: grafana_playlist
+
+- name: Copy config file
+  ansible.builtin.template:
+    src: .grafana-kiosk-config.yml.j2
+    dest: "{{ home_dir }}/.grafana-kiosk-config.yml"
+    mode: '0644'
+
+- name: Start Service
+  community.general.homebrew_services:
+    name: grafana-kiosk
+    state: restarted

@@ -1,0 +1,2 @@
+---
+start_hap_nature_remo_nature_oauth_token: "{{ lookup('ansible.builtin.env', 'NATURE_OAUTH_TOKEN', default=Undefined) }}"

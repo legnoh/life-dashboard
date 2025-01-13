@@ -1,0 +1,10 @@
+general:
+  kiosk-mode: full
+  autofit: false
+
+target:
+  login-method: local
+  username: grafana-kiosk
+  password: grafana-kiosk
+  playlist: true
+  URL: http://grafstation.local/playlists/play/{{ grafana_playlist.json[0].uid }}

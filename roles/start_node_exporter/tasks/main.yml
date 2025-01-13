@@ -1,0 +1,11 @@
+---
+
+- name: Install Brew packages
+  community.general.homebrew:
+    name: node_exporter
+    state: upgraded
+
+- name: Start Service
+  community.general.homebrew_services:
+    name: node_exporter
+    state: restarted

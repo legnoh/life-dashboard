@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>io.lkj.life.dashboard.grafstation.grafana.apply</string>
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>ABEMA_JWT_TOKEN</key>
+        <string>{{ start_grafana_config_abema_jwt_token }}</string>
+        <key>GRAFANA_AUTH</key>
+        <string>admin:{{ start_grafana_config_grafana_admin_password }}</string>
+        <key>GREENCH_EMAIL</key>
+        <string>{{ start_grafana_config_greench_email }}</string>
+        <key>GREENCH_PASSWORD</key>
+        <string>{{ start_grafana_config_greench_password }}</string>
+        <key>TF_VAR_OPENWEATHER_CITY</key>
+        <string>{{ start_grafana_config_openweather_city }}</string>
+        <key>TF_VAR_NATURE_REMO_DEVICE_NAME</key>
+        <string>{{ start_grafana_config_nature_remo_device_name }}</string>
+        <key>TF_VAR_YOUTUBE_PLAYLIST_ID</key>
+        <string>{{ start_grafana_config_youtube_playlist_id }}</string>
+    </dict>
+    <key>ProgramArguments</key>
+    <array>
+        <string>{{ home_dir }}/life-dashboard/configs/grafana/apply.sh</string>
+    </array>
+    <key>WorkingDirectory</key>
+    <string>{{ home_dir }}/life-dashboard/configs/grafana</string>
+    <key>StandardOutPath</key>
+    <string>/tmp/grafana-apply.log</string>
+    <key>StandardErrorPath</key>
+    <string>/tmp/grafana-apply.err</string>
+    <key>StartCalendarInterval</key>
+    <array>
+{% for i in range(60) %}
+        <dict>
+            <key>Minute</key>
+            <integer>{{ i }}</integer>
+        </dict>
+{% endfor %}
+    </array>
+</dict>
+</plist>
