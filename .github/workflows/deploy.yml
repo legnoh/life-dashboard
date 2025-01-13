@@ -27,7 +27,7 @@ on:
           - start_logrotate
 
 jobs:
-  install:
+  execute:
     runs-on: [self-hosted, grafstation]
     steps:
 
