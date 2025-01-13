@@ -17,11 +17,15 @@ jobs:
 
     - name: Checkout Repository
       uses: actions/checkout@v4
-    
+
     - name: Read inventory file
       id: read_inventory
-      run: echo "inventory_file=$(cat ./inventory/localhost.yml)" >> $GITHUB_OUTPUT
-    
+      run: |
+          inventory_file=$(cat ./inventory/localhost.yml)"
+          echo 'inventory_file<<EOF' >> $GITHUB_OUTPUT
+          echo $inventory_file >> $GITHUB_OUTPUT
+          echo 'EOF' >> $GITHUB_OUTPUT
+
     - name: Run playbook
       uses: dawidd6/action-ansible-playbook@v2
       with:
