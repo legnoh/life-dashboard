@@ -7,10 +7,13 @@
 
 - name: Create config directories
   ansible.builtin.file:
-    path: /opt/homebrew/etc/logrotate.d
+    path: {{ item }}
     state: directory
     recurse: true
     mode: '0755'
+  loop:
+    - /opt/homebrew/etc/logrotate.d
+    - /opt/homebrew/var/lib # for logrotate.status file
 
 - name: Copy config files
   when: not ansible_check_mode
