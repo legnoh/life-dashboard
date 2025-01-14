@@ -7,7 +7,7 @@
 
 - name: Create config directories
   ansible.builtin.file:
-    path: {{ item }}
+    path: "{{ item }}"
     state: directory
     recurse: true
     mode: '0755'
