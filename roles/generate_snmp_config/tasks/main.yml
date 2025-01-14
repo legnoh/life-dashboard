@@ -52,6 +52,7 @@
     name: snmp-generator
     image: prom/snmp-generator:latest
     command: generate --no-fail-on-parse-errors
+    platform: linux/amd64
     volumes:
       - "{{ generate_snmp_config_tmp_dir }}:/opt"
     detach: false
