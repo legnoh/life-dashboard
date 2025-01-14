@@ -1,10 +1,9 @@
 ---
 - name: Set .zshenv for homebrew bins and /usr/local/bin
   ansible.builtin.copy:
-    src: .zshenv
-    dest: "{{ home_dir }}/.zshenv"
+    src: "{{ item }}"
+    dest: "{{ home_dir }}/{{ item }}"
     mode: '0644'
-
-- name: Update homebrew
-  community.general.homebrew:
-    update_homebrew: true
+  loop:
+    - .zshenv
+    - .zshrc

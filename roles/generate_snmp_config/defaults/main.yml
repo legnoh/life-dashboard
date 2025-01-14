@@ -1,8 +1,8 @@
 ---
-generate_snmp_config_grafstation_sudo_pass: "{{ lookup('ansible.builtin.env', 'GRAFSTATION_SUDO_PASS', default=Undefined) }}"
+generate_snmp_config_grafstation_sudo_pass: "{{ lookup('env', 'GRAFSTATION_SUDO_PASS', default=Undefined) }}"
 generate_snmp_config_tmp_dir: /tmp/snmp-generator
-generate_snmp_config_snmp_exporter_module_name: "{{ lookup('ansible.builtin.env', 'SNMP_EXPORTER_MODULE_NAME', default='rtx1300') }}"
-generate_snmp_config_snmp_username: "{{ lookup('ansible.builtin.env', 'SNMP_USERNAME', default=Undefined) }}"
-generate_snmp_config_snmp_password: "{{ lookup('ansible.builtin.env', 'SNMP_PASSWORD', default=Undefined) }}"
-generate_snmp_config_snmp_priv_password: "{{ lookup('ansible.builtin.env', 'SNMP_PRIV_PASSWORD', default=Undefined) }}"
-generate_snmp_config_snmp_context_name: "{{ lookup('ansible.builtin.env', 'SNMP_CONTEXT_NAME', default='rtx1300') }}"
+generate_snmp_config_snmp_exporter_module_name: "{{ lookup('env', 'SNMP_EXPORTER_MODULE_NAME', default='rtx1300') }}"
+generate_snmp_config_snmp_username: "{{ lookup('env', 'SNMP_USERNAME', default=Undefined) }}"
+generate_snmp_config_snmp_password: "{{ lookup('env', 'SNMP_PASSWORD', default=Undefined) }}"
+generate_snmp_config_snmp_priv_password: "{{ lookup('env', 'SNMP_PRIV_PASSWORD', default=Undefined) }}"
+generate_snmp_config_snmp_context_name: "{{ lookup('env', 'SNMP_CONTEXT_NAME', default='rtx1300') }}"
