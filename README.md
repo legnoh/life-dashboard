@@ -7,8 +7,7 @@
 
 ![dashboard-sample](https://user-images.githubusercontent.com/706834/236629238-3730ee10-3a4b-414e-9699-3c820b05b638.png)
 
-お品書き
-----
+## お品書き
 
 |name|desc|
 |---|---|
@@ -25,17 +24,23 @@
 | [RSS一覧 - Yahoo!ニュース](https://news.yahoo.co.jp/rss) | 最新ニュースのヘッドライン |
 | [legnoh/youtube-playlist-creator](https://github.com/legnoh/youtube-playlist-creator) | 嗜好に基づいたYouTubeLiveのプレイリスト生成 |
 
-Installation
-----
+## Installation
+
+### 共通
 
 - Apple Account にサインインする
   - [Apple Account にサインインする - Apple サポート (日本)](https://support.apple.com/ja-jp/111001#macos)
+- macのコンピュータ名を"grafstation.local"に変更し、ブラウザアクセス用のホスト名を決定する
+  - [Macでコンピュータの名前またはローカルホスト名を変更する - Apple サポート (日本)](https://support.apple.com/ja-jp/guide/mac-help/mchlp2322/mac)
+
+### GitHub Actionsを使ってセットアップする場合
+
 - 自己ホストランナーをインストールして、サービスが起動した状態にする
   - [自己ホストランナーの追加 - GitHub Docs](https://docs.github.com/ja/actions/hosting-your-own-runners/managing-self-hosted-runners/adding-self-hosted-runners)
   - [Add new self-hosted runner · legnoh/life-dashboard](https://github.com/legnoh/life-dashboard/settings/actions/runners/new?arch=arm64&os=osx)
 - 自己ホストランナーをサービスとして起動した状態にする
   - [自己ホストランナーアプリケーションをサービスとして設定する - GitHub Docs](https://docs.github.com/ja/actions/hosting-your-own-runners/managing-self-hosted-runners/configuring-the-self-hosted-runner-application-as-a-service?platform=mac)
-- GitHub Actionの Deploy 経由で以下がすべて実行される
+- GitHub Actionの Deploy (Ansible) 経由で以下がすべて実行される
   - Homebrew をインストールする
   - 必要な設定やパッケージをインストールする
   - 設定ファイルを作成・コピーする
@@ -43,3 +48,76 @@ Installation
   - Dockerコンテナを立ち上げる
   - Terraform経由でGrafanaの基本設定を投入する
   - grafana-kioskを起動する
+
+### 手動でセットアップする場合
+
+手動実行する場合、以下の2つから実行方法を選択できる(両方併用しても良い)。
+
+- 管理対象ノードとなるmac上で直接Ansibleを実行する
+- コントロールノードとなるmacを別に用意し、SSH経由でAnsibleを実行する
+
+<details>
+
+<summary>管理対象ノードとなるmac上で直接Ansibleを実行する</summary>
+
+- Homebrew をインストールする
+  - [macOS（またはLinux）用パッケージマネージャー — Homebrew](https://brew.sh/ja/)
+- ansible をインストールする
+  ```sh
+  brew install ansible
+  ```
+- このリポジトリをcloneする
+  ```sh
+  git clone https://github.com/legnoh/life-dashboard.git 
+  ```
+- [`.env`](./.env.sample) をサンプルからコピーし、必要な環境変数を設定して読み込ませる
+  ```sh
+  cp .env.sample .env
+  vi .env
+  source ./.env
+  ```
+- ansibleを実行してデプロイする
+  ```sh
+  ansible-playbook site.yml -i inventory/localhost.yml
+  ```
+</details>
+
+<details>
+
+<summary>コントロールノードとなるmacを別に用意し、SSH経由でAnsibleを実行する</summary>
+
+コントロールノード(**C:** ansibleを実行する端末), 管理対象ノード(**M:** 管理される端末)として記載する。
+
+- **M:** macにSSHできるようにする
+  - [リモートコンピュータにMacへのアクセスを許可する - Apple サポート (日本)](https://support.apple.com/ja-jp/guide/mac-help/mchlp1066/mac)
+- **C:** ログイン用の秘密鍵/公開鍵を用意し、公開鍵を管理対象ノードに配布する
+  ```sh
+  username="yourusername"
+  pubkey="$(cat yourpubkey.pub)"
+  ssh $username@grafstation.local \
+    "mkdir -p ~/.ssh \
+    && echo \"$pubkey\" > ~/.ssh/authorized_keys \
+    && chmod 600 ~/.ssh/authorized_keys"
+  ```
+- **C/M:** Homebrew をインストールする
+  - [macOS（またはLinux）用パッケージマネージャー — Homebrew](https://brew.sh/ja/)
+- **C:** ansible をインストールする
+  ```sh
+  brew install ansible
+  ```
+- **C:** このリポジトリをcloneする
+  ```sh
+  git clone https://github.com/legnoh/life-dashboard.git
+  ```
+- **C:** [`.env`](./.env.sample) をサンプルからコピーし、必要な環境変数を設定して読み込ませる
+  ```sh
+  cp .env.sample .env
+  vi .env
+  source ./.env
+  ```
+- **C:** ansibleを実行してデプロイする。inventoryはgrafstation.ymlに向ける
+  ```sh
+  ansible-playbook site.yml -i inventory/grafstation.yml
+  ```
+
+</details>
