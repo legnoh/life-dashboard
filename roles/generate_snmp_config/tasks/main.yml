@@ -56,10 +56,17 @@
       - "{{ generate_snmp_config_tmp_dir }}:/opt"
     detach: false
 
+- name: Create a config directory
+  ansible.builtin.file:
+    path: "{{ home_dir }}/grafstation/configs"
+    state: directory
+    recurse: true
+    mode: '0755'
+
 - name: Copy snmp.yml to snmp-exporter config dir
   when: not ansible_check_mode
   ansible.builtin.copy:
     remote_src: true
     src: "{{ generate_snmp_config_tmp_dir }}/snmp.yml"
-    dest: "{{ home_dir }}/life-dashboard/configs/snmp.yml"
+    dest: "{{ home_dir }}/grafstation/configs/snmp.yml"
     mode: '0644'

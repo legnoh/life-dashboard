@@ -2,7 +2,7 @@
 
 - name: Create config directories
   ansible.builtin.file:
-    path: "{{ home_dir }}/life-dashboard/{{ item }}"
+    path: "{{ home_dir }}/grafstation/{{ item }}"
     state: directory
     recurse: true
     mode: '0755'
@@ -14,7 +14,7 @@
 - name: Copy config files
   ansible.builtin.copy:
     src: "{{ item.src }}"
-    dest: "{{ home_dir }}/life-dashboard/{{ item.dst }}"
+    dest: "{{ home_dir }}/grafstation/{{ item.dst }}"
     mode: '0644'
   loop:
     - { src: html/, dst: configs/html/ }
@@ -26,7 +26,7 @@
   when: not ansible_check_mode
   ansible.builtin.get_url:
     url: "https://github.com/xqq/mpegts.js/releases/download/v1.7.3/{{ item }}"
-    dest: "{{ home_dir }}/life-dashboard/configs/html/player/{{ item }}"
+    dest: "{{ home_dir }}/grafstation/configs/html/player/{{ item }}"
     mode: '0644'
   loop:
     - mpegts.js
@@ -36,24 +36,24 @@
   when: not ansible_check_mode
   ansible.builtin.template:
     src: .env.j2
-    dest: "{{ home_dir }}/life-dashboard/configs/.env"
+    dest: "{{ home_dir }}/grafstation/configs/.env"
     mode: '0644'
 
 - name: Pull docker images
   when: not ansible_check_mode
   community.docker.docker_compose_v2_pull:
-    project_src: "{{ home_dir }}/life-dashboard/configs"
+    project_src: "{{ home_dir }}/grafstation/configs"
 
 - name: Stop docker containers
   when: not start_docker_containers_recreate_container and not ansible_check_mode
   community.docker.docker_compose_v2:
-    project_src: "{{ home_dir }}/life-dashboard/configs"
+    project_src: "{{ home_dir }}/grafstation/configs"
     state: stopped
 
 - name: Delete docker containers
   when: start_docker_containers_recreate_container and not ansible_check_mode
   community.docker.docker_compose_v2:
-    project_src: "{{ home_dir }}/life-dashboard/configs"
+    project_src: "{{ home_dir }}/grafstation/configs"
     state: absent
 
 - name: Delete terraform.tfstate
@@ -65,7 +65,7 @@
 - name: Start docker containers
   when: not ansible_check_mode
   community.docker.docker_compose_v2:
-    project_src: "{{ home_dir }}/life-dashboard/configs"
+    project_src: "{{ home_dir }}/grafstation/configs"
 
 - name: Prune unused resources
   when: not ansible_check_mode

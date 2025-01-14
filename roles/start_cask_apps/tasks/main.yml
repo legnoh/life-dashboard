@@ -1,14 +1,21 @@
 ---
 
-- name: Install Docker Desktop
+- name: Install Cask applications
   community.general.homebrew_cask:
-    name: docker # sudo required
+    name:
+      - docker # sudo required
+      - flux
     state: upgraded
-    sudo_password: "{{ start_dockerd_grafstation_sudo_pass }}"
+    sudo_password: "{{ start_cask_apps_grafstation_sudo_pass }}"
 
-- name: Start Dockerd
+- name: Start Docker
   ansible.builtin.command:
     cmd: /usr/bin/open --background -a Docker
+  changed_when: false
+
+- name: Start Flux
+  ansible.builtin.command:
+    cmd: /usr/bin/open --background -a Flux
   changed_when: false
 
 - name: Wait dockerd is running

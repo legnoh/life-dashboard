@@ -33,15 +33,15 @@
     recurse: true
     mode: '0755'
   loop:
-    - life-dashboard/configs/grafana
-    - life-dashboard/configs/stream
+    - grafstation/configs/grafana
+    - grafstation/configs/stream
     - "Library/Application Support/streamlink/plugins"
 
 - name: Copy config files
   when: not ansible_check_mode
   ansible.builtin.copy:
     src: "{{ item.path }}"
-    dest: "{{ home_dir }}/life-dashboard/configs/{{ item.path }}"
+    dest: "{{ home_dir }}/grafstation/configs/{{ item.path }}"
     mode: "{{ item.mod }}"
     force: true
   loop:
@@ -59,7 +59,7 @@
 - name: Check terraform init & upgrade
   when: not ansible_check_mode
   community.general.terraform:
-    project_path: "{{ home_dir }}/life-dashboard/configs/grafana"
+    project_path: "{{ home_dir }}/grafstation/configs/grafana"
     plan_file: /tmp/grafana-plan.log
     force_init: true
     provider_upgrade: true

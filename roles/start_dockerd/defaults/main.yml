@@ -1,2 +1,0 @@
----
-start_dockerd_grafstation_sudo_pass: "{{ lookup('env', 'GRAFSTATION_SUDO_PASS', default=Undefined) }}"

@@ -5,8 +5,8 @@ services:
     ports: [80:80]
     restart: always
     volumes:
-      - /Users/${USER}/life-dashboard/configs/nginx.conf:/etc/nginx/nginx.conf:ro
-      - /Users/${USER}/life-dashboard/configs/html:/usr/share/nginx/html:ro
+      - /Users/${USER}/grafstation/configs/nginx.conf:/etc/nginx/nginx.conf:ro
+      - /Users/${USER}/grafstation/configs/html:/usr/share/nginx/html:ro
     extra_hosts:
       - "grafstation.local:172.17.0.1"
   prometheus:
@@ -15,7 +15,7 @@ services:
     ports: [9090:9090]
     restart: always
     volumes:
-      - /Users/${USER}/life-dashboard/prometheus/:/etc/prometheus/
+      - /Users/${USER}/grafstation/prometheus/:/etc/prometheus/
   grafana:
     container_name: grafana
     image: grafana/grafana:11.2.4
@@ -83,7 +83,7 @@ services:
     ports: [9106:9116]
     restart: always
     volumes:
-      - /Users/${USER}/life-dashboard/configs/snmp.yml:/etc/snmp_exporter/snmp.yml
+      - /Users/${USER}/grafstation/configs/snmp.yml:/etc/snmp_exporter/snmp.yml
   speedtest-exporter:
     container_name: speedtest-exporter
     image: billimek/prometheus-speedtest-exporter:latest
@@ -109,7 +109,7 @@ services:
       - WITHINGS_EXPIRES_IN=10800
       - WITHINGS_CREATED=${WITHINGS_CREATED}
     volumes:
-      - /Users/${USER}/life-dashboard/withings:/usr/src/app/config/tmp
+      - /Users/${USER}/grafstation/withings:/usr/src/app/config/tmp
 
 secrets:
   grafana_admin_password:

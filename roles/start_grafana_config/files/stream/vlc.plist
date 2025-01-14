@@ -13,7 +13,7 @@
         <string>0</string>
         <string>${STREAMLINK_HTTP_URL}</string>
         <string>vlc://quit</string>
-        <string>--sout=#transcode{width=1920,height=1080,fps=30,vcodec=h264,vb=256,venc=x264{aud,profile=baseline,level=30,keyint=30,ref=1},acodec=mp3,ab=96}:std{access=livehttp{seglen=10,delsegs=true,numsegs=5,index=/Users/${USER}/life-dashboard/configs/html/stream/${STREAM_KEY}.m3u8,index-url=http://grafstation.local/stream/${STREAM_KEY}-########.ts},mux=ts{use-key-frames},dst=/Users/${USER}/life-dashboard/configs/html/stream/${STREAM_KEY}-########.ts}</string>
+        <string>--sout=#transcode{width=1920,height=1080,fps=30,vcodec=h264,vb=256,venc=x264{aud,profile=baseline,level=30,keyint=30,ref=1},acodec=mp3,ab=96}:std{access=livehttp{seglen=10,delsegs=true,numsegs=5,index=/Users/${USER}/grafstation/configs/html/stream/${STREAM_KEY}.m3u8,index-url=http://grafstation.local/stream/${STREAM_KEY}-########.ts},mux=ts{use-key-frames},dst=/Users/${USER}/grafstation/configs/html/stream/${STREAM_KEY}-########.ts}</string>
     </array>
     <key>WorkingDirectory</key>
     <string>/tmp</string>

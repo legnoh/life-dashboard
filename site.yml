@@ -5,11 +5,8 @@
     - role: install_core_settings
       tags: [install_core_settings]
 
-    - role: install_misc_packages
-      tags: [install_misc_packages]
-
-    - role: start_dockerd
-      tags: [start_dockerd]
+    - role: start_cask_apps
+      tags: [start_cask_apps]
 
     - role: generate_snmp_config
       tags: [generate_snmp_config]
