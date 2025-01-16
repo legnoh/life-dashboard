@@ -6,7 +6,7 @@ updates:
       interval: daily
       time: "04:00" # 13:00(UTC+9)
   - package-ecosystem: "terraform"
-    directory: "/grafstation/configs/grafana"
+    directory: "/roles/start_grafana_config/files/grafana"
     schedule:
       interval: daily
       time: "04:00" # 13:00(UTC+9)
