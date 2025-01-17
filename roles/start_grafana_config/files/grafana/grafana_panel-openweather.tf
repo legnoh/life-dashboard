@@ -90,7 +90,7 @@ resource "grafana_library_panel" "openweather-thi" {
     ]
     fieldConfig = merge(local.field_config_base, {
       defaults = merge(local.field_config_default_base, {
-        mappings = locals.thi_threshold
+        mappings = local.thi_threshold
         thresholds = merge(local.thresholds_base, {
           steps = [
             zipmap(local.thresholds_keys, ["text", null]),
