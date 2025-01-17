@@ -60,6 +60,30 @@ resource "grafana_library_panel" "remo-humidity" {
   }))
 }
 
+resource "grafana_library_panel" "remo-thi" {
+  org_id = grafana_organization.main.org_id
+  name   = "NatureRemo - 不快指数"
+  model_json = jsonencode(merge(local.common_base, local.stats_base, local.link.openweather, {
+    title = "中: 不快指数",
+    targets = [
+      merge(local.target_base, {
+        expr = "(0.81 * remo_temperature{name=\"${var.NATURE_REMO_DEVICE_NAME}\"}) + (0.01 * remo_humidity{name=\"${var.NATURE_REMO_DEVICE_NAME}\"}) * ( (0.99 * remo_temperature{name=\"${var.NATURE_REMO_DEVICE_NAME}\"}) - 14.3 ) + 46.3"
+        refId = "A"
+      }),
+    ]
+    fieldConfig = merge(local.field_config_base, {
+      defaults = merge(local.field_config_default_base, {
+        mappings = locals.thi_threshold
+        thresholds = merge(local.thresholds_base, {
+          steps = [
+            zipmap(local.thresholds_keys, ["text", null]),
+          ]
+        })
+      })
+    })
+  }))
+}
+
 resource "grafana_library_panel" "remo-power-consumption" {
   org_id = grafana_organization.main.org_id
   name   = "NatureRemo - 瞬間消費電力"

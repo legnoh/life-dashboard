@@ -78,7 +78,7 @@ resource "grafana_dashboard" "life-metrics" {
         gridPos      = local.grid_position.B4
       },
       {
-        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.remo-humidity.uid])
+        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.remo-thi.uid])
         gridPos      = local.grid_position.C4
       },
       {

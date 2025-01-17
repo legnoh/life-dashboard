@@ -148,4 +148,39 @@ locals {
     { h = 11, w = 8,  x = 8,  y = 15 },
     { h = 11, w = 8,  x = 16, y = 15 },
   ]
+
+  thi_threshold = [
+    { 
+      type = "range",
+      options = { from = 0,  to = 55,  result = { index = 0 , color = "dark-blue" , text = "寒🥶" } },
+    },
+    { 
+      type = "range", 
+      options = { from = 55, to = 60,  result = { index = 1 , color = "blue" , text = "稍寒😨" } },
+    },
+    { 
+      type = "range", 
+      options = { from = 60, to = 65,  result = { index = 2 , color = "super-light-green" , text = "普通-🙂" } },
+    },
+    { 
+      type = "range", 
+      options = { from = 65, to = 70,  result = { index = 3 , color = "green" , text = "快適🥰" } },
+    },
+    { 
+      type = "range", 
+      options = { from = 70, to = 75,  result = { index = 4 , color = "super-light-yellow" , text = "普通+😊" } },
+    },
+    { 
+      type = "range", 
+      options = { from = 75, to = 80,  result = { index = 5 , color = "orange" , text = "稍暑😎" } },
+    },
+    { 
+      type = "range", 
+      options = { from = 80, to = 85,  result = { index = 6 , color = "red" , text = "暑😥" } },
+    },
+    { 
+      type = "range", 
+      options = { from = 85, to = 120, result = { index = 7 , color = "dark-red" , text = "猛暑🥵" } },
+    },
+  ]
 }
