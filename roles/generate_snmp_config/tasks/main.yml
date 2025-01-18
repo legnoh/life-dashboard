@@ -1,73 +1,81 @@
 ---
 
-- name: Install gnu-tar(for ansible unarchive module)
-  community.general.homebrew:
-    name: gnu-tar
-    state: upgraded
+- name: Generate SNMP Config
+  block:
+    - name: Install gnu-tar(for ansible unarchive module)
+      community.general.homebrew:
+        name: gnu-tar
+        state: upgraded
 
-- name: Create a temp directory
-  ansible.builtin.file:
-    path: "{{ generate_snmp_config_tmp_dir }}/mibs"
-    state: directory
-    recurse: true
-    mode: '0755'
+    - name: Create a temp directory
+      ansible.builtin.file:
+        path: "{{ generate_snmp_config_tmp_dir }}/mibs"
+        state: directory
+        recurse: true
+        mode: '0755'
 
-- name: Download Makefile
-  when: not ansible_check_mode
-  ansible.builtin.get_url:
-    url: https://github.com/prometheus/snmp_exporter/raw/main/generator/Makefile
-    dest: "{{ generate_snmp_config_tmp_dir }}/Makefile"
-    mode: '0644'
+    - name: Download Makefile
+      when: not ansible_check_mode
+      ansible.builtin.get_url:
+        url: https://github.com/prometheus/snmp_exporter/raw/main/generator/Makefile
+        dest: "{{ generate_snmp_config_tmp_dir }}/Makefile"
+        mode: '0644'
 
-- name: Download Common mib file with Makefile
-  when: not ansible_check_mode
-  make:
-    chdir: "{{ generate_snmp_config_tmp_dir }}"
-    target: mibs
+    - name: Download Common mib file with Makefile
+      when: not ansible_check_mode
+      make:
+        chdir: "{{ generate_snmp_config_tmp_dir }}"
+        target: mibs
 
-- name: Download YAMAHA private mib
-  when: not ansible_check_mode
-  ansible.builtin.get_url:
-    url: http://www.rtpro.yamaha.co.jp/RT/docs/mib/yamaha-private-mib.tar.gz
-    dest: "{{ generate_snmp_config_tmp_dir }}/yamaha-private-mib.tar.gz"
-    mode: '0644'
+    - name: Download YAMAHA private mib
+      when: not ansible_check_mode
+      ansible.builtin.get_url:
+        url: https://www.rtpro.yamaha.co.jp/RT/docs/mib/yamaha-private-mib.tar.gz
+        dest: "{{ generate_snmp_config_tmp_dir }}/yamaha-private-mib.tar.gz"
+        mode: '0644'
 
-- name: Unarchive private mib
-  when: not ansible_check_mode
-  ansible.builtin.unarchive:
-    src: "{{ generate_snmp_config_tmp_dir }}/yamaha-private-mib.tar.gz"
-    dest: "{{ generate_snmp_config_tmp_dir }}"
-    extra_opts: ['--strip-components', '1', -C, 'mibs']
+    - name: Unarchive private mib
+      when: not ansible_check_mode
+      ansible.builtin.unarchive:
+        remote_src: true
+        src: "{{ generate_snmp_config_tmp_dir }}/yamaha-private-mib.tar.gz"
+        dest: "{{ generate_snmp_config_tmp_dir }}"
+        extra_opts: ['--strip-components', '1', -C, 'mibs']
 
-- name: Create generator.yml
-  when: not ansible_check_mode
-  ansible.builtin.template:
-    src: generator.yml.j2
-    dest: "{{ generate_snmp_config_tmp_dir }}/generator.yml"
-    mode: '0644'
+    - name: Create generator.yml
+      when: not ansible_check_mode
+      ansible.builtin.template:
+        src: generator.yml.j2
+        dest: "{{ generate_snmp_config_tmp_dir }}/generator.yml"
+        mode: '0644'
 
-- name: Run generate script in Container
-  when: not ansible_check_mode
-  community.docker.docker_container:
-    name: snmp-generator
-    image: prom/snmp-generator:latest
-    command: generate --no-fail-on-parse-errors
-    platform: linux/amd64
-    volumes:
-      - "{{ generate_snmp_config_tmp_dir }}:/opt"
-    detach: false
+    - name: Run generate script in Container
+      when: not ansible_check_mode
+      community.docker.docker_container:
+        name: snmp-generator
+        image: prom/snmp-generator:latest
+        command: generate --no-fail-on-parse-errors
+        platform: linux/amd64
+        volumes:
+          - "{{ generate_snmp_config_tmp_dir }}:/opt"
+        detach: false
 
-- name: Create a config directory
-  ansible.builtin.file:
-    path: "{{ home_dir }}/grafstation/configs"
-    state: directory
-    recurse: true
-    mode: '0755'
+    - name: Create a config directory
+      ansible.builtin.file:
+        path: "{{ home_dir }}/grafstation/configs"
+        state: directory
+        recurse: true
+        mode: '0755'
 
-- name: Copy snmp.yml to snmp-exporter config dir
-  when: not ansible_check_mode
-  ansible.builtin.copy:
-    remote_src: true
-    src: "{{ generate_snmp_config_tmp_dir }}/snmp.yml"
-    dest: "{{ home_dir }}/grafstation/configs/snmp.yml"
-    mode: '0644'
+    - name: Copy snmp.yml to snmp-exporter config dir
+      when: not ansible_check_mode
+      ansible.builtin.copy:
+        remote_src: true
+        src: "{{ generate_snmp_config_tmp_dir }}/snmp.yml"
+        dest: "{{ home_dir }}/grafstation/configs/snmp.yml"
+        mode: '0644'
+  always:
+    - name: Remove temp directory
+      ansible.builtin.file:
+        path: "{{ generate_snmp_config_tmp_dir }}"
+        state: absent

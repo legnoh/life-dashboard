@@ -1,77 +1,79 @@
 ---
 
-- name: Create config directories
-  ansible.builtin.file:
-    path: "{{ home_dir }}/grafstation/{{ item }}"
-    state: directory
-    recurse: true
-    mode: '0755'
-  loop:
-    - configs/html/player
-    - prometheus
-    - withings
+- name: Start Docker containers
+  block:
+    - name: Create config directories
+      ansible.builtin.file:
+        path: "{{ home_dir }}/grafstation/{{ item }}"
+        state: directory
+        recurse: true
+        mode: '0755'
+      loop:
+        - configs/html/player
+        - prometheus
+        - withings
 
-- name: Copy config files
-  ansible.builtin.copy:
-    src: "{{ item.src }}"
-    dest: "{{ home_dir }}/grafstation/{{ item.dst }}"
-    mode: '0644'
-  loop:
-    - { src: html/, dst: configs/html/ }
-    - { src: docker-compose.yml, dst: configs/docker-compose.yml }
-    - { src: nginx.conf, dst: configs/nginx.conf }
-    - { src: prometheus.yml, dst: prometheus/prometheus.yml }
+    - name: Copy config files
+      ansible.builtin.copy:
+        src: "{{ item.src }}"
+        dest: "{{ home_dir }}/grafstation/{{ item.dst }}"
+        mode: '0644'
+      loop:
+        - { src: html/, dst: configs/html/ }
+        - { src: docker-compose.yml, dst: configs/docker-compose.yml }
+        - { src: nginx.conf, dst: configs/nginx.conf }
+        - { src: prometheus.yml, dst: prometheus/prometheus.yml }
 
-- name: Download remote files(mpegts)
-  when: not ansible_check_mode
-  ansible.builtin.get_url:
-    url: "https://github.com/xqq/mpegts.js/releases/download/v1.7.3/{{ item }}"
-    dest: "{{ home_dir }}/grafstation/configs/html/player/{{ item }}"
-    mode: '0644'
-  loop:
-    - mpegts.js
-    - mpegts.js.map
+    - name: Download remote files(mpegts)
+      when: not ansible_check_mode
+      ansible.builtin.get_url:
+        url: "https://github.com/xqq/mpegts.js/releases/download/v1.7.3/{{ item }}"
+        dest: "{{ home_dir }}/grafstation/configs/html/player/{{ item }}"
+        mode: '0644'
+      loop:
+        - mpegts.js
+        - mpegts.js.map
 
-- name: Create .env file
-  when: not ansible_check_mode
-  ansible.builtin.template:
-    src: .env.j2
-    dest: "{{ home_dir }}/grafstation/configs/.env"
-    mode: '0644'
+    - name: Create .env file
+      when: not ansible_check_mode
+      ansible.builtin.template:
+        src: .env.j2
+        dest: "{{ home_dir }}/grafstation/configs/.env"
+        mode: '0644'
 
-- name: Pull docker images
-  when: not ansible_check_mode
-  community.docker.docker_compose_v2_pull:
-    project_src: "{{ home_dir }}/grafstation/configs"
+    - name: Pull docker images
+      when: not ansible_check_mode
+      community.docker.docker_compose_v2_pull:
+        project_src: "{{ home_dir }}/grafstation/configs"
 
-- name: Stop docker containers
-  when: not start_docker_containers_recreate_container and not ansible_check_mode
-  community.docker.docker_compose_v2:
-    project_src: "{{ home_dir }}/grafstation/configs"
-    state: stopped
+    - name: Stop docker containers
+      when: not start_docker_containers_recreate_container and not ansible_check_mode
+      community.docker.docker_compose_v2:
+        project_src: "{{ home_dir }}/grafstation/configs"
+        state: stopped
 
-- name: Delete docker containers
-  when: start_docker_containers_recreate_container and not ansible_check_mode
-  community.docker.docker_compose_v2:
-    project_src: "{{ home_dir }}/grafstation/configs"
-    state: absent
+    - name: Delete docker containers
+      when: start_docker_containers_recreate_container and not ansible_check_mode
+      community.docker.docker_compose_v2:
+        project_src: "{{ home_dir }}/grafstation/configs"
+        state: absent
 
-- name: Delete terraform.tfstate
-  when: start_docker_containers_recreate_container and not ansible_check_mode
-  ansible.builtin.file:
-    state: absent
-    path: /tmp/terraform.tfstate
+    - name: Delete terraform.tfstate
+      when: start_docker_containers_recreate_container and not ansible_check_mode
+      ansible.builtin.file:
+        state: absent
+        path: /tmp/terraform.tfstate
 
-- name: Start docker containers
-  when: not ansible_check_mode
-  community.docker.docker_compose_v2:
-    project_src: "{{ home_dir }}/grafstation/configs"
+    - name: Start docker containers
+      when: not ansible_check_mode
+      community.docker.docker_compose_v2:
+        project_src: "{{ home_dir }}/grafstation/configs"
 
-- name: Prune unused resources
-  when: not ansible_check_mode
-  community.docker.docker_prune:
-    builder_cache: true
-    containers: true
-    images: true
-    networks: true
-    volumes: true
+    - name: Prune unused resources
+      when: not ansible_check_mode
+      community.docker.docker_prune:
+        builder_cache: true
+        containers: true
+        images: true
+        networks: true
+        volumes: true

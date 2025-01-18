@@ -1,33 +1,35 @@
 ---
 
-- name: Install Cask applications
-  community.general.homebrew_cask:
-    name:
-      - docker # sudo required
-      - flux
-    state: upgraded
-    sudo_password: "{{ start_cask_apps_grafstation_sudo_pass }}"
+- name: Start cask apps
+  block:
+    - name: Install Cask applications
+      community.general.homebrew_cask:
+        name:
+          - docker # sudo required
+          - flux
+        state: upgraded
+        sudo_password: "{{ start_cask_apps_grafstation_sudo_pass }}"
 
-- name: Start Docker
-  ansible.builtin.command:
-    cmd: /usr/bin/open --background -a Docker
-  changed_when: false
+    - name: Start Docker
+      ansible.builtin.command:
+        cmd: /usr/bin/open --background -a Docker
+      changed_when: false
 
-- name: Start Flux
-  ansible.builtin.command:
-    cmd: /usr/bin/open --background -a Flux
-  changed_when: false
+    - name: Start Flux
+      ansible.builtin.command:
+        cmd: /usr/bin/open --background -a Flux
+      changed_when: false
 
-- name: Wait dockerd is running
-  ansible.builtin.shell: |
-      while true
-      do
-        docker ps > /dev/null
-        if [[ $? = 0 ]]; then
-          echo "dockerd is running!"
-          exit 0
-        fi
-        echo "dockerd is starting..."
-        sleep 5
-      done
-  changed_when: false
+    - name: Wait dockerd is running
+      ansible.builtin.shell: |
+          while true
+          do
+            docker ps > /dev/null
+            if [[ $? = 0 ]]; then
+              echo "dockerd is running!"
+              exit 0
+            fi
+            echo "dockerd is starting..."
+            sleep 5
+          done
+      changed_when: false
