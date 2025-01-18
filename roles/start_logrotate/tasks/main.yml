@@ -22,6 +22,7 @@
     dest: "/opt/homebrew/etc/logrotate.d/{{ item }}"
     mode: '0644'
   loop:
+    - closenotification.conf
     - grafana-apply.conf
     - streamlink.conf
     - vlc.conf
