@@ -40,14 +40,8 @@
   - [Add new self-hosted runner · legnoh/life-dashboard](https://github.com/legnoh/life-dashboard/settings/actions/runners/new?arch=arm64&os=osx)
 - 自己ホストランナーをサービスとして起動した状態にする
   - [自己ホストランナーアプリケーションをサービスとして設定する - GitHub Docs](https://docs.github.com/ja/actions/hosting-your-own-runners/managing-self-hosted-runners/configuring-the-self-hosted-runner-application-as-a-service?platform=mac)
-- GitHub Actionの Deploy (Ansible) 経由で以下がすべて実行される
-  - Homebrew をインストールする
-  - 必要な設定やパッケージをインストールする
-  - 設定ファイルを作成・コピーする
-  - SNMP設定ファイルを作成する
-  - Dockerコンテナを立ち上げる
-  - Terraform経由でGrafanaの基本設定を投入する
-  - grafana-kioskを起動する
+- リポジトリのSecretに必要なクレデンシャル情報を登録する([deploy.yml](./.github/workflows/deploy.yml)を参照)
+- GitHub ActionのDeployジョブを実行するとデプロイが実行される
 
 ### 手動でセットアップする場合
 
@@ -68,7 +62,7 @@
   ```sh
   git clone https://github.com/legnoh/life-dashboard.git && cd life-dashboard
   ```
-- **C:** [`credential.yml`](./credential.yml) をサンプルからコピーし、必要な環境変数を設定する
+- [`credential.yml`](./credential.yml) をサンプルからコピーし、必要な環境変数を設定する
   ```sh
   cp credential-sample.yml credential.yml
   vi credential.yml
@@ -115,3 +109,9 @@
   ```
 
 </details>
+
+## Usage
+
+- Grafana: http://grafstation.local
+- Prometheus: http://grafstation.local:9090
+- etc: [docker-compose.yml](./roles/start_docker_containers/files/docker-compose.yml) を参照
