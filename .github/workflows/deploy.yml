@@ -78,7 +78,7 @@ jobs:
 
     - name: Test
       run: |
-        ansible grafstation -m ansible.builtin.setup
+        ansible localhost -m ansible.builtin.setup
 
     # - name: Run playbook
     #   uses: dawidd6/action-ansible-playbook@v2
