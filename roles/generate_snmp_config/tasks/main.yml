@@ -74,6 +74,7 @@
         src: "{{ generate_snmp_config_tmp_dir }}/snmp.yml"
         dest: "{{ home_dir }}/grafstation/configs/snmp.yml"
         mode: '0644'
+
   always:
     - name: Remove temp directory
       ansible.builtin.file:

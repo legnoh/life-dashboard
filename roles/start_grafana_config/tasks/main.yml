@@ -81,3 +81,9 @@
       community.general.launchd:
         name: io.lkj.life.dashboard.grafstation.grafana.apply
         state: reloaded
+
+  always:
+    - name: Remove temp file
+      ansible.builtin.file:
+        path: /tmp/grafana-plan.log
+        state: absent
