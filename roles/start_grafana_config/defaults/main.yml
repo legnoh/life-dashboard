@@ -1,9 +1,9 @@
 ---
 
-start_grafana_config_abema_jwt_token: "{{ lookup('env', 'ABEMA_JWT_TOKEN', default=Undefined) }}"
-start_grafana_config_grafana_admin_password: "{{ lookup('env', 'GRAFANA_ADMIN_PASSWORD', default=Undefined) }}"
-start_grafana_config_greench_email: "{{ lookup('env', 'GREENCH_EMAIL', default=Undefined) }}"
-start_grafana_config_greench_password: "{{ lookup('env', 'GREENCH_PASSWORD', default=Undefined) }}"
-start_grafana_config_nature_remo_device_name: "{{ lookup('env', 'NATURE_DEVICE_NAME', default=Undefined) }}"
-start_grafana_config_openweather_city: "{{ lookup('env', 'OPENWEATHER_CITY', default=Undefined) }}"
-start_grafana_config_youtube_playlist_id: "{{ lookup('env', 'YOUTUBE_PLAYLIST_ID', default=Undefined) }}"
+start_grafana_config_abema_jwt_token: "{{ abema.jwt_token }}"
+start_grafana_config_grafana_admin_password: "{{ grafana.admin_password }}"
+start_grafana_config_greench_email: "{{ greench.email }}"
+start_grafana_config_greench_password: "{{ greench.password }}"
+start_grafana_config_nature_remo_device_name: "{{ nature.remo_device_name }}"
+start_grafana_config_openweather_city: "{{ openweather.city }}"
+start_grafana_config_youtube_playlist_id: "{{ youtube.playlist_id }}"

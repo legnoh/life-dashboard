@@ -76,37 +76,41 @@ jobs:
             echo "options=" >> $GITHUB_OUTPUT
           fi
 
-    - name: Run playbook
-      uses: dawidd6/action-ansible-playbook@v2
-      with:
-        playbook: site.yml
-        options: -i inventory/localhost.yml ${{ steps.set-mode.outputs.options }}
-      env:
-        ABEMA_JWT_TOKEN: ${{ secrets.ABEMA_JWT_TOKEN }}
-        ASKEN_PASSWORD: ${{ secrets.ASKEN_PASSWORD }}
-        ASKEN_USERNAME: ${{ secrets.ASKEN_USERNAME }}
-        GRAFANA_ADMIN_PASSWORD: ${{ secrets.GRAFANA_ADMIN_PASSWORD }}
-        GRAFSTATION_SUDO_PASS: ${{ secrets.GRAFSTATION_SUDO_PASS }}
-        GREENCH_EMAIL: ${{ secrets.GREENCH_EMAIL }}
-        GREENCH_PASSWORD: ${{ secrets.GREENCH_PASSWORD }}
-        MONEYFORWARD_EMAIL: ${{ secrets.MONEYFORWARD_EMAIL }}
-        MONEYFORWARD_PASSWORD: ${{ secrets.MONEYFORWARD_PASSWORD }}
-        NATURE_DEVICE_NAME: ${{ secrets.NATURE_DEVICE_NAME }}
-        NATURE_OAUTH_TOKEN: ${{ secrets.NATURE_OAUTH_TOKEN }}
-        OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
-        OPENWEATHER_CITY: ${{ secrets.OPENWEATHER_CITY }}
-        OURA_ACCESS_TOKEN: ${{ secrets.OURA_ACCESS_TOKEN }}
-        OURA_TZ: ${{ secrets.OURA_TZ }}
-        RECREATE_CONTAINER: ${{ inputs.rm_state }}
-        SNMP_PASSWORD: ${{ secrets.SNMP_PASSWORD }}
-        SNMP_PRIV_PASSWORD: ${{ secrets.SNMP_PRIV_PASSWORD }}
-        SNMP_USERNAME: ${{ secrets.SNMP_USERNAME }}
-        SPEEDTEST_SERVER_IDS: ${{ secrets.SPEEDTEST_SERVER_IDS }}
-        WITHINGS_ACCESS_TOKEN: ${{ secrets.WITHINGS_ACCESS_TOKEN }}
-        WITHINGS_CLIENT_ID: ${{ secrets.WITHINGS_CLIENT_ID }}
-        WITHINGS_CONSUMER_SECRET: ${{ secrets.WITHINGS_CONSUMER_SECRET }}
-        WITHINGS_CREATED: ${{ secrets.WITHINGS_CREATED }}
-        WITHINGS_REFRESH_TOKEN: ${{ secrets.WITHINGS_REFRESH_TOKEN }}
-        WITHINGS_TZ: "Asia/Tokyo"
-        WITHINGS_USERID: ${{ secrets.WITHINGS_USERID }}
-        YOUTUBE_PLAYLIST_ID: ${{ secrets.YOUTUBE_PLAYLIST_ID }}
+    - name: Test
+      run: |
+        ansible grafstation -m ansible.builtin.setup
+
+    # - name: Run playbook
+    #   uses: dawidd6/action-ansible-playbook@v2
+    #   with:
+    #     playbook: site.yml
+    #     options: -i inventory/localhost.yml -e @credential.yml ${{ steps.set-mode.outputs.options }}
+    #   env:
+    #     ABEMA_JWT_TOKEN: ${{ secrets.ABEMA_JWT_TOKEN }}
+    #     ASKEN_PASSWORD: ${{ secrets.ASKEN_PASSWORD }}
+    #     ASKEN_USERNAME: ${{ secrets.ASKEN_USERNAME }}
+    #     GRAFANA_ADMIN_PASSWORD: ${{ secrets.GRAFANA_ADMIN_PASSWORD }}
+    #     GRAFSTATION_SUDO_PASS: ${{ secrets.GRAFSTATION_SUDO_PASS }}
+    #     GREENCH_EMAIL: ${{ secrets.GREENCH_EMAIL }}
+    #     GREENCH_PASSWORD: ${{ secrets.GREENCH_PASSWORD }}
+    #     MONEYFORWARD_EMAIL: ${{ secrets.MONEYFORWARD_EMAIL }}
+    #     MONEYFORWARD_PASSWORD: ${{ secrets.MONEYFORWARD_PASSWORD }}
+    #     NATURE_DEVICE_NAME: ${{ secrets.NATURE_DEVICE_NAME }}
+    #     NATURE_OAUTH_TOKEN: ${{ secrets.NATURE_OAUTH_TOKEN }}
+    #     OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
+    #     OPENWEATHER_CITY: ${{ secrets.OPENWEATHER_CITY }}
+    #     OURA_ACCESS_TOKEN: ${{ secrets.OURA_ACCESS_TOKEN }}
+    #     OURA_TZ: ${{ secrets.OURA_TZ }}
+    #     RECREATE_CONTAINER: ${{ inputs.rm_state }}
+    #     SNMP_PASSWORD: ${{ secrets.SNMP_PASSWORD }}
+    #     SNMP_PRIV_PASSWORD: ${{ secrets.SNMP_PRIV_PASSWORD }}
+    #     SNMP_USERNAME: ${{ secrets.SNMP_USERNAME }}
+    #     SPEEDTEST_SERVER_IDS: ${{ secrets.SPEEDTEST_SERVER_IDS }}
+    #     WITHINGS_ACCESS_TOKEN: ${{ secrets.WITHINGS_ACCESS_TOKEN }}
+    #     WITHINGS_CLIENT_ID: ${{ secrets.WITHINGS_CLIENT_ID }}
+    #     WITHINGS_CONSUMER_SECRET: ${{ secrets.WITHINGS_CONSUMER_SECRET }}
+    #     WITHINGS_CREATED: ${{ secrets.WITHINGS_CREATED }}
+    #     WITHINGS_REFRESH_TOKEN: ${{ secrets.WITHINGS_REFRESH_TOKEN }}
+    #     WITHINGS_TZ: "Asia/Tokyo"
+    #     WITHINGS_USERID: ${{ secrets.WITHINGS_USERID }}
+    #     YOUTUBE_PLAYLIST_ID: ${{ secrets.YOUTUBE_PLAYLIST_ID }}

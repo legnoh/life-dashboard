@@ -1,8 +1,7 @@
 ---
-generate_snmp_config_grafstation_sudo_pass: "{{ lookup('env', 'GRAFSTATION_SUDO_PASS', default=Undefined) }}"
 generate_snmp_config_tmp_dir: /tmp/snmp-generator
-generate_snmp_config_snmp_exporter_module_name: "{{ lookup('env', 'SNMP_EXPORTER_MODULE_NAME', default='rtx1300') }}"
-generate_snmp_config_snmp_username: "{{ lookup('env', 'SNMP_USERNAME', default=Undefined) }}"
-generate_snmp_config_snmp_password: "{{ lookup('env', 'SNMP_PASSWORD', default=Undefined) }}"
-generate_snmp_config_snmp_priv_password: "{{ lookup('env', 'SNMP_PRIV_PASSWORD', default=Undefined) }}"
-generate_snmp_config_snmp_context_name: "{{ lookup('env', 'SNMP_CONTEXT_NAME', default='rtx1300') }}"
+generate_snmp_config_snmp_exporter_module_name: "{{ snmp.exporter_module_name }}"
+generate_snmp_config_snmp_username: "{{ snmp.username }}"
+generate_snmp_config_snmp_password: "{{ snmp.password }}"
+generate_snmp_config_snmp_priv_password: "{{ snmp.priv_password }}"
+generate_snmp_config_snmp_context_name: "{{ snmp.context_name }}"

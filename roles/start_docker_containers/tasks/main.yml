@@ -22,7 +22,6 @@
         - { src: html/, dst: configs/html/ }
         - { src: docker-compose.yml, dst: configs/docker-compose.yml }
         - { src: nginx.conf, dst: configs/nginx.conf }
-        - { src: prometheus.yml, dst: prometheus/prometheus.yml }
 
     - name: Download remote files(mpegts)
       when: not ansible_check_mode
@@ -33,6 +32,13 @@
       loop:
         - mpegts.js
         - mpegts.js.map
+
+    - name: Create prometheus.yml file
+      when: not ansible_check_mode
+      ansible.builtin.template:
+        src: prometheus.yml.j2
+        dest: "{{ home_dir }}/grafstation/prometheus/prometheus.yml"
+        mode: '0644'
 
     - name: Create .env file
       when: not ansible_check_mode

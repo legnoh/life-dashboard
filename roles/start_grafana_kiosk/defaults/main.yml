@@ -1,2 +1,2 @@
 ---
-start_grafana_kiosk_grafana_admin_password: "{{ lookup('env', 'GRAFANA_ADMIN_PASSWORD', default=Undefined) }}"
+start_grafana_kiosk_grafana_admin_password: "{{ grafana.admin_password }}"

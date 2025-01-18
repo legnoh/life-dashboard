@@ -60,25 +60,22 @@
 
 <summary>管理対象ノードとなるmac上で直接Ansibleを実行する</summary>
 
-- Homebrew をインストールする
-  - [macOS（またはLinux）用パッケージマネージャー — Homebrew](https://brew.sh/ja/)
-- ansible をインストールする
+- Homebrew & ansibleをインストールする([`legnoh/ansibler`](https://github.com/legnoh/ansibler)を利用)
   ```sh
-  brew install ansible
+  sh -c "$(curl -L ansible.lkj.io)"
   ```
 - このリポジトリをcloneする
   ```sh
-  git clone https://github.com/legnoh/life-dashboard.git 
+  git clone https://github.com/legnoh/life-dashboard.git && cd life-dashboard
   ```
-- [`.env`](./.env.sample) をサンプルからコピーし、必要な環境変数を設定して読み込ませる
+- **C:** [`credential.yml`](./credential.yml) をサンプルからコピーし、必要な環境変数を設定する
   ```sh
-  cp .env.sample .env
-  vi .env
-  source ./.env
+  cp credential-sample.yml credential.yml
+  vi credential.yml
   ```
 - ansibleを実行してデプロイする
   ```sh
-  ansible-playbook site.yml -i inventory/localhost.yml
+  ansible-playbook site.yml -i inventory/localhost.yml -e @credential.yml
   ```
 </details>
 
@@ -99,25 +96,22 @@
     && echo \"$pubkey\" > ~/.ssh/authorized_keys \
     && chmod 600 ~/.ssh/authorized_keys"
   ```
-- **C/M:** Homebrew をインストールする
-  - [macOS（またはLinux）用パッケージマネージャー — Homebrew](https://brew.sh/ja/)
-- **C:** ansible をインストールする
+- **C/M:** Homebrew & ansibleをインストールする([`legnoh/ansibler`](https://github.com/legnoh/ansibler)を利用)
   ```sh
-  brew install ansible
+  sh -c "$(curl -L ansible.lkj.io)"
   ```
 - **C:** このリポジトリをcloneする
   ```sh
-  git clone https://github.com/legnoh/life-dashboard.git
+  git clone https://github.com/legnoh/life-dashboard.git && cd life-dashboard
   ```
-- **C:** [`.env`](./.env.sample) をサンプルからコピーし、必要な環境変数を設定して読み込ませる
+- **C:** [`credential.yml`](./credential.yml) をサンプルからコピーし、必要な環境変数を設定する
   ```sh
-  cp .env.sample .env
-  vi .env
-  source ./.env
+  cp credential-sample.yml credential.yml
+  vi credential.yml
   ```
 - **C:** ansibleを実行してデプロイする。inventoryはgrafstation.ymlに向ける
   ```sh
-  ansible-playbook site.yml -i inventory/grafstation.yml
+  ansible-playbook site.yml -i inventory/grafstation.yml -e @credential.yml
   ```
 
 </details>

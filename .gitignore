@@ -88,6 +88,5 @@ terraform.rc
 
 *.retry
 
-# env files
-.env
-.envrc
+# credential file
+credential.yml
