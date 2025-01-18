@@ -22,7 +22,7 @@
 | [billimek/prometheus-speedtest-exporter](https://github.com/billimek/prometheus-speedtest-exporter) | Speedtest で計測した宅内通信回線の最高速度 |
 | [legnoh/withings-exporter](https://github.com/legnoh/withings-exporter) | Withings の 身体測定情報 |
 | [RSS一覧 - Yahoo!ニュース](https://news.yahoo.co.jp/rss) | 最新ニュースのヘッドライン |
-| [legnoh/youtube-playlist-creator](https://github.com/legnoh/youtube-playlist-creator) | 嗜好に基づいたYouTubeLiveのプレイリスト生成 |
+| [legnoh/nijisanji-stream-playlist-creator](https://github.com/legnoh/nijisanji-stream-playlist-creator) | 嗜好に基づいたYouTubeLiveのプレイリスト生成 |
 
 ## Installation
 
