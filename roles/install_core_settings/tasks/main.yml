@@ -9,22 +9,29 @@
     - .zshrc
 
 - name: Download close_notifications_applescript.js
-  when: not ansible_check_mode
-  ansible.builtin.get_url:
+  ansible.builtin.uri:
     url: |
       https://gist.githubusercontent.com/lancethomps/a5ac103f334b171f70ce2ff983220b4f/raw/578178c6729cb4f3a048c0b62b4e402a1112336b/close_notifications_applescript.js
-    dest: "{{ home_dir }}/grafstation/close_notifications_applescript.scpt"
-    mode: '0644'
+    status_code: 200
+    return_content: true
+  register: close_notifications_script
+
+- name: Create JXA file
+  when: not ansible_check_mode
+  ansible.builtin.template:
+    src: close_notifications.j2
+    dest: "{{ home_dir }}/grafstation/close_notifications"
+    mode: '0755'
 
 - name: Create launchd definition file
   when: not ansible_check_mode
   ansible.builtin.template:
-    src: closenotification.plist.j2
-    dest: "{{ home_dir }}/Library/LaunchAgents/io.lkj.life.dashboard.closenotification.plist"
+    src: closenotifications.plist.j2
+    dest: "{{ home_dir }}/Library/LaunchAgents/io.lkj.life.dashboard.closenotifications.plist"
     mode: '0644'
 
-- name: Start grafana-config daemon
+- name: Start closenotifications daemon
   when: not ansible_check_mode
   community.general.launchd:
-    name: io.lkj.life.dashboard.closenotification
+    name: io.lkj.life.dashboard.closenotifications
     state: reloaded

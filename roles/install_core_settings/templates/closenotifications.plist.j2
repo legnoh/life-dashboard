@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>io.lkj.life.dashboard.closenotifications</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/usr/bin/osascript</string>
+        <string>{{ home_dir }}/grafstation/close_notifications</string>
+    </array>
+    <key>WorkingDirectory</key>
+    <string>{{ home_dir }}/grafstation</string>
+    <key>StandardOutPath</key>
+    <string>/tmp/closenotifications.log</string>
+    <key>StandardErrorPath</key>
+    <string>/tmp/closenotifications.err</string>
+    <key>StartCalendarInterval</key>
+    <array>
+{% for i in range(12) %}
+        <dict>
+            <key>Minute</key>
+            <integer>{{ i*5 }}</integer>
+        </dict>
+{% endfor %}
+    </array>
+</dict>
+</plist>
