@@ -15,7 +15,7 @@ function unload_launchd() {
 function main() {
     export STREAM_KEY=${1:-"stream"}
     unload_launchd "io.lkj.life.dashboard.grafstation.stream.${STREAM_KEY}.streamlink"
-    # unload_launchd "io.lkj.life.dashboard.grafstation.stream.${STREAM_KEY}.ffmpeg"
+    unload_launchd "io.lkj.life.dashboard.grafstation.stream.${STREAM_KEY}.ffmpeg"
 }
 
 main $@
