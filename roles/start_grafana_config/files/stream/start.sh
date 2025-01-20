@@ -22,10 +22,9 @@ function main() {
     export STREAMLINK_ORIGIN_URL=${1:?}
     export STREAMLINK_HTTP_PORT=${2:-"45081"}
     export STREAM_KEY=${3:-"stream"}
-    export STREAMLINK_HTTP_URL="http://grafstation.local:${STREAMLINK_HTTP_PORT}"
-    load_launchd "io.lkj.life.dashboard.grafstation.stream.${STREAM_KEY}.stl" "./stl.plist"
-    sleep 10
-    load_launchd "io.lkj.life.dashboard.grafstation.stream.${STREAM_KEY}.vlc" "./vlc.plist"
+    export STREAMLINK_HTTP_URL="http://grafstation.local:${STREAMLINK_HTTP_PORT}/"
+    load_launchd "io.lkj.life.dashboard.grafstation.stream.${STREAM_KEY}.streamlink" "./streamlink.plist"
+    load_launchd "io.lkj.life.dashboard.grafstation.stream.${STREAM_KEY}.ffmpeg" "./ffmpeg.plist"
     touch ${STREAM_START_FILE} # 開始時刻把握のためにファイルを更新する
 }
 

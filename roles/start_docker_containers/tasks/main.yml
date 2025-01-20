@@ -23,16 +23,6 @@
         - { src: docker-compose.yml, dst: configs/docker-compose.yml }
         - { src: nginx.conf, dst: configs/nginx.conf }
 
-    - name: Download remote files(mpegts)
-      when: not ansible_check_mode
-      ansible.builtin.get_url:
-        url: "https://github.com/xqq/mpegts.js/releases/download/v1.7.3/{{ item }}"
-        dest: "{{ home_dir }}/grafstation/configs/html/player/{{ item }}"
-        mode: '0644'
-      loop:
-        - mpegts.js
-        - mpegts.js.map
-
     - name: Create prometheus.yml file
       when: not ansible_check_mode
       ansible.builtin.template:

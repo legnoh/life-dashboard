@@ -34,7 +34,7 @@ locals {
     }
     mahjong = {
       name = "Mリーグ"
-      url  = "http://grafstation.local/player/hls.html?url=http%3A%2F%2Fgrafstation.local%2Fstream%2Fstream.m3u8"
+      url  = "http://grafstation.local/player/hls.html?url=http%3A%2F%2Fgrafstation.local%2Fstream%2Fch1.m3u8"
     }
     greench = {
       name = "GREEN Ch."

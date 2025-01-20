@@ -16,16 +16,12 @@
       when: not ansible_check_mode
       community.general.homebrew:
         name:
+          - ffmpeg
           - focus-cli
           - gettext # for envsubst
           - jq
           - streamlink
           - terraform
-        state: upgraded
-
-    - name: Install Cask Packages
-      community.general.homebrew_cask:
-        name: vlc
         state: upgraded
 
     - name: Create config directories
@@ -36,6 +32,7 @@
         mode: '0755'
       loop:
         - grafstation/configs/grafana
+        - grafstation/configs/html/stream
         - grafstation/configs/stream
         - "Library/Application Support/streamlink/plugins"
 
@@ -49,7 +46,10 @@
       loop:
         - { path: 'grafana/', mod: '0644' }
         - { path: 'grafana/apply.sh', mod: '0755' }
-        - { path: 'stream/', mod: '0644' }
+        - { path: 'stream/start.sh', mod: '0755' }
+        - { path: 'stream/stop.sh', mod: '0755' }
+        - { path: 'stream/streamlink.plist', mod: '0644' }
+        - { path: 'stream/ffmpeg.plist', mod: '0644' }
 
     - name: Download remote files(streamlink plugin)
       when: not ansible_check_mode
