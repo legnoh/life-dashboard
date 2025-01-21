@@ -30,29 +30,43 @@
         dest: "{{ home_dir }}/grafstation/prometheus/prometheus.yml"
         mode: '0644'
 
-    - name: Create .env file
-      when: not ansible_check_mode
-      ansible.builtin.template:
-        src: .env.j2
-        dest: "{{ home_dir }}/grafstation/configs/.env"
-        mode: '0644'
-
     - name: Pull docker images
       when: not ansible_check_mode
       community.docker.docker_compose_v2_pull:
         project_src: "{{ home_dir }}/grafstation/configs"
+      environment: &docker_envs
+        ASKEN_PASSWORD: "{{ start_docker_containers_asken_password }}"
+        ASKEN_USERNAME: "{{ start_docker_containers_asken_username }}"
+        GRAFANA_ADMIN_PASSWORD: "{{ start_docker_containers_grafana_admin_password }}"
+        MONEYFORWARD_EMAIL: "{{ start_docker_containers_moneyforward_email }}"
+        MONEYFORWARD_PASSWORD: "{{ start_docker_containers_moneyforward_password }}"
+        NATURE_OAUTH_TOKEN: "{{ start_docker_containers_nature_oauth_token }}"
+        OPENWEATHER_CITY: "{{ start_docker_containers_openweather_city }}"
+        OPENWEATHER_API_KEY: "{{ start_docker_containers_openweather_api_key }}"
+        OURA_ACCESS_TOKEN: "{{ start_docker_containers_oura_access_token }}"
+        OURA_TZ: "{{ start_docker_containers_oura_tz }}"
+        SPEEDTEST_SERVER_IDS: "{{ start_docker_containers_speedtest_server_ids }}"
+        WITHINGS_ACCESS_TOKEN: "{{ start_docker_containers_withings_access_token }}"
+        WITHINGS_CLIENT_ID: "{{ start_docker_containers_withings_client_id }}"
+        WITHINGS_CONSUMER_SECRET: "{{ start_docker_containers_withings_consumer_secret }}"
+        WITHINGS_CREATED: "{{ start_docker_containers_withings_created }}"
+        WITHINGS_REFRESH_TOKEN: "{{ start_docker_containers_withings_refresh_token }}"
+        WITHINGS_TZ: "{{ start_docker_containers_withings_tz }}"
+        WITHINGS_USERID: "{{ start_docker_containers_withings_userid }}"
 
     - name: Stop docker containers
       when: not start_docker_containers_recreate_container and not ansible_check_mode
       community.docker.docker_compose_v2:
         project_src: "{{ home_dir }}/grafstation/configs"
         state: stopped
+      environment: *docker_envs
 
     - name: Delete docker containers
       when: start_docker_containers_recreate_container and not ansible_check_mode
       community.docker.docker_compose_v2:
         project_src: "{{ home_dir }}/grafstation/configs"
         state: absent
+      environment: *docker_envs
 
     - name: Delete terraform.tfstate
       when: start_docker_containers_recreate_container and not ansible_check_mode
@@ -64,6 +78,7 @@
       when: not ansible_check_mode
       community.docker.docker_compose_v2:
         project_src: "{{ home_dir }}/grafstation/configs"
+      environment: *docker_envs
 
     - name: Prune unused resources
       when: not ansible_check_mode
