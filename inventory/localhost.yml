@@ -1,6 +1,6 @@
 all:
   vars:
-    ansible_python_interpreter: /opt/homebrew/Cellar/ansible/11.1.0_1/libexec/bin/python
+    ansible_python_interpreter: /opt/homebrew/Cellar/ansible/11.2.0/libexec/bin/python
     home_dir: "{{ ansible_env.HOME }}"
 
 grafstation:
