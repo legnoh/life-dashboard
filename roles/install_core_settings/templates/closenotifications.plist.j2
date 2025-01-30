@@ -6,10 +6,10 @@
     <string>io.lkj.life.dashboard.closenotifications</string>
     <key>ProgramArguments</key>
     <array>
-        <string>{{ home_dir }}/grafstation/close_notifications</string>
+        <string>{{ ansible_env.HOME }}/grafstation/close_notifications</string>
     </array>
     <key>WorkingDirectory</key>
-    <string>{{ home_dir }}/grafstation</string>
+    <string>{{ ansible_env.HOME }}/grafstation</string>
     <key>StandardOutPath</key>
     <string>/tmp/closenotifications.log</string>
     <key>StandardErrorPath</key>

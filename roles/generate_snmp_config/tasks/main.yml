@@ -62,7 +62,7 @@
 
     - name: Create a config directory
       ansible.builtin.file:
-        path: "{{ home_dir }}/grafstation/configs"
+        path: "{{ ansible_env.HOME }}/grafstation/configs"
         state: directory
         recurse: true
         mode: '0755'
@@ -72,7 +72,7 @@
       ansible.builtin.copy:
         remote_src: true
         src: "{{ generate_snmp_config_tmp_dir }}/snmp.yml"
-        dest: "{{ home_dir }}/grafstation/configs/snmp.yml"
+        dest: "{{ ansible_env.HOME }}/grafstation/configs/snmp.yml"
         mode: '0644'
 
   always:

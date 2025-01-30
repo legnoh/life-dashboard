@@ -5,7 +5,7 @@
     - name: Set .zshenv for homebrew bins and /usr/local/bin
       ansible.builtin.copy:
         src: "{{ item }}"
-        dest: "{{ home_dir }}/{{ item }}"
+        dest: "{{ ansible_env.HOME }}/{{ item }}"
         mode: '0644'
       loop:
         - .zshenv
@@ -23,14 +23,14 @@
       when: not ansible_check_mode
       ansible.builtin.template:
         src: close_notifications.j2
-        dest: "{{ home_dir }}/grafstation/close_notifications"
+        dest: "{{ ansible_env.HOME }}/grafstation/close_notifications"
         mode: '0755'
 
     - name: Create launchd definition file
       when: not ansible_check_mode
       ansible.builtin.template:
         src: closenotifications.plist.j2
-        dest: "{{ home_dir }}/Library/LaunchAgents/io.lkj.life.dashboard.closenotifications.plist"
+        dest: "{{ ansible_env.HOME }}/Library/LaunchAgents/io.lkj.life.dashboard.closenotifications.plist"
         mode: '0644'
 
     - name: Start closenotifications daemon

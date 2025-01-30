@@ -9,6 +9,7 @@
         state: unloaded
 
     - name: Tap custom repos
+      check_mode: false
       community.general.homebrew_tap:
         name: legnoh/etc
 
@@ -17,7 +18,7 @@
       community.general.homebrew:
         name:
           - ffmpeg
-          - focus-cli
+          - legnoh/etc/focus-cli
           - gettext # for envsubst
           - jq
           - streamlink
@@ -26,7 +27,7 @@
 
     - name: Create config directories
       ansible.builtin.file:
-        path: "{{ home_dir }}/{{ item }}"
+        path: "{{ ansible_env.HOME }}/{{ item }}"
         state: directory
         recurse: true
         mode: '0755'
@@ -40,7 +41,7 @@
       when: not ansible_check_mode
       ansible.builtin.copy:
         src: "{{ item.path }}"
-        dest: "{{ home_dir }}/grafstation/configs/{{ item.path }}"
+        dest: "{{ ansible_env.HOME }}/grafstation/configs/{{ item.path }}"
         mode: "{{ item.mod }}"
         force: true
       loop:
@@ -55,13 +56,13 @@
       when: not ansible_check_mode
       ansible.builtin.get_url:
         url: "https://raw.githubusercontent.com/legnoh/streamlink-plugin-greenchannel/refs/heads/main/greenchannel.py"
-        dest: "{{ home_dir }}/Library/Application Support/streamlink/plugins/greenchannel.py"
+        dest: "{{ ansible_env.HOME }}/Library/Application Support/streamlink/plugins/greenchannel.py"
         mode: '0644'
 
     - name: Check terraform init & upgrade
       when: not ansible_check_mode
       community.general.terraform:
-        project_path: "{{ home_dir }}/grafstation/configs/grafana"
+        project_path: "{{ ansible_env.HOME }}/grafstation/configs/grafana"
         plan_file: /tmp/grafana-plan.log
         force_init: true
         provider_upgrade: true
@@ -73,7 +74,7 @@
       when: not ansible_check_mode
       ansible.builtin.template:
         src: apply.plist.j2
-        dest: "{{ home_dir }}/Library/LaunchAgents/io.lkj.life.dashboard.grafstation.grafana.apply.plist"
+        dest: "{{ ansible_env.HOME }}/Library/LaunchAgents/io.lkj.life.dashboard.grafstation.grafana.apply.plist"
         mode: '0644'
 
     - name: Start grafana-config daemon

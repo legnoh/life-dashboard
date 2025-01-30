@@ -3,29 +3,34 @@
 - name: Start reminders-exporter
   block:
     - name: Tap custom repos
+      check_mode: false
       community.general.homebrew_tap:
-        name: legnoh/etc
+        name:
+          - keith/formulae
+          - legnoh/etc
 
     - name: Install Brew packages
       when: not ansible_check_mode
       community.general.homebrew:
-        name: reminders-exporter
+        name:
+          - keith/formulae/reminders-cli
+          - legnoh/etc/reminders-exporter
         state: upgraded
 
     - name: Create a config directory
       ansible.builtin.file:
-        path: "{{ home_dir }}/.reminders-exporter"
+        path: "{{ ansible_env.HOME }}/.reminders-exporter"
         state: directory
         mode: '0755'
 
     - name: Copy config file
       ansible.builtin.copy:
         src: config.yml
-        dest: "{{ home_dir }}/.reminders-exporter/config.yml"
+        dest: "{{ ansible_env.HOME }}/.reminders-exporter/config.yml"
         mode: '0644'
 
     - name: Start Service
       when: not ansible_check_mode
       community.general.homebrew_services:
-        name: reminders-exporter
+        name: legnoh/etc/reminders-exporter
         state: restarted
