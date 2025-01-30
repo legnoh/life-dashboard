@@ -1,4 +1,4 @@
-name: Deploy
+name: CI
 
 on:
   push:
@@ -54,25 +54,30 @@ jobs:
     - name: Install ansible
       if: ${{ !steps.check-ansible.outputs.installed || github.event_name == 'pull_request_target' }}
       run: brew install ansible
+      env:
+        HOMEBREW_NO_INSTALL_UPGRADE: true
 
     - name: Update ansible
-      if: |
-        github.event_name == 'push'
-        && steps.check-ansible.outputs.installed
-        && startsWith(github.event.head_commit.message, 'bump')
-        && contains(github.event.head_commit.message, 'ansible')
+      if: github.event_name == 'push' && steps.check-ansible.outputs.installed
       run: brew upgrade ansible
       env:
         HOMEBREW_NO_INSTALL_UPGRADE: true
+
+    - name: Set ansible config
+      run: |
+        interpreter=$(ansible --version | grep 'python version' | sed -n 's/.*(\(.*\)).*/\1/p')
+        cat <<EOF > $HOME/.ansible.cfg
+        [defaults]
+        interpreter_python=$interpreter
+        roles_path=$HOME/.ansible/roles
+        EOF
 
     - name: Set ansible mode
       id: set-mode
       run: |
           if [[ "${{ github.event_name }}" == "pull_request_target" ]]; then
-            echo "execute with check mode"
             echo "options=--check" >> $GITHUB_OUTPUT
           else
-            echo "execute with normal mode"
             echo "options=" >> $GITHUB_OUTPUT
           fi
 
@@ -96,7 +101,7 @@ jobs:
         OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
         OPENWEATHER_CITY: ${{ secrets.OPENWEATHER_CITY }}
         OURA_ACCESS_TOKEN: ${{ secrets.OURA_ACCESS_TOKEN }}
-        OURA_TZ: ${{ secrets.OURA_TZ }}
+        OURA_TZ: "Asia/Tokyo"
         RECREATE_CONTAINER: ${{ inputs.rm_state }}
         SNMP_PASSWORD: ${{ secrets.SNMP_PASSWORD }}
         SNMP_PRIV_PASSWORD: ${{ secrets.SNMP_PRIV_PASSWORD }}

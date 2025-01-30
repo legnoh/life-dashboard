@@ -3,13 +3,14 @@
 - name: Start grafana-kiosk
   block:
     - name: Tap custom repos
+      check_mode: false
       community.general.homebrew_tap:
         name: legnoh/etc
 
     - name: Install grafana-kiosk
       when: not ansible_check_mode
       community.general.homebrew:
-        name: grafana-kiosk
+        name: legnoh/etc/grafana-kiosk
         state: upgraded
 
     - name: Install google-chrome
@@ -32,11 +33,11 @@
       when: not ansible_check_mode
       ansible.builtin.template:
         src: .grafana-kiosk-config.yml.j2
-        dest: "{{ home_dir }}/.grafana-kiosk-config.yml"
+        dest: "{{ ansible_env.HOME }}/.grafana-kiosk-config.yml"
         mode: '0644'
 
     - name: Start Service
       when: not ansible_check_mode
       community.general.homebrew_services:
-        name: grafana-kiosk
+        name: legnoh/etc/grafana-kiosk
         state: restarted

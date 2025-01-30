@@ -23,10 +23,10 @@
     </dict>
     <key>ProgramArguments</key>
     <array>
-        <string>{{ home_dir }}/grafstation/configs/grafana/apply.sh</string>
+        <string>{{ ansible_env.HOME }}/grafstation/configs/grafana/apply.sh</string>
     </array>
     <key>WorkingDirectory</key>
-    <string>{{ home_dir }}/grafstation/configs/grafana</string>
+    <string>{{ ansible_env.HOME }}/grafstation/configs/grafana</string>
     <key>StandardOutPath</key>
     <string>/tmp/grafana-apply.log</string>
     <key>StandardErrorPath</key>
