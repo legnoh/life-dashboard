@@ -27,6 +27,8 @@
         status_code: 200
         body_format: json
         return_content: true
+      retries: 720 # 720 * 5 seconds = 1hour (60*60/5)
+      delay: 5 # Every 5 seconds
       register: grafana_playlist
 
     - name: Copy config file

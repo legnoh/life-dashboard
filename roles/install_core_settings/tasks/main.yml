@@ -17,6 +17,8 @@
           https://gist.githubusercontent.com/lancethomps/a5ac103f334b171f70ce2ff983220b4f/raw/578178c6729cb4f3a048c0b62b4e402a1112336b/close_notifications_applescript.js
         status_code: 200
         return_content: true
+      retries: 720 # 720 * 5 seconds = 1hour (60*60/5)
+      delay: 5 # Every 5 seconds
       register: close_notifications_script
 
     - name: Create JXA file
