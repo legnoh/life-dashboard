@@ -4,206 +4,220 @@ resource "grafana_dashboard" "life-metrics" {
     title       = "Life Metrics"
     description = "Ch1:${var.TV_CHANNEL1} M:${var.IS_TV_CHANNEL1_MUTED} / Ch2:${var.TV_CHANNEL2} M:${var.IS_TV_CHANNEL2_MUTED}"
     timezone    = "browser"
-    version     = 0
-    # timepicker = {
-    #   hidden = true
-    # }
-    panels = var.TV_CHANNEL1 != "fitness" ? [
+    timepicker = {
+      hidden = true
+    }
+    version = 0
+    panels = [
       # 通常モード
       # channel1
       {
+        title        = null
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.channel1.uid])
         gridPos      = { h = 11, w = 9, x = 0, y = 0 }
       },
 
       # channel2
       {
+        title        = null
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.channel2.uid])
         gridPos      = { h = 11, w = 9, x = 0, y = 11 }
       },
 
       # aphorism
       {
+        title        = null
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.aphorism.uid])
         gridPos      = { h = 6, w = 9, x = 0, y = 22 }
       },
 
       # news
       {
+        title        = null
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.news-domestic.uid])
         gridPos      = local.grid_position.E1
       },
       {
+        title        = null
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.news-world.uid])
         gridPos      = local.grid_position.E2
       },
       {
+        title        = null
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.news-business.uid])
         gridPos      = local.grid_position.E3
       },
       {
+        title        = null
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.news-sports.uid])
         gridPos      = local.grid_position.E4
       },
 
       # clock
       {
+        title        = null
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.clock.uid])
         gridPos      = local.grid_position.A5
+        options = {
+          mode     = "time"
+          refresh  = "sec"
+          bgColor  = ""
+          fontMono = false
+          countdownSettings = {
+            source           = "input"
+            endCountdownTime = "2025-01-31T17:19:26+09:00"
+            queryCalculation = "last"
+            endText          = "00:00:00"
+            noValueText      = "no value found"
+            invalidValueText = "invalid value"
+          }
+          countupSettings = {
+            source           = "input"
+            beginCountupTime = "2025-01-31T17:19:26+09:00"
+            queryCalculation = "last"
+            beginText        = "00:00:00"
+            noValueText      = "no value found"
+            invalidValueText = "invalid value"
+          }
+          descriptionSettings = {
+            source          = "none"
+            descriptionText = ""
+            noValueText     = "no description found"
+            fontSize        = "12px"
+            fontWeight      = "normal"
+          }
+          clockType = "custom"
+          timeSettings = {
+            fontSize     = "3vw"
+            fontWeight   = "bold"
+            customFormat = "HH:mm"
+          }
+          timezone = "Asia/Tokyo"
+          timezoneSettings = {
+            showTimezone = false
+            zoneFormat   = "offsetAbbv"
+            fontSize     = "12px"
+            fontWeight   = "normal"
+          }
+          dateSettings = {
+            showDate   = true
+            dateFormat = "YY/MM/DD(ddd)"
+            locale     = "ja"
+            fontSize   = "1.5vw"
+            fontWeight = "normal"
+          }
+        }
       },
 
       ### asken
       {
+        title        = "あすけん健康度"
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.asken-score.uid])
         gridPos      = local.grid_position.C1
       },
 
       # moneyforward
       {
+        title        = "当月収支"
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.moneyforward-balance.uid])
         gridPos      = local.grid_position.D1
       },
       {
+        title        = "バランスシート"
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.moneyforward-balancesheet.uid])
         gridPos      = local.grid_position.D2
       },
       {
+        title        = "残高足りる?"
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.moneyforward-deposit-withdrawal.uid])
         gridPos      = local.grid_position.D3
       },
 
       # nature remo
       {
+        title        = "部屋の温度"
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.remo-temperature.uid])
         gridPos      = local.grid_position.B4
       },
       {
+        title        = "内: 不快指数"
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.remo-thi.uid])
         gridPos      = local.grid_position.C4
       },
       {
+        title        = "瞬間消費電力"
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.remo-power-consumption.uid])
         gridPos      = local.grid_position.D4
       },
 
       # openweather
       {
-        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.openweather-condition.uid])
+        title        = null
+        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.openweather-condition-icon.uid])
         gridPos      = local.grid_position.A4
       },
       {
+        title        = "外の温度"
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.openweather-temperature.uid])
         gridPos      = local.grid_position.B5
       },
       {
+        title        = "外: 不快指数"
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.openweather-thi.uid])
         gridPos      = local.grid_position.C5
       },
 
       # oura
       {
+        title        = "コンディションスコア"
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.oura-readiness-score.uid])
         gridPos      = local.grid_position.A1
       },
       {
+        title        = "睡眠スコア"
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.oura-sleep-score.uid])
         gridPos      = local.grid_position.A3
       },
       {
+        title        = "アクティビティスコア"
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.oura-activity-score.uid])
         gridPos      = local.grid_position.A2
       },
 
       # reminders
       {
+        title        = "タスク残数(期限切れ)"
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.reminders-outdated.uid])
         gridPos      = local.grid_position.C3
       },
       {
+        title        = "タスク残数(ASAP)"
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.reminders-asap.uid])
         gridPos      = local.grid_position.C2
       },
 
       # snmp
       {
+        title        = "帯域利用率"
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.snmp-speedtest-occupancy.uid])
         gridPos      = local.grid_position.D5
       },
 
       # withings
       {
+        title        = "BMI"
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.withings-bmi.uid])
         gridPos      = local.grid_position.B1
       },
       {
+        title        = "最高血圧"
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.withings-bpm-max.uid])
         gridPos      = local.grid_position.B2
       },
       {
+        title        = "体温"
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.withings-body-temperature.uid])
         gridPos      = local.grid_position.B3
-      },
-      ] : [
-      # フィットネスモード
-
-      # メイン画面
-      {
-        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.channel1.uid])
-        gridPos      = { h = 20, w = 16, x = 4, y = 0 }
-      },
-
-      # 左(Oura+あすけん)
-      {
-        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.oura-readiness-score.uid])
-        gridPos      = local.panorama_position.L1
-      },
-      {
-        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.oura-sleep-score.uid])
-        gridPos      = local.panorama_position.L2
-      },
-      {
-        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.oura-activity-score.uid])
-        gridPos      = local.panorama_position.L3
-      },
-      {
-        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.asken-score.uid])
-        gridPos      = local.panorama_position.L4
-      },
-
-      # 右(時計+天気+外温度+内温度)
-      {
-        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.clock.uid])
-        gridPos      = local.panorama_position.R1
-      },
-      {
-        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.openweather-condition.uid])
-        gridPos      = local.panorama_position.R2
-      },
-      {
-        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.openweather-temperature.uid])
-        gridPos      = local.panorama_position.R3
-      },
-      {
-        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.remo-temperature.uid])
-        gridPos      = local.panorama_position.R4
-      },
-
-      # 下(歩数+体脂肪率+BMI+湿度)
-      {
-        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.oura-steps.uid])
-        gridPos      = local.panorama_position.U1
-      },
-      {
-        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.withings-fat-ratio.uid])
-        gridPos      = local.panorama_position.U2
-      },
-      {
-        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.withings-bmi.uid])
-        gridPos      = local.panorama_position.U3
-      },
-      {
-        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.remo-humidity.uid])
-        gridPos      = local.panorama_position.U4
       },
     ]
   })
@@ -220,37 +234,37 @@ resource "grafana_dashboard" "gch" {
     description = ""
     timezone    = "browser"
     version     = 0
-    panels      = concat(
+    panels = concat(
       [
         for i, s in var.GCH_STREAMS
         :
-            {
-              libraryPanel = zipmap(local.libpanel_keys, [
-                  s.program_name != "放送休止"
-                  ?
-                    grafana_library_panel.gch[i].uid
-                  :
-                    grafana_library_panel.gch_not_onair.uid])
-              gridPos = (
-                  s.channel_id == "ch1" ?
-                    local.gch_position[0]
-                  :
-                  s.channel_id == "ch2" ?
-                    local.gch_position[1]
-                  :
-                  s.channel_id == "ch3" ?
-                    local.gch_position[2]
-                  :
-                  s.channel_id == "ch4" ?
-                    local.gch_position[3]
-                  :
-                  s.channel_id == "ch5" ?
-                    local.gch_position[4]
-                  :
-                  { h = 0, w = 0,  x = 0, y = 0 }
-                )
-            }
-      ],[
+        {
+          libraryPanel = zipmap(local.libpanel_keys, [
+            s.program_name != "放送休止"
+            ?
+            grafana_library_panel.gch[i].uid
+            :
+          grafana_library_panel.gch_not_onair.uid])
+          gridPos = (
+            s.channel_id == "ch1" ?
+            local.gch_position[0]
+            :
+            s.channel_id == "ch2" ?
+            local.gch_position[1]
+            :
+            s.channel_id == "ch3" ?
+            local.gch_position[2]
+            :
+            s.channel_id == "ch4" ?
+            local.gch_position[3]
+            :
+            s.channel_id == "ch5" ?
+            local.gch_position[4]
+            :
+            { h = 0, w = 0, x = 0, y = 0 }
+          )
+        }
+        ], [
         {
           libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.news-netkeiba.uid])
           gridPos      = { h = 2, w = 24, x = 0, y = 26 }

@@ -2,34 +2,29 @@
 
 - name: Start cask apps
   block:
-    - name: Install Cask applications
+    - name: Install Flux
       community.general.homebrew_cask:
-        name:
-          - docker # sudo required
-          - flux
+        name: flux
         state: upgraded
-        sudo_password: "{{ start_cask_apps_grafstation_sudo_pass }}"
-
-    - name: Start Docker
-      ansible.builtin.command:
-        cmd: /usr/bin/open --background -a Docker
-      changed_when: false
 
     - name: Start Flux
       ansible.builtin.command:
         cmd: /usr/bin/open --background -a Flux
       changed_when: false
 
+    - name: Install/Start Rancher
+      ansible.builtin.import_role:
+        name: legnoh.dotfiles.install_rancher
+
     - name: Wait dockerd is running
       ansible.builtin.shell: |
-          while true
-          do
-            docker ps > /dev/null
-            if [[ $? = 0 ]]; then
-              echo "dockerd is running!"
-              exit 0
-            fi
-            echo "dockerd is starting..."
-            sleep 5
-          done
+        while true
+        do
+          if {{ ansible_env.HOME }}/.rd/bin/docker ps > /dev/null; then
+            echo "dockerd is running!"
+            exit 0
+          fi
+          echo "dockerd is starting..."
+          sleep 5
+        done
       changed_when: false

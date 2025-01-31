@@ -1,5 +1,5 @@
 ---
-generate_snmp_config_tmp_dir: /tmp/snmp-generator
+generate_snmp_config_tmp_dir: "{{ ansible_env.HOME }}/snmp_generator"
 generate_snmp_config_snmp_exporter_module_name: "{{ snmp.exporter_module_name }}"
 generate_snmp_config_snmp_username: "{{ snmp.username }}"
 generate_snmp_config_snmp_password: "{{ snmp.password }}"

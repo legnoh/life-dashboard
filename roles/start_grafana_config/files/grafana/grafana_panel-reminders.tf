@@ -1,6 +1,7 @@
 resource "grafana_library_panel" "reminders-outdated" {
-  org_id = grafana_organization.main.org_id
-  name   = "リマインダー - タスク残数(期限切れ)"
+  org_id     = grafana_organization.main.org_id
+  folder_uid = grafana_folder.todolist.uid
+  name       = "リマインダー - タスク残数(期限切れ)"
   model_json = jsonencode(merge(local.common_base, local.stats_base, {
     title = "タスク残数(期限切れ)",
     targets = [
@@ -25,8 +26,9 @@ resource "grafana_library_panel" "reminders-outdated" {
 }
 
 resource "grafana_library_panel" "reminders-asap" {
-  org_id = grafana_organization.main.org_id
-  name   = "リマインダー - タスク残数(ASAP)"
+  org_id     = grafana_organization.main.org_id
+  folder_uid = grafana_folder.todolist.uid
+  name       = "リマインダー - タスク残数(ASAP)"
   model_json = jsonencode(merge(local.common_base, local.stats_base, {
     title = "タスク残数(ASAP)",
     targets = [

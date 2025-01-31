@@ -1,7 +1,8 @@
 resource "grafana_library_panel" "gch" {
-  count  = length(var.GCH_STREAMS)
-  org_id = grafana_organization.main.org_id
-  name   = "GREEN Ch.(${var.GCH_STREAMS[count.index].channel_id})"
+  count      = length(var.GCH_STREAMS)
+  org_id     = grafana_organization.main.org_id
+  folder_uid = grafana_folder.onair.uid
+  name       = "GREEN Ch.(${var.GCH_STREAMS[count.index].channel_id})"
   model_json = jsonencode({
     title       = var.GCH_STREAMS[count.index].program_name,
     type        = "innius-video-panel",
@@ -15,8 +16,9 @@ resource "grafana_library_panel" "gch" {
 }
 
 resource "grafana_library_panel" "gch_not_onair" {
-  org_id = grafana_organization.main.org_id
-  name   = "GREEN Ch.(not onair)"
+  org_id     = grafana_organization.main.org_id
+  folder_uid = grafana_folder.onair.uid
+  name       = "GREEN Ch.(not onair)"
   model_json = jsonencode({
     title       = "放送休止",
     type        = "innius-video-panel",

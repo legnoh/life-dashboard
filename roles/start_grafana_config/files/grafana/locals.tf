@@ -142,45 +142,97 @@ locals {
   }
 
   gch_position = [
-    { h = 15, w = 12, x = 0,  y = 0 },
+    { h = 15, w = 12, x = 0, y = 0 },
     { h = 15, w = 12, x = 12, y = 0 },
-    { h = 11, w = 8,  x = 0,  y = 15 },
-    { h = 11, w = 8,  x = 8,  y = 15 },
-    { h = 11, w = 8,  x = 16, y = 15 },
+    { h = 11, w = 8, x = 0, y = 15 },
+    { h = 11, w = 8, x = 8, y = 15 },
+    { h = 11, w = 8, x = 16, y = 15 },
   ]
 
   thi_threshold = [
-    { 
-      type = "range",
-      options = { from = 0,  to = 55,  result = { index = 0 , color = "dark-blue" , text = "寒🥶" } },
+    {
+      type    = "range",
+      options = { from = 0, to = 55, result = { index = 0, color = "dark-blue", text = "寒🥶" } },
     },
-    { 
-      type = "range", 
-      options = { from = 55, to = 60,  result = { index = 1 , color = "blue" , text = "稍寒😨" } },
+    {
+      type    = "range",
+      options = { from = 55, to = 60, result = { index = 1, color = "blue", text = "稍寒😨" } },
     },
-    { 
-      type = "range", 
-      options = { from = 60, to = 65,  result = { index = 2 , color = "super-light-green" , text = "普通-🙂" } },
+    {
+      type    = "range",
+      options = { from = 60, to = 65, result = { index = 2, color = "super-light-green", text = "普通-🙂" } },
     },
-    { 
-      type = "range", 
-      options = { from = 65, to = 70,  result = { index = 3 , color = "green" , text = "快適🥰" } },
+    {
+      type    = "range",
+      options = { from = 65, to = 70, result = { index = 3, color = "green", text = "快適🥰" } },
     },
-    { 
-      type = "range", 
-      options = { from = 70, to = 75,  result = { index = 4 , color = "super-light-yellow" , text = "普通+😊" } },
+    {
+      type    = "range",
+      options = { from = 70, to = 75, result = { index = 4, color = "super-light-yellow", text = "普通+😊" } },
     },
-    { 
-      type = "range", 
-      options = { from = 75, to = 80,  result = { index = 5 , color = "orange" , text = "稍暑😎" } },
+    {
+      type    = "range",
+      options = { from = 75, to = 80, result = { index = 5, color = "orange", text = "稍暑😎" } },
     },
-    { 
-      type = "range", 
-      options = { from = 80, to = 85,  result = { index = 6 , color = "red" , text = "暑😥" } },
+    {
+      type    = "range",
+      options = { from = 80, to = 85, result = { index = 6, color = "red", text = "暑😥" } },
     },
-    { 
-      type = "range", 
-      options = { from = 85, to = 120, result = { index = 7 , color = "dark-red" , text = "猛暑🥵" } },
+    {
+      type    = "range",
+      options = { from = 85, to = 120, result = { index = 7, color = "dark-red", text = "猛暑🥵" } },
     },
   ]
+
+  stream_urls = {
+    daymode-bgm = {
+      name = "LIVE STREAM - Cafe Music BGM channel"
+      url  = "https://www.youtube.com/embed/videoseries?autoplay=1&list=PLYyJCobshLZkNKdbhWzRMhtqe0S6shnB1"
+    }
+    nightmode-bgm = {
+      name = "名曲クラシック"
+      url  = "https://www.youtube.com/embed/S3o_jlSWXNI?autoplay=1"
+    }
+    sleep-bgm = {
+      name = "睡眠導入用BGM"
+      url  = "https://www.youtube.com/embed/EW4iydAQCUo?autoplay=1"
+    }
+    stretch = {
+      name = "施術のプロが考案！ 1回3分でできる「痩せるスゴレッチ」"
+      url  = "https://www.youtube.com/embed/5haAgY-JxcA?autoplay=1&start=299"
+    }
+    fitness = {
+      name = "筋トレ用プレイリスト"
+      url  = "https://www.youtube.com/embed/videoseries?autoplay=1&list=PLBdI4smwsafofooNhNuBsJHqdQ57-c-xo"
+    }
+    news-domestic = {
+      name = "JapaNews24 ～日本のニュースを24時間配信"
+      url  = "https://www.youtube.com/embed/coYw-eVU0Ks?autoplay=1"
+    }
+    news-global = {
+      name = "ABC World News Tonight Full Broadcast"
+      url  = "https://www.youtube.com/embed/videoseries?autoplay=1&list=PLQOa26lW-uI8ixlVw1NWu_l4Eh8iZW_qN"
+    }
+    vtuber = {
+      name = "VTuber(2434) Live Playlist"
+      url  = "http://grafstation.local/player/youtube.html?list=${var.YOUTUBE_PLAYLIST_ID}"
+    }
+    mahjong = {
+      name = "Mリーグ"
+      url  = "http://grafstation.local/player/hls.html?url=http%3A%2F%2Fgrafstation.local%2Fstream%2Fch1.m3u8"
+    }
+    greench = {
+      name = "GREEN Ch."
+      url  = "http://grafstation.local/player/hls.html?url=${urlencode(var.GCH_STREAMS[0].stream_url)}"
+    }
+    earthquake = {
+      name = "地震速報"
+      url  = "https://www.youtube.com/embed/HXGANE2pRrA?autoplay=1"
+    }
+  }
+
+  tv_channel1     = lookup(local.stream_urls, var.TV_CHANNEL1, local.stream_urls.nightmode-bgm)
+  tv_channel1_url = var.IS_TV_CHANNEL1_MUTED ? format("%s&mute=1", local.tv_channel1.url) : local.tv_channel1.url
+  tv_channel2     = lookup(local.stream_urls, var.TV_CHANNEL2, local.stream_urls.vtuber)
+  tv_channel2_url = var.IS_TV_CHANNEL2_MUTED ? format("%s&mute=1", local.tv_channel2.url) : local.tv_channel2.url
 }

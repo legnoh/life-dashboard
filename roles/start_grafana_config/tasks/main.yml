@@ -2,8 +2,15 @@
 
 - name: Start grafana config
   block:
+    - name: Get LaunchAgent status
+      ansible.builtin.stat:
+        path: "{{ ansible_env.HOME }}/Library/LaunchAgents/io.lkj.life.dashboard.grafstation.grafana.apply.plist"
+      register: launchagent
+
     - name: Stop grafana-config daemon
-      when: not ansible_check_mode
+      when:
+        - not ansible_check_mode
+        - launchagent.stat.exists
       community.general.launchd:
         name: io.lkj.life.dashboard.grafstation.grafana.apply
         state: unloaded
@@ -29,28 +36,21 @@
       ansible.builtin.file:
         path: "{{ ansible_env.HOME }}/{{ item }}"
         state: directory
-        recurse: true
         mode: '0755'
       loop:
-        - grafstation/configs/grafana
         - grafstation/configs/html/stream
-        - grafstation/configs/stream
-        - "Library/Application Support/streamlink/plugins"
+        - Library/Application Support/streamlink/plugins
 
     - name: Copy config files
       when: not ansible_check_mode
-      ansible.builtin.copy:
-        src: "{{ item.path }}"
-        dest: "{{ ansible_env.HOME }}/grafstation/configs/{{ item.path }}"
-        mode: "{{ item.mod }}"
-        force: true
+      ansible.builtin.synchronize:
+        src: "{{ item }}"
+        dest: "{{ ansible_env.HOME }}/grafstation/configs/{{ item }}"
+        recursive: true
+        delete: true
       loop:
-        - { path: 'grafana/', mod: '0644' }
-        - { path: 'grafana/apply.sh', mod: '0755' }
-        - { path: 'stream/start.sh', mod: '0755' }
-        - { path: 'stream/stop.sh', mod: '0755' }
-        - { path: 'stream/streamlink.plist', mod: '0644' }
-        - { path: 'stream/ffmpeg.plist', mod: '0644' }
+        - grafana/
+        - stream/
 
     - name: Download remote files(streamlink plugin)
       when: not ansible_check_mode

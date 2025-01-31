@@ -2,14 +2,30 @@
 
 - name: Install core settings
   block:
-    - name: Set .zshenv for homebrew bins and /usr/local/bin
-      ansible.builtin.copy:
-        src: "{{ item }}"
-        dest: "{{ ansible_env.HOME }}/{{ item }}"
+    - name: Install/Start Rancher
+      ansible.builtin.import_role:
+        name: legnoh.dotfiles.install_zsh_config
+
+    - name: Set .zshenv for homebrew bins & Rancher
+      when: not ansible_check_mode
+      ansible.builtin.template:
+        src: .zshenv.j2
+        dest: "{{ ansible_env.HOME }}/.zshenv"
         mode: '0644'
+
+    - name: Remove .zprofile
+      ansible.builtin.file:
+        path: "{{ ansible_env.HOME }}/.zprofile"
+        state: absent
+
+    - name: Create directory
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        mode: '0755'
       loop:
-        - .zshenv
-        - .zshrc
+        - "{{ ansible_env.HOME }}/grafstation"
+        - "{{ ansible_env.HOME }}/Library/LaunchAgents"
 
     - name: Download close_notifications_applescript.js
       ansible.builtin.uri:

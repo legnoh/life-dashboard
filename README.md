@@ -14,7 +14,7 @@
 | [legnoh/aphorism-exporter](https://github.com/legnoh/aphorism-exporter) | 格言 |
 | [legnoh/asken-exporter](https://github.com/legnoh/asken-exporter) | あすけん の食事スコア、アドバイス |
 | [legnoh/moneyforward-exporter](https://github.com/legnoh/moneyforward-exporter) | MoneyForward ME の 残高、資産、負債、引落予定額 |
-| [legnoh/openweather-exporter](https://github.com/legnoh/openweather-exporter) | OpenWeatherMap の 指定地点の天気、温度、湿度 の気象情報 |
+| [billykwooten/openweather-exporter](https://github.com/billykwooten/openweather-exporter) | OpenWeatherMap の 指定地点の天気、温度、湿度 の気象情報 |
 | [legnoh/oura-exporter](https://github.com/legnoh/oura-exporter) | Oura Ring の 各種スコア(アクティビティ、コンディション、睡眠) |
 | [legnoh/reminders-exporter](https://github.com/legnoh/reminders-exporter) | リマインダーの期限切れ・特定リストのタスク残数 |
 | [kenfdev/remo-exporter](https://github.com/kenfdev/remo-exporter) | NatureRemo の の計測情報 |
@@ -69,6 +69,7 @@
   ```
 - ansibleを実行してデプロイする
   ```sh
+  ansible-galaxy collection install -r requirements.yml
   ansible-playbook site.yml -i inventory/localhost.yml -e @credential.yml
   ```
 </details>
@@ -85,7 +86,7 @@
   ```sh
   username="yourusername"
   pubkey="$(cat yourpubkey.pub)"
-  ssh $username@grafstation.local \
+  ssh $username@grafstation.local -o PreferredAuthentications=password \
     "mkdir -p ~/.ssh \
     && echo \"$pubkey\" > ~/.ssh/authorized_keys \
     && chmod 600 ~/.ssh/authorized_keys"
@@ -103,8 +104,9 @@
   cp credential-sample.yml credential.yml
   vi credential.yml
   ```
-- **C:** ansibleを実行してデプロイする。inventoryはgrafstation.ymlに向ける
+- **C:** ansibleを実行して依存解決・デプロイする。inventoryはgrafstation.ymlに向ける
   ```sh
+  ansible-galaxy collection install -r requirements.yml
   ansible-playbook site.yml -i inventory/grafstation.yml -e @credential.yml
   ```
 

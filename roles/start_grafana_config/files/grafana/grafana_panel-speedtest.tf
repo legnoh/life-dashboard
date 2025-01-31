@@ -1,6 +1,7 @@
 resource "grafana_library_panel" "speedtest-score" {
-  org_id = grafana_organization.main.org_id
-  name   = "Speedtest - ダウンロード速度"
+  org_id     = grafana_organization.main.org_id
+  folder_uid = grafana_folder.network.uid
+  name       = "Speedtest - ダウンロード速度"
   model_json = jsonencode(merge(local.common_base, local.stats_base, {
     title = "回線速度",
     targets = [merge(local.target_base, {

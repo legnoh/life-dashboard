@@ -1,10 +1,11 @@
 resource "grafana_library_panel" "openweather-temperature" {
-  org_id = grafana_organization.main.org_id
-  name   = "OpenWeather: 温度"
+  org_id     = grafana_organization.main.org_id
+  folder_uid = grafana_folder.atmosphere.uid
+  name       = "OpenWeather: 温度"
   model_json = jsonencode(merge(local.common_base, local.stats_base, local.link.openweather, {
     title = "外の温度",
     targets = [merge(local.target_base, {
-      expr = "(openweather_temperature{location=\"${var.OPENWEATHER_CITY}\"} - 32)/1.8"
+      expr = "openweather_temperature{location=\"${var.OPENWEATHER_CITY}\"}"
     })]
     fieldConfig = merge(local.field_config_base, {
       defaults = merge(local.field_config_default_base, {
@@ -30,8 +31,9 @@ resource "grafana_library_panel" "openweather-temperature" {
 }
 
 resource "grafana_library_panel" "openweather-humidity" {
-  org_id = grafana_organization.main.org_id
-  name   = "OpenWeather - 湿度"
+  org_id     = grafana_organization.main.org_id
+  folder_uid = grafana_folder.atmosphere.uid
+  name       = "OpenWeather - 湿度"
   model_json = jsonencode(merge(local.common_base, local.stats_base, local.link.openweather, {
     title = "外の湿度",
     targets = [merge(local.target_base, {
@@ -61,31 +63,32 @@ resource "grafana_library_panel" "openweather-humidity" {
 }
 
 resource "grafana_library_panel" "openweather-thi" {
-  org_id = grafana_organization.main.org_id
-  name   = "OpenWeather: 不快指数"
+  org_id     = grafana_organization.main.org_id
+  folder_uid = grafana_folder.atmosphere.uid
+  name       = "OpenWeather: 不快指数"
   model_json = jsonencode(merge(local.common_base, local.stats_base, local.link.openweather, {
     title = "外: 不快指数",
     targets = [
       merge(local.target_base, {
-        expr = "(openweather_temperature{location=\"${var.OPENWEATHER_CITY}\"} - 32)/1.8"
-        hide = true
+        expr  = "openweather_temperature{location=\"${var.OPENWEATHER_CITY}\"}"
+        hide  = true
         refId = "temp"
       }),
       merge(local.target_base, {
-        expr = "openweather_humidity{location=\"${var.OPENWEATHER_CITY}\"}",
-        hide = true
+        expr  = "openweather_humidity{location=\"${var.OPENWEATHER_CITY}\"}",
+        hide  = true
         refId = "humd"
       }),
       {
         datasource = {
           name = "Expression"
           type = "__expr__"
-          uid = "__expr__"
+          uid  = "__expr__"
         }
         expression = "(0.81 * $temp) + (0.01 * $humd) * ( (0.99 * $temp) - 14.3 ) + 46.3",
-        hide = false,
-        refId = "THI",
-        type = "math"
+        hide       = false,
+        refId      = "THI",
+        type       = "math"
       }
     ]
     fieldConfig = merge(local.field_config_base, {
@@ -102,8 +105,9 @@ resource "grafana_library_panel" "openweather-thi" {
 }
 
 resource "grafana_library_panel" "openweather-condition" {
-  org_id = grafana_organization.main.org_id
-  name   = "OpenWeather - 現在の天気"
+  org_id     = grafana_organization.main.org_id
+  folder_uid = grafana_folder.atmosphere.uid
+  name       = "OpenWeather - 現在の天気"
   model_json = jsonencode(merge(local.common_base, local.stats_base, local.link.openweather, {
     targets = [merge(local.target_base, {
       expr = "openweather_currentconditions{location=\"${var.OPENWEATHER_CITY}\"}",
@@ -190,5 +194,84 @@ resource "grafana_library_panel" "openweather-condition" {
         }]
       })
     })
+  }))
+}
+
+resource "grafana_library_panel" "openweather-condition-icon" {
+  org_id     = grafana_organization.main.org_id
+  folder_uid = grafana_folder.atmosphere.uid
+  name       = "OpenWeather - 現在の天気(アイコン)"
+  model_json = jsonencode(merge(local.common_base, local.link.openweather, {
+    type = "dalvany-image-panel"
+    targets = [merge(local.target_base, {
+      expr    = "topk(1, openweather_currentconditions{location=\"${var.OPENWEATHER_CITY}\"})"
+      instant = true
+    })]
+    options = {
+      "alt_field" : "currentconditions",
+      "autofit" : true,
+      "baseUrl" : "https://openweathermap.org/img/wn/",
+      "height" : "75",
+      "icon_field" : "icon",
+      "open_url" : {
+        "base_url" : "",
+        "enable" : false,
+        "metric_field" : "",
+        "open_in_tab" : true,
+        "suffix" : ""
+      },
+      "overlay" : {
+        "bindings" : {
+          "bindings" : [],
+          "has_text" : true,
+          "unbounded" : "#66666620"
+        },
+        "field" : "",
+        "height" : {
+          "size" : 5,
+          "unit" : "%"
+        },
+        "position" : "Top right",
+        "width" : {
+          "size" : 5,
+          "unit" : "%"
+        }
+      },
+      "shared_cross_hair" : {
+        "backgroundColor" : "#FFFFFF10",
+        "borderColor" : "#FFFFFF20"
+      },
+      "singleFill" : true,
+      "slideshow" : {
+        "duration" : 5000,
+        "enable" : false,
+        "infinite" : true,
+        "pauseOnHover" : true,
+        "transition" : "Slide",
+        "transition_duration" : 1000
+      },
+      "suffix" : "@4x.png",
+      "tooltip" : false,
+      "tooltip_date_elapsed" : false,
+      "tooltip_field" : "",
+      "tooltip_include_date" : false,
+      "tooltip_include_field" : true,
+      "underline" : {
+        "bindings" : {
+          "bindings" : [],
+          "has_text" : true,
+          "unbounded" : "#CCCCDCFF"
+        },
+        "bindings_field" : "",
+        "field" : "currentconditions",
+        "text_align" : "center",
+        "text_size" : "20"
+      },
+      "width" : "75"
+    },
+    fieldConfig = {
+      defaults  = {}
+      overrides = []
+    }
   }))
 }

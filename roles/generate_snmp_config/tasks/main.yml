@@ -11,7 +11,6 @@
       ansible.builtin.file:
         path: "{{ generate_snmp_config_tmp_dir }}/mibs"
         state: directory
-        recurse: true
         mode: '0755'
 
     - name: Download Makefile
@@ -52,6 +51,7 @@
     - name: Run generate script in Container
       when: not ansible_check_mode
       community.docker.docker_container:
+        docker_host: "unix://{{ ansible_env.HOME }}/.rd/docker.sock"
         name: snmp-generator
         image: prom/snmp-generator:latest
         command: generate --no-fail-on-parse-errors
@@ -64,7 +64,6 @@
       ansible.builtin.file:
         path: "{{ ansible_env.HOME }}/grafstation/configs"
         state: directory
-        recurse: true
         mode: '0755'
 
     - name: Copy snmp.yml to snmp-exporter config dir

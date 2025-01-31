@@ -1,5 +1,5 @@
 provider "grafana" {
-  url  = "http://${var.GRAFANA_HOST}/"
+  url = "http://${var.GRAFANA_HOST}/"
 }
 
 provider "curl" {

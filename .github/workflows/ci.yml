@@ -81,6 +81,9 @@ jobs:
             echo "options=" >> $GITHUB_OUTPUT
           fi
 
+    - name: Install requirements
+      run: ansible-galaxy collection install -r requirements.yml
+
     - name: Run playbook
       uses: dawidd6/action-ansible-playbook@v2
       with:

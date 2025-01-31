@@ -1,6 +1,7 @@
 resource "grafana_library_panel" "remo-temperature" {
-  org_id = grafana_organization.main.org_id
-  name   = "NatureRemo - 温度"
+  org_id     = grafana_organization.main.org_id
+  folder_uid = grafana_folder.atmosphere.uid
+  name       = "NatureRemo - 温度"
   model_json = jsonencode(merge(local.common_base, local.stats_base, {
     title = "部屋の温度",
     targets = [merge(local.target_base, {
@@ -30,8 +31,9 @@ resource "grafana_library_panel" "remo-temperature" {
 }
 
 resource "grafana_library_panel" "remo-humidity" {
-  org_id = grafana_organization.main.org_id
-  name   = "NatureRemo - 湿度"
+  org_id     = grafana_organization.main.org_id
+  folder_uid = grafana_folder.atmosphere.uid
+  name       = "NatureRemo - 湿度"
   model_json = jsonencode(merge(local.common_base, local.stats_base, {
     title = "部屋の湿度",
     targets = [merge(local.target_base, {
@@ -61,13 +63,14 @@ resource "grafana_library_panel" "remo-humidity" {
 }
 
 resource "grafana_library_panel" "remo-thi" {
-  org_id = grafana_organization.main.org_id
-  name   = "NatureRemo - 不快指数"
+  org_id     = grafana_organization.main.org_id
+  folder_uid = grafana_folder.atmosphere.uid
+  name       = "NatureRemo - 不快指数"
   model_json = jsonencode(merge(local.common_base, local.stats_base, local.link.openweather, {
-    title = "中: 不快指数",
+    title = "内: 不快指数",
     targets = [
       merge(local.target_base, {
-        expr = "(0.81 * remo_temperature{name=\"${var.NATURE_REMO_DEVICE_NAME}\"}) + (0.01 * remo_humidity{name=\"${var.NATURE_REMO_DEVICE_NAME}\"}) * ( (0.99 * remo_temperature{name=\"${var.NATURE_REMO_DEVICE_NAME}\"}) - 14.3 ) + 46.3"
+        expr  = "(0.81 * remo_temperature{name=\"${var.NATURE_REMO_DEVICE_NAME}\"}) + (0.01 * remo_humidity{name=\"${var.NATURE_REMO_DEVICE_NAME}\"}) * ( (0.99 * remo_temperature{name=\"${var.NATURE_REMO_DEVICE_NAME}\"}) - 14.3 ) + 46.3"
         refId = "A"
       }),
     ]
@@ -85,8 +88,9 @@ resource "grafana_library_panel" "remo-thi" {
 }
 
 resource "grafana_library_panel" "remo-power-consumption" {
-  org_id = grafana_organization.main.org_id
-  name   = "NatureRemo - 瞬間消費電力"
+  org_id     = grafana_organization.main.org_id
+  folder_uid = grafana_folder.electricity.uid
+  name       = "NatureRemo - 瞬間消費電力"
   model_json = jsonencode(merge(local.common_base, local.stats_base, {
     title = "瞬間消費電力",
     targets = [merge(local.target_base, {
