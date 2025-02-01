@@ -1,10 +1,10 @@
 name: CI
 
 on:
-  # push:
-  #   branches: [main]
-  # pull_request_target:
-  #   branches: [main]
+  push:
+    branches: [main]
+  pull_request_target:
+    branches: [main]
   workflow_dispatch:
     inputs:
       rm_state:
@@ -92,10 +92,12 @@ jobs:
       run: ansible-galaxy collection install -r requirements.yml --force
 
     - name: Run playbook
-      uses: dawidd6/action-ansible-playbook@v2
-      with:
-        playbook: site.yml
-        options: -i inventory/localhost.yml -e @credential-action.yml ${{ steps.set-mode.outputs.options }}
+      run: |
+        RUNNER_TRACKING_ID="" && ansible-playbook site.yml -i inventory/localhost.yml -e @credential-action.yml ${{ steps.set-mode.outputs.options }}
+      # uses: dawidd6/action-ansible-playbook@v2
+      # with:
+      #   playbook: site.yml
+      #   options: -i inventory/localhost.yml -e @credential-action.yml ${{ steps.set-mode.outputs.options }}
       env:
         ABEMA_JWT_TOKEN: ${{ secrets.ABEMA_JWT_TOKEN }}
         ASKEN_PASSWORD: ${{ secrets.ASKEN_PASSWORD }}
