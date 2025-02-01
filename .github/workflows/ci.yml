@@ -80,7 +80,7 @@ jobs:
       id: set-mode
       run: |
         options=""
-        if [[ ${{ inputs.verbose }} == true ]]; then
+        if [[ "${{ inputs.verbose }}" == true ]]; then
           options="-v"
         fi
         if [[ "${{ github.event_name }}" == "pull_request_target" ]]; then
