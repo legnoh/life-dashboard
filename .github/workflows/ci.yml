@@ -91,15 +91,21 @@ jobs:
     - name: Install requirements
       run: ansible-galaxy collection install -r requirements.yml --force
 
+    - name: Set sudopass
+      run: echo "$GRAFSTATION_SUDO_PASS" > /tmp/BECOME_PASS
+      env:
+        GRAFSTATION_SUDO_PASS: ${{ secrets.GRAFSTATION_SUDO_PASS }}
+
     - name: Run playbook
-      # run: |
-      #    && ansible-playbook site.yml -i inventory/localhost.yml -e @credential-action.yml ${{ steps.set-mode.outputs.options }}
       uses: dawidd6/action-ansible-playbook@v2
       with:
         playbook: site.yml
-        options: -i inventory/localhost.yml -e @credential-action.yml ${{ steps.set-mode.outputs.options }}
+        options: |
+          -i inventory/localhost.yml
+          -e @credential-action.yml
+          --become-pass-file=/tmp/BECOME_PASS
+          ${{ steps.set-mode.outputs.options }}
       env:
-        RUNNER_TRACKING_ID: ""
         ABEMA_JWT_TOKEN: ${{ secrets.ABEMA_JWT_TOKEN }}
         ASKEN_PASSWORD: ${{ secrets.ASKEN_PASSWORD }}
         ASKEN_USERNAME: ${{ secrets.ASKEN_USERNAME }}
@@ -128,3 +134,11 @@ jobs:
         WITHINGS_TZ: "Asia/Tokyo"
         WITHINGS_USERID: ${{ secrets.WITHINGS_USERID }}
         YOUTUBE_PLAYLIST_ID: ${{ secrets.YOUTUBE_PLAYLIST_ID }}
+
+        # prevent cleanup orphan process
+        # https://github.com/actions/runner/issues/598#issuecomment-721151364
+        RUNNER_TRACKING_ID: ""
+
+    - name: Set sudopass
+      if: always()
+      run: rm -rf /tmp/BECOME_PASS

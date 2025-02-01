@@ -1,70 +1,18 @@
 ---
 
-- name: Start cask apps
+- name: Start Rancher
   block:
-    - name: Check Docker Desktop was installed
-      ansible.builtin.stat:
-        path: "/Applications/Docker.app"
-      register: check_installed
-
-    - name: Stop Docker Desktop
-      when: check_installed.stat.exists
-      ansible.builtin.command:
-        cmd: /usr/bin/killall 'Docker Desktop'
-      changed_when: false
-      failed_when: false
-
-    - name: Wait dockerd is stopping
-      ansible.builtin.shell: |
-        while true
-        do
-          if ! /usr/local/bin/docker ps > /dev/null; then
-            echo "dockerd is stopped."
-            exit 0
-          fi
-          echo "dockerd is still running..."
-          sleep 5
-        done
-      changed_when: false
-
-    - name: Install Cask applications
-      community.general.homebrew_cask:
-        name: docker
-        state: upgraded
-        sudo_password: "{{ install_docker_grafstation_sudo_pass }}"
-
-    - name: Accept EULA
-      ansible.builtin.command:
-        cmd: /usr/bin/defaults write com.docker.docker EULASignature -string "accept"
-      changed_when: false
-
-    - name: Create conf directory
-      ansible.builtin.file:
-        path: "{{ ansible_env.HOME }}/Library/Group\ Containers/group.com.docker"
-        state: directory
-        mode: '0755'
-
-    - name: Copy config file
-      when: not ansible_check_mode
-      ansible.builtin.copy:
-        src: settings-store.json
-        dest: "{{ ansible_env.HOME }}/Library/Group\ Containers/group.com.docker/settings-store.json"
-        mode: '0644'
-
-    - name: Start Docker
-      ansible.builtin.command:
-        cmd: /usr/bin/open --background -a Docker
-      changed_when: false
-
-    - name: Show dialog
-      ansible.builtin.debug:
-        msg: "⚠️ Check Docker Desktop is running on your Mac! ⚠️"
+    - name: Install/Start Rancher
+      ansible.builtin.import_role:
+        name: legnoh.dotfiles.install_rancher
+      vars:
+        install_rancher_memory_in_gb: 8
 
     - name: Wait dockerd is running
       ansible.builtin.shell: |
         while true
         do
-          if /usr/local/bin/docker ps > /dev/null; then
+          if {{ ansible_env.HOME }}/.rd/bin/docker ps ps > /dev/null; then
             echo "dockerd is running!"
             exit 0
           fi

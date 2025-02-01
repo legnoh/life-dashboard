@@ -51,6 +51,7 @@
     - name: Run generate script in Container
       when: not ansible_check_mode
       community.docker.docker_container:
+        docker_host: "unix://{{ ansible_env.HOME }}/.rd/docker.sock"
         name: snmp-generator
         image: prom/snmp-generator:latest
         command: generate --no-fail-on-parse-errors
