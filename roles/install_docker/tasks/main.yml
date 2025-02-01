@@ -2,13 +2,7 @@
 
 - name: Start cask apps
   block:
-    - name: Install Cask applications
-      community.general.homebrew_cask:
-        name: docker
-        state: upgraded
-        sudo_password: "{{ install_docker_grafstation_sudo_pass }}"
-
-    - name: Check Rancher Desktop was installed
+    - name: Check Docker Desktop was installed
       ansible.builtin.stat:
         path: "/Applications/Docker.app"
       register: check_installed
@@ -33,6 +27,12 @@
         done
       changed_when: false
 
+    - name: Install Cask applications
+      community.general.homebrew_cask:
+        name: docker
+        state: upgraded
+        sudo_password: "{{ install_docker_grafstation_sudo_pass }}"
+
     - name: Accept EULA
       ansible.builtin.command:
         cmd: /usr/bin/defaults write com.docker.docker EULASignature -string "accept"
@@ -53,7 +53,7 @@
 
     - name: Start Docker
       ansible.builtin.command:
-        cmd: /usr/bin/open --background -a Docker
+        cmd: nohup /usr/bin/open --background -a Docker &
       changed_when: false
 
     - name: Show dialog
