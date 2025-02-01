@@ -130,7 +130,10 @@ jobs:
         WITHINGS_TZ: "Asia/Tokyo"
         WITHINGS_USERID: ${{ secrets.WITHINGS_USERID }}
         YOUTUBE_PLAYLIST_ID: ${{ secrets.YOUTUBE_PLAYLIST_ID }}
-    
+
+    - name: Sleeeep
+      run: sleep 1000
+
     - name: Set sudopass
       if: always()
       run: rm -rf /tmp/BECOME_PASS
