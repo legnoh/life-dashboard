@@ -9,14 +9,7 @@
         install_rancher_memory_in_gb: 8
 
     - name: Wait dockerd is running
-      ansible.builtin.shell: |
-        while true
-        do
-          if {{ ansible_env.HOME }}/.rd/bin/docker ps > /dev/null; then
-            echo "dockerd is running!"
-            exit 0
-          fi
-          echo "dockerd is starting..."
-          sleep 5
-        done
+      ansible.builtin.command: "{{ ansible_env.HOME }}/.rd/bin/docker ps"
+      retries: 120 # 120 * 5 seconds = 10min (60*60/5)
+      delay: 5 # Every 5 seconds
       changed_when: false
