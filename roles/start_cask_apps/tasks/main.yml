@@ -18,6 +18,7 @@
       vars:
         install_rancher_memory_in_gb: 5
         install_rancher_number_cpus: 2
+        install_rancher_start_in_background: false
 
     - name: Wait dockerd is running
       ansible.builtin.shell: |
