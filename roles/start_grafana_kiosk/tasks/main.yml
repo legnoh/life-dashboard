@@ -30,6 +30,7 @@
       retries: 720 # 720 * 5 seconds = 1hour (60*60/5)
       delay: 5 # Every 5 seconds
       register: grafana_playlist
+      failed_when: grafana_playlist.json[0].uid is not defined
 
     - name: Copy config file
       when: not ansible_check_mode

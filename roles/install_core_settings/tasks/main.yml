@@ -2,11 +2,11 @@
 
 - name: Install core settings
   block:
-    - name: Install/Start Rancher
+    - name: Install core zsh settings
       ansible.builtin.import_role:
         name: legnoh.dotfiles.install_zsh_config
 
-    - name: Set .zshenv for homebrew bins & Rancher
+    - name: Set .zshenv for homebrew bins
       when: not ansible_check_mode
       ansible.builtin.template:
         src: .zshenv.j2

@@ -1,2 +1,1 @@
 ---
-start_cask_apps_grafstation_sudo_pass: "{{ grafstation.sudo_pass }}"

@@ -8,6 +8,9 @@
     - role: start_cask_apps
       tags: [start_cask_apps]
 
+    - role: install_docker
+      tags: [install_docker]
+
     - role: generate_snmp_config
       tags: [generate_snmp_config]
 

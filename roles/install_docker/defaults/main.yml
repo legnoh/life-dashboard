@@ -1,0 +1,3 @@
+---
+
+install_docker_grafstation_sudo_pass: "{{ grafstation.sudo_pass }}"
