@@ -8,6 +8,31 @@
         state: upgraded
         sudo_password: "{{ install_docker_grafstation_sudo_pass }}"
 
+    - name: Check Rancher Desktop was installed
+      ansible.builtin.stat:
+        path: "/Applications/Docker.app"
+      register: check_installed
+
+    - name: Stop Docker Desktop
+      when: check_installed.stat.exists
+      ansible.builtin.command:
+        cmd: /usr/bin/killall 'Docker Desktop'
+      changed_when: false
+      failed_when: false
+
+    - name: Wait dockerd is stopping
+      ansible.builtin.shell: |
+        while true
+        do
+          if ! /usr/local/bin/docker ps > /dev/null; then
+            echo "dockerd is stopped."
+            exit 0
+          fi
+          echo "dockerd is still running..."
+          sleep 5
+        done
+      changed_when: false
+
     - name: Accept EULA
       ansible.builtin.command:
         cmd: /usr/bin/defaults write com.docker.docker EULASignature -string "accept"
