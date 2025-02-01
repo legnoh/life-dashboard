@@ -52,8 +52,8 @@
         mode: '0644'
 
     - name: Start Docker
-      ansible.builtin.shell:
-        cmd: nohup /usr/bin/open --background -a Docker &
+      ansible.builtin.command:
+        cmd: /usr/bin/open --background -a Docker
       changed_when: false
 
     - name: Show dialog
