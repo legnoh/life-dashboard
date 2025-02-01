@@ -224,7 +224,7 @@ resource "grafana_dashboard" "life-metrics" {
 }
 
 resource "grafana_dashboard" "node-exporter" {
-  config_json = data.curl.node-exporter-full.response
+  config_json = data.curl.node-exporter-macos.response
 }
 
 resource "grafana_dashboard" "gch" {
@@ -234,37 +234,15 @@ resource "grafana_dashboard" "gch" {
     description = ""
     timezone    = "browser"
     version     = 0
-    panels = concat(
+    panels      = concat(
       [
         for i, s in var.GCH_STREAMS
         :
         {
-          libraryPanel = zipmap(local.libpanel_keys, [
-            s.program_name != "放送休止"
-            ?
-            grafana_library_panel.gch[i].uid
-            :
-          grafana_library_panel.gch_not_onair.uid])
-          gridPos = (
-            s.channel_id == "ch1" ?
-            local.gch_position[0]
-            :
-            s.channel_id == "ch2" ?
-            local.gch_position[1]
-            :
-            s.channel_id == "ch3" ?
-            local.gch_position[2]
-            :
-            s.channel_id == "ch4" ?
-            local.gch_position[3]
-            :
-            s.channel_id == "ch5" ?
-            local.gch_position[4]
-            :
-            { h = 0, w = 0, x = 0, y = 0 }
-          )
+          libraryPanel = zipmap(local.libpanel_keys, [s.program_name != "放送休止" ? grafana_library_panel.gch[i].uid : grafana_library_panel.gch_not_onair.uid])
+          gridPos = local.gch_position[i]
         }
-        ], [
+      ], [
         {
           libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.news-netkeiba.uid])
           gridPos      = { h = 2, w = 24, x = 0, y = 26 }

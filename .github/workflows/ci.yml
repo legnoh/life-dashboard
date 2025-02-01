@@ -11,6 +11,10 @@ on:
         description: 'inject docker compose down'
         type: boolean
         default: false
+      verbose:
+        description: ansible-playbook with -v
+        type: boolean
+        default: false
 
 jobs:
   setup:
@@ -75,11 +79,14 @@ jobs:
     - name: Set ansible mode
       id: set-mode
       run: |
-          if [[ "${{ github.event_name }}" == "pull_request_target" ]]; then
-            echo "options=--check" >> $GITHUB_OUTPUT
-          else
-            echo "options=" >> $GITHUB_OUTPUT
-          fi
+        options=""
+        if [[ ${{ inputs.verbose }} == true ]]; then
+          options="-v"
+        fi
+        if [[ "${{ github.event_name }}" == "pull_request_target" ]]; then
+          options="--check"
+        fi
+        echo "options=$options" >> $GITHUB_OUTPUT
 
     - name: Install requirements
       run: ansible-galaxy collection install -r requirements.yml
