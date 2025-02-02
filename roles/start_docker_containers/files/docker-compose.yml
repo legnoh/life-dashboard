@@ -16,8 +16,6 @@ services:
     restart: always
     volumes:
       - /Users/${USER}/grafstation/prometheus/:/etc/prometheus/
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
   grafana:
     container_name: grafana
     image: grafana/grafana:11.5.0
