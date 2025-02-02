@@ -32,6 +32,8 @@
   - [Apple Account にサインインする - Apple サポート (日本)](https://support.apple.com/ja-jp/111001#macos)
 - macのコンピュータ名を"grafstation.local"に変更し、ブラウザアクセス用のホスト名を決定する
   - [Macでコンピュータの名前またはローカルホスト名を変更する - Apple サポート (日本)](https://support.apple.com/ja-jp/guide/mac-help/mchlp2322/mac)
+- focus-cli/reminders-cli/reminders-exporterにそれぞれフルディスクアクセスを許可する
+- そのほかセットアップ中に出てくる許可ダイアログをすべて許可する
 
 ### GitHub Actionsを使ってセットアップする場合
 
