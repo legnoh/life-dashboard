@@ -24,7 +24,9 @@ function main() {
     export STREAM_KEY=${3:-"stream"}
     export STREAMLINK_HTTP_URL="http://grafstation.local:${STREAMLINK_HTTP_PORT}/"
     load_launchd "io.lkj.life.dashboard.grafstation.stream.${STREAM_KEY}.streamlink" "./streamlink.plist"
+    sleep 5
     load_launchd "io.lkj.life.dashboard.grafstation.stream.${STREAM_KEY}.ffmpeg" "./ffmpeg.plist"
+    sleep 5
     touch ${STREAM_START_FILE} # 開始時刻把握のためにファイルを更新する
 }
 
