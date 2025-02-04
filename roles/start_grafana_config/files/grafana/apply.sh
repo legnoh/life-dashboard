@@ -53,11 +53,12 @@ function fetch_abema_slots_data() {
   if [[ ! -e "${ABEMA_SLOTS_FILE}" ]] || [[ $(date "+%M") == "55" ]]; then
 
     # たまに制御文字が紛れ込むことがあるので消す
-    local onair_slot=$(curl -o - -q -L \
+    curl -o - -q -L \
       -H "Accept-Encoding: gzip" \
       -H "Authorization: Bearer ${token}" "${timetable_url}" \
-      | gunzip)
-    echo ${onair_slot} | tr -d "\t" | tr -d "\n" > ${ABEMA_SLOTS_FILE}
+    | gunzip \
+    | perl -CSD -pe 's/\p{C}//g' \
+    > ${ABEMA_SLOTS_FILE}
   fi
 }
 
@@ -137,7 +138,11 @@ function restart_stream(){
   if [[ ! -e "${STREAM_START_FILE}" ]]; then
     echo "ストリームを再起動します(ファイルなし)"
     cd ../stream && ./start.sh "${mleague_url}" && cd -
+    sleep 5
     return 0
+
+    # キャッシュクリアのため、grafana-kioskも再起動する
+    ${BREW} services restart grafana-kiosk
   fi
 
   local now_unixtime=${TIMESTAMP}
