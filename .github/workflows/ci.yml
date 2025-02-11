@@ -57,7 +57,7 @@ jobs:
 
     - name: Install ansible
       if: ${{ !steps.check-ansible.outputs.installed || github.event_name == 'pull_request_target' }}
-      run: brew install ansible
+      run: brew install ansible rsync
       env:
         HOMEBREW_NO_INSTALL_UPGRADE: true
 
