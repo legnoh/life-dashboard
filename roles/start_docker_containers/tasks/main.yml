@@ -13,6 +13,7 @@
         - withings
 
     - name: Copy config files
+      when: not ansible_check_mode
       ansible.builtin.synchronize:
         src: "{{ item }}"
         dest: "{{ ansible_env.HOME }}/grafstation/configs/{{ item }}"
