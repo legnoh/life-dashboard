@@ -30,6 +30,7 @@ STREAM_START_FILE="/tmp/start.stream"
 
 
 MODE_MEAL="食事"
+MODE_CHILL="食後"
 MODE_WORKOUT="フィットネス"
 MODE_STRETCH="ストレッチ"
 MODE_PRESLEEP="睡眠導入"
@@ -372,6 +373,12 @@ function main(){
     echo "モード判定: 食事"
     tv_channel1="news-domestic"
     tv_channel2="news-global"
+  
+  ## "食事"モードの場合はニュースをつける
+  elif [ "${focusmode}" = "${MODE_CHILL}" ]; then
+    echo "モード判定: 食後"
+    tv_channel1="vtuber"
+    tv_channel2="greench"
   
   ## 特にどれにも該当しなかった場合はモードなしとする
   else

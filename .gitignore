@@ -87,6 +87,7 @@ terraform.rc
 ### https://raw.github.com/github/gitignore/76739a38b56907118c5a880d63250c99d5690a5a/Global/Ansible.gitignore
 
 *.retry
+.ansible
 
 # credential file
 credential.yml

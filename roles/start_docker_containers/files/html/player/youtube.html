@@ -4,41 +4,30 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <head>
-    <script src="https://www.youtube.com/iframe_api"></script>
-    <style>
-      body {
-        margin: 0 auto; /* 左右中央揃え */
-        vertical-align: middle; /* 上下中央揃え */
-        background-color: rgb(17, 18, 23);
-      }
-    </style>
-  </head>
-  <body>
-    <div id="player"></div>
-    <script>
+    <script defer>
       const urlParams = new URLSearchParams(window.location.search);
       const playlistId = urlParams.get('list');
       const videoId = urlParams.get('v');
       const isMute = urlParams.get('mute');
       const isShuffle = urlParams.get('shuffle');
 
-      var player;
+      let player;
 
       var playerOption = {
-          height: window.innerHeight,
-          width: window.innerWidth,
-          events: {
-            'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChange
-          }
+        height: window.innerHeight,
+        width: window.innerWidth,
+        events: {
+          'onReady': onPlayerReady,
+          'onStateChange': onPlayerStateChange
+        }
       };
 
       if (playlistId != null) {
         playerOption.playerVars = {
-            listType:'playlist',
-            list: playlistId,
-            loop: 1,
-            modestbranding: 1,
+          listType: 'playlist',
+          list: playlistId,
+          loop: 1,
+          modestbranding: 1,
         }
       }
 
@@ -55,10 +44,10 @@
       }
 
       function onPlayerReady(event) {
-        if(isMute == "1") {
+        if (isMute == "1") {
           event.target.mute();
         }
-        if(isShuffle == "true") {
+        if (isShuffle == "true") {
           event.target.setShuffle(true);
         }
         event.target.playVideoAt(0);
@@ -71,6 +60,27 @@
           done = true;
         }
       }
+
+      window.addEventListener('load', () => {
+        if (window.YT && YT.Player) {
+          onYouTubeIframeAPIReady();
+        }
+      });
+
+      window.addEventListener('beforeunload', () => {
+        if (player) player.destroy();
+      });
     </script>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <style>
+      body {
+        margin: 0 auto; /* 左右中央揃え */
+        vertical-align: middle; /* 上下中央揃え */
+        background-color: rgb(17, 18, 23);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="player"></div>
   </body>
 </html>
