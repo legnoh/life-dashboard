@@ -16,6 +16,7 @@
 | [legnoh/moneyforward-exporter](https://github.com/legnoh/moneyforward-exporter) | MoneyForward ME の 残高、資産、負債、引落予定額 |
 | [billykwooten/openweather-exporter](https://github.com/billykwooten/openweather-exporter) | OpenWeatherMap の 指定地点の天気、温度、湿度 の気象情報 |
 | [legnoh/oura-exporter](https://github.com/legnoh/oura-exporter) | Oura Ring の 各種スコア(アクティビティ、コンディション、睡眠) |
+| [legnoh/google-pollen-exporter](https://github.com/legnoh/google-pollen-exporter) | 花粉(木･草)の飛散予報 |
 | [legnoh/reminders-exporter](https://github.com/legnoh/reminders-exporter) | リマインダーの期限切れ・特定リストのタスク残数 |
 | [kenfdev/remo-exporter](https://github.com/kenfdev/remo-exporter) | NatureRemo の の計測情報 |
 | [prometheus/snmp_exporter](https://github.com/prometheus/snmp_exporter) | 宅内通信回線の利用状況 |
