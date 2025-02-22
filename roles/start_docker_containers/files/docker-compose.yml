@@ -51,6 +51,16 @@ services:
       - MONEYFORWARD_PASSWORD=${MONEYFORWARD_PASSWORD}
       - SE_OFFLINE=false
     shm_size: 2gb
+  pollen-exporter:
+    container_name: pollen-exporter
+    image: legnoh/google-pollen-exporter:latest
+    platform: linux/arm64
+    ports: [9113:8000]
+    restart: always
+    environment:
+      - GOOGLE_API_KEY=${POLLEN_APIKEY}
+      - COORDINATES=${POLLEN_COORDINATES}
+      - LANGUAGE_CODE=ja
   openweather-exporter:
     container_name: openweather-exporter
     image: legnoh/openweather-exporter:icon

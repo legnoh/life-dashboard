@@ -121,6 +121,8 @@ jobs:
         OPENWEATHER_CITY: ${{ secrets.OPENWEATHER_CITY }}
         OURA_ACCESS_TOKEN: ${{ secrets.OURA_ACCESS_TOKEN }}
         OURA_TZ: "Asia/Tokyo"
+        POLLEN_APIKEY: ${{ secrets.POLLEN_APIKEY }}
+        POLLEN_COORDINATES: ${{ secrets.POLLEN_COORDINATES }}
         RECREATE_CONTAINER: ${{ inputs.rm_state }}
         SNMP_PASSWORD: ${{ secrets.SNMP_PASSWORD }}
         SNMP_PRIV_PASSWORD: ${{ secrets.SNMP_PRIV_PASSWORD }}

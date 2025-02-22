@@ -47,6 +47,8 @@
         OPENWEATHER_API_KEY: "{{ start_docker_containers_openweather_api_key }}"
         OURA_ACCESS_TOKEN: "{{ start_docker_containers_oura_access_token }}"
         OURA_TZ: "{{ start_docker_containers_oura_tz }}"
+        POLLEN_APIKEY: "{{ start_docker_containers_pollen_apikey }}"
+        POLLEN_COORDINATES: "{{ start_docker_containers_pollen_coordinates }}"
         SPEEDTEST_SERVER_IDS: "{{ start_docker_containers_speedtest_server_ids }}"
         WITHINGS_ACCESS_TOKEN: "{{ start_docker_containers_withings_access_token }}"
         WITHINGS_CLIENT_ID: "{{ start_docker_containers_withings_client_id }}"
