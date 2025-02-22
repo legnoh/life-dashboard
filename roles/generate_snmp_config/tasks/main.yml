@@ -2,9 +2,11 @@
 
 - name: Generate SNMP Config
   block:
-    - name: Install gnu-tar(for ansible unarchive module)
+    - name: Install gnu-tar(for ansible unarchive module) and gnu-sed(for Makefile)
       community.general.homebrew:
-        name: gnu-tar
+        name:
+          - gnu-tar
+          - gnu-sed
         state: upgraded
 
     - name: Create a temp directory
@@ -20,26 +22,22 @@
         dest: "{{ generate_snmp_config_tmp_dir }}/Makefile"
         mode: '0644'
 
+    - name: Insert temporary sed alias
+      ansible.builtin.file:
+        src: /opt/homebrew/bin/gsed
+        dest: /opt/homebrew/bin/sed
+        state: link
+
     - name: Download Common mib file with Makefile
       when: not ansible_check_mode
-      make:
+      community.general.make:
         chdir: "{{ generate_snmp_config_tmp_dir }}"
         target: mibs
 
-    - name: Download YAMAHA private mib
-      when: not ansible_check_mode
-      ansible.builtin.get_url:
-        url: https://www.rtpro.yamaha.co.jp/RT/docs/mib/yamaha-private-mib.tar.gz
-        dest: "{{ generate_snmp_config_tmp_dir }}/yamaha-private-mib.tar.gz"
-        mode: '0644'
-
-    - name: Unarchive private mib
-      when: not ansible_check_mode
-      ansible.builtin.unarchive:
-        remote_src: true
-        src: "{{ generate_snmp_config_tmp_dir }}/yamaha-private-mib.tar.gz"
-        dest: "{{ generate_snmp_config_tmp_dir }}"
-        extra_opts: ['--strip-components', '1', -C, 'mibs']
+    - name: Remove temporary sed alias
+      ansible.builtin.file:
+        path: /opt/homebrew/bin/sed
+        state: absent
 
     - name: Create generator.yml
       when: not ansible_check_mode
