@@ -5,7 +5,7 @@ resource "grafana_library_panel" "pollen-forecast" {
   model_json = jsonencode(merge(local.common_base, local.stats_base, {
     title = "花粉予測",
     targets = [merge(local.target_base, {
-      expr = "max(google_pollen_type_upi)"
+      expr = "max(google_pollen_type_upi) or vector(0)"
     })]
     fieldConfig = merge(local.field_config_base, {
       defaults = merge(local.field_config_default_base, {
