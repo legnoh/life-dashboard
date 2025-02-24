@@ -157,11 +157,6 @@ resource "grafana_dashboard" "life-metrics" {
         gridPos      = local.grid_position.A4
       },
       {
-        title        = "外の温度"
-        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.openweather-temperature.uid])
-        gridPos      = local.grid_position.B5
-      },
-      {
         title        = "外: 不快指数"
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.openweather-thi.uid])
         gridPos      = local.grid_position.C5
@@ -182,6 +177,13 @@ resource "grafana_dashboard" "life-metrics" {
         title        = "アクティビティスコア"
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.oura-activity-score.uid])
         gridPos      = local.grid_position.A2
+      },
+
+      # pollen
+      {
+        title        = "花粉予報"
+        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.pollen-forecast.uid])
+        gridPos      = local.grid_position.B5
       },
 
       # reminders
