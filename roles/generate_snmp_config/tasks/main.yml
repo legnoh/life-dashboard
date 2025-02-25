@@ -23,6 +23,7 @@
         mode: '0644'
 
     - name: Insert temporary sed alias
+      when: not ansible_check_mode
       ansible.builtin.file:
         src: /opt/homebrew/bin/gsed
         dest: /opt/homebrew/bin/sed
@@ -35,6 +36,7 @@
         target: mibs
 
     - name: Remove temporary sed alias
+      when: not ansible_check_mode
       ansible.builtin.file:
         path: /opt/homebrew/bin/sed
         state: absent
