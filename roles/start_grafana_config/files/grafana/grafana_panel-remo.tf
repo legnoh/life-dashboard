@@ -112,3 +112,39 @@ resource "grafana_library_panel" "remo-power-consumption" {
     })
   }))
 }
+
+resource "grafana_library_panel" "thi" {
+  org_id     = grafana_organization.main.org_id
+  folder_uid = grafana_folder.atmosphere.uid
+  name       = "不快指数"
+  model_json = jsonencode(merge(local.common_base, local.stats_base, local.link.openweather, {
+    title = "不快指数",
+    targets = [
+      merge(local.target_base, {
+        expr  = "(0.81 * remo_temperature{name=\"${var.NATURE_REMO_DEVICE_NAME}\"}) + (0.01 * remo_humidity{name=\"${var.NATURE_REMO_DEVICE_NAME}\"}) * ( (0.99 * remo_temperature{name=\"${var.NATURE_REMO_DEVICE_NAME}\"}) - 14.3 ) + 46.3"
+        refId = "内"
+      }),
+      merge(local.target_base, {
+        expr  = "(0.81 * openweather_temperature{location=\"${var.OPENWEATHER_CITY}\"}) + (0.01 * openweather_humidity{location=\"${var.OPENWEATHER_CITY}\"}) * ( (0.99 * openweather_temperature{location=\"${var.OPENWEATHER_CITY}\"}) - 14.3 ) + 46.3"
+        refId = "外"
+      }),
+    ]
+    transformations = [{
+      id = "renameByRegex"
+      options = {
+        regex = "Value #(.*)"
+        renamePattern = "$1"
+      }
+    }]
+    fieldConfig = merge(local.field_config_base, {
+      defaults = merge(local.field_config_default_base, {
+        mappings = local.thi_threshold
+        thresholds = merge(local.thresholds_base, {
+          steps = [
+            zipmap(local.thresholds_keys, ["text", null]),
+          ]
+        })
+      })
+    })
+  }))
+}
