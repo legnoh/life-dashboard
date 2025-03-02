@@ -33,3 +33,7 @@ resource "grafana_folder" "rss" {
 resource "grafana_folder" "todolist" {
   title = "TODOリスト"
 }
+
+resource "grafana_folder" "etc" {
+  title = "その他"
+}
