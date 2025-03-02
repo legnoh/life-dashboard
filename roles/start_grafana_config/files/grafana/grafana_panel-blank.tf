@@ -3,7 +3,8 @@ resource "grafana_library_panel" "blank" {
   folder_uid = grafana_folder.etc.uid
   name       = "空白"
   model_json = jsonencode({
-    title = "",
+    title = ""
+    type  = "text"
     options = {
       mode = "markdown"
       code = {
