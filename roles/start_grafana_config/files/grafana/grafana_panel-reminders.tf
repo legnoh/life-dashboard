@@ -61,12 +61,10 @@ resource "grafana_library_panel" "reminders-all" {
     targets = [
       merge(local.target_base, {
         expr   = "reminders_list_total{name=\"ASAP #私用\"}"
-        format = "time_series"
         refId  = "ASAP #私用"
       }),
       merge(local.target_base, {
         expr   = "reminders_all_total{status=\"outdated\"}"
-        format = "time_series"
         refId  = "期限切れ"
       }),
     ],
