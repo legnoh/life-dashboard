@@ -33,7 +33,7 @@ resource "grafana_library_panel" "reminders-asap" {
     title = "タスク残数(ASAP)",
     targets = [
       merge(local.target_base, {
-        expr   = "reminders_list_total{name=\"ASAP\"}",
+        expr   = "reminders_list_total{name=\"ASAP #私用\"}",
         format = "time_series",
       }),
     ]
