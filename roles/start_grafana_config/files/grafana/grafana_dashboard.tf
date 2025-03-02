@@ -111,9 +111,9 @@ resource "grafana_dashboard" "life-metrics" {
 
       ### asken
       {
-        title        = "あすけん健康度"
+        title        = "食事スコア"
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.asken-score.uid])
-        gridPos      = local.grid_position.C1
+        gridPos      = local.grid_position.B4
       },
 
       # moneyforward
@@ -135,14 +135,14 @@ resource "grafana_dashboard" "life-metrics" {
 
       # nature remo
       {
-        title        = "部屋の温度"
+        title        = ""
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.remo-temperature.uid])
         gridPos      = local.grid_position.B4
       },
       {
         title        = "内: 不快指数"
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.remo-thi.uid])
-        gridPos      = local.grid_position.C4
+        gridPos      = local.grid_position.A1
       },
       {
         title        = "瞬間消費電力"
@@ -159,24 +159,24 @@ resource "grafana_dashboard" "life-metrics" {
       {
         title        = "外: 不快指数"
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.openweather-thi.uid])
-        gridPos      = local.grid_position.C5
+        gridPos      = local.grid_position.A2
       },
 
       # oura
       {
         title        = "コンディションスコア"
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.oura-readiness-score.uid])
-        gridPos      = local.grid_position.A1
+        gridPos      = local.grid_position.B1
       },
       {
         title        = "睡眠スコア"
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.oura-sleep-score.uid])
-        gridPos      = local.grid_position.A3
+        gridPos      = local.grid_position.B3
       },
       {
         title        = "アクティビティスコア"
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.oura-activity-score.uid])
-        gridPos      = local.grid_position.A2
+        gridPos      = local.grid_position.B2
       },
 
       # pollen
@@ -190,12 +190,12 @@ resource "grafana_dashboard" "life-metrics" {
       {
         title        = "タスク残数(期限切れ)"
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.reminders-outdated.uid])
-        gridPos      = local.grid_position.C3
+        gridPos      = local.grid_position.C5
       },
       {
         title        = "タスク残数(ASAP)"
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.reminders-asap.uid])
-        gridPos      = local.grid_position.C2
+        gridPos      = local.grid_position.C4
       },
 
       # snmp
@@ -209,17 +209,24 @@ resource "grafana_dashboard" "life-metrics" {
       {
         title        = "BMI"
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.withings-bmi.uid])
-        gridPos      = local.grid_position.B1
+        gridPos      = local.grid_position.C1
       },
       {
         title        = "最高血圧"
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.withings-bpm-max.uid])
-        gridPos      = local.grid_position.B2
+        gridPos      = local.grid_position.C2
       },
       {
         title        = "体温"
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.withings-body-temperature.uid])
-        gridPos      = local.grid_position.B3
+        gridPos      = local.grid_position.C3
+      },
+
+      # blank
+      {
+        title        = ""
+        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.blank.uid])
+        gridPos      = local.grid_position.B5
       },
     ]
   })
