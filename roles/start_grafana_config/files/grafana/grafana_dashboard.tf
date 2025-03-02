@@ -178,7 +178,7 @@ resource "grafana_dashboard" "life-metrics" {
       {
         title        = "花粉予報"
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.pollen-forecast.uid])
-        gridPos      = local.grid_position.B5
+        gridPos      = local.grid_position.A3
       },
 
       # reminders
