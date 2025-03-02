@@ -135,11 +135,6 @@ resource "grafana_dashboard" "life-metrics" {
 
       # nature remo
       {
-        title        = ""
-        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.remo-temperature.uid])
-        gridPos      = local.grid_position.B4
-      },
-      {
         title        = "内: 不快指数"
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.remo-thi.uid])
         gridPos      = local.grid_position.A1
