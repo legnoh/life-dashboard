@@ -243,6 +243,7 @@ resource "grafana_dashboard" "gch" {
         for i, s in var.GCH_STREAMS
         :
         {
+          title = s.program_name
           libraryPanel = zipmap(local.libpanel_keys, [s.program_name != "放送休止" ? grafana_library_panel.gch[i].uid : grafana_library_panel.gch_not_onair.uid])
           gridPos = local.gch_position[i]
         }
