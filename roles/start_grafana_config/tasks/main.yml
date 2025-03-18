@@ -55,7 +55,7 @@
     - name: Download remote files(streamlink plugin)
       when: not ansible_check_mode
       ansible.builtin.get_url:
-        url: "https://raw.githubusercontent.com/legnoh/streamlink-plugin-greenchannel/refs/heads/main/greenchannel.py"
+        url: "https://raw.githubusercontent.com/legnoh/streamlink-plugin-greenchannel/refs/heads/main/greenchannel/greenchannel.py"
         dest: "{{ ansible_env.HOME }}/Library/Application Support/streamlink/plugins/greenchannel.py"
         mode: '0644'
 

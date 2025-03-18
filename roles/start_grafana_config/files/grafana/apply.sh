@@ -92,6 +92,7 @@ function get_greench_stream_url() {
   ${STREAMLINK} "https://sp.gch.jp/#ch${channel_code}" \
     --greenchannel-email="${GREENCH_EMAIL}" \
     --greenchannel-password="${GREENCH_PASSWORD}" \
+    --greenchannel-low-latency=true \
     best --stream-url
 }
 
