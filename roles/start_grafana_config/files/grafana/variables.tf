@@ -36,11 +36,6 @@ variable "YOUTUBE_PLAYLIST_ID" {
   default = ""
 }
 
-variable "IS_YOUTUBE_MUTED" {
-  type    = bool
-  default = true
-}
-
 variable "GCH_STREAMS" {
   type = list(object({
     channel_id   = string
@@ -64,39 +59,4 @@ variable "NATURE_REMO_DEVICE_NAME" {
 variable "OPENWEATHER_CITY" {
   type    = string
   default = "Tokyo, JP"
-}
-
-variable "IS_DAYMODE" {
-  type    = bool
-  default = false
-}
-
-variable "IS_NEWSTIME_DOMESTIC" {
-  type    = bool
-  default = false
-}
-
-variable "IS_NEWSTIME_GLOBAL" {
-  type    = bool
-  default = false
-}
-
-variable "IS_RACETIME" {
-  type    = bool
-  default = false
-}
-
-variable "IS_REFRESHTIME" {
-  type    = bool
-  default = false
-}
-
-variable "IS_STREAM_ONAIR" {
-  type    = bool
-  default = false
-}
-
-variable "IS_EARTHQUAKE" {
-  type    = bool
-  default = false
 }

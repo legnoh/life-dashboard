@@ -88,12 +88,19 @@ function fetch_dirt_race_data() {
 
 # グリーンチャンネルの指定チャンネルでストリームURLを取得する
 function get_greench_stream_url() {
-  local channel_code=${1:-"1"}
-  ${STREAMLINK} "https://sp.gch.jp/#ch${channel_code}" \
+  local channel_code=${1:?}
+  if [[ ${channel_code} == "1" ]]; then
+    ${STREAMLINK} "https://sp.gch.jp/#ch${channel_code}" \
     --greenchannel-email="${GREENCH_EMAIL}" \
     --greenchannel-password="${GREENCH_PASSWORD}" \
     --greenchannel-low-latency=true \
-    best --stream-url
+    --stream-url
+  else
+    ${STREAMLINK} "https://sp.gch.jp/#ch${channel_code}" \
+    --greenchannel-email "${GREENCH_EMAIL}" \
+    --greenchannel-password "${GREENCH_PASSWORD}" \
+    --stream-url
+  fi
 }
 
 # グリーンチャンネルの現在放送中の番組タイトルを取得する

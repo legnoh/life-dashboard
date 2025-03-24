@@ -237,6 +237,9 @@ resource "grafana_dashboard" "gch" {
     title       = "GreenCH"
     description = ""
     timezone    = "browser"
+    timepicker = {
+      hidden = true
+    }
     version     = 0
     panels      = concat(
       [

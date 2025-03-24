@@ -12,27 +12,27 @@ resource "grafana_library_panel" "pollen-forecast" {
         mappings = [
           {
             type    = "range",
-            options = { from = 0, to = 1, result = { index = 1, color = "green", text = "無🥰" } },
+            options = { from = 0, to = 0, result = { index = 1, color = "green", text = "無🥰" } },
           },
           {
             type    = "range",
-            options = { from = 1, to = 2, result = { index = 2, color = "super-light-green", text = "少😎" } },
+            options = { from = 1, to = 1, result = { index = 2, color = "super-light-green", text = "少😎" } },
           },
           {
             type    = "range",
-            options = { from = 2, to = 3, result = { index = 3, color = "green", text = "低🤨" } },
+            options = { from = 2, to = 2, result = { index = 3, color = "green", text = "低🤨" } },
           },
           {
             type    = "range",
-            options = { from = 3, to = 4, result = { index = 4, color = "yellow", text = "中😷" } },
+            options = { from = 3, to = 3, result = { index = 4, color = "yellow", text = "中😷" } },
           },
           {
             type    = "range",
-            options = { from = 4, to = 5, result = { index = 5, color = "orange", text = "多🤧" } },
+            options = { from = 4, to = 4, result = { index = 5, color = "orange", text = "多🤧" } },
           },
           {
             type    = "range",
-            options = { from = 5, to = 6, result = { index = 6, color = "red", text = "甚😵" } },
+            options = { from = 5, to = 5, result = { index = 6, color = "red", text = "甚😵" } },
           },
         ]
       })
