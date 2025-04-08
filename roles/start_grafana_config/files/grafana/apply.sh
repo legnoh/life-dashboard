@@ -108,12 +108,17 @@ function get_greench_now_onair_title() {
   local channel_code=${1:-"1"}
   local filename=$(eval echo '$'GCH_ONAIR_JSON_CH${channel_code})
   local ts=$(date +%s)
-  title=$(cat ${filename} \
+  local title=$(cat ${filename} \
     | ${JQ} -r "[ .[][] \
       | .live_start_datetime = ( .live_start_datetime | strptime(\"%Y-%m-%d %T\") | strftime(\"%s\") | tonumber) \
       | .live_end_datetime   = ( .live_end_datetime | strptime(\"%Y-%m-%d %T\") | strftime(\"%s\") | tonumber ) \
       | select( .live_start_datetime < ${ts} and .live_end_datetime > ${ts} ) ] | .[0].program_name")
-  if [[ "${title}" == "null" ]]; then
+  local category_code=$(cat ${filename} \
+    | ${JQ} -r "[ .[][] \
+      | .live_start_datetime = ( .live_start_datetime | strptime(\"%Y-%m-%d %T\") | strftime(\"%s\") | tonumber) \
+      | .live_end_datetime   = ( .live_end_datetime | strptime(\"%Y-%m-%d %T\") | strftime(\"%s\") | tonumber ) \
+      | select( .live_start_datetime < ${ts} and .live_end_datetime > ${ts} ) ] | .[0].category_code")
+  if [[ "${title}" == "null" ]] || [[ "${category_code}" == "L999" ]]; then
     echo "放送休止"
   else
     echo "${title}"
@@ -194,8 +199,10 @@ function is_national_racetime(){
     num=0
   fi
   if [[ ${num} > 0 ]]; then
+    echo "中央競馬判定: 有"
     return 0
   else
+    echo "中央競馬判定: 無"
     return 1
   fi
 }
@@ -212,8 +219,10 @@ function is_dirt_grade_race() {
       num=0
     fi
     if [[ ${num} > 0 ]]; then
+      echo "ダートグレード競走判定: 有"
       return 0
     else
+      echo "ダートグレード競走判定: 無"
       return 1
     fi
 }
@@ -237,8 +246,10 @@ function is_world_racetime(){
     num=0
   fi
   if [[ ${num} > 0 ]]; then
+    echo "海外競馬判定: 有"
     return 0
   else
+    echo "海外競馬判定: 無"
     return 1
   fi
 }
