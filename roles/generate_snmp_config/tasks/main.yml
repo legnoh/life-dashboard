@@ -18,7 +18,7 @@
     - name: Download Makefile
       when: not ansible_check_mode
       ansible.builtin.get_url:
-        url: https://github.com/prometheus/snmp_exporter/raw/main/generator/Makefile
+        url: https://raw.githubusercontent.com/prometheus/snmp_exporter/005ee4ff108178103f49c1f68cc98d7ad65ea18d/generator/Makefile
         dest: "{{ generate_snmp_config_tmp_dir }}/Makefile"
         mode: '0644'
 
