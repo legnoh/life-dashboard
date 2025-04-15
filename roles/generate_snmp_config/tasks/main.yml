@@ -79,3 +79,9 @@
       ansible.builtin.file:
         path: "{{ generate_snmp_config_tmp_dir }}"
         state: absent
+
+    - name: Remove temporary sed alias
+      when: not ansible_check_mode
+      ansible.builtin.file:
+        path: /opt/homebrew/bin/sed
+        state: absent
