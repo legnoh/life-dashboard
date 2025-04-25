@@ -100,8 +100,7 @@ resource "grafana_library_panel" "remo-power-consumption" {
       defaults = merge(local.field_config_default_base, {
         thresholds = merge(local.thresholds_base, {
           steps = [
-            zipmap(local.thresholds_keys, ["text", null]),
-            zipmap(local.thresholds_keys, ["green", 500]),
+            zipmap(local.thresholds_keys, ["green", null]),
             zipmap(local.thresholds_keys, ["yellow", 1000]),
             zipmap(local.thresholds_keys, ["orange", 2000]),
             zipmap(local.thresholds_keys, ["red", 2500]),
