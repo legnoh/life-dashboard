@@ -91,7 +91,7 @@ resource "grafana_library_panel" "withings-body-temperature" {
         thresholds = merge(local.thresholds_base, {
           steps = [
             zipmap(local.thresholds_keys, ["blue", null]),
-            zipmap(local.thresholds_keys, ["light-green", 35.5]),
+            zipmap(local.thresholds_keys, ["green", 35.5]),
             zipmap(local.thresholds_keys, ["yellow", 37]),
             zipmap(local.thresholds_keys, ["orange", 38]),
             zipmap(local.thresholds_keys, ["semi-dark-orange", 39]),
