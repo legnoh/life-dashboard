@@ -85,9 +85,9 @@ resource "grafana_library_panel" "moneyforward-deposit-withdrawal" {
         thresholds = merge(local.thresholds_base, {
           steps = [
             zipmap(local.thresholds_keys, ["#181b1f", null]),
-            zipmap(local.thresholds_keys, ["dark-red", -1000000]),
-            zipmap(local.thresholds_keys, ["semi-dark-red", 0]),
-            zipmap(local.thresholds_keys, ["red", 20000]),
+            zipmap(local.thresholds_keys, ["red", -1000000]),
+            zipmap(local.thresholds_keys, ["orange", 0]),
+            zipmap(local.thresholds_keys, ["yellow", 20000]),
             zipmap(local.thresholds_keys, ["light-green", 50000]),
             zipmap(local.thresholds_keys, ["green", 100000]),
           ]
