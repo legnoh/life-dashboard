@@ -11,8 +11,7 @@ resource "grafana_library_panel" "asken-score" {
       defaults = merge(local.field_config_default_base, {
         thresholds = merge(local.thresholds_base, {
           steps = [
-            zipmap(local.thresholds_keys, ["dark-red", null]),
-            zipmap(local.thresholds_keys, ["red", 30]),
+            zipmap(local.thresholds_keys, ["red", null]),
             zipmap(local.thresholds_keys, ["orange", 40]),
             zipmap(local.thresholds_keys, ["yellow", 50]),
             zipmap(local.thresholds_keys, ["super-light-green", 60]),
