@@ -42,6 +42,7 @@
         GRAFANA_ADMIN_PASSWORD: "{{ start_docker_containers_grafana_admin_password }}"
         MONEYFORWARD_EMAIL: "{{ start_docker_containers_moneyforward_email }}"
         MONEYFORWARD_PASSWORD: "{{ start_docker_containers_moneyforward_password }}"
+        MONEYFORWARD_TOTP_SECRET: "{{ start_docker_containers_moneyforward_totp_secret }}"
         NATURE_OAUTH_TOKEN: "{{ start_docker_containers_nature_oauth_token }}"
         OPENWEATHER_CITY: "{{ start_docker_containers_openweather_city }}"
         OPENWEATHER_API_KEY: "{{ start_docker_containers_openweather_api_key }}"

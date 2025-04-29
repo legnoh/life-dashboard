@@ -49,6 +49,7 @@ services:
     environment:
       - MONEYFORWARD_EMAIL=${MONEYFORWARD_EMAIL}
       - MONEYFORWARD_PASSWORD=${MONEYFORWARD_PASSWORD}
+      - MONEYFORWARD_TOTP_SECRET=${MONEYFORWARD_TOTP_SECRET}
       - SE_OFFLINE=false
     shm_size: 2gb
   pollen-exporter:
