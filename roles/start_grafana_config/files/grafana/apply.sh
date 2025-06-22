@@ -110,13 +110,13 @@ function get_greench_now_onair_title() {
   local ts=$(date +%s)
   local title=$(cat ${filename} \
     | ${JQ} -r "[ .[][] \
-      | .live_start_datetime = ( .live_start_datetime | strptime(\"%Y-%m-%d %T\") | strftime(\"%s\") | tonumber) \
-      | .live_end_datetime   = ( .live_end_datetime | strptime(\"%Y-%m-%d %T\") | strftime(\"%s\") | tonumber ) \
+      | .live_start_datetime = ( .live_start_datetime | strptime(\"%Y-%m-%d %T\") | strftime(\"%s\") | tonumber ) - 32400 \
+      | .live_end_datetime   = ( .live_end_datetime | strptime(\"%Y-%m-%d %T\") | strftime(\"%s\") | tonumber ) - 32400 \
       | select( .live_start_datetime < ${ts} and .live_end_datetime > ${ts} ) ] | .[0].program_name")
   local category_code=$(cat ${filename} \
     | ${JQ} -r "[ .[][] \
-      | .live_start_datetime = ( .live_start_datetime | strptime(\"%Y-%m-%d %T\") | strftime(\"%s\") | tonumber) \
-      | .live_end_datetime   = ( .live_end_datetime | strptime(\"%Y-%m-%d %T\") | strftime(\"%s\") | tonumber ) \
+      | .live_start_datetime = ( .live_start_datetime | strptime(\"%Y-%m-%d %T\") | strftime(\"%s\") | tonumber ) - 32400 \
+      | .live_end_datetime   = ( .live_end_datetime | strptime(\"%Y-%m-%d %T\") | strftime(\"%s\") | tonumber ) - 32400 \
       | select( .live_start_datetime < ${ts} and .live_end_datetime > ${ts} ) ] | .[0].category_code")
   if [[ "${title}" == "null" ]] || [[ "${category_code}" == "L999" ]]; then
     echo "放送休止"
@@ -190,8 +190,8 @@ function is_national_racetime(){
     | ${JQ} -r "[ .[][] \
       | select(.category_name==\"中継\") \
       | select(.program_name | contains(\"中央競馬\")) \
-      | .live_start_datetime = ( .live_start_datetime | strptime(\"%Y-%m-%d %T\") | strftime(\"%s\") | tonumber) \
-      | .live_end_datetime   = ( .live_end_datetime | strptime(\"%Y-%m-%d %T\") | strftime(\"%s\") | tonumber ) \
+      | .live_start_datetime = ( .live_start_datetime | strptime(\"%Y-%m-%d %T\") | strftime(\"%s\") | tonumber ) - 32400 \
+      | .live_end_datetime   = ( .live_end_datetime | strptime(\"%Y-%m-%d %T\") | strftime(\"%s\") | tonumber ) - 32400 \
       | select( .live_start_datetime < ${ts} and .live_end_datetime > ${ts} ) ] | length" \
   )
 
@@ -237,8 +237,8 @@ function is_world_racetime(){
     | ${JQ} -r "[ .[][] \
       | select(.category_name==\"中継\") \
       | select(.is_free==\"1\") \
-      | .live_start_datetime = ( .live_start_datetime | strptime(\"%Y-%m-%d %T\") | strftime(\"%s\") | tonumber) \
-      | .live_end_datetime   = ( .live_end_datetime | strptime(\"%Y-%m-%d %T\") | strftime(\"%s\") | tonumber ) \
+      | .live_start_datetime = ( .live_start_datetime | strptime(\"%Y-%m-%d %T\") | strftime(\"%s\") | tonumber ) - 32400 \
+      | .live_end_datetime   = ( .live_end_datetime | strptime(\"%Y-%m-%d %T\") | strftime(\"%s\") | tonumber ) - 32400 \
       | select( .live_start_datetime < ${ts} and .live_end_datetime > ${ts} ) ] | length" \
   )
 
