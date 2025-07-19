@@ -1,7 +1,7 @@
 resource "grafana_library_panel" "channel1" {
   org_id     = grafana_organization.main.org_id
   folder_uid = grafana_folder.onair.uid
-  name       = "1ch: " + local.tv_channel1.name
+  name       = format("%s %s", "1ch:", local.tv_channel1.name)
   model_json = jsonencode({
     type        = "innius-video-panel",
     transparent = true,
@@ -16,7 +16,7 @@ resource "grafana_library_panel" "channel1" {
 resource "grafana_library_panel" "channel2" {
   org_id     = grafana_organization.main.org_id
   folder_uid = grafana_folder.onair.uid
-  name       = "2ch: " + local.tv_channel2.name
+  name       = format("%s %s", "2ch:", local.tv_channel2.name)
   model_json = jsonencode({
     type        = "innius-video-panel",
     transparent = true,
