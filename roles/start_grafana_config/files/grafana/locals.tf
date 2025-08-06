@@ -211,7 +211,7 @@ locals {
     }
     news-global = {
       name = "ABC World News Tonight Full Broadcast"
-      url  = "https://www.youtube.com/embed/videoseries?autoplay=1&list=PLQOa26lW-uI8ixlVw1NWu_l4Eh8iZW_qN"
+      url  = "https://www.youtube.com/embed/videoseries?autoplay=1&list=PLQOa26lW-uI_V2Ux6Iwcr0me-RjB8gZaF"
     }
     vtuber = {
       name = "VTuber(2434) Live Playlist"
