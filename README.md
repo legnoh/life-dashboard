@@ -1,4 +1,4 @@
-# life-dashboard
+# life-dashboard test
 
 - Mac mini で人生に必要なメトリクス・情報を取得するための Prometheus+Grafana セットです。
 - 慣れれば1時間かからないくらいで必要なものが揃うようになっています。
