@@ -152,10 +152,10 @@ function restart_stream(){
   if [[ ! -e "${STREAM_START_FILE}" ]]; then
     echo "ストリームを再起動します(ファイルなし)"
     cd ../stream && ./start.sh "${mleague_url}" && cd -
-    return 0
 
     # キャッシュクリアのため、grafana-kioskも再起動する
     ${BREW} services restart grafana-kiosk
+    return 0
   fi
 
   local now_unixtime=${TIMESTAMP}
@@ -167,6 +167,7 @@ function restart_stream(){
 
     # キャッシュクリアのため、grafana-kioskも再起動する
     ${BREW} services restart grafana-kiosk
+    return 0
   fi
 }
 

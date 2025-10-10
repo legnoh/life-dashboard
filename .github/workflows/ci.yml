@@ -1,11 +1,11 @@
 name: CI
 permissions:
-  contents: read
+  contents: read  # リポジトリコンテンツの読み取りのみ
 
 on:
   push:
     branches: [main]
-  pull_request_target:
+  pull_request:
     branches: [main]
   workflow_dispatch:
     inputs:
@@ -22,12 +22,12 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     outputs:
-      runner: ${{ steps.check-pr.outputs.runner }}
+      runner: ${{ steps.check-event.outputs.runner }}
     steps:
-    - name: check-pr
-      id: check-pr
+    - name: check-event
+      id: check-event
       run: |
-        if [ ${{ github.event_name }} == 'pull_request_target' ]; then
+        if [ ${{ github.event_name }} == 'pull_request' ]; then
           echo "runner=macos-latest" >> $GITHUB_OUTPUT
         else
           echo "runner=grafstation" >> $GITHUB_OUTPUT
@@ -40,8 +40,6 @@ jobs:
 
     - name: Checkout Repository
       uses: actions/checkout@v5
-      with: 
-        ref: ${{ github.head_ref }}
 
     - name: Set up Homebrew
       uses: Homebrew/actions/setup-homebrew@master
@@ -58,7 +56,7 @@ jobs:
         fi
 
     - name: Install ansible
-      if: ${{ !steps.check-ansible.outputs.installed || github.event_name == 'pull_request_target' }}
+      if: ${{ !steps.check-ansible.outputs.installed || github.event_name == 'pull_request' }}
       run: brew install ansible rsync
       env:
         HOMEBREW_NO_INSTALL_UPGRADE: true
@@ -85,15 +83,20 @@ jobs:
         if [[ "${{ inputs.verbose }}" == true ]]; then
           options="-v"
         fi
-        if [[ "${{ github.event_name }}" == "pull_request_target" ]]; then
+        if [[ "${{ github.event_name }}" == "pull_request" ]]; then
           options="--check"
+          become_pass_option=""
+        else
+          become_pass_option="--become-pass-file=/tmp/BECOME_PASS"
         fi
         echo "options=$options" >> $GITHUB_OUTPUT
+        echo "become_pass_option=$become_pass_option" >> $GITHUB_OUTPUT
 
     - name: Install requirements
       run: ansible-galaxy collection install -r requirements.yml --force
 
     - name: Set sudopass
+      if: ${{ github.event_name != 'pull_request' }}
       run: echo "$GRAFSTATION_SUDO_PASS" > /tmp/BECOME_PASS
       env:
         GRAFSTATION_SUDO_PASS: ${{ secrets.GRAFSTATION_SUDO_PASS }}
@@ -105,7 +108,7 @@ jobs:
         options: |
           -i inventory/localhost.yml
           -e @credential-action.yml
-          --become-pass-file=/tmp/BECOME_PASS
+          ${{ steps.set-mode.outputs.become_pass_option }}
           ${{ steps.set-mode.outputs.options }}
       env:
         ABEMA_JWT_TOKEN: ${{ secrets.ABEMA_JWT_TOKEN }}
