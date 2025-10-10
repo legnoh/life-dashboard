@@ -88,3 +88,8 @@
       ansible.builtin.file:
         path: /tmp/grafana-plan.log
         state: absent
+
+    - name: Remove stream state
+      ansible.builtin.file:
+        path: /tmp/start.stream
+        state: absent
