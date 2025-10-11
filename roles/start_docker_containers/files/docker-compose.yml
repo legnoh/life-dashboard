@@ -22,7 +22,7 @@ services:
     ports: [3000:3000]
     restart: always
     environment:
-      - GF_INSTALL_PLUGINS=grafana-clock-panel,innius-video-panel,dalvany-image-panel
+      - GF_INSTALL_PLUGINS=grafana-clock-panel,innius-video-panel,dalvany-image-panel,yesoreyeram-infinity-datasource
       - GF_SECURITY_ADMIN_PASSWORD__FILE=/run/secrets/grafana_admin_password
       - GF_PANELS_DISABLE_SANITIZE_HTML=true
     secrets:
