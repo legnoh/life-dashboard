@@ -20,6 +20,9 @@
     - role: start_reminders_exporter
       tags: [start_reminders_exporter]
 
+    - role: start_apple_calendars_server
+      tags: [start_apple_calendars_server]
+
     - role: start_hap_nature_remo
       tags: [start_hap_nature_remo]
 

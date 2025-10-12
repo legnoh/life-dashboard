@@ -1,0 +1,34 @@
+---
+
+- name: Start apple-calendar-server
+  block:
+    - name: Tap custom repos
+      check_mode: false
+      community.general.homebrew_tap:
+        name:
+          - legnoh/etc
+
+    - name: Install Brew packages
+      when: not ansible_check_mode
+      community.general.homebrew:
+        name:
+          - legnoh/etc/apple-calendar-server
+        state: upgraded
+
+    - name: Create a config directory
+      ansible.builtin.file:
+        path: "{{ ansible_env.HOME }}/.apple-calendar-server"
+        state: directory
+        mode: '0755'
+
+    - name: Copy config file
+      ansible.builtin.template:
+        src: config.yml.j2
+        dest: "{{ ansible_env.HOME }}/.apple-calendar-server/config.yml"
+        mode: '0644'
+
+    - name: Start Service
+      when: not ansible_check_mode
+      community.general.homebrew_services:
+        name: legnoh/etc/apple-calendar-server
+        state: restarted

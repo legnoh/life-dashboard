@@ -1,0 +1,2 @@
+---
+start_apple_calendars_server_calendars: "{{ apple_calendar.calendars }}"
