@@ -1,2 +1,2 @@
 ---
-start_apple_calendars_server_calendars: "{{ apple_calendar.calendars }}"
+start_apple_calendars_server_calendars: "{{ apple_calendar.calendars.split(',') | map('trim') | list }}"
