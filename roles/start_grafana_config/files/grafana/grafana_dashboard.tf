@@ -24,10 +24,10 @@ resource "grafana_dashboard" "life-metrics" {
         gridPos      = { h = 11, w = 9, x = 0, y = 11 }
       },
 
-      # aphorism
+      # calendar
       {
         title        = null
-        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.aphorism.uid])
+        libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.calendar.uid])
         gridPos      = { h = 6, w = 9, x = 0, y = 22 }
       },
 
