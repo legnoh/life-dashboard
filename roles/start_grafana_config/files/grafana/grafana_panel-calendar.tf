@@ -49,27 +49,27 @@ resource "grafana_library_panel" "calendar" {
         mappings = [{
           options = {
             "個人" = {
-              color = "purple",
+              color = "super-light-purple",
               index = 0,
               text = "個人"
             }
             "家族" = {
-              color = "green",
+              color = "super-light-green",
               index = 1,
               text = "家族"
             },
             "仕事" = {
-              color = "yellow",
+              color = "super-light-yellow",
               index = 2,
               text = "仕事"
             },
             "休日" = {
-              color = "red",
+              color = "super-light-red",
               index = 3,
               text = "休日"
             },
             "Connpass" = {
-              color = "dark-red",
+              color = "super-light-red",
               index = 4,
               text = "イベント"
             },
