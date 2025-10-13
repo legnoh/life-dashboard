@@ -65,14 +65,19 @@ resource "grafana_library_panel" "moneyforward-deposit-withdrawal" {
         refId : "A"
       }),
       merge(local.target_base, {
-        expr = "sum(mf_monthly_withdrawal_jpy{name=~\".*カード\"})"
+        expr = "sum(mf_monthly_withdrawal_jpy{name=~\".*カード\"} * on() group_left() (day_of_month() >= bool 24) * on() group_left() (day_of_month() <= bool 27)) * -1"
         hide : true
         refId : "B"
       }),
       merge(local.target_base, {
-        expr = "sum(scholarship_next_repayment_amount_jpy) * -1"
+        expr = "sum(scholarship_next_repayment_amount_jpy * on() group_left() (day_of_month() >= bool 24) * on() group_left() (day_of_month() <= bool 27)) * -1"
         hide : true
         refId : "C"
+      }),
+      merge(local.target_base, {
+        expr = "(  (mf_liability_detail_jpy{account=\"住信SBIネット銀行\",name=\"ローン(カードローン)\"} <= bool 2000)    * mf_liability_detail_jpy{account=\"住信SBIネット銀行\",name=\"ローン(カードローン)\"}+ ((mf_liability_detail_jpy{account=\"住信SBIネット銀行\",name=\"ローン(カードローン)\"} > bool 2000)   * (mf_liability_detail_jpy{account=\"住信SBIネット銀行\",name=\"ローン(カードローン)\"} <= bool 100000)) * 2000+ ((mf_liability_detail_jpy{account=\"住信SBIネット銀行\",name=\"ローン(カードローン)\"} > bool 100000)   * (mf_liability_detail_jpy{account=\"住信SBIネット銀行\",name=\"ローン(カードローン)\"} <= bool 200000)) * 4000+ ((mf_liability_detail_jpy{account=\"住信SBIネット銀行\",name=\"ローン(カードローン)\"} > bool 200000)   * (mf_liability_detail_jpy{account=\"住信SBIネット銀行\",name=\"ローン(カードローン)\"} <= bool 400000)) * 6000+ ((mf_liability_detail_jpy{account=\"住信SBIネット銀行\",name=\"ローン(カードローン)\"} > bool 400000)   * (mf_liability_detail_jpy{account=\"住信SBIネット銀行\",name=\"ローン(カードローン)\"} <= bool 600000)) * 8000+ ((mf_liability_detail_jpy{account=\"住信SBIネット銀行\",name=\"ローン(カードローン)\"} > bool 600000)   * (mf_liability_detail_jpy{account=\"住信SBIネット銀行\",name=\"ローン(カードローン)\"} <= bool 800000)) * 11000+ ((mf_liability_detail_jpy{account=\"住信SBIネット銀行\",name=\"ローン(カードローン)\"} > bool 800000)   * (mf_liability_detail_jpy{account=\"住信SBIネット銀行\",name=\"ローン(カードローン)\"} <= bool 1000000)) * 15000+ ((mf_liability_detail_jpy{account=\"住信SBIネット銀行\",name=\"ローン(カードローン)\"} > bool 1000000)   * (mf_liability_detail_jpy{account=\"住信SBIネット銀行\",name=\"ローン(カードローン)\"} <= bool 1500000)) * 20000+ ((mf_liability_detail_jpy{account=\"住信SBIネット銀行\",name=\"ローン(カードローン)\"} > bool 1500000)   * (mf_liability_detail_jpy{account=\"住信SBIネット銀行\",name=\"ローン(カードローン)\"} <= bool 3000000)) * 25000+ ((mf_liability_detail_jpy{account=\"住信SBIネット銀行\",name=\"ローン(カードローン)\"} > bool 3000000)   * (mf_liability_detail_jpy{account=\"住信SBIネット銀行\",name=\"ローン(カードローン)\"} <= bool 4000000)) * 30000+ ((mf_liability_detail_jpy{account=\"住信SBIネット銀行\",name=\"ローン(カードローン)\"} > bool 4000000)   * (mf_liability_detail_jpy{account=\"住信SBIネット銀行\",name=\"ローン(カードローン)\"} <= bool 5000000)) * 40000+ ((mf_liability_detail_jpy{account=\"住信SBIネット銀行\",name=\"ローン(カードローン)\"} > bool 5000000)   * (mf_liability_detail_jpy{account=\"住信SBIネット銀行\",name=\"ローン(カードローン)\"} <= bool 6000000)) * 50000+ ((mf_liability_detail_jpy{account=\"住信SBIネット銀行\",name=\"ローン(カードローン)\"} > bool 6000000)   * (mf_liability_detail_jpy{account=\"住信SBIネット銀行\",name=\"ローン(カードローン)\"} <= bool 7000000)) * 60000+ ((mf_liability_detail_jpy{account=\"住信SBIネット銀行\",name=\"ローン(カードローン)\"} > bool 7000000)   * (mf_liability_detail_jpy{account=\"住信SBIネット銀行\",name=\"ローン(カードローン)\"} <= bool 8000000)) * 70000+ ((mf_liability_detail_jpy{account=\"住信SBIネット銀行\",name=\"ローン(カードローン)\"} > bool 8000000)   * (mf_liability_detail_jpy{account=\"住信SBIネット銀行\",name=\"ローン(カードローン)\"} <= bool 9000000)) * 75000+  (mf_liability_detail_jpy{account=\"住信SBIネット銀行\",name=\"ローン(カードローン)\"} > bool 9000000) * 80000) * on() group_left() (day_of_month() >= bool 1) * on() group_left() (day_of_month() <= bool 5) * -1"
+        hide : true
+        refId : "D"
       }),
       {
         datasource : {
@@ -80,8 +85,8 @@ resource "grafana_library_panel" "moneyforward-deposit-withdrawal" {
           type : "__expr__"
           uid : "__expr__"
         }
-        expression : "$A + $B + $C"
-        refId : "D"
+        expression : "$A + $B + $C + $D"
+        refId : "E"
         type : "math"
       }
     ]
