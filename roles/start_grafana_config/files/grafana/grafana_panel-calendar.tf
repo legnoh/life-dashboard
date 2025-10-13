@@ -4,44 +4,44 @@ resource "grafana_library_panel" "calendar" {
   name       = "予定"
   model_json = jsonencode(merge(local.calendar_base, local.table_base, {
     targets = [{
-        columns = [
-          {
-            selector = "title"
-            text = "title"
-            type = "string"
-          },
-          {
-            selector = "startFormatted"
-            text = "start"
-            type = "string"
-          },
-          {
-            selector = "calendar"
-            text = "カレンダー"
-            type = "string"
-          }
-        ]
-        datasource = local.calendar
-        format = "dataframe"
-        hide = false
-        parser = "backend"
-        refId = "A"
-        source = "url"
-        type = "json"
-        url = "/events"
-        url_options = {
-          method = "GET"
+      columns = [
+        {
+          selector = "title"
+          text     = "title"
+          type     = "string"
+        },
+        {
+          selector = "startFormatted"
+          text     = "start"
+          type     = "string"
+        },
+        {
+          selector = "calendar"
+          text     = "カレンダー"
+          type     = "string"
         }
+      ]
+      datasource = local.calendar
+      format     = "dataframe"
+      hide       = false
+      parser     = "backend"
+      refId      = "A"
+      source     = "url"
+      type       = "json"
+      url        = "/events"
+      url_options = {
+        method = "GET"
+      }
     }]
-    fieldConfig = merge(local.field_config_base, {
+    fieldConfig = merge({
       defaults = merge(local.field_config_default_base, {
         custom = {
           align = "auto",
           cellOptions = {
-            type = "color-text",
+            type     = "color-text",
             wrapText = false
           },
-          inspect = false,
+          inspect    = false,
           filterable = true
         },
         mappings = [{
@@ -49,27 +49,27 @@ resource "grafana_library_panel" "calendar" {
             "個人" = {
               color = "purple",
               index = 0,
-              text = "個人"
+              text  = "個人"
             }
             "家族" = {
               color = "green",
               index = 1,
-              text = "家族"
+              text  = "家族"
             },
             "仕事" = {
               color = "yellow",
               index = 2,
-              text = "仕事"
+              text  = "仕事"
             },
             "休日" = {
               color = "red",
               index = 3,
-              text = "休日"
+              text  = "休日"
             },
             "Connpass" = {
               color = "blue",
               index = 4,
-              text = "イベント"
+              text  = "イベント"
             },
           },
           type = "value"
@@ -80,6 +80,28 @@ resource "grafana_library_panel" "calendar" {
           ]
         })
       })
+      overrides = [
+        {
+          matcher = {
+            id      = "byName"
+            options = "start"
+          }
+          properties = [{
+            id    = "custom.width"
+            value = 120
+          }]
+        },
+        {
+          matcher = {
+            id      = "byName"
+            options = "カレンダー"
+          }
+          properties = [{
+            id    = "custom.width"
+            value = 70
+          }]
+        }
+      ]
     })
   }))
 }

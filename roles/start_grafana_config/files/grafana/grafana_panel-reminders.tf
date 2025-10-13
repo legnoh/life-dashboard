@@ -60,18 +60,18 @@ resource "grafana_library_panel" "reminders-all" {
     title = "タスク残数",
     targets = [
       merge(local.target_base, {
-        expr   = "reminders_list_total{name=\"ASAP #私用\"}"
-        refId  = "ASAP #私用"
+        expr  = "reminders_list_total{name=\"ASAP #私用\"}"
+        refId = "ASAP #私用"
       }),
       merge(local.target_base, {
-        expr   = "reminders_all_total{status=\"outdated\"}"
-        refId  = "期限切れ"
+        expr  = "reminders_all_total{status=\"outdated\"}"
+        refId = "期限切れ"
       }),
     ],
     transformations = [{
       id = "renameByRegex"
       options = {
-        regex = "Value #(.*)"
+        regex         = "Value #(.*)"
         renamePattern = "$1"
       }
     }]

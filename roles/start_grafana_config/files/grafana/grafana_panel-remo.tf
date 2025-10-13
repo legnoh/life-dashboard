@@ -131,7 +131,7 @@ resource "grafana_library_panel" "thi" {
     transformations = [{
       id = "renameByRegex"
       options = {
-        regex = "Value #(.*)"
+        regex         = "Value #(.*)"
         renamePattern = "$1"
       }
     }]

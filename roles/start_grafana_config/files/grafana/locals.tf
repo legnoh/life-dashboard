@@ -37,7 +37,7 @@ locals {
   }
 
   table_base = {
-    type = "table"
+    type    = "table"
     options = local.basic_table_options
   }
 
@@ -45,10 +45,10 @@ locals {
     showHeader = false
     cellHeight = "sm"
     footer = {
-      show = false
-      reducer = ["sum"]
+      show      = false
+      reducer   = ["sum"]
       countRows = false
-      fields = ""
+      fields    = ""
     }
   }
 

@@ -240,17 +240,17 @@ resource "grafana_dashboard" "gch" {
     timepicker = {
       hidden = true
     }
-    version     = 0
-    panels      = concat(
+    version = 0
+    panels = concat(
       [
         for i, s in var.GCH_STREAMS
         :
         {
-          title = s.program_name
+          title        = s.program_name
           libraryPanel = zipmap(local.libpanel_keys, [s.program_name != "放送休止" ? grafana_library_panel.gch[i].uid : grafana_library_panel.gch_not_onair.uid])
-          gridPos = local.gch_position[i]
+          gridPos      = local.gch_position[i]
         }
-      ], [
+        ], [
         {
           libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.news-netkeiba.uid])
           gridPos      = { h = 2, w = 24, x = 0, y = 26 }
