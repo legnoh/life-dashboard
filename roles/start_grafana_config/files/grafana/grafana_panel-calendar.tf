@@ -69,7 +69,7 @@ resource "grafana_library_panel" "calendar" {
               text = "休日"
             },
             "Connpass" = {
-              color = "super-light-red",
+              color = "super-light-blue",
               index = 4,
               text = "イベント"
             },
