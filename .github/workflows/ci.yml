@@ -131,6 +131,9 @@ jobs:
         POLLEN_APIKEY: ${{ secrets.POLLEN_APIKEY }}
         POLLEN_COORDINATES: ${{ secrets.POLLEN_COORDINATES }}
         RECREATE_CONTAINER: ${{ inputs.rm_state }}
+        SCHOLARPS_ID: ${{ secrets.SCHOLARPS_ID }}
+        SCHOLARPS_PASSWORD: ${{ secrets.SCHOLARPS_PASSWORD }}
+        SCHOLARPS_NUMBER: ${{ secrets.SCHOLARPS_NUMBER }}
         SNMP_PASSWORD: ${{ secrets.SNMP_PASSWORD }}
         SNMP_PRIV_PASSWORD: ${{ secrets.SNMP_PRIV_PASSWORD }}
         SNMP_USERNAME: ${{ secrets.SNMP_USERNAME }}

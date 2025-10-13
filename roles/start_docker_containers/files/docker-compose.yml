@@ -88,6 +88,16 @@ services:
     restart: always
     environment:
       - OAUTH_TOKEN=${NATURE_OAUTH_TOKEN}
+  scholarps-exporter:
+    container_name: scholarps-exporter
+    image: legnoh/scholarps-exporter:latest
+    platform: linux/arm64
+    ports: [9117:8000]
+    restart: always
+    environment:
+      - SCHOLARPS_ID=${SCHOLARPS_ID}
+      - SCHOLARPS_PASSWORD=${SCHOLARPS_PASSWORD}
+      - SCHOLARPS_NUMBER=${SCHOLARPS_NUMBER}
   snmp-exporter:
     container_name: snmp-exporter
     image: prom/snmp-exporter:latest
