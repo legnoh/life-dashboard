@@ -27,6 +27,22 @@ locals {
     text        = {}
   }
 
+  table_base = {
+    type = "table"
+    options = local.basic_table_options
+  }
+
+  basic_table_options = {
+    showHeader = false
+    cellHeight = "sm"
+    footer = {
+      show = false
+      reducer = ["sum"]
+      countRows = false
+      fields = ""
+    }
+  }
+
   field_config_base = {
     overrides = []
   }
