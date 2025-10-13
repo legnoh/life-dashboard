@@ -8,7 +8,7 @@ resource "grafana_data_source" "prometheus" {
 
 resource "grafana_data_source" "calendar" {
   org_id     = grafana_organization.main.org_id
-  type       = "infinity"
+  type       = "yesoreyeram-infinity-datasource"
   name       = "apple-calendar"
   url        = "http://host.docker.internal:9102"
   is_default = false
