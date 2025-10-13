@@ -69,14 +69,19 @@ resource "grafana_library_panel" "moneyforward-deposit-withdrawal" {
         hide : true
         refId : "B"
       }),
+      merge(local.target_base, {
+        expr = "sum(scholarship_next_repayment_amount_jpy) * -1"
+        hide : true
+        refId : "C"
+      }),
       {
         datasource : {
           name : "Expression"
           type : "__expr__"
           uid : "__expr__"
         }
-        expression : "$A + $B"
-        refId : "C"
+        expression : "$A + $B + $C"
+        refId : "D"
         type : "math"
       }
     ]
