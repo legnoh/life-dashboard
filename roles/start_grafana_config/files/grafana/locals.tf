@@ -4,8 +4,17 @@ locals {
     uid  = grafana_data_source.prometheus.uid
   }
 
+  calendar = {
+    type = grafana_data_source.calendar.type
+    uid  = grafana_data_source.calendar.uid
+  }
+
   common_base = {
-    datasource = local.prometheus,
+    datasource = local.prometheus
+  }
+
+  calendar_base = {
+    datasource = local.calendar
   }
 
   stats_base = {
