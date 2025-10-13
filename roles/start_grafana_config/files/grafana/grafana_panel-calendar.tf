@@ -38,9 +38,7 @@ resource "grafana_library_panel" "calendar" {
         custom = {
           align = "auto",
           cellOptions = {
-            type = "color-background",
-            applyToRow = true,
-            mode = "gradient",
+            type = "color-text",
             wrapText = false
           },
           inspect = false,
@@ -49,27 +47,27 @@ resource "grafana_library_panel" "calendar" {
         mappings = [{
           options = {
             "個人" = {
-              color = "super-light-purple",
+              color = "purple",
               index = 0,
               text = "個人"
             }
             "家族" = {
-              color = "super-light-green",
+              color = "green",
               index = 1,
               text = "家族"
             },
             "仕事" = {
-              color = "super-light-yellow",
+              color = "yellow",
               index = 2,
               text = "仕事"
             },
             "休日" = {
-              color = "super-light-red",
+              color = "red",
               index = 3,
               text = "休日"
             },
             "Connpass" = {
-              color = "super-light-blue",
+              color = "blue",
               index = 4,
               text = "イベント"
             },
@@ -78,7 +76,7 @@ resource "grafana_library_panel" "calendar" {
         }],
         thresholds = merge(local.thresholds_base, {
           steps = [
-            zipmap(local.thresholds_keys, ["transparent", null]),
+            zipmap(local.thresholds_keys, ["text", null]),
           ]
         })
       })
