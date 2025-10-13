@@ -1,5 +1,6 @@
-listen: ":9102"
-calendars:
-{% for calendar in start_apple_calendars_server_calendars %}
-  - "{{ calendar }}"
-{% endfor %}
+serve:
+  listen: ":9102"
+  calendars:
+  {% for calendar in start_apple_calendars_server_calendars %}
+    - "{{ calendar }}"
+  {% endfor %}
