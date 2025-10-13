@@ -37,6 +37,10 @@ scrape_configs:
     metric_relabel_configs:
       - { source_labels: [__name__], regex: '(go|process|promhttp)_(.*)', action: drop }
     scrape_interval: 60s
+  - job_name: 'scholarps'
+    static_configs:
+      - targets: [scholarps-exporter:8000]
+    scrape_interval: 300s
   - job_name: 'snmp'
     metrics_path: "/snmp"
     params:
