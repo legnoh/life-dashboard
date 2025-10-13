@@ -11,7 +11,7 @@
 
 |name|desc|
 |---|---|
-| [legnoh/aphorism-exporter](https://github.com/legnoh/aphorism-exporter) | 格言 |
+| [legnoh/apple-calendar-server](https://github.com/legnoh/apple-calendar-server) | 予定表 |
 | [legnoh/asken-exporter](https://github.com/legnoh/asken-exporter) | あすけん の食事スコア、アドバイス |
 | [legnoh/moneyforward-exporter](https://github.com/legnoh/moneyforward-exporter) | MoneyForward ME の 残高、資産、負債、引落予定額 |
 | [billykwooten/openweather-exporter](https://github.com/billykwooten/openweather-exporter) | OpenWeatherMap の 指定地点の天気、温度、湿度 の気象情報 |
