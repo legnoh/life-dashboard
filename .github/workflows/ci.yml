@@ -112,7 +112,7 @@ jobs:
           ${{ steps.set-mode.outputs.options }}
       env:
         ABEMA_JWT_TOKEN: ${{ secrets.ABEMA_JWT_TOKEN }}
-        APPLE_CALENDAR_CALENDARS: ${{ secrets.APPLE_CALENDAR_CALENDARS }}
+        APPLE_CALENDAR_CALENDARS: "個人,家族,仕事,休日,Connpass"
         ASKEN_PASSWORD: ${{ secrets.ASKEN_PASSWORD }}
         ASKEN_USERNAME: ${{ secrets.ASKEN_USERNAME }}
         GRAFANA_ADMIN_PASSWORD: ${{ secrets.GRAFANA_ADMIN_PASSWORD }}
