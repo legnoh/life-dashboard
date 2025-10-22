@@ -306,6 +306,15 @@ function check_latest_earthquake() {
   )
 }
 
+# 現在ダークモードかどうか判定する
+function is_dark_mode() {
+  if defaults read -g AppleInterfaceStyle &>/dev/null; then
+    return 0
+  else
+    return 1
+  fi
+}
+
 function main(){
 
   echo "---------------------------------"
@@ -337,7 +346,7 @@ function main(){
   latest_earthquake_offset=$(( TIMESTAMP - latest_earthquake_tsux ))
 
   # 優先度の高い順に、画面の構成判定を行う
-  # 地震 > 運動 > ストレッチ > 睡眠 > ZZZ > 競馬 > Mリーグ > 食事
+  # 地震 > 運動 > ストレッチ > 睡眠 > ZZZ > 競馬 > Mリーグ > 食事 > ダークモード > なし
 
   ## 直近で緊急地震速報が発生している場合、地震速報を表示する
   ## TODO: ここでテレビ自体のONと入力変更も挟みたい
@@ -399,6 +408,11 @@ function main(){
     echo "モード判定: 食後"
     tv_channel1="vtuber"
     tv_channel2="greench"
+  
+  ## ダークモードの場合、夜間用BGMに切り替える
+  elif is_dark_mode; then
+    echo "モード判定: ダークモード"
+    tv_channel1="darkmode-bgm"
   
   ## 特にどれにも該当しなかった場合はモードなしとする
   else

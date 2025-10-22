@@ -214,6 +214,10 @@ locals {
       name = "LIVE STREAM - Cafe Music BGM channel"
       url  = "https://www.youtube.com/embed/videoseries?autoplay=1&list=PLYyJCobshLZkNKdbhWzRMhtqe0S6shnB1"
     }
+    darkmode-bgm = {
+      name = "TOKYO Cafe: Beautiful Relaxing Jazz Piano Music for Stress Relief - Night Coffee Shop Ambience"
+      url  = "https://www.youtube.com/embed/6uddGul0oAc?si=ZbSv9vrDZyEiTcA0?autoplay=1"
+    }
     nightmode-bgm = {
       name = "名曲クラシック"
       url  = "https://www.youtube.com/embed/S3o_jlSWXNI?autoplay=1"
