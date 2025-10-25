@@ -65,7 +65,7 @@ resource "grafana_library_panel" "moneyforward-deposit-withdrawal" {
         refId : "A"
       }),
       merge(local.target_base, {
-        expr = "sum(mf_monthly_withdrawal_jpy{name=~\".*カード\"} * on() group_left() (day_of_month() >= bool 24) * on() group_left() (day_of_month() <= bool 27)) * -1"
+        expr = "sum(mf_monthly_withdrawal_jpy{name=~\".*カード\"} * on() group_left() (day_of_month() >= bool 24) * on() group_left() (day_of_month() <= bool 27))"
         hide : true
         refId : "B"
       }),
