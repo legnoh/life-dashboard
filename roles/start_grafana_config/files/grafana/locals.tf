@@ -216,7 +216,7 @@ locals {
     }
     darkmode-bgm = {
       name = "TOKYO Cafe: Beautiful Relaxing Jazz Piano Music for Stress Relief - Night Coffee Shop Ambience"
-      url  = "https://www.youtube.com/embed/6uddGul0oAc?si=ZbSv9vrDZyEiTcA0?autoplay=1"
+      url  = "https://www.youtube.com/embed/6uddGul0oAc?si=ZbSv9vrDZyEiTcA0&autoplay=1"
     }
     nightmode-bgm = {
       name = "名曲クラシック"
