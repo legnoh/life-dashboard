@@ -208,18 +208,28 @@ function is_national_racetime(){
   fi
 }
 
-# ダートグレード競走をやっているか確認する
+# ダートグレード競走中継をやっているか確認する
 function is_dirt_grade_race() {
   local num=0
 
-  num=$(cat ${DIRT_RACE_JSON} \
+  # レース時間の1時間前からレース終了後15分までを放送時間とみなす
+  race_num=$(cat ${DIRT_RACE_JSON} \
     | ${JQ} -r "[.races[] | select(.start_at - ${TIMESTAMP} < 3600 and .end_at + 900 > ${TIMESTAMP})] | length"
   )
 
-  if [[ "${num}" == "" ]]; then
+  # かつ、グリーンチャンネルで中継が行われているか確認する
+  live_num=$(cat ${GCH_ONAIR_JSON_CH1} \
+    | ${JQ} -r "[ .[][] \
+      | select(.category_name==\"中継\") \
+      | .live_start_datetime = ( .live_start_datetime | strptime(\"%Y-%m-%d %T\") | strftime(\"%s\") | tonumber ) - 32400 \
+      | .live_end_datetime   = ( .live_end_datetime | strptime(\"%Y-%m-%d %T\") | strftime(\"%s\") | tonumber ) - 32400 \
+      | select( .live_start_datetime < ${TIMESTAMP} and .live_end_datetime > ${TIMESTAMP} ) ] | length" \
+  )
+
+  if [[ "${race_num}" == "" ]]; then
       num=0
     fi
-    if [[ ${num} > 0 ]]; then
+    if [[ ${race_num} > 0 && ${live_num} > 0 ]]; then
       echo "ダートグレード競走判定: 有"
       return 0
     else
