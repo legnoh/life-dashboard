@@ -178,6 +178,7 @@ function stop_stream(){
     echo "ストリームを停止します"
     cd ../stream && ./stop.sh && cd -
     rm -rf ${STREAM_START_FILE}
+    rm -rf ${HOME}/grafstation/configs/html/stream/*.ts
     return 0
   fi
 }
