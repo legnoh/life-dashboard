@@ -126,22 +126,22 @@ function get_greench_now_onair_title() {
 }
 
 # Mリーグをやっているか確認する(フェニックスの出場日のみ)
-function get_mleague_onair_slot() {
+function get_mleague_onair_channel_id() {
 
   local now_unixtime=${TIMESTAMP}
   local filepath=${ABEMA_SLOTS_FILE}
 
-  local mleague_onair_slot=$(cat ${filepath} \
+  local mleague_channel_id=$(cat ${filepath} \
     | ${JQ} -r ".slots[] \
       | select( (.channelId == \"mahjong\" or .channelId == \"mahjong-live\") and .mark.live == true ) \
       | select(.title | contains(\"Mリーグ\") ) \
       | select(.startAt < ${now_unixtime} and .endAt > ${now_unixtime} ) \
       | select(.detailHighlight | contains(\"セガサミーフェニックス\") )
-      | .id")
-    if [[ ${mleague_onair_slot} != "" ]]; then
-      echo ""
+      | .channelId")
+    if [[ ${mleague_channel_id} != "" ]]; then
+      echo "${mleague_channel_id}"
     else
-      echo "${mleague_onair_slot}" 
+      echo ""
     fi
 }
 
@@ -351,7 +351,7 @@ function main(){
   focusmode="$(/opt/homebrew/bin/focus get)"
 
   # Mリーグ放送中かどうか確認
-  local mleague_channel_id=$(get_mleague_onair_slot)
+  local mleague_channel_id=$(get_mleague_onair_channel_id)
 
   # グリーンチャンネルのデータ更新処理
   create_gch_streams_json
