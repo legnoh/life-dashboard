@@ -126,28 +126,29 @@ function get_greench_now_onair_title() {
 }
 
 # Mリーグをやっているか確認する(フェニックスの出場日のみ)
-function is_mleague_onair() {
+function get_mleague_onair_slot() {
 
   local now_unixtime=${TIMESTAMP}
   local filepath=${ABEMA_SLOTS_FILE}
 
   local mleague_onair_slot=$(cat ${filepath} \
     | ${JQ} -r ".slots[] \
-      | select( .channelId == \"mahjong\" and .mark.live == true ) \
+      | select( (.channelId == \"mahjong\" or .channelId == \"mahjong-live\") and .mark.live == true ) \
       | select(.title | contains(\"Mリーグ\") ) \
       | select(.startAt < ${now_unixtime} and .endAt > ${now_unixtime} ) \
       | select(.detailHighlight | contains(\"セガサミーフェニックス\") )
       | .id")
     if [[ ${mleague_onair_slot} != "" ]]; then
-      return 0
+      echo ""
     else
-      return 1
+      echo "${mleague_onair_slot}" 
     fi
 }
 
 # ストリームの開始時間を確認し、5時間以上経過していたら再起動する
 function restart_stream(){
-  local mleague_url="https://abema.tv/now-on-air/mahjong"
+  local channelId=${1:-"mahjong"}
+  local mleague_url="https://abema.tv/now-on-air/${channelId}"
 
   if [[ ! -e "${STREAM_START_FILE}" ]]; then
     echo "ストリームを再起動します(ファイルなし)"
@@ -349,6 +350,9 @@ function main(){
   # 集中モードを取得
   focusmode="$(/opt/homebrew/bin/focus get)"
 
+  # Mリーグ放送中かどうか確認
+  local mleague_channel_id=$(get_mleague_onair_slot)
+
   # グリーンチャンネルのデータ更新処理
   create_gch_streams_json
 
@@ -403,9 +407,9 @@ function main(){
     tv_channel1="greench"
 
   ## Mリーグの放送中ならMリーグをつける
-  elif is_mleague_onair; then
+  elif [[ "${mleague_channel_id}" != "" ]]; then
     echo "モード判定: Mリーグ"
-    restart_stream
+    restart_stream "${mleague_channel_id}"
     tv_channel1="mahjong"
 
   ## "食事"モードの場合はニュースをつける
