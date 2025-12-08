@@ -314,7 +314,7 @@ function check_latest_earthquake() {
     | ${JQ} -r ".[].time \
       | split(\".\")[0] \
       | strptime(\"%Y/%m/%d %H:%M:%S\") \
-      | mktime - 32400" \
+      | mktime - 32400"
   )
 }
 

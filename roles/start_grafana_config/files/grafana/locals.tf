@@ -256,7 +256,7 @@ locals {
     }
     earthquake = {
       name = "地震速報"
-      url  = "https://www.youtube.com/embed/HXGANE2pRrA?autoplay=1"
+      url  = "https://www.youtube.com/embed/c7_kqMFDE8c?autoplay=1"
     }
   }
 
