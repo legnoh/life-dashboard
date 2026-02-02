@@ -102,7 +102,7 @@ jobs:
         GRAFSTATION_SUDO_PASS: ${{ secrets.GRAFSTATION_SUDO_PASS }}
 
     - name: Run playbook
-      uses: dawidd6/action-ansible-playbook@v6
+      uses: dawidd6/action-ansible-playbook@v7
       with:
         playbook: site.yml
         options: |
