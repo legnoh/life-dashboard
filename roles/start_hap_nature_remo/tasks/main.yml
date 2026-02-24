@@ -15,14 +15,14 @@
 
     - name: Create a config directory
       ansible.builtin.file:
-        path: "{{ ansible_env.HOME }}/.hap-nature-remo"
+        path: "{{ ansible_facts['env']['HOME'] }}/.hap-nature-remo"
         state: directory
         mode: '0755'
 
     - name: Copy config file
       ansible.builtin.template:
         src: config.yml.j2
-        dest: "{{ ansible_env.HOME }}/.hap-nature-remo/config.yml"
+        dest: "{{ ansible_facts['env']['HOME'] }}/.hap-nature-remo/config.yml"
         mode: '0644'
 
     - name: Start Service

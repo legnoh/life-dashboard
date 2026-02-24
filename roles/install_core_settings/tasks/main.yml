@@ -10,12 +10,12 @@
       when: not ansible_check_mode
       ansible.builtin.template:
         src: .zshenv.j2
-        dest: "{{ ansible_env.HOME }}/.zshenv"
+        dest: "{{ ansible_facts['env']['HOME'] }}/.zshenv"
         mode: '0644'
 
     - name: Remove .zprofile
       ansible.builtin.file:
-        path: "{{ ansible_env.HOME }}/.zprofile"
+        path: "{{ ansible_facts['env']['HOME'] }}/.zprofile"
         state: absent
 
     - name: Create directory
@@ -24,8 +24,8 @@
         state: directory
         mode: '0755'
       loop:
-        - "{{ ansible_env.HOME }}/grafstation"
-        - "{{ ansible_env.HOME }}/Library/LaunchAgents"
+        - "{{ ansible_facts['env']['HOME'] }}/grafstation"
+        - "{{ ansible_facts['env']['HOME'] }}/Library/LaunchAgents"
 
     - name: Download close_notifications_applescript.js
       ansible.builtin.uri:
@@ -41,14 +41,14 @@
       when: not ansible_check_mode
       ansible.builtin.template:
         src: close_notifications.j2
-        dest: "{{ ansible_env.HOME }}/grafstation/close_notifications"
+        dest: "{{ ansible_facts['env']['HOME'] }}/grafstation/close_notifications"
         mode: '0755'
 
     - name: Create launchd definition file
       when: not ansible_check_mode
       ansible.builtin.template:
         src: closenotifications.plist.j2
-        dest: "{{ ansible_env.HOME }}/Library/LaunchAgents/io.lkj.life.dashboard.closenotifications.plist"
+        dest: "{{ ansible_facts['env']['HOME'] }}/Library/LaunchAgents/io.lkj.life.dashboard.closenotifications.plist"
         mode: '0644'
 
     - name: Start closenotifications daemon

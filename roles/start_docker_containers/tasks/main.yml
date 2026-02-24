@@ -4,7 +4,7 @@
   block:
     - name: Create config directories
       ansible.builtin.file:
-        path: "{{ ansible_env.HOME }}/grafstation/{{ item }}"
+        path: "{{ ansible_facts['env']['HOME'] }}/grafstation/{{ item }}"
         state: directory
         mode: '0755'
       loop:
@@ -16,7 +16,7 @@
       when: not ansible_check_mode
       ansible.builtin.synchronize:
         src: "{{ item }}"
-        dest: "{{ ansible_env.HOME }}/grafstation/configs/{{ item }}"
+        dest: "{{ ansible_facts['env']['HOME'] }}/grafstation/configs/{{ item }}"
         recursive: true
         delete: true
       loop:
@@ -28,14 +28,14 @@
       when: not ansible_check_mode
       ansible.builtin.template:
         src: prometheus.yml.j2
-        dest: "{{ ansible_env.HOME }}/grafstation/prometheus/prometheus.yml"
+        dest: "{{ ansible_facts['env']['HOME'] }}/grafstation/prometheus/prometheus.yml"
         mode: '0644'
 
     - name: Pull docker images
       when: not ansible_check_mode
       community.docker.docker_compose_v2_pull:
-        docker_host: "unix://{{ ansible_env.HOME }}/.rd/docker.sock"
-        project_src: "{{ ansible_env.HOME }}/grafstation/configs"
+        docker_host: "unix://{{ ansible_facts['env']['HOME'] }}/.rd/docker.sock"
+        project_src: "{{ ansible_facts['env']['HOME'] }}/grafstation/configs"
       environment: &docker_envs
         ASKEN_PASSWORD: "{{ start_docker_containers_asken_password }}"
         ASKEN_USERNAME: "{{ start_docker_containers_asken_username }}"
@@ -65,16 +65,16 @@
     - name: Stop docker containers
       when: not start_docker_containers_recreate_container and not ansible_check_mode
       community.docker.docker_compose_v2:
-        docker_host: "unix://{{ ansible_env.HOME }}/.rd/docker.sock"
-        project_src: "{{ ansible_env.HOME }}/grafstation/configs"
+        docker_host: "unix://{{ ansible_facts['env']['HOME'] }}/.rd/docker.sock"
+        project_src: "{{ ansible_facts['env']['HOME'] }}/grafstation/configs"
         state: stopped
       environment: *docker_envs
 
     - name: Delete docker containers
       when: start_docker_containers_recreate_container and not ansible_check_mode
       community.docker.docker_compose_v2:
-        docker_host: "unix://{{ ansible_env.HOME }}/.rd/docker.sock"
-        project_src: "{{ ansible_env.HOME }}/grafstation/configs"
+        docker_host: "unix://{{ ansible_facts['env']['HOME'] }}/.rd/docker.sock"
+        project_src: "{{ ansible_facts['env']['HOME'] }}/grafstation/configs"
         state: absent
       environment: *docker_envs
 
@@ -87,14 +87,14 @@
     - name: Start docker containers
       when: not ansible_check_mode
       community.docker.docker_compose_v2:
-        docker_host: "unix://{{ ansible_env.HOME }}/.rd/docker.sock"
-        project_src: "{{ ansible_env.HOME }}/grafstation/configs"
+        docker_host: "unix://{{ ansible_facts['env']['HOME'] }}/.rd/docker.sock"
+        project_src: "{{ ansible_facts['env']['HOME'] }}/grafstation/configs"
       environment: *docker_envs
 
     - name: Prune unused resources
       when: not ansible_check_mode
       community.docker.docker_prune:
-        docker_host: "unix://{{ ansible_env.HOME }}/.rd/docker.sock"
+        docker_host: "unix://{{ ansible_facts['env']['HOME'] }}/.rd/docker.sock"
         builder_cache: true
         containers: true
         images: true

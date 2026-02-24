@@ -7,7 +7,7 @@ services:
     volumes:
       - /Users/${USER}/grafstation/configs/nginx.conf:/etc/nginx/nginx.conf:ro
       - /Users/${USER}/grafstation/configs/html:/usr/share/nginx/html:ro
-      - "/Users/${USER}/Library/Mobile Documents/com~apple~CloudDocs/ical/business.ics:/usr/share/nginx/html/business.ics:ro"
+      - "/Users/${USER}/Library/Mobile Documents/com~apple~CloudDocs/ical/business.ics:/data/business.ics:ro"
     extra_hosts:
       - "host.docker.internal:host-gateway"
   prometheus:

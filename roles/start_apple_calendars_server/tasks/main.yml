@@ -17,14 +17,14 @@
 
     - name: Create a config directory
       ansible.builtin.file:
-        path: "{{ ansible_env.HOME }}/.apple-calendar-server"
+        path: "{{ ansible_facts['env']['HOME'] }}/.apple-calendar-server"
         state: directory
         mode: '0755'
 
     - name: Copy config file
       ansible.builtin.template:
         src: config.yml.j2
-        dest: "{{ ansible_env.HOME }}/.apple-calendar-server/config.yml"
+        dest: "{{ ansible_facts['env']['HOME'] }}/.apple-calendar-server/config.yml"
         mode: '0644'
 
     - name: Start Service

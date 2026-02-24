@@ -2,4 +2,4 @@
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # rancher desktop setting
-export PATH={{ ansible_env.HOME }}/.rd/bin:${PATH}
+export PATH={{ ansible_facts['env']['HOME'] }}/.rd/bin:${PATH}

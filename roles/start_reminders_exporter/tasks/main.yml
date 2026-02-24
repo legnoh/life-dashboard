@@ -19,14 +19,14 @@
 
     - name: Create a config directory
       ansible.builtin.file:
-        path: "{{ ansible_env.HOME }}/.reminders-exporter"
+        path: "{{ ansible_facts['env']['HOME'] }}/.reminders-exporter"
         state: directory
         mode: '0755'
 
     - name: Copy config file
       ansible.builtin.copy:
         src: config.yml
-        dest: "{{ ansible_env.HOME }}/.reminders-exporter/config.yml"
+        dest: "{{ ansible_facts['env']['HOME'] }}/.reminders-exporter/config.yml"
         mode: '0644'
 
     - name: Start Service

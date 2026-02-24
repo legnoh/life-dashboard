@@ -4,7 +4,7 @@
   block:
     - name: Get LaunchAgent status
       ansible.builtin.stat:
-        path: "{{ ansible_env.HOME }}/Library/LaunchAgents/io.lkj.life.dashboard.grafstation.grafana.apply.plist"
+        path: "{{ ansible_facts['env']['HOME'] }}/Library/LaunchAgents/io.lkj.life.dashboard.grafstation.grafana.apply.plist"
       register: launchagent
 
     - name: Stop grafana-config daemon
@@ -34,7 +34,7 @@
 
     - name: Create config directories
       ansible.builtin.file:
-        path: "{{ ansible_env.HOME }}/{{ item }}"
+        path: "{{ ansible_facts['env']['HOME'] }}/{{ item }}"
         state: directory
         mode: '0755'
       loop:
@@ -45,7 +45,7 @@
       when: not ansible_check_mode
       ansible.builtin.synchronize:
         src: "{{ item }}"
-        dest: "{{ ansible_env.HOME }}/grafstation/configs/{{ item }}"
+        dest: "{{ ansible_facts['env']['HOME'] }}/grafstation/configs/{{ item }}"
         recursive: true
         delete: true
       loop:
@@ -56,13 +56,13 @@
       when: not ansible_check_mode
       ansible.builtin.get_url:
         url: "https://raw.githubusercontent.com/legnoh/streamlink-plugin-greenchannel/refs/heads/main/greenchannel/greenchannel.py"
-        dest: "{{ ansible_env.HOME }}/Library/Application Support/streamlink/plugins/greenchannel.py"
+        dest: "{{ ansible_facts['env']['HOME'] }}/Library/Application Support/streamlink/plugins/greenchannel.py"
         mode: '0644'
 
     - name: Check terraform init & upgrade
       when: not ansible_check_mode
       community.general.terraform:
-        project_path: "{{ ansible_env.HOME }}/grafstation/configs/grafana"
+        project_path: "{{ ansible_facts['env']['HOME'] }}/grafstation/configs/grafana"
         plan_file: /tmp/grafana-plan.log
         force_init: true
         provider_upgrade: true
@@ -74,7 +74,7 @@
       when: not ansible_check_mode
       ansible.builtin.template:
         src: apply.plist.j2
-        dest: "{{ ansible_env.HOME }}/Library/LaunchAgents/io.lkj.life.dashboard.grafstation.grafana.apply.plist"
+        dest: "{{ ansible_facts['env']['HOME'] }}/Library/LaunchAgents/io.lkj.life.dashboard.grafstation.grafana.apply.plist"
         mode: '0644'
 
     - name: Start grafana-config daemon

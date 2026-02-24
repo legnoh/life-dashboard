@@ -52,7 +52,7 @@
     - name: Run generate script in Container
       when: not ansible_check_mode and generate_snmp_config_makefile.changed
       community.docker.docker_container:
-        docker_host: "unix://{{ ansible_env.HOME }}/.rd/docker.sock"
+        docker_host: "unix://{{ ansible_facts['env']['HOME'] }}/.rd/docker.sock"
         name: snmp-generator
         image: prom/snmp-generator:latest
         command: generate --no-fail-on-parse-errors
@@ -63,7 +63,7 @@
 
     - name: Create a config directory
       ansible.builtin.file:
-        path: "{{ ansible_env.HOME }}/grafstation/configs"
+        path: "{{ ansible_facts['env']['HOME'] }}/grafstation/configs"
         state: directory
         mode: '0755'
 
@@ -72,7 +72,7 @@
       ansible.builtin.copy:
         remote_src: true
         src: "{{ generate_snmp_config_tmp_dir }}/snmp.yml"
-        dest: "{{ ansible_env.HOME }}/grafstation/configs/snmp.yml"
+        dest: "{{ ansible_facts['env']['HOME'] }}/grafstation/configs/snmp.yml"
         mode: '0644'
 
   always:
