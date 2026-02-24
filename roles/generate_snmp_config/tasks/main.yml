@@ -21,35 +21,36 @@
         url: https://raw.githubusercontent.com/prometheus/snmp_exporter/main/generator/Makefile
         dest: "{{ generate_snmp_config_tmp_dir }}/Makefile"
         mode: '0644'
+      register: generate_snmp_config_makefile
 
     - name: Insert temporary sed alias
-      when: not ansible_check_mode
+      when: not ansible_check_mode and generate_snmp_config_makefile.changed
       ansible.builtin.file:
         src: /opt/homebrew/bin/gsed
         dest: /opt/homebrew/bin/sed
         state: link
 
     - name: Download Common mib file with Makefile
-      when: not ansible_check_mode
+      when: not ansible_check_mode and generate_snmp_config_makefile.changed
       community.general.make:
         chdir: "{{ generate_snmp_config_tmp_dir }}"
         target: mibs
 
     - name: Remove temporary sed alias
-      when: not ansible_check_mode
+      when: not ansible_check_mode and generate_snmp_config_makefile.changed
       ansible.builtin.file:
         path: /opt/homebrew/bin/sed
         state: absent
 
     - name: Create generator.yml
-      when: not ansible_check_mode
+      when: not ansible_check_mode and generate_snmp_config_makefile.changed
       ansible.builtin.template:
         src: generator.yml.j2
         dest: "{{ generate_snmp_config_tmp_dir }}/generator.yml"
         mode: '0644'
 
     - name: Run generate script in Container
-      when: not ansible_check_mode
+      when: not ansible_check_mode and generate_snmp_config_makefile.changed
       community.docker.docker_container:
         docker_host: "unix://{{ ansible_env.HOME }}/.rd/docker.sock"
         name: snmp-generator
@@ -67,7 +68,7 @@
         mode: '0755'
 
     - name: Copy snmp.yml to snmp-exporter config dir
-      when: not ansible_check_mode
+      when: not ansible_check_mode and generate_snmp_config_makefile.changed
       ansible.builtin.copy:
         remote_src: true
         src: "{{ generate_snmp_config_tmp_dir }}/snmp.yml"
@@ -75,13 +76,13 @@
         mode: '0644'
 
   always:
-    - name: Remove temp directory
-      ansible.builtin.file:
-        path: "{{ generate_snmp_config_tmp_dir }}"
-        state: absent
+    # - name: Remove temp directory
+    #   ansible.builtin.file:
+    #     path: "{{ generate_snmp_config_tmp_dir }}"
+    #     state: absent
 
     - name: Remove temporary sed alias
-      when: not ansible_check_mode
+      when: not ansible_check_mode and generate_snmp_config_makefile.changed
       ansible.builtin.file:
         path: /opt/homebrew/bin/sed
         state: absent

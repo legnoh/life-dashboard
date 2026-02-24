@@ -27,7 +27,7 @@
     - name: Create alias for ics file
       when: not ansible_check_mode
       ansible.builtin.file:
-        src: "{{ ansible_env.HOME }}/Documents/ical/business.ics"
+        src: "{{ ansible_env.HOME }}/Library/Mobile Documents/com~apple~CloudDocs/ical/business.ics"
         dest: "{{ ansible_env.HOME }}/grafstation/configs/html/business.ics"
         state: link
 
