@@ -23,6 +23,9 @@
     - role: start_apple_calendars_server
       tags: [start_apple_calendars_server]
 
+    - role: start_google_calendar_fix_daemon
+      tags: [start_google_calendar_fix_daemon]
+
     - role: start_hap_nature_remo
       tags: [start_hap_nature_remo]
 

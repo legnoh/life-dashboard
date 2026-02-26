@@ -5,12 +5,12 @@
     - name: Get LaunchAgent status
       ansible.builtin.stat:
         path: "{{ ansible_facts['env']['HOME'] }}/Library/LaunchAgents/io.lkj.life.dashboard.grafstation.grafana.apply.plist"
-      register: launchagent
+      register: start_grafana_config_launchagent
 
     - name: Stop grafana-config daemon
       when:
         - not ansible_check_mode
-        - launchagent.stat.exists
+        - start_grafana_config_launchagent.stat.exists
       community.general.launchd:
         name: io.lkj.life.dashboard.grafstation.grafana.apply
         state: unloaded
