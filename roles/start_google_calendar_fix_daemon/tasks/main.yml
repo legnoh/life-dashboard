@@ -1,0 +1,29 @@
+---
+
+- name: Start apple-calendar-server
+  block:
+    - name: Tap custom repos
+      check_mode: false
+      community.general.homebrew_tap:
+        name:
+          - legnoh/etc
+
+    - name: Install Brew packages
+      when: not ansible_check_mode
+      community.general.homebrew:
+        name:
+          - legnoh/etc/google-calendar-ics-fixer
+        state: upgraded
+
+    - name: Create launchd definition file
+      when: not ansible_check_mode
+      ansible.builtin.template:
+        src: gcal.fixer.plist.j2
+        dest: "{{ ansible_facts['env']['HOME'] }}/Library/LaunchAgents/io.lkj.life.dashboard.gcal.fixer.plist"
+        mode: '0644'
+
+    - name: Start google-calendar-ics-fixer daemon
+      when: not ansible_check_mode
+      community.general.launchd:
+        name: io.lkj.life.dashboard.google.calendar.ics.fixer
+        state: reloaded
