@@ -25,5 +25,5 @@
     - name: Start google-calendar-ics-fixer daemon
       when: not ansible_check_mode
       community.general.launchd:
-        name: io.lkj.life.dashboard.google.calendar.ics.fixer
+        name: io.lkj.life.dashboard.gcal.fixer
         state: reloaded
