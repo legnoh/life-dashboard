@@ -1,0 +1,7 @@
+---
+
+- name: Restart apple-calendar-server service
+  when: not ansible_check_mode
+  community.general.homebrew_services:
+    name: legnoh/etc/apple-calendar-server
+    state: restarted

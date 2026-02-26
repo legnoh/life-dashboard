@@ -23,6 +23,7 @@
         - html/
         - docker-compose.yml
         - nginx.conf
+      notify: Start docker containers
 
     - name: Create prometheus.yml file
       when: not ansible_check_mode
@@ -30,6 +31,7 @@
         src: prometheus.yml.j2
         dest: "{{ ansible_facts['env']['HOME'] }}/grafstation/prometheus/prometheus.yml"
         mode: '0644'
+      notify: Start docker containers
 
     - name: Pull docker images
       when: not ansible_check_mode
@@ -61,6 +63,7 @@
         WITHINGS_REFRESH_TOKEN: "{{ start_docker_containers_withings_refresh_token }}"
         WITHINGS_TZ: "{{ start_docker_containers_withings_tz }}"
         WITHINGS_USERID: "{{ start_docker_containers_withings_userid }}"
+      notify: Start docker containers
 
     - name: Stop docker containers
       when: not start_docker_containers_recreate_container and not ansible_check_mode
@@ -69,6 +72,7 @@
         project_src: "{{ ansible_facts['env']['HOME'] }}/grafstation/configs"
         state: stopped
       environment: *docker_envs
+      notify: Start docker containers
 
     - name: Delete docker containers
       when: start_docker_containers_recreate_container and not ansible_check_mode
@@ -77,19 +81,13 @@
         project_src: "{{ ansible_facts['env']['HOME'] }}/grafstation/configs"
         state: absent
       environment: *docker_envs
+      notify: Start docker containers
 
     - name: Delete terraform.tfstate
       when: start_docker_containers_recreate_container and not ansible_check_mode
       ansible.builtin.file:
         state: absent
         path: /tmp/terraform.tfstate
-
-    - name: Start docker containers
-      when: not ansible_check_mode
-      community.docker.docker_compose_v2:
-        docker_host: "unix://{{ ansible_facts['env']['HOME'] }}/.rd/docker.sock"
-        project_src: "{{ ansible_facts['env']['HOME'] }}/grafstation/configs"
-      environment: *docker_envs
 
     - name: Prune unused resources
       when: not ansible_check_mode

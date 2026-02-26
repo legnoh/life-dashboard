@@ -2,19 +2,6 @@
 
 - name: Start grafana config
   block:
-    - name: Get LaunchAgent status
-      ansible.builtin.stat:
-        path: "{{ ansible_facts['env']['HOME'] }}/Library/LaunchAgents/io.lkj.life.dashboard.grafstation.grafana.apply.plist"
-      register: start_grafana_config_launchagent
-
-    - name: Stop grafana-config daemon
-      when:
-        - not ansible_check_mode
-        - start_grafana_config_launchagent.stat.exists
-      community.general.launchd:
-        name: io.lkj.life.dashboard.grafstation.grafana.apply
-        state: unloaded
-
     - name: Tap custom repos
       check_mode: false
       community.general.homebrew_tap:
@@ -31,6 +18,7 @@
           - streamlink
           - terraform
         state: upgraded
+      notify: Restart grafana-config daemon
 
     - name: Create config directories
       ansible.builtin.file:
@@ -51,6 +39,7 @@
       loop:
         - grafana/
         - stream/
+      notify: Restart grafana-config daemon
 
     - name: Download remote files(streamlink plugin)
       when: not ansible_check_mode
@@ -58,6 +47,7 @@
         url: "https://raw.githubusercontent.com/legnoh/streamlink-plugin-greenchannel/refs/heads/main/greenchannel/greenchannel.py"
         dest: "{{ ansible_facts['env']['HOME'] }}/Library/Application Support/streamlink/plugins/greenchannel.py"
         mode: '0644'
+      notify: Restart grafana-config daemon
 
     - name: Check terraform init & upgrade
       when: not ansible_check_mode
@@ -76,12 +66,7 @@
         src: apply.plist.j2
         dest: "{{ ansible_facts['env']['HOME'] }}/Library/LaunchAgents/io.lkj.life.dashboard.grafstation.grafana.apply.plist"
         mode: '0644'
-
-    - name: Start grafana-config daemon
-      when: not ansible_check_mode
-      community.general.launchd:
-        name: io.lkj.life.dashboard.grafstation.grafana.apply
-        state: reloaded
+      notify: Restart grafana-config daemon
 
   always:
     - name: Remove temp file

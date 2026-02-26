@@ -14,6 +14,7 @@
         name:
           - legnoh/etc/apple-calendar-server
         state: upgraded
+      notify: Restart apple-calendar-server service
 
     - name: Create a config directory
       ansible.builtin.file:
@@ -26,9 +27,4 @@
         src: config.yml.j2
         dest: "{{ ansible_facts['env']['HOME'] }}/.apple-calendar-server/config.yml"
         mode: '0644'
-
-    - name: Start Service
-      when: not ansible_check_mode
-      community.general.homebrew_services:
-        name: legnoh/etc/apple-calendar-server
-        state: restarted
+      notify: Restart apple-calendar-server service

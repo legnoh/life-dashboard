@@ -1,0 +1,7 @@
+---
+
+- name: Restart hap-nature-remo service
+  when: not ansible_check_mode
+  community.general.homebrew_services:
+    name: legnoh/etc/hap-nature-remo
+    state: restarted

@@ -43,6 +43,7 @@
         src: close_notifications.j2
         dest: "{{ ansible_facts['env']['HOME'] }}/grafstation/close_notifications"
         mode: '0755'
+      notify: Restart closenotifications daemon
 
     - name: Create launchd definition file
       when: not ansible_check_mode
@@ -50,9 +51,4 @@
         src: closenotifications.plist.j2
         dest: "{{ ansible_facts['env']['HOME'] }}/Library/LaunchAgents/io.lkj.life.dashboard.closenotifications.plist"
         mode: '0644'
-
-    - name: Start closenotifications daemon
-      when: not ansible_check_mode
-      community.general.launchd:
-        name: io.lkj.life.dashboard.closenotifications
-        state: reloaded
+      notify: Restart closenotifications daemon

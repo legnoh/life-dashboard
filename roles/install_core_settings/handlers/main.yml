@@ -1,0 +1,7 @@
+---
+
+- name: Restart closenotifications daemon
+  when: not ansible_check_mode
+  community.general.launchd:
+    name: io.lkj.life.dashboard.closenotifications
+    state: reloaded

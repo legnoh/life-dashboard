@@ -12,6 +12,7 @@
       community.general.homebrew:
         name: legnoh/etc/hap-nature-remo
         state: upgraded
+      notify: Restart hap-nature-remo service
 
     - name: Create a config directory
       ansible.builtin.file:
@@ -24,9 +25,4 @@
         src: config.yml.j2
         dest: "{{ ansible_facts['env']['HOME'] }}/.hap-nature-remo/config.yml"
         mode: '0644'
-
-    - name: Start Service
-      when: not ansible_check_mode
-      community.general.homebrew_services:
-        name: legnoh/etc/hap-nature-remo
-        state: restarted
+      notify: Restart hap-nature-remo service

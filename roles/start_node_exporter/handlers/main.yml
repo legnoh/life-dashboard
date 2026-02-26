@@ -1,0 +1,7 @@
+---
+
+- name: Restart node_exporter service
+  when: not ansible_check_mode
+  community.general.homebrew_services:
+    name: node_exporter
+    state: restarted

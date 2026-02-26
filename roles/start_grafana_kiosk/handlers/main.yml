@@ -1,0 +1,7 @@
+---
+
+- name: Restart grafana-kiosk service
+  when: not ansible_check_mode
+  community.general.homebrew_services:
+    name: legnoh/etc/grafana-kiosk
+    state: restarted

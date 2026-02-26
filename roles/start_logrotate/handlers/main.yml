@@ -1,0 +1,7 @@
+---
+
+- name: Restart logrotate service
+  when: not ansible_check_mode
+  community.general.homebrew_services:
+    name: logrotate
+    state: restarted

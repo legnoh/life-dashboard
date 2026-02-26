@@ -6,6 +6,7 @@
       community.general.homebrew:
         name: logrotate
         state: upgraded
+      notify: Restart logrotate service
 
     - name: Create config directories
       ansible.builtin.file:
@@ -27,9 +28,4 @@
         - ffmpeg.conf
         - grafana-apply.conf
         - streamlink.conf
-
-    - name: Start logrotate
-      when: not ansible_check_mode
-      community.general.homebrew_services:
-        name: logrotate
-        state: restarted
+      notify: Restart logrotate service

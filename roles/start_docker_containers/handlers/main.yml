@@ -1,0 +1,32 @@
+---
+
+- name: Start docker containers
+  when: not ansible_check_mode
+  community.docker.docker_compose_v2:
+    docker_host: "unix://{{ ansible_facts['env']['HOME'] }}/.rd/docker.sock"
+    project_src: "{{ ansible_facts['env']['HOME'] }}/grafstation/configs"
+  environment:
+    ASKEN_PASSWORD: "{{ start_docker_containers_asken_password }}"
+    ASKEN_USERNAME: "{{ start_docker_containers_asken_username }}"
+    GRAFANA_ADMIN_PASSWORD: "{{ start_docker_containers_grafana_admin_password }}"
+    MONEYFORWARD_EMAIL: "{{ start_docker_containers_moneyforward_email }}"
+    MONEYFORWARD_PASSWORD: "{{ start_docker_containers_moneyforward_password }}"
+    MONEYFORWARD_TOTP_SECRET: "{{ start_docker_containers_moneyforward_totp_secret }}"
+    NATURE_OAUTH_TOKEN: "{{ start_docker_containers_nature_oauth_token }}"
+    OPENWEATHER_CITY: "{{ start_docker_containers_openweather_city }}"
+    OPENWEATHER_API_KEY: "{{ start_docker_containers_openweather_api_key }}"
+    OURA_ACCESS_TOKEN: "{{ start_docker_containers_oura_access_token }}"
+    OURA_TZ: "{{ start_docker_containers_oura_tz }}"
+    POLLEN_APIKEY: "{{ start_docker_containers_pollen_apikey }}"
+    POLLEN_COORDINATES: "{{ start_docker_containers_pollen_coordinates }}"
+    SCHOLARPS_ID: "{{ start_docker_containers_scholarps_id }}"
+    SCHOLARPS_PASSWORD: "{{ start_docker_containers_scholarps_password }}"
+    SCHOLARPS_NUMBER: "{{ start_docker_containers_scholarps_number }}"
+    SPEEDTEST_SERVER_IDS: "{{ start_docker_containers_speedtest_server_ids }}"
+    WITHINGS_ACCESS_TOKEN: "{{ start_docker_containers_withings_access_token }}"
+    WITHINGS_CLIENT_ID: "{{ start_docker_containers_withings_client_id }}"
+    WITHINGS_CONSUMER_SECRET: "{{ start_docker_containers_withings_consumer_secret }}"
+    WITHINGS_CREATED: "{{ start_docker_containers_withings_created }}"
+    WITHINGS_REFRESH_TOKEN: "{{ start_docker_containers_withings_refresh_token }}"
+    WITHINGS_TZ: "{{ start_docker_containers_withings_tz }}"
+    WITHINGS_USERID: "{{ start_docker_containers_withings_userid }}"

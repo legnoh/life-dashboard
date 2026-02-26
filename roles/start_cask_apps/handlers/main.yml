@@ -1,0 +1,6 @@
+---
+
+- name: Start Flux app
+  ansible.builtin.command:
+    cmd: /usr/bin/open --background -a Flux
+  changed_when: false

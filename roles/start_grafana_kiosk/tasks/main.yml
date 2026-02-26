@@ -12,6 +12,7 @@
       community.general.homebrew:
         name: legnoh/etc/grafana-kiosk
         state: upgraded
+      notify: Restart grafana-kiosk service
 
     - name: Install google-chrome
       community.general.homebrew_cask:
@@ -38,9 +39,4 @@
         src: .grafana-kiosk-config.yml.j2
         dest: "{{ ansible_facts['env']['HOME'] }}/.grafana-kiosk-config.yml"
         mode: '0644'
-
-    - name: Start Service
-      when: not ansible_check_mode
-      community.general.homebrew_services:
-        name: legnoh/etc/grafana-kiosk
-        state: restarted
+      notify: Restart grafana-kiosk service

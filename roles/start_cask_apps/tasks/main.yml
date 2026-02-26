@@ -6,8 +6,4 @@
       community.general.homebrew_cask:
         name: flux
         state: upgraded
-
-    - name: Start Flux
-      ansible.builtin.command:
-        cmd: /usr/bin/open --background -a Flux
-      changed_when: false
+      notify: Start Flux app

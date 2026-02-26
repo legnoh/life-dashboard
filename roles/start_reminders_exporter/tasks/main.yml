@@ -16,6 +16,7 @@
           - keith/formulae/reminders-cli
           - legnoh/etc/reminders-exporter
         state: upgraded
+      notify: Restart reminders-exporter service
 
     - name: Create a config directory
       ansible.builtin.file:
@@ -28,9 +29,4 @@
         src: config.yml
         dest: "{{ ansible_facts['env']['HOME'] }}/.reminders-exporter/config.yml"
         mode: '0644'
-
-    - name: Start Service
-      when: not ansible_check_mode
-      community.general.homebrew_services:
-        name: legnoh/etc/reminders-exporter
-        state: restarted
+      notify: Restart reminders-exporter service
