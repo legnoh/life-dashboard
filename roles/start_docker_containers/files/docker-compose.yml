@@ -64,7 +64,7 @@ services:
       - LANGUAGE_CODE=ja
   openweather-exporter:
     container_name: openweather-exporter
-    image: legnoh/openweather-exporter:icon
+    image: billykwooten/openweather-exporter:latest
     ports: [9103:9091]
     restart: always
     environment:
