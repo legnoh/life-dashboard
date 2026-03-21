@@ -11,7 +11,7 @@ services:
       - "host.docker.internal:host-gateway"
   prometheus:
     container_name: prometheus
-    image: prom/prometheus:v3.1.0
+    image: prom/prometheus:v3.10.0
     ports: [9090:9090]
     restart: always
     volumes:
