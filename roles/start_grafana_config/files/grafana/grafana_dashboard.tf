@@ -14,21 +14,21 @@ resource "grafana_dashboard" "life-metrics" {
       {
         title        = null
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.channel1.uid])
-        gridPos      = { h = 11, w = 9, x = 0, y = 0 }
+        gridPos      = { h = 12, w = 9, x = 0, y = 0 }
       },
 
       # channel2
       {
         title        = null
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.channel2.uid])
-        gridPos      = { h = 11, w = 9, x = 0, y = 11 }
+        gridPos      = { h = 12, w = 9, x = 0, y = 11 }
       },
 
       # calendar
       {
         title        = null
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.calendar.uid])
-        gridPos      = { h = 6, w = 9, x = 0, y = 22 }
+        gridPos      = { h = 7, w = 9, x = 0, y = 22 }
       },
 
       # news
