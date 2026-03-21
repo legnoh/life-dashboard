@@ -1,7 +1,7 @@
 services:
   nginx:
     container_name: nginx
-    image: nginx:1.26
+    image: nginx:1.29
     ports: [80:80]
     restart: always
     volumes:
