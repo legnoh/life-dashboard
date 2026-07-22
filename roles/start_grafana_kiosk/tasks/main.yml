@@ -7,6 +7,12 @@
       community.general.homebrew_tap:
         name: legnoh/etc
 
+    - name: Trust custom repos
+      check_mode: false
+      community.general.command:
+        cmd: brew trust legnoh/etc
+        changed_when: false
+
     - name: Install grafana-kiosk
       when: not ansible_check_mode
       community.general.homebrew:

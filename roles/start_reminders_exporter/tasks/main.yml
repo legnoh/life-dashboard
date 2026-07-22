@@ -9,6 +9,12 @@
           - keith/formulae
           - legnoh/etc
 
+    - name: Trust custom repos
+      check_mode: false
+      community.general.command:
+        cmd: brew trust keith/formulae legnoh/etc
+        changed_when: false
+
     - name: Install Brew packages
       when: not ansible_check_mode
       community.general.homebrew:
