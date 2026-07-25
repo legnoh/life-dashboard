@@ -3,6 +3,7 @@ resource "grafana_library_panel" "calendar" {
   folder_uid = grafana_folder.etc.uid
   name       = "予定"
   model_json = jsonencode(merge(local.calendar_base, local.table_base, {
+    title = "",
     targets = [{
       columns = [
         {
