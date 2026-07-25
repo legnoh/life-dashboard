@@ -3,7 +3,7 @@ resource "grafana_library_panel" "clock" {
   folder_uid = grafana_folder.misc.uid
   name       = "clock"
   model_json = jsonencode({
-    title = "",
+    showTitle   = false,
     type = "grafana-clock-panel",
     options = {
       mode     = "time"

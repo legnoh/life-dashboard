@@ -109,7 +109,7 @@ resource "grafana_library_panel" "openweather-condition" {
   folder_uid = grafana_folder.atmosphere.uid
   name       = "OpenWeather - 現在の天気"
   model_json = jsonencode(merge(local.common_base, local.stats_base, local.link.openweather, {
-    title = "",
+    showTitle   = false,
     targets = [merge(local.target_base, {
       expr = "openweather_currentconditions{location=\"${var.OPENWEATHER_CITY}\"}",
     })]

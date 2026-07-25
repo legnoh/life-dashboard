@@ -3,7 +3,7 @@ resource "grafana_library_panel" "news-domestic" {
   folder_uid = grafana_folder.rss.uid
   name       = "news-domestic"
   model_json = jsonencode({
-    title = "",
+    showTitle   = false,
     type  = "news",
     options = {
       showImage = false,
@@ -17,7 +17,7 @@ resource "grafana_library_panel" "news-world" {
   folder_uid = grafana_folder.rss.uid
   name       = "news-world"
   model_json = jsonencode({
-    title = "",
+    showTitle   = false,
     type  = "news",
     options = {
       showImage = false,
@@ -31,7 +31,7 @@ resource "grafana_library_panel" "news-business" {
   folder_uid = grafana_folder.rss.uid
   name       = "news-business"
   model_json = jsonencode({
-    title = "",
+    showTitle   = false,
     type  = "news",
     options = {
       showImage = false,
@@ -45,7 +45,7 @@ resource "grafana_library_panel" "news-sports" {
   folder_uid = grafana_folder.rss.uid
   name       = "news-sports"
   model_json = jsonencode({
-    title = "",
+    showTitle   = false,
     type  = "news",
     options = {
       showImage = false,
@@ -59,7 +59,7 @@ resource "grafana_library_panel" "news-netkeiba" {
   folder_uid = grafana_folder.rss.uid
   name       = "news-netkeiba"
   model_json = jsonencode({
-    title = "",
+    showTitle   = false,
     type  = "news",
     options = {
       showImage = false,

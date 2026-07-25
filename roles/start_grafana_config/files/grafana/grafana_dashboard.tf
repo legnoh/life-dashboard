@@ -12,50 +12,50 @@ resource "grafana_dashboard" "life-metrics" {
       # 通常モード
       # channel1
       {
-        title        = ""
+        showTitle    = false,
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.channel1.uid])
         gridPos      = { h = 11, w = 9, x = 0, y = 0 }
       },
 
       # channel2
       {
-        title        = ""
+        showTitle    = false,
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.channel2.uid])
         gridPos      = { h = 11, w = 9, x = 0, y = 11 }
       },
 
       # calendar
       {
-        title        = ""
+        showTitle    = false,
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.calendar.uid])
         gridPos      = { h = 6, w = 9, x = 0, y = 22 }
       },
 
       # news
       {
-        title        = ""
+        showTitle    = false,
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.news-domestic.uid])
         gridPos      = local.grid_position.E1
       },
       {
-        title        = ""
+        showTitle    = false,
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.news-world.uid])
         gridPos      = local.grid_position.E2
       },
       {
-        title        = ""
+        showTitle    = false,
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.news-business.uid])
         gridPos      = local.grid_position.E3
       },
       {
-        title        = ""
+        showTitle    = false,
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.news-sports.uid])
         gridPos      = local.grid_position.E4
       },
 
       # clock
       {
-        title        = ""
+        showTitle    = false,
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.clock.uid])
         gridPos      = local.grid_position.A5
         options = {
@@ -147,7 +147,7 @@ resource "grafana_dashboard" "life-metrics" {
 
       # openweather
       {
-        title        = ""
+        showTitle    = false,
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.openweather-condition-icon.uid])
         gridPos      = local.grid_position.A4
       },
@@ -219,7 +219,7 @@ resource "grafana_dashboard" "life-metrics" {
 
       # blank
       {
-        title        = ""
+        showTitle    = false,
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.blank.uid])
         gridPos      = local.grid_position.B5
       },
