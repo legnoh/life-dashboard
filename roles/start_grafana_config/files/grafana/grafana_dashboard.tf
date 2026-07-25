@@ -26,24 +26,24 @@ resource "grafana_dashboard" "life-metrics" {
 
       # calendar
       {
-        title        = null
+        title        = ""
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.calendar.uid])
         gridPos      = { h = 6, w = 9, x = 0, y = 22 }
       },
 
       # news
       {
-        title        = null
+        title        = ""
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.news-domestic.uid])
         gridPos      = local.grid_position.E1
       },
       {
-        title        = null
+        title        = ""
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.news-world.uid])
         gridPos      = local.grid_position.E2
       },
       {
-        title        = null
+        title        = ""
         libraryPanel = zipmap(local.libpanel_keys, [grafana_library_panel.news-business.uid])
         gridPos      = local.grid_position.E3
       },
