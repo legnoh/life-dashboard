@@ -42,7 +42,7 @@ jobs:
       uses: actions/checkout@v7
 
     - name: Set up Homebrew
-      uses: Homebrew/actions/setup-homebrew@master
+      uses: Homebrew/actions/setup-homebrew@e99025eb970cfa124b8284a35463d87426917478 # 2026.09.28.1
 
     - name: Check ansible installed
       id: check-ansible
