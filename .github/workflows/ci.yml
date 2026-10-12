@@ -135,7 +135,6 @@ jobs:
         SCHOLARPS_PASSWORD: ${{ secrets.SCHOLARPS_PASSWORD }}
         SCHOLARPS_NUMBER: ${{ secrets.SCHOLARPS_NUMBER }}
         SNMP_PASSWORD: ${{ secrets.SNMP_PASSWORD }}
-        SNMP_PRIV_PASSWORD: ${{ secrets.SNMP_PRIV_PASSWORD }}
         SNMP_USERNAME: ${{ secrets.SNMP_USERNAME }}
         SPEEDTEST_SERVER_IDS: ${{ secrets.SPEEDTEST_SERVER_IDS }}
         WITHINGS_ACCESS_TOKEN: ${{ secrets.WITHINGS_ACCESS_TOKEN }}
