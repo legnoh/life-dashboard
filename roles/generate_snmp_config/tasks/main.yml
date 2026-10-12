@@ -9,19 +9,12 @@
           - gnu-sed
         state: upgraded
 
-    - name: Create a temp directory
-      ansible.builtin.file:
-        path: "{{ generate_snmp_config_tmp_dir }}/mibs"
-        state: directory
-        mode: '0755'
-
-    - name: Download Makefile
+    - name: Checkout snmp_exporter repository
       when: not ansible_check_mode
-      ansible.builtin.get_url:
-        url: https://raw.githubusercontent.com/prometheus/snmp_exporter/main/generator/Makefile
-        dest: "{{ generate_snmp_config_tmp_dir }}/Makefile"
-        mode: '0644'
-      register: generate_snmp_config_makefile
+      ansible.builtin.git:
+        repo: https://github.com/prometheus/snmp_exporter.git
+        dest: "{{ generate_snmp_config_tmp_dir }}"
+        version: v0.30.1
 
     - name: Insert temporary sed alias
       when: not ansible_check_mode and generate_snmp_config_makefile.changed
@@ -33,7 +26,7 @@
     - name: Download Common mib file with Makefile
       when: not ansible_check_mode and generate_snmp_config_makefile.changed
       community.general.make:
-        chdir: "{{ generate_snmp_config_tmp_dir }}"
+        chdir: "{{ generate_snmp_config_tmp_dir }}/generator"
         target: mibs
 
     - name: Remove temporary sed alias
@@ -46,7 +39,7 @@
       when: not ansible_check_mode and generate_snmp_config_makefile.changed
       ansible.builtin.template:
         src: generator.yml.j2
-        dest: "{{ generate_snmp_config_tmp_dir }}/generator.yml"
+        dest: "{{ generate_snmp_config_tmp_dir }}/generator/generator.yml"
         mode: '0644'
 
     - name: Run generate script in Container
@@ -61,6 +54,12 @@
           - "{{ generate_snmp_config_tmp_dir }}:/opt"
         detach: false
 
+    - name: Run generate script in Container
+      when: not ansible_check_mode and generate_snmp_config_makefile.changed
+      community.general.make:
+        chdir: "{{ generate_snmp_config_tmp_dir }}/generator"
+        target: docker-generate
+
     - name: Create a config directory
       ansible.builtin.file:
         path: "{{ ansible_facts['env']['HOME'] }}/grafstation/configs"
@@ -71,7 +70,7 @@
       when: not ansible_check_mode and generate_snmp_config_makefile.changed
       ansible.builtin.copy:
         remote_src: true
-        src: "{{ generate_snmp_config_tmp_dir }}/snmp.yml"
+        src: "{{ generate_snmp_config_tmp_dir }}/generator/snmp.yml"
         dest: "{{ ansible_facts['env']['HOME'] }}/grafstation/configs/snmp.yml"
         mode: '0644'
 
