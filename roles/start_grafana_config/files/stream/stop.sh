@@ -6,16 +6,16 @@ function unload_launchd() {
     local PLIST_PATH="${LA}/${LA_DOMAIN}.plist"
     if [[ -f ${PLIST_PATH} ]]; then
         chmod 664 ${PLIST_PATH}
-        if ! launchctl list ${LA_DOMAIN} &> /dev/null; then
-            launchctl unload -w ${PLIST_PATH}
+        if launchctl list "${LA_DOMAIN}" &> /dev/null; then
+            launchctl unload -w "${PLIST_PATH}"
         fi
     fi
 }
 
 function main() {
     export STREAM_KEY=${1:-"stream"}
-    unload_launchd "io.lkj.life.dashboard.grafstation.stream.${STREAM_KEY}.streamlink"
-    unload_launchd "io.lkj.life.dashboard.grafstation.stream.${STREAM_KEY}.ffmpeg"
+    unload_launchd "io.lkj.life.dashboard.grafstation.stream.${STREAM_KEY}.streamlink" || return 1
+    unload_launchd "io.lkj.life.dashboard.grafstation.stream.${STREAM_KEY}.ffmpeg" || return 1
 }
 
 main $@

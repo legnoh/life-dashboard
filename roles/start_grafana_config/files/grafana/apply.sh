@@ -174,14 +174,22 @@ function restart_stream(){
 
 # ストリームを停止する
 function stop_stream(){
-  # ストリーム開始ファイルがある場合のみ停止処理を実行する
+  local stream_dir="${HOME}/grafstation/configs/html/stream"
+
   if [[ -e "${STREAM_START_FILE}" ]]; then
     echo "ストリームを停止します"
-    cd ../stream && ./stop.sh && cd -
-    rm -rf ${STREAM_START_FILE}
-    rm -rf ${HOME}/grafstation/configs/html/stream/*.ts
-    return 0
   fi
+
+  # 開始ファイルがなくても、残っているジョブやHLSファイルを処理する
+  if ! (cd ../stream && ./stop.sh); then
+    echo "ストリーム停止に失敗しました" >&2
+    return 1
+  fi
+
+  rm -f "${STREAM_START_FILE}" || return 1
+  find "${stream_dir}" -maxdepth 1 -type f \
+    \( -name '*.ts' -o -name '*.m3u8' -o -name '*.m3u8.tmp' \) \
+    -delete || return 1
 }
 
 # 中央競馬の中継中か確認する
@@ -436,7 +444,7 @@ function main(){
 
   # Mリーグ放送中でない場合、ストリームを停止させておく
   if [[ "${tv_channel1}" != "mahjong" ]]; then
-    stop_stream
+    stop_stream || return 1
   fi
 
   # デフォルト外項目のみterraformに変数として渡す
