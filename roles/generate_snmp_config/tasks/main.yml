@@ -58,6 +58,34 @@
         state: directory
         mode: '0755'
 
+    - name: Check generated snmp.yml
+      ansible.builtin.stat:
+        path: "{{ generate_snmp_config_tmp_dir }}/generator/snmp.yml"
+      register: generate_snmp_config_output
+      when: not ansible_check_mode
+
+    - name: Validate generated snmp.yml
+      ansible.builtin.assert:
+        that:
+          - generate_snmp_config_output.stat.exists
+          - generate_snmp_config_output.stat.isreg
+        fail_msg: "SNMP generator did not create a regular snmp.yml file."
+      when: not ansible_check_mode
+
+    - name: Check snmp.yml mount path
+      ansible.builtin.stat:
+        path: "{{ ansible_facts['env']['HOME'] }}/grafstation/configs/snmp.yml"
+      register: generate_snmp_config_mount_path
+      when: not ansible_check_mode
+
+    - name: Remove directory at snmp.yml mount path
+      ansible.builtin.file:
+        path: "{{ ansible_facts['env']['HOME'] }}/grafstation/configs/snmp.yml"
+        state: absent
+      when:
+        - not ansible_check_mode
+        - generate_snmp_config_mount_path.stat.isdir | default(false)
+
     - name: Copy snmp.yml to snmp-exporter config dir
       when: not ansible_check_mode
       ansible.builtin.copy:
