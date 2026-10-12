@@ -8,8 +8,13 @@
     - role: start_cask_apps
       tags: [start_cask_apps]
 
-    - role: install_docker
-      tags: [install_docker]
+    - name: Install & Start Lima
+      role: legnoh.dotfiles.install_lima
+      vars:
+        install_lima_docker_memory: 4GiB
+
+    - name: Install Docker CLI
+      role: legnoh.dotfiles.install_docker_cli
 
     - role: generate_snmp_config
       tags: [generate_snmp_config]
