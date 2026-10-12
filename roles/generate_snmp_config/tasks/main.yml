@@ -8,6 +8,11 @@
           - gnu-sed
         state: upgraded
 
+    - name: Remove previous generated SNMP generator config
+      ansible.builtin.file:
+        path: "{{ generate_snmp_config_tmp_dir }}/generator/generator.yml"
+        state: absent
+
     - name: Checkout snmp_exporter repository
       when: not ansible_check_mode
       ansible.builtin.git:
@@ -36,14 +41,14 @@
         state: absent
 
     - name: Create generator.yml
-      when: not ansible_check_mode and generate_snmp_config_repo.before != generate_snmp_config_repo.after
+      when: not ansible_check_mode
       ansible.builtin.template:
         src: generator.yml.j2
         dest: "{{ generate_snmp_config_tmp_dir }}/generator/generator.yml"
         mode: '0644'
 
     - name: Run generate script in Container
-      when: not ansible_check_mode and generate_snmp_config_repo.before != generate_snmp_config_repo.after
+      when: not ansible_check_mode
       community.general.make:
         chdir: "{{ generate_snmp_config_tmp_dir }}/generator"
         target: docker-generate
@@ -58,7 +63,7 @@
         mode: '0755'
 
     - name: Copy snmp.yml to snmp-exporter config dir
-      when: not ansible_check_mode and generate_snmp_config_repo.before != generate_snmp_config_repo.after
+      when: not ansible_check_mode
       ansible.builtin.copy:
         remote_src: true
         src: "{{ generate_snmp_config_tmp_dir }}/generator/snmp.yml"
@@ -70,6 +75,11 @@
     #   ansible.builtin.file:
     #     path: "{{ generate_snmp_config_tmp_dir }}"
     #     state: absent
+
+    - name: Remove generated SNMP generator config
+      ansible.builtin.file:
+        path: "{{ generate_snmp_config_tmp_dir }}/generator/generator.yml"
+        state: absent
 
     - name: Remove temporary sed alias
       when: not ansible_check_mode and generate_snmp_config_repo.before != generate_snmp_config_repo.after
