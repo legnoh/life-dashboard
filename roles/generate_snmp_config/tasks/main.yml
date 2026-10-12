@@ -49,6 +49,7 @@
         target: docker-generate
       environment:
         DOCKER_HOST: "unix://{{ ansible_facts['env']['HOME'] }}/.lima/docker/sock/docker.sock"
+        PWD: "{{ generate_snmp_config_tmp_dir }}/generator"
 
     - name: Create a config directory
       ansible.builtin.file:
