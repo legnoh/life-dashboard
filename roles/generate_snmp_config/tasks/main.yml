@@ -13,7 +13,7 @@
       ansible.builtin.git:
         repo: https://github.com/prometheus/snmp_exporter.git
         dest: "{{ generate_snmp_config_tmp_dir }}"
-        version: v0.30.1
+        version: main
       register: generate_snmp_config_repo
 
     - name: Insert temporary sed alias
