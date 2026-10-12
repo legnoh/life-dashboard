@@ -44,18 +44,6 @@
 
     - name: Run generate script in Container
       when: not ansible_check_mode and generate_snmp_config_repo.before != generate_snmp_config_repo.after
-      community.docker.docker_container:
-        docker_host: "unix://{{ ansible_facts['env']['HOME'] }}/.lima/docker/sock/docker.sock"
-        name: snmp-generator
-        image: prom/snmp-generator:latest
-        command: generate --no-fail-on-parse-errors
-        platform: linux/amd64
-        volumes:
-          - "{{ generate_snmp_config_tmp_dir }}:/opt"
-        detach: false
-
-    - name: Run generate script in Container
-      when: not ansible_check_mode and generate_snmp_config_repo.before != generate_snmp_config_repo.after
       community.general.make:
         chdir: "{{ generate_snmp_config_tmp_dir }}/generator"
         target: docker-generate
