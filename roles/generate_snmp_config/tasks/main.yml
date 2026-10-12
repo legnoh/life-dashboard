@@ -2,10 +2,9 @@
 
 - name: Generate SNMP Config
   block:
-    - name: Install gnu-tar(for ansible unarchive module) and gnu-sed(for Makefile)
+    - name: Install gnu-sed(for Makefile)
       community.general.homebrew:
         name:
-          - gnu-tar
           - gnu-sed
         state: upgraded
 
@@ -15,35 +14,36 @@
         repo: https://github.com/prometheus/snmp_exporter.git
         dest: "{{ generate_snmp_config_tmp_dir }}"
         version: v0.30.1
+      register: generate_snmp_config_repo
 
     - name: Insert temporary sed alias
-      when: not ansible_check_mode and generate_snmp_config_makefile.changed
+      when: not ansible_check_mode and generate_snmp_config_repo.before != generate_snmp_config_repo.after
       ansible.builtin.file:
         src: /opt/homebrew/bin/gsed
         dest: /opt/homebrew/bin/sed
         state: link
 
     - name: Download Common mib file with Makefile
-      when: not ansible_check_mode and generate_snmp_config_makefile.changed
+      when: not ansible_check_mode and generate_snmp_config_repo.before != generate_snmp_config_repo.after
       community.general.make:
         chdir: "{{ generate_snmp_config_tmp_dir }}/generator"
         target: mibs
 
     - name: Remove temporary sed alias
-      when: not ansible_check_mode and generate_snmp_config_makefile.changed
+      when: not ansible_check_mode and generate_snmp_config_repo.before != generate_snmp_config_repo.after
       ansible.builtin.file:
         path: /opt/homebrew/bin/sed
         state: absent
 
     - name: Create generator.yml
-      when: not ansible_check_mode and generate_snmp_config_makefile.changed
+      when: not ansible_check_mode and generate_snmp_config_repo.before != generate_snmp_config_repo.after
       ansible.builtin.template:
         src: generator.yml.j2
         dest: "{{ generate_snmp_config_tmp_dir }}/generator/generator.yml"
         mode: '0644'
 
     - name: Run generate script in Container
-      when: not ansible_check_mode and generate_snmp_config_makefile.changed
+      when: not ansible_check_mode and generate_snmp_config_repo.before != generate_snmp_config_repo.after
       community.docker.docker_container:
         docker_host: "unix://{{ ansible_facts['env']['HOME'] }}/.lima/docker/sock/docker.sock"
         name: snmp-generator
@@ -55,7 +55,7 @@
         detach: false
 
     - name: Run generate script in Container
-      when: not ansible_check_mode and generate_snmp_config_makefile.changed
+      when: not ansible_check_mode and generate_snmp_config_repo.before != generate_snmp_config_repo.after
       community.general.make:
         chdir: "{{ generate_snmp_config_tmp_dir }}/generator"
         target: docker-generate
@@ -67,7 +67,7 @@
         mode: '0755'
 
     - name: Copy snmp.yml to snmp-exporter config dir
-      when: not ansible_check_mode and generate_snmp_config_makefile.changed
+      when: not ansible_check_mode and generate_snmp_config_repo.before != generate_snmp_config_repo.after
       ansible.builtin.copy:
         remote_src: true
         src: "{{ generate_snmp_config_tmp_dir }}/generator/snmp.yml"
@@ -81,7 +81,7 @@
     #     state: absent
 
     - name: Remove temporary sed alias
-      when: not ansible_check_mode and generate_snmp_config_makefile.changed
+      when: not ansible_check_mode and generate_snmp_config_repo.before != generate_snmp_config_repo.after
       ansible.builtin.file:
         path: /opt/homebrew/bin/sed
         state: absent
