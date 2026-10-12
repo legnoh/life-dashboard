@@ -79,7 +79,10 @@ services:
     ports: [9112:8000]
     restart: always
     environment:
-      - OURA_ACCESS_TOKEN=${OURA_ACCESS_TOKEN}
+      - OURA_CLIENT_ID=${OURA_CLIENT_ID}
+      - OURA_CLIENT_SECRET=${OURA_CLIENT_SECRET}
+      - OURA_REDIRECT_URI=http://localhost:8000/callback
+      - OURA_AUTH_CODE=${OURA_AUTH_CODE}
       - TZ=${OURA_TZ}
   remo-exporter:
     container_name: remo-exporter
