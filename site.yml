@@ -11,7 +11,7 @@
     - name: Install & Start Lima
       role: legnoh.dotfiles.install_lima
       vars:
-        install_lima_docker_memory: 4GiB
+        install_lima_docker_memory: 10GiB
         install_lima_enable_external_access: true
 
     - name: Install Docker CLI
